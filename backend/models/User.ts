@@ -43,7 +43,7 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
     default: 'user',
-    enum: ['user', '  admin', 'hotel', 'director'],
+    enum: ['user', 'admin', 'hotel', 'director'],
   },
   phoneNumber: {
     type: String,
