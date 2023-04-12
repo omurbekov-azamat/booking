@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Grid, Menu, MenuItem, styled } from '@mui/material';
-import { User } from '../../types';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
-import { logout } from '../../featurees/users/usersThunks';
 import { useTranslation } from 'react-i18next';
+import { logout } from '../../../features/users/usersThunks';
+import { useAppDispatch } from '../../../app/hooks';
+import { User } from '../../../types';
 
 interface Props {
   user: User;
@@ -17,7 +17,11 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   };
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -39,6 +43,11 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   return (
     <>
       <Grid container>
+        <Grid item>
+          <button onClick={() => changeLanguage('en')}>EN</button>
+          <button onClick={() => changeLanguage('ru')}>RU</button>
+          <div>{t('text')}</div>
+        </Grid>
         <Button onClick={handleClick} color="inherit">
           Hello, {user.firstName} {user.lastName}
         </Button>

@@ -2,9 +2,12 @@ import React from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import { AppBar, Box, Grid, styled, Toolbar, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { selectUser } from '../../../features/users/usersSlice';
+import UserMenu from './UserMenu';
+import AnonymousMenu from './AnonymousMenu';
 
 const AppToolbar = () => {
-  // const user = useAppSelector(selectUser);
+  const user = useAppSelector(selectUser);
 
   const Link = styled(NavLink)({
     color: 'inherit',
@@ -23,7 +26,7 @@ const AppToolbar = () => {
               <Typography variant="h6" component="div">
                 <Link to="/">Booking</Link>
               </Typography>
-              {/*<Grid item>{user ? <UserMenu user={user} /> : <AnonymousMenu />}</Grid>*/}
+              <Grid item>{user ? <UserMenu user={user} /> : <AnonymousMenu />}</Grid>
             </Grid>
           </Toolbar>
         </AppBar>
