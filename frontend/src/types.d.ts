@@ -16,3 +16,8 @@ export interface RegisterMutation {
   displayName: string;
   phoneNumber: string;
 }
+
+export interface LoginMutation {
+  email: string;
+  password: string;
+}
