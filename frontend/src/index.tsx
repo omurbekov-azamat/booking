@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './app/store';
+import { Provider } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import './18n';
 
@@ -10,11 +13,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
     <Suspense fallback={<CircularProgress/>}>
-    <App />
-    </Suspense>
-  </React.StrictMode>
+      <App />
+      </Suspense>
+    </PersistGate>
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
