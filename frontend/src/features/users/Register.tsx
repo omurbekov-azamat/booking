@@ -17,7 +17,8 @@ const Register = () => {
   const [state, setState] = useState<RegisterMutation>({
     email: '',
     password: '',
-    displayName: '',
+    firstName: '',
+    lastName: '',
     phoneNumber: '',
   });
 
@@ -77,29 +78,6 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Display name"
-                name="displayName"
-                autoComplete="new-displayName"
-                value={state.displayName}
-                onChange={inputChangeHandler}
-                error={Boolean(getFieldError('displayName'))}
-                helperText={getFieldError('displayName')}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Phone number"
-                name="phoneNumber"
-                type="tel"
-                autoComplete="phone-number"
-                value={state.password}
-                onChange={inputChangeHandler}
-                error={Boolean(getFieldError('phoneNumber'))}
-                helperText={getFieldError('phoneNumber')}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
                 label="Password"
                 name="password"
                 type="password"
@@ -108,6 +86,42 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('password'))}
                 helperText={getFieldError('password')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="FirstName"
+                name="firstName"
+                type="firstName"
+                autoComplete="new-firstName"
+                value={state.firstName}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('firstName'))}
+                helperText={getFieldError('firstName')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="LastName"
+                name="lastName"
+                type="lastName"
+                autoComplete="new-lastName"
+                value={state.lastName}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('lastName'))}
+                helperText={getFieldError('lastName')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Phone number"
+                name="phoneNumber"
+                type="tel"
+                autoComplete="phone-number"
+                value={state.phoneNumber}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('phoneNumber'))}
+                helperText={getFieldError('phoneNumber')}
               />
             </Grid>
           </Grid>
