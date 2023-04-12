@@ -1,19 +1,28 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import AppToolbar from './components/UI/AppToolbar/AppToolbar';
+import { CssBaseline } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+import Login from './features/users/Login';
+import Register from './features/users/Register';
 
 function App() {
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-  };
-
   return (
-    <div>
-      <button onClick={() => changeLanguage('en')}>EN</button>
-      <button onClick={() => changeLanguage('ru')}>RU</button>
-      <div>{t('text')}</div>
-    </div>
+    <>
+      <CssBaseline />
+      <AppToolbar />
+      <Routes>
+        <Route
+          path={'/'}
+          element={
+            <>
+              <h1>Test Router Main</h1>
+            </>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </>
   );
 }
 

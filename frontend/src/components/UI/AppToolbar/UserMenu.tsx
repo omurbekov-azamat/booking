@@ -17,11 +17,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   };
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-  };
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -43,11 +39,6 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   return (
     <>
       <Grid container>
-        <Grid item>
-          <button onClick={() => changeLanguage('en')}>EN</button>
-          <button onClick={() => changeLanguage('ru')}>RU</button>
-          <div>{t('text')}</div>
-        </Grid>
         <Button onClick={handleClick} color="inherit">
           Hello, {user.firstName} {user.lastName}
         </Button>
