@@ -9,3 +9,15 @@ export interface User {
   status?: string;
   cashback?: string;
 }
+
+export interface RegisterMutation {
+  email: string;
+  password: string;
+  displayName: string;
+  phoneNumber: string;
+}
+
+export interface LoginMutation {
+  email: string;
+  password: string;
+}
