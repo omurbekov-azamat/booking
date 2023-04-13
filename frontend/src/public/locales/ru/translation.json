@@ -5,5 +5,8 @@
   "singUp": "Регистрация",
   "hello": "Привет",
   "password": "Пароль",
-  "email": "Почта"
+  "email": "Почта",
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "phoneNumber": "Телефон"
 }

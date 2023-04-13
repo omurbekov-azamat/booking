@@ -5,5 +5,8 @@
   "singUp": "Sing up",
   "hello": "hello",
   "password": "Password",
-  "email": "Email"
+  "email": "Email",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "phoneNumber": "Phone number"
 }
