@@ -57,4 +57,17 @@ roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
   }
 });
 
+roomTypesRouter.delete('/:id', auth, permit('admin'), async (req, res, next) => {
+  try {
+    const room = await RoomType.findById(req.params.id);
+
+    if (room) {
+      await RoomType.deleteOne({ _id: req.params.id });
+      return res.send({ message: 'Deleted successfully' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export default roomTypesRouter;
