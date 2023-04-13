@@ -50,4 +50,31 @@ hotelsRouter.get('/:id', async (req, res) => {
   }
 });
 
+hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), async (req, res) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    let findParams;
+    if (user.role === 'hotel') {
+      findParams = { _id: req.params.id, userId: user._id };
+    } else {
+      findParams = { _id: req.params.id };
+    }
+    const hotel = await Hotel.updateOne(findParams, {
+      $set: {
+        name: req.body.name,
+        address: req.body.address,
+        location: req.body.location ? req.body.location : null,
+        star: req.body.star,
+      },
+    });
+    if (hotel.modifiedCount < 1) {
+      res.status(404).send({ message: 'Cant find hotel' });
+    } else {
+      res.send({ message: 'Successfully Updated' });
+    }
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
 export default hotelsRouter;
