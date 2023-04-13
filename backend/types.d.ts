@@ -9,3 +9,7 @@ export interface IUser {
   cashback?: string;
   token: string;
 }
+
+export interface IRoomType {
+  name: string;
+}
