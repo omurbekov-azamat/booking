@@ -1,3 +1,6 @@
 {
-  "text": "Hello world"
+  "profile": "Profile",
+  "logout": "Logout",
+  "singIn": "Sing in",
+  "singUp": "Sing up"
 }
