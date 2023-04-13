@@ -3,5 +3,10 @@
   "logout": "Выйти",
   "singIn": "Войти",
   "singUp": "Регистрация",
-  "hello": "Привет"
+  "hello": "Привет",
+  "password": "Пароль",
+  "email": "Почта",
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "phoneNumber": "Телефон"
 }
