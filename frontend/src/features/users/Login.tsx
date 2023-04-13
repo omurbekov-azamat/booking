@@ -7,12 +7,14 @@ import { LoadingButton } from '@mui/lab';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import type { LoginMutation } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectLoginError);
   const loading = useAppSelector(selectLoginLoading);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [state, setState] = useState<LoginMutation>({
     email: '',
@@ -44,7 +46,7 @@ const Login = () => {
           <LockOpenIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {t('singIn')}
         </Typography>
         {error && (
           <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
@@ -55,7 +57,7 @@ const Login = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Email"
+                label={t('email')}
                 name="email"
                 type="email"
                 autoComplete="current-email"
@@ -65,7 +67,7 @@ const Login = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Password"
+                label={t('password')}
                 name="password"
                 type="password"
                 autoComplete="current-password"
@@ -75,12 +77,12 @@ const Login = () => {
             </Grid>
           </Grid>
           <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign In
+            {t('singIn')}
           </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/register" variant="body2">
-                Or sign up
+                {t('singUp')}
               </Link>
             </Grid>
           </Grid>

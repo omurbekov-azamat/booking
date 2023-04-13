@@ -7,12 +7,14 @@ import { LoadingButton } from '@mui/lab';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import type { RegisterMutation } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectRegisterError);
   const loading = useAppSelector(selectRegisterLoading);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [state, setState] = useState<RegisterMutation>({
     email: '',
@@ -60,13 +62,13 @@ const Register = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {t('singUp')}
         </Typography>
         <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Email"
+                label={t('email')}
                 name="email"
                 autoComplete="new-email"
                 type="email"
@@ -78,7 +80,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Password"
+                label={t('password')}
                 name="password"
                 type="password"
                 autoComplete="new-password"
@@ -90,7 +92,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="FirstName"
+                label={t('firstName')}
                 name="firstName"
                 type="firstName"
                 autoComplete="new-firstName"
@@ -102,7 +104,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="LastName"
+                label={t('lastName')}
                 name="lastName"
                 type="lastName"
                 autoComplete="new-lastName"
@@ -114,7 +116,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Phone number"
+                label={t('phoneNumber')}
                 name="phoneNumber"
                 type="tel"
                 autoComplete="phone-number"
@@ -126,12 +128,12 @@ const Register = () => {
             </Grid>
           </Grid>
           <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign Up
+            {t('singUp')}
           </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/login" variant="body2">
-                Already have an account? Sign in
+                {t('singIn')}
               </Link>
             </Grid>
           </Grid>

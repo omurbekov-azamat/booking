@@ -3,5 +3,10 @@
   "logout": "Logout",
   "singIn": "Sing in",
   "singUp": "Sing up",
-  "hello": "hello"
+  "hello": "hello",
+  "password": "Password",
+  "email": "Email",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "phoneNumber": "Phone number"
 }
