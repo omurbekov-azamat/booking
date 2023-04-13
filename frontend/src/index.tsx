@@ -6,9 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './app/store';
 import { Provider } from 'react-redux';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, ThemeProvider } from '@mui/material';
 import './18n';
 import { BrowserRouter } from 'react-router-dom';
+import theme from './theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -16,7 +17,9 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <Suspense fallback={<CircularProgress />}>
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </Suspense>
       </PersistGate>
     </Provider>
