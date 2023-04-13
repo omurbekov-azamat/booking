@@ -1,8 +1,10 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import auth from '../middleware/auth';
 import RoomType from '../models/RoomType';
 import permit from '../middleware/permit';
+import { promises as fs } from 'fs';
+import { IRoomType } from '../types';
 
 const roomTypesRouter = express.Router();
 
@@ -27,6 +29,31 @@ roomTypesRouter.get('/', async (req, res) => {
     return res.send(room);
   } catch {
     return res.sendStatus(500);
+  }
+});
+
+roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
+  try {
+    const room: HydratedDocument<IRoomType> | null = await RoomType.findById(req.params.id);
+
+    if (!room) {
+      return res.sendStatus(404);
+    }
+
+    room.name = req.body.name;
+
+    await room.save();
+    return res.send(room);
+  } catch (e) {
+    if (req.file) {
+      await fs.unlink(req.file.path);
+    }
+
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(e);
+    } else {
+      return next(e);
+    }
   }
 });
 
