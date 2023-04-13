@@ -3,8 +3,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import config from './config';
 import usersRouter from './routers/users';
-import hotelsRouter from "./routers/hotels";
-import roomTypesRouter from "./routers/roomTypes";
+import hotelsRouter from './routers/hotels';
+import roomTypesRouter from './routers/roomTypes';
 
 const app = express();
 const port = 8000;
