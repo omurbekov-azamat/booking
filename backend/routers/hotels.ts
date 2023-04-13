@@ -27,4 +27,18 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), async (req, res, next) =>
   }
 });
 
+hotelsRouter.get('/', async (req, res) => {
+  try {
+    const queryOwner = req.query.owner as string;
+    if (queryOwner) {
+      const hotelsRes = await Hotel.find({ userId: queryOwner });
+      res.send(hotelsRes);
+    }
+    const hotelsRes = await Hotel.find();
+    res.send(hotelsRes);
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
 export default hotelsRouter;
