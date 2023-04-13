@@ -3,5 +3,7 @@
   "logout": "Logout",
   "singIn": "Sing in",
   "singUp": "Sing up",
-  "hello": "hello"
+  "hello": "hello",
+  "password": "Password",
+  "email": "Email"
 }
