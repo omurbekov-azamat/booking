@@ -77,4 +77,24 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), async (req, res) => {
   }
 });
 
+hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, res) => {
+  try {
+    const hotel = await Hotel.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          isPublished: true,
+        },
+      },
+    );
+    if (hotel.modifiedCount < 1) {
+      res.status(404).send({ message: 'Cant find hotel' });
+    } else {
+      res.send({ message: 'Successfully Updated' });
+    }
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
 export default hotelsRouter;
