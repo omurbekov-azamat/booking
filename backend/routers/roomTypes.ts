@@ -23,12 +23,12 @@ roomTypesRouter.post('/', auth, permit('admin'), async (req, res, next) => {
   }
 });
 
-roomTypesRouter.get('/', async (req, res) => {
+roomTypesRouter.get('/', async (req, res, next) => {
   try {
     const room = await RoomType.find();
     return res.send(room);
-  } catch {
-    return res.sendStatus(500);
+  } catch (e) {
+    return next(e);
   }
 });
 
