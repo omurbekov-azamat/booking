@@ -8,6 +8,9 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import type { RegisterMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
+import PhoneInput from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 const Register = () => {
   const dispatch = useAppDispatch();
@@ -26,8 +29,11 @@ const Register = () => {
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
     setState((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const phoneChangeHandler = (newPhone: string) => {
+    setState((prevState) => ({ ...prevState, phoneNumber: newPhone }));
   };
 
   const submitFormHandler = async (event: React.FormEvent) => {
@@ -114,16 +120,18 @@ const Register = () => {
                 helperText={getFieldError('lastName')}
               />
             </Grid>
+
             <Grid item xs={12}>
-              <TextField
-                label={t('phoneNumber')}
+              <label> {t('phoneNumber')}</label>
+              <PhoneInput
+                onChange={phoneChangeHandler}
+                defaultCountry={'KG'}
+                international
+                inputStyle={{ padding: '10px' }}
+                countryCallingCodeEditable={false}
                 name="phoneNumber"
-                type="tel"
-                autoComplete="phone-number"
                 value={state.phoneNumber}
-                onChange={inputChangeHandler}
-                error={Boolean(getFieldError('phoneNumber'))}
-                helperText={getFieldError('phoneNumber')}
+                error={state.phoneNumber && (isValidPhoneNumber(state.phoneNumber) ? undefined : t('phoneError'))}
               />
             </Grid>
           </Grid>

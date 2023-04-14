@@ -22,6 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
+    "react-phone-input-2": "^2.15.1",
+    "react-phone-number-input": "^3.2.19",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
@@ -53,8 +55,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "2.8.4",
-    "i18next-browser-languagedetector": "^7.0.1"
+    "i18next-browser-languagedetector": "^7.0.1",
+    "prettier": "2.8.4"
   },
   "browserslist": {
     "production": [

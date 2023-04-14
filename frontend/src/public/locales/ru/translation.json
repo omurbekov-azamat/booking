@@ -8,6 +8,7 @@
   "email": "Почта",
   "firstName": "Имя",
   "lastName": "Фамилия",
+  "footerText": "Футер",
   "phoneNumber": "Телефон",
-  "footerText": "Футер"
+  "phoneError": "неправильный номер"
 }
