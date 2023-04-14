@@ -23,6 +23,26 @@ const ApartmentSchema = new Schema({
       message: 'RoomType does not exist',
     },
   },
+  price: {
+    type: {
+      from: {
+        type: Number,
+        required: true,
+      },
+      till: {
+        type: Number,
+        required: true,
+      },
+    },
+    required: true,
+  },
+  images: {
+    type: [String],
+    default: [],
+  },
+  description: {
+    type: String,
+  },
 });
 
 const Apartment = mongoose.model('Apartment', ApartmentSchema);
