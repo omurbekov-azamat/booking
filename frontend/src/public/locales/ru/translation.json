@@ -8,5 +8,6 @@
   "email": "Почта",
   "firstName": "Имя",
   "lastName": "Фамилия",
-  "phoneNumber": "Телефон"
+  "phoneNumber": "Телефон",
+  "footerText": "Футер"
 }

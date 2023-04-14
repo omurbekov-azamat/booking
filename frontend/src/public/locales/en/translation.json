@@ -8,5 +8,6 @@
   "email": "Email",
   "firstName": "First name",
   "lastName": "Last name",
-  "phoneNumber": "Phone number"
+  "phoneNumber": "Phone number",
+  "footerText": "Footer"
 }
