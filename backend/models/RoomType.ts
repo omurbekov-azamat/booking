@@ -9,6 +9,6 @@ const RoomTypeSchema = new Schema({
   },
 });
 
-const RoomType = mongoose.model('Hotel', RoomTypeSchema);
+const RoomType = mongoose.model('RoomType', RoomTypeSchema);
 
 export default RoomType;
