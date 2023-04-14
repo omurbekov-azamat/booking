@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface IUser {
   email: string;
   password: string;
@@ -12,4 +14,16 @@ export interface IUser {
 
 export interface IRoomType {
   name: string;
+}
+
+export interface ApartmentWithId {
+  _id: Types.ObjectId;
+  hotelId: Types.ObjectId;
+  roomType: Types.ObjectId;
+  price: {
+    from: number;
+    till: number;
+  };
+  images: string[] | null;
+  info: string | null;
 }
