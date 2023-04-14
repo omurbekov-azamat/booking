@@ -9,5 +9,6 @@
   "firstName": "First name",
   "lastName": "Last name",
   "phoneNumber": "Phone number",
-  "footerText": "Footer"
+  "footerText": "Footer",
+  "phoneError": "Invalid phone number"
 }
