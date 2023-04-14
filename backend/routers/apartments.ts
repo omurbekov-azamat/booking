@@ -46,7 +46,7 @@ apartmentsRouter.get('/', async (req, res, next) => {
 
 apartmentsRouter.get('/:id', async (req, res, next) => {
   try {
-    const apartmentRes = await Apartment.find({ _id: req.params.id });
+    const apartmentRes = await Apartment.findById(req.params.id);
     return res.send(apartmentRes);
   } catch (e) {
     return next(e);
@@ -76,8 +76,17 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
 
     res.send({ message: 'Changed successfully' });
   } catch (e) {
-    if (req.file) {
-      await fs.unlink(req.file.path);
+    if (req.files && Array.isArray(req.files)) {
+      await Promise.all(
+        req.files.map(async (file) => {
+          try {
+            await fs.unlink(file.path);
+            console.log(`File ${file.path} deleted successfully`);
+          } catch (err) {
+            console.error(`Failed to delete file: ${file.path}`);
+          }
+        }),
+      );
     }
 
     if (e instanceof mongoose.Error.ValidationError) {
