@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, mt: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <Grid container justifyContent="space-between" alignItems="center">
