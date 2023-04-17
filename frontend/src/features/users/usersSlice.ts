@@ -10,6 +10,7 @@ interface UsersState {
   loginLoading: boolean;
   logoutLoading: boolean;
   loginError: GlobalError | null;
+  modalCoverState: boolean;
 }
 
 const initialState: UsersState = {
@@ -19,6 +20,7 @@ const initialState: UsersState = {
   loginLoading: false,
   logoutLoading: false,
   loginError: null,
+  modalCoverState: true,
 };
 
 export const usersSlice = createSlice({
@@ -27,6 +29,12 @@ export const usersSlice = createSlice({
   reducers: {
     unsetUser: (state) => {
       state.user = null;
+    },
+    openModalCover: (state) => {
+      state.modalCoverState = true;
+    },
+    closeModalCover: (state) => {
+      state.modalCoverState = false;
     },
   },
   extraReducers: (builder) => {
@@ -69,7 +77,7 @@ export const usersSlice = createSlice({
 
 export const usersReducer = usersSlice.reducer;
 
-export const { unsetUser } = usersSlice.actions;
+export const { unsetUser, openModalCover, closeModalCover } = usersSlice.actions;
 
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterLoading = (state: RootState) => state.users.registerLoading;
@@ -77,3 +85,4 @@ export const selectRegisterError = (state: RootState) => state.users.registerErr
 export const selectLoginLoading = (state: RootState) => state.users.loginLoading;
 export const selectLoginError = (state: RootState) => state.users.loginError;
 export const selectLogoutLoading = (state: RootState) => state.users.logoutLoading;
+export const selectModalCoverState = (state: RootState) => state.users.modalCoverState;
