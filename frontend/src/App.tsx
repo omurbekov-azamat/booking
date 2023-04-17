@@ -5,8 +5,12 @@ import Login from './features/users/Login';
 import Register from './features/users/Register';
 import Layout from './components/UI/Layout/Layout';
 import notFoundImage from './assets/images/notFound.jpg';
+import ModalCover from './components/UI/ModalCover/ModalCover';
+import { useAppSelector } from './app/hooks';
+import { selectModalCoverState } from './features/users/usersSlice';
 
 function App() {
+  const state = useAppSelector(selectModalCoverState);
   return (
     <>
       <CssBaseline />
@@ -17,6 +21,7 @@ function App() {
             element={
               <>
                 <h1>Test Router Main</h1>
+                <ModalCover state={state} />
               </>
             }
           />
