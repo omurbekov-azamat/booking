@@ -1,3 +1,27 @@
+export interface Hotel {
+  userId: string;
+  name: string;
+  address: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  star: number;
+  isPublished: boolean;
+  image: string;
+}
+
+export interface HotelMutation {
+  name: string;
+  address: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  star: string;
+  image: File;
+}
+
 export interface User {
   _id: string;
   email: string;

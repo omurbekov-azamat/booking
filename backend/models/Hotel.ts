@@ -1,8 +1,9 @@
 import mongoose, { Types } from 'mongoose';
 import User from './User';
+import { IHotel } from '../types';
 
 const Schema = mongoose.Schema;
-const HotelSchema = new Schema({
+const HotelSchema = new Schema<IHotel>({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -33,6 +34,10 @@ const HotelSchema = new Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  image: {
+    type: String,
+    required: true,
   },
 });
 
