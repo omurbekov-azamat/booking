@@ -3,18 +3,20 @@ import mongoose from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Hotel from '../models/Hotel';
+import { imagesUpload } from '../multer';
 
 const hotelsRouter = express.Router();
 
-hotelsRouter.post('/', auth, permit('admin', 'hotel'), async (req, res, next) => {
+hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
     const hotel = new Hotel({
       userId: user._id,
       name: req.body.name,
       address: req.body.address,
-      location: req.body.location ? req.body.location : null,
+      location: req.body.location ? JSON.parse(req.body.location) : null,
       star: req.body.star,
+      image: req.file && req.file.filename,
     });
 
     await hotel.save();
@@ -50,7 +52,7 @@ hotelsRouter.get('/:id', async (req, res) => {
   }
 });
 
-hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), async (req, res) => {
+hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res) => {
   try {
     const user = (req as RequestWithUser).user;
     let findParams;
@@ -65,6 +67,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), async (req, res) => {
         address: req.body.address,
         location: req.body.location ? req.body.location : null,
         star: req.body.star,
+        image: req.file && req.file.filename,
       },
     });
     if (hotel.modifiedCount < 1) {
