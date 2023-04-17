@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongoose';
+
 export interface IUser {
   email: string;
   password: string;
@@ -12,4 +14,16 @@ export interface IUser {
 
 export interface IRoomType {
   name: string;
+}
+
+export interface IHotel {
+  userId: ObjectId;
+  name: string;
+  address: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  star: number;
+  isPublished: boolean;
 }
