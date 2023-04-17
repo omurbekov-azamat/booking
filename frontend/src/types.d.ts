@@ -8,6 +8,18 @@ export interface Hotel {
   };
   star: number;
   isPublished: boolean;
+  image: string;
+}
+
+export interface HotelMutation {
+  name: string;
+  address: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  star: string;
+  image: File;
 }
 
 export interface User {

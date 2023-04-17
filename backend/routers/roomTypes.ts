@@ -3,7 +3,6 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import auth from '../middleware/auth';
 import RoomType from '../models/RoomType';
 import permit from '../middleware/permit';
-import { promises as fs } from 'fs';
 import { IRoomType } from '../types';
 
 const roomTypesRouter = express.Router();
@@ -45,10 +44,6 @@ roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
     await room.save();
     return res.send(room);
   } catch (e) {
-    if (req.file) {
-      await fs.unlink(req.file.path);
-    }
-
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(e);
     } else {

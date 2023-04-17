@@ -26,4 +26,5 @@ export interface IHotel {
   };
   star: number;
   isPublished: boolean;
+  image: string;
 }
