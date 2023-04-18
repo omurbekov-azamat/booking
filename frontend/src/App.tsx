@@ -5,6 +5,7 @@ import Login from './features/users/Login';
 import Register from './features/users/Register';
 import Layout from './components/UI/Layout/Layout';
 import notFoundImage from './assets/images/notFound.jpg';
+import HotelsPage from './features/hotels/HotelsPage';
 
 function App() {
   return (
@@ -12,14 +13,7 @@ function App() {
       <CssBaseline />
       <Layout>
         <Routes>
-          <Route
-            path={'/'}
-            element={
-              <>
-                <h1>Test Router Main</h1>
-              </>
-            }
-          />
+          <Route path={'/'} element={<HotelsPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

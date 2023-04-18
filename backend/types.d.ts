@@ -28,3 +28,14 @@ export interface IHotel {
   isPublished: boolean;
   image: string;
 }
+
+export interface ApartmentWithId {
+  hotelId: ObjectId;
+  roomTypeId: ObjectId;
+  price: {
+    from: number;
+    till: number;
+  }
+  images: string[] | null;
+  description: string;
+}
