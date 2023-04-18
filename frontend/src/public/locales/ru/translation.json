@@ -10,5 +10,6 @@
   "lastName": "Фамилия",
   "footerText": "Футер",
   "phoneNumber": "Телефон",
-  "phoneError": "неправильный номер"
+  "phoneError": "неправильный номер",
+  "extraServices": "Дополнительный сервис:"
 }

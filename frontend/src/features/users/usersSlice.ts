@@ -20,7 +20,7 @@ const initialState: UsersState = {
   loginLoading: false,
   logoutLoading: false,
   loginError: null,
-  modalCoverState: true,
+  modalCoverState: false,
 };
 
 export const usersSlice = createSlice({

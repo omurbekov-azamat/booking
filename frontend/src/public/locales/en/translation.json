@@ -10,5 +10,6 @@
   "lastName": "Last name",
   "phoneNumber": "Phone number",
   "footerText": "Footer",
-  "phoneError": "Invalid phone number"
+  "phoneError": "Invalid phone number",
+  "extraServices": "Extra services:"
 }
