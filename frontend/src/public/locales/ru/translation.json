@@ -10,5 +10,11 @@
   "lastName": "Фамилия",
   "footerText": "Футер",
   "phoneNumber": "Телефон",
-  "phoneError": "неправильный номер"
+  "phoneError": "неправильный номер",
+  "createHotel": "Создать отель",
+  "hotelName": "Название отеля",
+  "address": "Адрес",
+  "stars": "Звёзды 0-5",
+  "image": "Картинка",
+  "create": "Создать"
 }
