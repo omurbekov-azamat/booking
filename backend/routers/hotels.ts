@@ -100,4 +100,25 @@ hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, re
   }
 });
 
+hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const hotel = await Hotel.findById(req.params.id);
+    if (hotel) {
+      if (user && user.role === 'admin') {
+        await Hotel.deleteOne({ _id: req.params.id });
+        return res.send({ message: 'Deleted successfully' });
+      }
+      if (user && user.role === 'hotel') {
+        await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
+        return res.send({ message: 'Deleted successfully' });
+      }
+    } else {
+      res.status(404).send({ message: 'Cant find hotel' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export default hotelsRouter;
