@@ -8,7 +8,7 @@
   "email": "Почта",
   "firstName": "Имя",
   "lastName": "Фамилия",
-  "footerText": "Футер",
+  "footerAddress": "адрес: г.Бишкек Логвиненко,55",
   "phoneNumber": "Телефон",
   "phoneError": "неправильный номер",
   "extraServices": "Дополнительный сервис:",

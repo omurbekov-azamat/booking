@@ -9,7 +9,7 @@
   "firstName": "First name",
   "lastName": "Last name",
   "phoneNumber": "Phone number",
-  "footerText": "Footer",
+  "footerAddress": "address: Bishkek c. Logvinenko st.,55",
   "phoneError": "Invalid phone number",
   "extraServices": "Extra services:",
   "createHotel": "Create hotel",
