@@ -11,6 +11,7 @@
   "phoneNumber": "Phone number",
   "footerText": "Footer",
   "phoneError": "Invalid phone number",
+  "extraServices": "Extra services:",
   "createHotel": "Create hotel",
   "hotelName": "Hotel name",
   "address": "Address",
