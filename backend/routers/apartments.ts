@@ -70,7 +70,7 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
     }
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
-      apartment.roomType = req.body.roomType;
+      apartment.roomTypeId = req.body.roomType;
       apartment.price = req.body.price;
 
       if (req.files) {
