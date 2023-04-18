@@ -2,6 +2,8 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import { useAppDispatch } from '../../../app/hooks';
 import { closeModalCover } from '../../../features/users/usersSlice';
+import { Box } from '@mui/material';
+import { styleModalCover } from '../../../constants';
 
 interface Props extends React.PropsWithChildren {
   state: boolean;
@@ -21,7 +23,7 @@ const ModalCover: React.FC<Props> = ({ state, children }) => {
       aria-describedby="modal-modal-description"
       onClick={handleCloseModal}
     >
-      <>{children}</>
+      <Box sx={styleModalCover}>{children}</Box>
     </Modal>
   );
 };

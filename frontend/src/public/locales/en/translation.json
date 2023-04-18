@@ -10,5 +10,11 @@
   "lastName": "Last name",
   "phoneNumber": "Phone number",
   "footerText": "Footer",
-  "phoneError": "Invalid phone number"
+  "phoneError": "Invalid phone number",
+  "createHotel": "Create hotel",
+  "hotelName": "Hotel name",
+  "address": "Address",
+  "stars": "Stars 0-5",
+  "image": "Image",
+  "create": "Create"
 }

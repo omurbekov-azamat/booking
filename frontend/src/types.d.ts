@@ -12,14 +12,14 @@ export interface Hotel {
 }
 
 export interface HotelMutation {
-  name: string;
+  hotelName: string;
   address: string;
-  location: {
+  location?: {
     latitude: number;
     longitude: number;
   };
-  star: string;
-  image: File;
+  star: number;
+  image: File | null;
 }
 
 export interface User {
