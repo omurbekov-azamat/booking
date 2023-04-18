@@ -68,7 +68,7 @@ const Register = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {t('singUp')}
+          {t('signUp')}
         </Typography>
         <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -120,7 +120,6 @@ const Register = () => {
                 helperText={getFieldError('lastName')}
               />
             </Grid>
-
             <Grid item xs={12}>
               <label> {t('phoneNumber')}</label>
               <PhoneInput
@@ -136,12 +135,12 @@ const Register = () => {
             </Grid>
           </Grid>
           <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            {t('singUp')}
+            {t('signUp')}
           </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/login" variant="body2">
-                {t('singIn')}
+                {t('signIn')}
               </Link>
             </Grid>
           </Grid>

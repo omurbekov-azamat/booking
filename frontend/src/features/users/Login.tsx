@@ -46,7 +46,7 @@ const Login = () => {
           <LockOpenIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {t('singIn')}
+          {t('signIn')}
         </Typography>
         {error && (
           <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
@@ -77,12 +77,12 @@ const Login = () => {
             </Grid>
           </Grid>
           <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            {t('singIn')}
+            {t('signIn')}
           </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/register" variant="body2">
-                {t('singUp')}
+                {t('signUp')}
               </Link>
             </Grid>
           </Grid>

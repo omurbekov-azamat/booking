@@ -9,10 +9,10 @@ const AnonymousMenu = () => {
   return (
     <>
       <Button component={NavLink} to="/register" color="inherit">
-        {t('singUp')}
+        {t('signUp')}
       </Button>
       <Button component={NavLink} to="/login" color="inherit">
-        {t('singIn')}
+        {t('signIn')}
       </Button>
     </>
   );

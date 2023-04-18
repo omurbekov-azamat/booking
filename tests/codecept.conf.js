@@ -2,7 +2,7 @@ exports.config = {
   output: './output',
   helpers: {
     Puppeteer: {
-      url: 'http://localhost:3000/',
+      url: 'http://localhost:3000',
       show: true,
       windowSize: '1200x900'
     }
@@ -22,20 +22,7 @@ exports.config = {
   plugins: {
     screenshotOnFail: {
       enabled: true
-    },
-    tryTo: {
-      enabled: true
-    },
-    retryFailedStep: {
-      enabled: true
-    },
-    retryTo: {
-      enabled: true
-    },
-    eachElement: {
-      enabled: true
-    },
-    pauseOnFail: {}
+    }
   },
   stepTimeout: 0,
   stepTimeoutOverride: [{
