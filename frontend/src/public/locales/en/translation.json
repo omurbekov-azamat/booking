@@ -17,5 +17,15 @@
   "address": "Address",
   "stars": "Stars 0-5",
   "image": "Image",
-  "create": "Create"
+  "create": "Create",
+  "bishkek": "Bishkek",
+  "issykKul": "Issyk Kul",
+  "osh": "Osh",
+  "whereAreYouGoing": "Where are you going?",
+  "search": "Search",
+  "facilities": "Facilities",
+  "noneSmokingRoom": "Non-smoking rooms",
+  "parking": "Parking",
+  "pool": "Swimming pool",
+  "petFriendly": "Pet Friendly"
 }
