@@ -10,4 +10,4 @@ Feature: Users
       | email    | user@gmail.com |
       | password | 123            |
     And I click "Sign in" button
-    Then I see user menu.
+    Then I see "Admin Adminich"  user menu.
