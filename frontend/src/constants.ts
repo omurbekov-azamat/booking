@@ -10,3 +10,9 @@ export const styleModalCover = {
   boxShadow: 24,
   p: 4,
 };
+
+export const CITIES = [
+  { id: 'bishkek', title: 'Bishkek' },
+  { id: 'issyk kul', title: 'Issyk Kil' },
+  { id: 'osh', title: 'Osh' },
+];
