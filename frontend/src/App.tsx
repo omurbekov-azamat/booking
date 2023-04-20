@@ -6,6 +6,7 @@ import Register from './features/users/Register';
 import Layout from './components/UI/Layout/Layout';
 import HotelsPage from './features/hotels/HotelsPage';
 import notFoundImage from './assets/images/notFound.jpg';
+import HotelPage from './features/hotels/HotelPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path={'/'} element={<HotelsPage />} />
+          <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
