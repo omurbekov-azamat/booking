@@ -7,7 +7,7 @@ import Layout from './components/UI/Layout/Layout';
 import HotelsPage from './features/hotels/HotelsPage';
 import notFoundImage from './assets/images/notFound.jpg';
 import HotelPage from './features/hotels/HotelPage';
-import HotelRoomPage from "./features/hotelRoom/HotelRoomPage";
+import HotelRoomPage from './features/hotelRoom/HotelRoomPage';
 
 function App() {
   return (
