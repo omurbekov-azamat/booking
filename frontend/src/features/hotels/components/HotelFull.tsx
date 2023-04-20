@@ -12,9 +12,9 @@ interface Props {
   title: string;
   rating: number;
   image: string;
-  description: string;
+  description?: string;
   id: string;
-  services: string[];
+  services?: string[];
 }
 
 const HotelFull: React.FC<Props> = ({ title, rating, image, description, services, id }) => {
@@ -35,22 +35,23 @@ const HotelFull: React.FC<Props> = ({ title, rating, image, description, service
           <Typography variant="body2" color="text.secondary" fontSize={24}>
             {description}
           </Typography>
-          <Typography gutterBottom component="p">
+          <Typography sx={{ my: 2 }} component="p">
             {t('extraServices')}
           </Typography>
           <Grid container xl>
-            {services.map((service) => {
-              return (
-                <Grid container gap={1} item key={id} alignSelf={'center'}>
-                  <Grid item>
-                    <TaskAltIcon />
+            {services &&
+              services.map((service) => {
+                return (
+                  <Grid container gap={1} item key={id} alignSelf={'center'}>
+                    <Grid item>
+                      <TaskAltIcon />
+                    </Grid>
+                    <Grid item sx={{ fontSize: 17 }}>
+                      {service}
+                    </Grid>
                   </Grid>
-                  <Grid item sx={{ fontSize: 17 }}>
-                    {service}
-                  </Grid>
-                </Grid>
-              );
-            })}
+                );
+              })}
           </Grid>
         </CardContent>
       </Card>
