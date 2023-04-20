@@ -6,13 +6,17 @@ import { Grid } from '@mui/material';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import HotelsCard from './components/HotelsCard';
 import SearchHotelForm from './components/SearchHotelForm';
+import { useNavigate } from 'react-router-dom';
 
 const HotelsPage = () => {
   const dispatch = useAppDispatch();
   const hotels = useAppSelector(selectHotels);
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchHotels());
   }, [dispatch]);
+
   return (
     <>
       <SearchHotelForm />
@@ -20,7 +24,12 @@ const HotelsPage = () => {
         {hotels ? (
           hotels.map((el) => (
             <Grid item xs={12} sm={6} lg={4} key={Math.random()} alignItems="stretch">
-              <HotelsCard image={el.image} title={el.name} rating={el.star} />
+              <HotelsCard
+                image={el.image}
+                title={el.name}
+                rating={el.star}
+                onHotelClick={() => navigate('/hotels/' + el._id)}
+              />
             </Grid>
           ))
         ) : (

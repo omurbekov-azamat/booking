@@ -1,4 +1,5 @@
 export interface Hotel {
+  _id: string;
   userId: string;
   name: string;
   address: string;
