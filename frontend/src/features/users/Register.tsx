@@ -82,6 +82,7 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('email'))}
                 helperText={getFieldError('email')}
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,6 +95,7 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('password'))}
                 helperText={getFieldError('password')}
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,6 +108,7 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('firstName'))}
                 helperText={getFieldError('firstName')}
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -118,6 +121,7 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('lastName'))}
                 helperText={getFieldError('lastName')}
+                required
               />
             </Grid>
             <Grid item xs={12}>
