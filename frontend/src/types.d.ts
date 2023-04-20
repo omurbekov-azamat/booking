@@ -18,7 +18,7 @@ export interface HotelMutation {
     latitude: number;
     longitude: number;
   };
-  star: number;
+  star: string;
   image: File | null;
 }
 

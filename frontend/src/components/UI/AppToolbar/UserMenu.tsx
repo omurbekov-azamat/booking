@@ -40,7 +40,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     <>
       <Grid container>
         <Button onClick={handleClick} color="inherit">
-          {t('hello')}, {user.firstName} {user.lastName}
+          {`${t('hello')}, ${user.firstName} ${user.lastName}`}
         </Button>
       </Grid>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>

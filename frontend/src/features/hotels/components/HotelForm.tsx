@@ -19,7 +19,7 @@ const HotelForm = () => {
   const [state, setState] = useState<HotelMutation>({
     name: '',
     address: '',
-    star: 0,
+    star: '',
     image: null,
   });
 
@@ -42,7 +42,7 @@ const HotelForm = () => {
     await setState({
       name: '',
       address: '',
-      star: 0,
+      star: '',
       image: null,
     });
     await navigate('/profile');
@@ -98,6 +98,7 @@ const HotelForm = () => {
               error={Boolean(getFieldError('star'))}
               helperText={getFieldError('star')}
               inputProps={{ min: 0, max: 5 }}
+              required
             />
           </Grid>
           <Grid item xs>
