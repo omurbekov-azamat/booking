@@ -7,6 +7,7 @@ import Layout from './components/UI/Layout/Layout';
 import HotelsPage from './features/hotels/HotelsPage';
 import notFoundImage from './assets/images/notFound.jpg';
 import HotelPage from './features/hotels/HotelPage';
+import HotelRoomPage from "./features/hotelRoom/HotelRoomPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/hotels/:id/:roomId" element={<HotelRoomPage />} />
           <Route
             path="*"
             element={
