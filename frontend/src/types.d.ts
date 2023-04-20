@@ -12,7 +12,7 @@ export interface Hotel {
 }
 
 export interface HotelMutation {
-  hotelName: string;
+  name: string;
   address: string;
   location?: {
     latitude: number;

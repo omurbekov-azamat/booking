@@ -36,10 +36,10 @@ const SearchHotelForm = () => {
   return (
     <Box component="form" mt={5} onSubmit={submitFormHandler}>
       <Grid container alignItems="center" spacing={2}>
-        <Grid item xs={12} md={4} lg={4} xl={1}>
+        <Grid item xs={12} md={4} lg={4} xl={4}>
           <SelectCities onChange={inputChangeHandler} name="city" label={t('whereAreYouGoing')} />
         </Grid>
-        <Grid item xs={8} md={3} lg={3} xl={0}>
+        <Grid item xs={8} md={3} lg={3} xl={3}>
           <ListFacilities onChange={handleChangeCheckBox} width={200} />
         </Grid>
         <Grid item xs lg={1} xl={1}>
