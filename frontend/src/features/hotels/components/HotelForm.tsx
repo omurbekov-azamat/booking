@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { selectCreateHotelError, selectLoadingCreateHotel } from '../hotelsSlice';
 import { Box, Container, Grid, TextField, Typography } from '@mui/material';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
+import { createHotel } from '../hotelsThunks';
+import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 
 const HotelForm = () => {
+  const dispatch = useAppDispatch();
   const error = useAppSelector(selectCreateHotelError);
   const loading = useAppSelector(selectLoadingCreateHotel);
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [state, setState] = useState<HotelMutation>({
-    hotelName: '',
+    name: '',
     address: '',
-    star: 0,
+    star: '',
     image: null,
   });
 
@@ -34,7 +38,14 @@ const HotelForm = () => {
 
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(state);
+    await dispatch(createHotel(state));
+    await setState({
+      name: '',
+      address: '',
+      star: '',
+      image: null,
+    });
+    await navigate('/profile');
   };
 
   const getFieldError = (fieldName: string) => {
@@ -47,7 +58,7 @@ const HotelForm = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Typography component="div" variant="h5" textTransform="capitalize" color="salmon">
+      <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
         {t('createHotel')}
       </Typography>
       <Box component="form" sx={{ mt: 2 }} onSubmit={submitFormHandler}>
@@ -57,10 +68,11 @@ const HotelForm = () => {
               label={t('hotelName')}
               name="name"
               autoComplete="current-name"
-              value={state.hotelName}
+              value={state.name}
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('name'))}
               helperText={getFieldError('name')}
+              required
             />
           </Grid>
           <Grid item xs>
@@ -72,6 +84,7 @@ const HotelForm = () => {
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('address'))}
               helperText={getFieldError('address')}
+              required
             />
           </Grid>
           <Grid item xs>
@@ -85,6 +98,7 @@ const HotelForm = () => {
               error={Boolean(getFieldError('star'))}
               helperText={getFieldError('star')}
               inputProps={{ min: 0, max: 5 }}
+              required
             />
           </Grid>
           <Grid item xs>

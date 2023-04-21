@@ -8,6 +8,9 @@ import { CircularProgress, ThemeProvider } from '@mui/material';
 import './18n';
 import { BrowserRouter } from 'react-router-dom';
 import theme from './theme';
+import { addInterceptors } from './axiosApi';
+
+addInterceptors(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

@@ -6,9 +6,15 @@ import Register from './features/users/Register';
 import Layout from './components/UI/Layout/Layout';
 import HotelsPage from './features/hotels/HotelsPage';
 import notFoundImage from './assets/images/notFound.jpg';
+import HotelForm from './features/hotels/components/HotelForm';
+import { useAppSelector } from './app/hooks';
+import { selectUser } from './features/users/usersSlice';
+import ProtectedRoute from './components/UI/ProtectedRoute/ProtectedRoute';
+import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
 
 function App() {
+  const user = useAppSelector(selectUser);
   return (
     <>
       <CssBaseline />
@@ -18,6 +24,22 @@ function App() {
           <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/addHotel"
+            element={
+              <ProtectedRoute isAllowed={user && (user.role === 'admin' || user.role === 'hotel')}>
+                <HotelForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute isAllowed={user && Boolean(user)}>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="*"
             element={

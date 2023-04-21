@@ -13,13 +13,13 @@ export interface Hotel {
 }
 
 export interface HotelMutation {
-  hotelName: string;
+  name: string;
   address: string;
   location?: {
     latitude: number;
     longitude: number;
   };
-  star: number;
+  star: string;
   image: File | null;
 }
 
