@@ -8,9 +8,21 @@ Feature: Users
     Given I am on login page
     When I enter form fields:
       | email    | admin@gmail.com |
-      | password | 123            |
+      | password | 123             |
     And I click "Sign in" button
     Then I see "Admin Adminich"  user menu.
+
+  @userRegister
+  Scenario: User Register
+    Given I am on register page
+    When I enter form fields:
+      | email       | test@gmail.com |
+      | password    | 123            |
+      | firstName   | Test           |
+      | lastName    | Testovich      |
+      | phoneNumber | 553211571      |
+    And I click "Sign up" button
+    Then I see "Test Testovich" user menu.
 
   @createHotel
   Scenario: create Hotel
@@ -28,8 +40,8 @@ Feature: Users
     And I click "Create hotel" button on profile page
     Then I am on create hotel page
     When I enter form fields:
-      | name    | Novotel        |
-      | address | Tynystanova 35 |
-      | star    | 5              |
+      | name    | Novotel           |
+      | address | Tynystanova 35    |
+      | star    | 5                 |
     And I click "Create" button on Create form
     Then I am on Profile page
