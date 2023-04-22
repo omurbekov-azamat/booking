@@ -43,6 +43,43 @@ const ApartmentSchema = new Schema({
   description: {
     type: String,
   },
+  aircon: {
+    type: Boolean,
+    required: true,
+  },
+  balcony: {
+    type: Boolean,
+    required: true,
+  },
+  bath: {
+    type: Boolean,
+    required: true,
+  },
+  family: {
+    type: Boolean,
+    required: true,
+  },
+  food: {
+    type: Boolean,
+    required: true,
+  },
+  place: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  tv: {
+    type: Boolean,
+    required: true,
+  },
+  towel: {
+    type: Boolean,
+    required: true,
+  },
+  wifi: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const Apartment = mongoose.model('Apartment', ApartmentSchema);
