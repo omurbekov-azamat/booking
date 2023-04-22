@@ -17,6 +17,11 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       location: req.body.location ? JSON.parse(req.body.location) : null,
       star: parseFloat(req.body.star),
       image: req.file && req.file.filename,
+      nonSmokingRooms: req.body.nonSmokingRooms,
+      parking: req.body.parking,
+      swimmingPool: req.body.swimmingPool,
+      petFriendly: req.body.petFriendly,
+      city: req.body.city,
     });
 
     await hotel.save();
