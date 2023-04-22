@@ -131,6 +131,40 @@ const run = async () => {
       petFriendly: true,
       city: 'osh',
     },
+    {
+      userId: hotel._id,
+      name: 'Dostuk',
+      address: 'Tynystanova 135',
+      location: {
+        latitude: 150,
+        longitude: 150,
+      },
+      star: 2,
+      isPublished: true,
+      image: 'fixtures/lulu.jpg',
+      nonSmokingRooms: true,
+      parking: true,
+      swimmingPool: false,
+      petFriendly: true,
+      city: 'bishkek',
+    },
+    {
+      userId: hotel._id,
+      name: 'Jannat Regency',
+      address: 'Tokombaeva, 21/2',
+      location: {
+        latitude: 150,
+        longitude: 150,
+      },
+      star: 2,
+      isPublished: true,
+      image: 'fixtures/lulu.jpg',
+      nonSmokingRooms: false,
+      parking: true,
+      swimmingPool: true,
+      petFriendly: false,
+      city: 'bishkek',
+    },
   );
 
   await Apartment.create(
