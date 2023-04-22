@@ -91,10 +91,15 @@ const run = async () => {
       star: 5,
       isPublished: false,
       image: 'fixtures/plaza.jpg',
+      nonSmokingRooms: false,
+      parking: true,
+      swimmingPool: true,
+      petFriendly: false,
+      city: 'bishkek',
     },
     {
       userId: hotel._id,
-      name: 'Hyatt Regency Bishkek',
+      name: 'Hyatt Regency',
       address: 'Abdrahmanov Street 191, 720011 Бишкек, Киргизия',
       location: {
         latitude: 50,
@@ -103,6 +108,11 @@ const run = async () => {
       star: 4,
       isPublished: false,
       image: 'fixtures/hyatt.jpg',
+      nonSmokingRooms: true,
+      parking: true,
+      swimmingPool: false,
+      petFriendly: false,
+      city: 'issyk kul',
     },
     {
       userId: hotel._id,
@@ -115,6 +125,11 @@ const run = async () => {
       star: 3,
       isPublished: false,
       image: 'fixtures/lulu.jpg',
+      nonSmokingRooms: true,
+      parking: true,
+      swimmingPool: true,
+      petFriendly: true,
+      city: 'osh',
     },
   );
 
