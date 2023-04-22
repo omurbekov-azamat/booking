@@ -18,6 +18,13 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
       price: req.body.price,
       images: req.files ? (req.files as Express.Multer.File[]).map((file) => file.path) : null,
       description: req.body.description ? req.body.description : null,
+      aircon: req.body.aircon,
+      balcony: req.body.balcony,
+      bath: req.body.bath,
+      family: req.body.family,
+      food: req.body.food,
+      towel: req.body.towel,
+      wifi: req.body.wifi
     });
 
     await apartment.save();
