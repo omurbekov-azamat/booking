@@ -4,6 +4,7 @@ import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Hotel from '../models/Hotel';
 import { imagesUpload } from '../multer';
+import { HotelFact } from '../types';
 
 const hotelsRouter = express.Router();
 
@@ -36,13 +37,47 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
 
 hotelsRouter.get('/', async (req, res) => {
   try {
-    const queryOwner = req.query.owner as string;
-    if (queryOwner) {
-      const hotelsRes = await Hotel.find({ userId: queryOwner });
-      res.send(hotelsRes);
+    if (req.query) {
+      const queryOwner = req.query.owner as string;
+      if (queryOwner) {
+        const hotelsRes = await Hotel.find({ userId: queryOwner });
+        return res.send(hotelsRes);
+      }
+
+      const nonSmokingRooms = req.query.nonSmoking as string;
+      const swimmingPool = req.query.swimmingPool as string;
+      const parking = req.query.parking as string;
+      const petFriendly = req.query.petFriendly as string;
+      const city = req.query.city as string;
+
+      const findParams: HotelFact = {
+        nonSmokingRooms: false,
+        parking: false,
+        swimmingPool: false,
+        petFriendly: false,
+      };
+
+      if (nonSmokingRooms === 'true') {
+        findParams.nonSmokingRooms = true;
+      }
+      if (parking === 'true') {
+        findParams.parking = true;
+      }
+      if (swimmingPool === 'true') {
+        findParams.swimmingPool = true;
+      }
+      if (petFriendly === 'true') {
+        findParams.petFriendly = true;
+      }
+      if (city) {
+        findParams.city = city;
+      }
+
+      const hotelResponse = await Hotel.find(findParams);
+      return res.send(hotelResponse);
     }
     const hotelsRes = await Hotel.find();
-    res.send(hotelsRes);
+    return res.send(hotelsRes);
   } catch {
     return res.sendStatus(500);
   }

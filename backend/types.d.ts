@@ -16,6 +16,14 @@ export interface IRoomType {
   name: string;
 }
 
+export interface HotelFact {
+  nonSmokingRooms: boolean;
+  parking: boolean;
+  swimmingPool: boolean;
+  petFriendly: boolean;
+  city?: string;
+}
+
 export interface IHotel {
   userId: ObjectId;
   name: string;
