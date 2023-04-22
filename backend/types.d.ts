@@ -17,10 +17,10 @@ export interface IRoomType {
 }
 
 export interface HotelFact {
-  nonSmokingRooms: boolean;
-  parking: boolean;
-  swimmingPool: boolean;
-  petFriendly: boolean;
+  nonSmokingRooms?: boolean;
+  parking?: boolean;
+  swimmingPool?: boolean;
+  petFriendly?: boolean;
   city?: string;
 }
 

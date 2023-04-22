@@ -36,37 +36,32 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
 });
 
 hotelsRouter.get('/', async (req, res) => {
+  const nonSmokingRooms = req.query.nonSmoking as string;
+  const swimmingPool = req.query.swimmingPool as string;
+  const parking = req.query.parking as string;
+  const petFriendly = req.query.petFriendly as string;
+  const city = req.query.city as string;
+  const queryOwner = req.query.owner as string;
+
   try {
-    if (req.query) {
-      const queryOwner = req.query.owner as string;
+    if (queryOwner || city) {
       if (queryOwner) {
         const hotelsRes = await Hotel.find({ userId: queryOwner });
         return res.send(hotelsRes);
       }
 
-      const nonSmokingRooms = req.query.nonSmoking as string;
-      const swimmingPool = req.query.swimmingPool as string;
-      const parking = req.query.parking as string;
-      const petFriendly = req.query.petFriendly as string;
-      const city = req.query.city as string;
+      const findParams: HotelFact = {};
 
-      const findParams: HotelFact = {
-        nonSmokingRooms: false,
-        parking: false,
-        swimmingPool: false,
-        petFriendly: false,
-      };
-
-      if (nonSmokingRooms === 'true') {
+      if (nonSmokingRooms) {
         findParams.nonSmokingRooms = true;
       }
-      if (parking === 'true') {
+      if (parking) {
         findParams.parking = true;
       }
-      if (swimmingPool === 'true') {
+      if (swimmingPool) {
         findParams.swimmingPool = true;
       }
-      if (petFriendly === 'true') {
+      if (petFriendly) {
         findParams.petFriendly = true;
       }
       if (city) {
