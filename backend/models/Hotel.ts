@@ -39,6 +39,26 @@ const HotelSchema = new Schema<IHotel>({
     type: String,
     required: true,
   },
+  nonSmokingRooms: {
+    type: Boolean,
+    required: true,
+  },
+  parking: {
+    type: Boolean,
+    required: true,
+  },
+  swimmingPool: {
+    type: Boolean,
+    required: true,
+  },
+  petFriendly: {
+    type: Boolean,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
 });
 
 const Hotel = mongoose.model('Hotel', HotelSchema);

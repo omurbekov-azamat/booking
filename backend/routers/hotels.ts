@@ -4,6 +4,7 @@ import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Hotel from '../models/Hotel';
 import { imagesUpload } from '../multer';
+import { HotelFact } from '../types';
 
 const hotelsRouter = express.Router();
 
@@ -17,6 +18,11 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       location: req.body.location ? JSON.parse(req.body.location) : null,
       star: parseFloat(req.body.star),
       image: req.file && req.file.filename,
+      nonSmokingRooms: req.body.nonSmokingRooms,
+      parking: req.body.parking,
+      swimmingPool: req.body.swimmingPool,
+      petFriendly: req.body.petFriendly,
+      city: req.body.city,
     });
 
     await hotel.save();
@@ -30,14 +36,43 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
 });
 
 hotelsRouter.get('/', async (req, res) => {
+  const nonSmokingRooms = req.query.nonSmoking as string;
+  const swimmingPool = req.query.swimmingPool as string;
+  const parking = req.query.parking as string;
+  const petFriendly = req.query.petFriendly as string;
+  const city = req.query.city as string;
+  const queryOwner = req.query.owner as string;
+
   try {
-    const queryOwner = req.query.owner as string;
-    if (queryOwner) {
-      const hotelsRes = await Hotel.find({ userId: queryOwner });
-      res.send(hotelsRes);
+    if (queryOwner || city) {
+      if (queryOwner) {
+        const hotelsRes = await Hotel.find({ userId: queryOwner });
+        return res.send(hotelsRes);
+      }
+
+      const findParams: HotelFact = {};
+
+      if (nonSmokingRooms) {
+        findParams.nonSmokingRooms = true;
+      }
+      if (parking) {
+        findParams.parking = true;
+      }
+      if (swimmingPool) {
+        findParams.swimmingPool = true;
+      }
+      if (petFriendly) {
+        findParams.petFriendly = true;
+      }
+      if (city) {
+        findParams.city = city;
+      }
+
+      const hotelResponse = await Hotel.find(findParams);
+      return res.send(hotelResponse);
     }
     const hotelsRes = await Hotel.find();
-    res.send(hotelsRes);
+    return res.send(hotelsRes);
   } catch {
     return res.sendStatus(500);
   }

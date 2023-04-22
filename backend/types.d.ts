@@ -16,6 +16,14 @@ export interface IRoomType {
   name: string;
 }
 
+export interface HotelFact {
+  nonSmokingRooms?: boolean;
+  parking?: boolean;
+  swimmingPool?: boolean;
+  petFriendly?: boolean;
+  city?: string;
+}
+
 export interface IHotel {
   userId: ObjectId;
   name: string;
@@ -27,6 +35,11 @@ export interface IHotel {
   star: number;
   isPublished: boolean;
   image: string;
+  nonSmokingRooms: boolean;
+  parking: boolean;
+  swimmingPool: boolean;
+  petFriendly: boolean;
+  city: string;
 }
 
 export interface ApartmentWithId {
@@ -35,7 +48,7 @@ export interface ApartmentWithId {
   price: {
     from: number;
     till: number;
-  }
+  };
   images: string[] | null;
   description: string;
 }
