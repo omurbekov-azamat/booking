@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ApartmentMutation, ValidationError } from '../../types';
+import { Apartment, ApartmentMutation, Hotel, ValidationError } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
@@ -11,7 +11,7 @@ export const createApartment = createAsyncThunk<
     state: RootState;
     rejectValue: ValidationError;
   }
->('apartment/createApartment', async (apartment, { getState, rejectWithValue }) => {
+>('apartments/createApartment', async (apartment, { getState, rejectWithValue }) => {
   try {
     const user = getState().users.user;
 
@@ -38,3 +38,20 @@ export const createApartment = createAsyncThunk<
     throw e;
   }
 });
+
+export const fetchApartments = createAsyncThunk<Apartment[], string | undefined>(
+  'apartments/fetchAll',
+  async (hotelId: string | undefined) => {
+    try {
+      if (hotelId) {
+        const response = await axiosApi.get<Apartment[]>('/apartments?owner=' + hotelId);
+        return response.data;
+      } else {
+        const response = await axiosApi.get<Apartment[]>('/apartments');
+        return response.data;
+      }
+    } catch {
+      throw new Error();
+    }
+  },
+);
