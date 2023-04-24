@@ -30,6 +30,9 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
           <Box textAlign={'center'}>
             <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
           </Box>
+          <Typography variant="h6" component="p" textAlign={'center'}>
+            {hotel.address}
+          </Typography>
           <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
           <Typography variant="body2" color="text.secondary" fontSize={24}>
             {hotel.description}
@@ -37,11 +40,19 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
           <Typography sx={{ my: 2 }} component="p">
             {t('extraServices')}
           </Typography>
-          <Grid container xl>
-            <Parking parking={hotel.parking} />
-            <PetFriendly petFriendly={hotel.petFriendly} />
-            <Pool pool={hotel.pool} />
-            <Smoking noSmoking={hotel.smoking} />
+          <Grid container rowSpacing={1}>
+            <Grid item xs={12} md={6} xl={3}>
+              <Parking parking={hotel.parking} />
+            </Grid>
+            <Grid item xs={12} md={6} xl={3}>
+              <PetFriendly petFriendly={hotel.petFriendly} />
+            </Grid>
+            <Grid item xs={12} md={6} xl={3}>
+              <Pool pool={hotel.swimmingPool} />
+            </Grid>
+            <Grid item xs={12} md={6} xl={3}>
+              <Smoking noSmoking={hotel.nonSmokingRooms} />
+            </Grid>
           </Grid>
         </CardContent>
       </Card>

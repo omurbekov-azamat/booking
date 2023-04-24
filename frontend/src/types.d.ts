@@ -3,6 +3,7 @@ export interface Hotel {
   userId: string;
   name: string;
   address: string;
+  city: string;
   location: {
     latitude: number;
     longitude: number;
@@ -13,13 +14,14 @@ export interface Hotel {
   image: string;
   parking: boolean;
   petFriendly: boolean;
-  pool: boolean;
-  smoking: boolean;
+  swimmingPool: boolean;
+  nonSmokingRooms: boolean;
 }
 
 export interface HotelMutation {
   name: string;
   address: string;
+  city?: string;
   location?: {
     latitude: number;
     longitude: number;
@@ -28,8 +30,8 @@ export interface HotelMutation {
   image: File | null;
   parking?: boolean;
   petFriendly?: boolean;
-  pool?: boolean;
-  smoking?: boolean;
+  swimmingPool?: boolean;
+  nonSmokingRooms?: boolean;
 }
 
 export interface User {
