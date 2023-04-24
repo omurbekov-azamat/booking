@@ -4,7 +4,7 @@ import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
-import { ApartmentWithId, IHotel } from '../types';
+import { IApartment, IHotel } from '../types';
 import { promises as fs } from 'fs';
 import Hotel from '../models/Hotel';
 
@@ -24,7 +24,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
       family: req.body.family,
       food: req.body.food,
       towel: req.body.towel,
-      wifi: req.body.wifi
+      wifi: req.body.wifi,
     });
 
     await apartment.save();
@@ -64,7 +64,7 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
   try {
     const user = (req as RequestWithUser).user;
 
-    const apartment: HydratedDocument<ApartmentWithId> | null = await Apartment.findById(req.params.id);
+    const apartment: HydratedDocument<IApartment> | null = await Apartment.findById(req.params.id);
 
     if (!apartment) {
       return res.status(404).send({ message: 'Not found apartment!' });
