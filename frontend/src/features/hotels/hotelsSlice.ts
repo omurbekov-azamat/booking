@@ -1,11 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { createHotel, fetchHotels, fetchOneHotel, removeHotel, togglePublishedHotel } from './hotelsThunks';
+import {
+  createHotel,
+  fetchHotels,
+  fetchNewPage,
+  fetchOneHotel,
+  removeHotel,
+  togglePublishedHotel,
+} from './hotelsThunks';
 import type { Hotel, ValidationError } from '../../types';
 
 interface ArtistsState {
   hotels: Hotel[];
   hotel: Hotel | null;
+  page: number;
   loading: boolean;
   loadingCreateHotel: boolean;
   loadingRemoveHotel: false | string;
@@ -17,6 +25,7 @@ interface ArtistsState {
 const initialState: ArtistsState = {
   hotels: [],
   hotel: null,
+  page: 1,
   loading: false,
   loadingCreateHotel: false,
   loadingRemoveHotel: false,
@@ -91,6 +100,19 @@ export const hotelsSlice = createSlice({
       state.loadingTogglePublished = false;
       state.error = true;
     });
+    builder.addCase(fetchNewPage.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchNewPage.fulfilled, (state, action) => {
+      state.loading = false;
+      if (action.payload.length) {
+        state.hotels = state.hotels.concat(action.payload);
+        state.page++;
+      }
+    });
+    builder.addCase(fetchNewPage.rejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 export const hotelsReducer = hotelsSlice.reducer;
@@ -102,3 +124,4 @@ export const selectLoadingCreateHotel = (state: RootState) => state.hotels.loadi
 export const selectLoadingRemoveHotel = (state: RootState) => state.hotels.loadingRemoveHotel;
 export const selectLoadingTogglePublished = (state: RootState) => state.hotels.loadingTogglePublished;
 export const selectCreateHotelError = (state: RootState) => state.hotels.createHotelError;
+export const selectPageOfHotels = (state: RootState) => state.hotels.page;
