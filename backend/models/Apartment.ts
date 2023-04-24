@@ -1,10 +1,11 @@
 import mongoose, { Types } from 'mongoose';
 import Hotel from './Hotel';
 import RoomType from './RoomType';
+import { IApartment } from '../types';
 
 const Schema = mongoose.Schema;
 
-const ApartmentSchema = new Schema({
+const ApartmentSchema = new Schema<IApartment>({
   hotelId: {
     type: Schema.Types.ObjectId,
     ref: 'Hotel',
@@ -82,5 +83,5 @@ const ApartmentSchema = new Schema({
   },
 });
 
-const Apartment = mongoose.model('Apartment', ApartmentSchema);
+const Apartment = mongoose.model<IApartment>('Apartment', ApartmentSchema);
 export default Apartment;
