@@ -56,7 +56,7 @@ export const fetchApartments = createAsyncThunk<Apartment[], string | undefined>
   },
 );
 
-export const fetchOneApartment = createAsyncThunk<Apartment, string>('hotels/fetchOne', async (id: string) => {
+export const fetchOneApartment = createAsyncThunk<Apartment, string>('apartments/fetchOne', async (id: string) => {
   try {
     const response = await axiosApi.get<Apartment>('/apartments/' + id);
     return response.data;
@@ -97,5 +97,13 @@ export const editApartment = createAsyncThunk<
       return rejectWithValue(e.response.data as ValidationError);
     }
     throw e;
+  }
+});
+
+export const removeApartment = createAsyncThunk<void, string>('apartments/removeOne', async (id) => {
+  try {
+    await axiosApi.delete('/apartments/' + id);
+  } catch {
+    throw new Error();
   }
 });
