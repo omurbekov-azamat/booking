@@ -12,7 +12,7 @@ import { selectUser } from './features/users/usersSlice';
 import ProtectedRoute from './components/UI/ProtectedRoute/ProtectedRoute';
 import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
-import HotelRoomPage from './features/hotelRoom/HotelRoomPage';
+import Apartment from './features/Apartment/Apartment';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -25,7 +25,7 @@ function App() {
           <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/hotels/:id/:roomId" element={<HotelRoomPage />} />
+          <Route path="/hotels/:id/:roomId" element={<Apartment />} />
           <Route
             path="/addHotel"
             element={
