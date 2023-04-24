@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useParams } from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { fetchOneHotel } from './hotelsThunks';
@@ -17,11 +16,7 @@ const HotelPage = () => {
     dispatch(fetchOneHotel(id));
   }, [dispatch, id]);
 
-  return loading ? (
-    <Spinner />
-  ) : (
-    <div>{hotel && <HotelFull title={hotel.name} rating={hotel.star} image={hotel.image} id={hotel._id} />}</div>
-  );
+  return loading ? <Spinner /> : <div>{hotel && <HotelFull hotel={hotel} />}</div>;
 };
 
 export default HotelPage;
