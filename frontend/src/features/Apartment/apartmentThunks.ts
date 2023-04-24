@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Apartment, ApartmentMutation, Hotel, ValidationError } from '../../types';
+import {Apartment, ApartmentMutation, Hotel, ValidationError} from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
@@ -55,3 +55,12 @@ export const fetchApartments = createAsyncThunk<Apartment[], string | undefined>
     }
   },
 );
+
+export const fetchOneApartment = createAsyncThunk<Apartment, string>('hotels/fetchOne', async (id: string) => {
+  try {
+    const response = await axiosApi.get<Apartment>('/apartments/' + id);
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
