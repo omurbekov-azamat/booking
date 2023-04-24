@@ -8,8 +8,13 @@ export interface Hotel {
     longitude: number;
   };
   star: number;
+  description: string;
   isPublished: boolean;
   image: string;
+  parking: boolean;
+  petFriendly: boolean;
+  pool: boolean;
+  smoking: boolean;
 }
 
 export interface HotelMutation {
@@ -21,6 +26,10 @@ export interface HotelMutation {
   };
   star: string;
   image: File | null;
+  parking?: boolean;
+  petFriendly?: boolean;
+  pool?: boolean;
+  smoking?: boolean;
 }
 
 export interface User {
