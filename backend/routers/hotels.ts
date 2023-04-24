@@ -42,6 +42,7 @@ hotelsRouter.get('/', async (req, res) => {
   const petFriendly = req.query.petFriendly as string;
   const city = req.query.city as string;
   const queryOwner = req.query.owner as string;
+  const queryPage = req.query.page as string;
 
   try {
     if (queryOwner || city) {
@@ -71,7 +72,7 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelResponse = await Hotel.find(findParams);
       return res.send(hotelResponse);
     }
-    const hotelsRes = await Hotel.find();
+    const hotelsRes = await Hotel.find().skip(queryPage? parseInt(queryPage) * 18 : 0).limit(18);
     return res.send(hotelsRes);
   } catch {
     return res.sendStatus(500);
