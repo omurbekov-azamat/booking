@@ -72,7 +72,9 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelResponse = await Hotel.find(findParams);
       return res.send(hotelResponse);
     }
-    const hotelsRes = await Hotel.find().skip(queryPage? parseInt(queryPage) * 18 : 0).limit(18);
+    const hotelsRes = await Hotel.find()
+      .skip(queryPage ? parseInt(queryPage) * 18 : 0)
+      .limit(18);
     return res.send(hotelsRes);
   } catch {
     return res.sendStatus(500);
