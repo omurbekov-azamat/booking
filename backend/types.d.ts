@@ -42,7 +42,7 @@ export interface IHotel {
   city: string;
 }
 
-export interface ApartmentWithId {
+export interface IApartment {
   hotelId: ObjectId;
   roomTypeId: ObjectId;
   price: {
@@ -51,4 +51,13 @@ export interface ApartmentWithId {
   };
   images: string[] | null;
   description: string;
+  aircon: boolean;
+  balcony: boolean;
+  bath: boolean;
+  family: boolean;
+  food: boolean;
+  place: number;
+  tv: boolean;
+  towel: boolean;
+  wifi: boolean;
 }
