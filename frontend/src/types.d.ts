@@ -34,7 +34,7 @@ export interface HotelMutation {
   nonSmokingRooms?: boolean;
 }
 
-export interface Apartment {
+export interface IApartment {
   _id: string;
   hotelId: string;
   roomTypeId: string;

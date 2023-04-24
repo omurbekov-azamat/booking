@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Apartment, ApartmentMutation, ValidationError } from '../../types';
+import { IApartment, ApartmentMutation, ValidationError } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
@@ -39,15 +39,15 @@ export const createApartment = createAsyncThunk<
   }
 });
 
-export const fetchApartments = createAsyncThunk<Apartment[], string | undefined>(
+export const fetchApartments = createAsyncThunk<IApartment[], string | undefined>(
   'apartments/fetchAll',
   async (hotelId: string | undefined) => {
     try {
       if (hotelId) {
-        const response = await axiosApi.get<Apartment[]>('/apartments?owner=' + hotelId);
+        const response = await axiosApi.get<IApartment[]>('/apartments?owner=' + hotelId);
         return response.data;
       } else {
-        const response = await axiosApi.get<Apartment[]>('/apartments');
+        const response = await axiosApi.get<IApartment[]>('/apartments');
         return response.data;
       }
     } catch {
@@ -56,9 +56,9 @@ export const fetchApartments = createAsyncThunk<Apartment[], string | undefined>
   },
 );
 
-export const fetchOneApartment = createAsyncThunk<Apartment, string>('apartments/fetchOne', async (id: string) => {
+export const fetchOneApartment = createAsyncThunk<IApartment, string>('apartments/fetchOne', async (id: string) => {
   try {
-    const response = await axiosApi.get<Apartment>('/apartments/' + id);
+    const response = await axiosApi.get<IApartment>('/apartments/' + id);
     return response.data;
   } catch {
     throw new Error();
