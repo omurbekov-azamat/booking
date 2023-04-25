@@ -36,5 +36,7 @@
   "bath": "Bathroom",
   "tv": "TV",
   "food": "Food delivery",
-  "more": "more"
+  "more": "more",
+  "roomType": "Room type",
+  "price": "Price"
 }

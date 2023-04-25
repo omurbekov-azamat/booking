@@ -1,15 +1,27 @@
-export interface Hotel {
-  _id: string;
-  userId: string;
+export interface HotelData {
   name: string;
   address: string;
-  city: string;
-  location: {
+  city?: string;
+  location?: {
     latitude: number;
     longitude: number;
   };
+  description?: string;
+}
+
+export interface HotelMutation extends HotelData {
+  star: string;
+  image: File | null;
+  parking?: boolean;
+  petFriendly?: boolean;
+  swimmingPool?: boolean;
+  nonSmokingRooms?: boolean;
+}
+
+export interface Hotel extends HotelData {
+  _id: string;
+  userId: string;
   star: number;
-  description: string;
   isPublished: boolean;
   image: string;
   parking: boolean;
@@ -22,61 +34,35 @@ export interface HotelWithLabel extends Hotel {
   label: string;
 }
 
-export interface HotelMutation {
-  name: string;
-  address: string;
-  city?: string;
-  location?: {
-    latitude: number;
-    longitude: number;
+export interface ApartmentData {
+  price: {
+    from: number;
+    till: number;
   };
-  star: string;
-  image: File | null;
-  parking?: boolean;
-  petFriendly?: boolean;
-  swimmingPool?: boolean;
-  nonSmokingRooms?: boolean;
+  description?: string;
+  aircon: boolean;
+  balcony: boolean;
+  bath: boolean;
+  family: boolean;
+  food: boolean;
+  place: number;
+  tv: boolean;
+  towel: boolean;
+  wifi: boolean;
+  images?: string[];
 }
 
-export interface IApartment {
+export interface ApartmentMutation extends ApartmentData {
+  hotelId: string;
+  roomTypeId: string;
+}
+
+export interface IApartment extends ApartmentMutation {
+  roomTypeId: {
+    name: string;
+    _id: string;
+  };
   _id: string;
-  hotelId: string;
-  roomTypeId: string;
-  price: {
-    type: number;
-    till: number;
-  };
-  images?: string[];
-  description?: string;
-  aircon: boolean;
-  balcony: boolean;
-  bath: boolean;
-  family: boolean;
-  food: boolean;
-  place: number;
-  tv: boolean;
-  towel: boolean;
-  wifi: boolean;
-}
-
-export interface ApartmentMutation {
-  hotelId: string;
-  roomTypeId: string;
-  price: {
-    type: number;
-    till: number;
-  };
-  images?: string[];
-  description?: string;
-  aircon: boolean;
-  balcony: boolean;
-  bath: boolean;
-  family: boolean;
-  food: boolean;
-  place: number;
-  tv: boolean;
-  towel: boolean;
-  wifi: boolean;
 }
 
 export interface User {
@@ -91,17 +77,15 @@ export interface User {
   cashback?: string;
 }
 
-export interface RegisterMutation {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-}
-
 export interface LoginMutation {
   email: string;
   password: string;
+}
+
+export interface RegisterMutation extends LoginMutation {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
 }
 
 export interface RegisterResponse {
