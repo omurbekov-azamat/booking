@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IApartment, ApartmentMutation, ValidationError } from '../../types';
+import { IApartment, ApartmentMutation, ValidationError, UpdateApartment } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
@@ -67,7 +67,7 @@ export const fetchOneApartment = createAsyncThunk<IApartment, string>('apartment
 
 export const editApartment = createAsyncThunk<
   void,
-  ApartmentMutation,
+  UpdateApartment,
   {
     state: RootState;
     rejectValue: ValidationError;
@@ -78,10 +78,10 @@ export const editApartment = createAsyncThunk<
 
     if (user) {
       const formData = new FormData();
-      const keys = Object.keys(apartment) as (keyof ApartmentMutation)[];
+      const keys = Object.keys(apartment.apartment) as (keyof ApartmentMutation)[];
 
       keys.forEach((key) => {
-        const value = apartment[key];
+        const value = apartment.apartment[key];
         if (value !== null) {
           if ((key as string) === 'location') {
             formData.append(key, JSON.stringify(value));
@@ -90,7 +90,7 @@ export const editApartment = createAsyncThunk<
           }
         }
       });
-      await axiosApi.patch('/apartments', formData);
+      await axiosApi.patch('/apartments/' + apartment.id, formData);
     }
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 400) {

@@ -79,6 +79,11 @@ export interface ApartmentMutation {
   wifi: boolean;
 }
 
+export interface UpdateApartment {
+  id: string;
+  apartment: ApartmentMutation;
+}
+
 export interface User {
   _id: string;
   email: string;

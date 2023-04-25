@@ -12,7 +12,7 @@ import { selectUser } from './features/users/usersSlice';
 import ProtectedRoute from './components/UI/ProtectedRoute/ProtectedRoute';
 import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
-import Apartment from './features/Apartment/Apartment';
+import Apartment from './features/apartment/Apartment';
 
 function App() {
   const user = useAppSelector(selectUser);
