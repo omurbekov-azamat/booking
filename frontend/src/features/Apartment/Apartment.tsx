@@ -4,15 +4,18 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import { Grid } from '@mui/material';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import { useParams } from 'react-router-dom';
 
 const Apartment = () => {
+  const { hotelName, id } = useParams() as { hotelName: string; id: string };
+
   const services = ['1', '2', '3'];
   return (
     <>
       <Card sx={{ mt: 5 }}>
         <CardContent>
           <Typography variant="h4" component="p" textAlign={'center'}>
-            {'Название отеля'}
+            {hotelName}
           </Typography>
           <Typography>{'Количество комнат:'}</Typography>
           <Typography gutterBottom component="p">

@@ -25,6 +25,7 @@ function App() {
           <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/:hotelName/apartment/:id" element={<Apartment />} />
           <Route path="/hotels/:id/:roomId" element={<Apartment />} />
           <Route
             path="/addHotel"
