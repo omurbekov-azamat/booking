@@ -16,7 +16,7 @@ const SelectCities: React.FC<Props> = ({ onChange, name, label, width }) => {
 
   const cities = [
     { id: 'bishkek', title: t('bishkek') },
-    { id: 'issyk kul', title: t('issykKul') },
+    { id: 'issykKul', title: t('issykKul') },
     { id: 'osh', title: t('osh') },
   ];
 
