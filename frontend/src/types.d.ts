@@ -18,6 +18,10 @@ export interface Hotel {
   nonSmokingRooms: boolean;
 }
 
+export interface HotelWithLabel extends Hotel {
+  label: string;
+}
+
 export interface HotelMutation {
   name: string;
   address: string;

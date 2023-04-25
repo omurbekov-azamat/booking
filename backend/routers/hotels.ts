@@ -43,8 +43,13 @@ hotelsRouter.get('/', async (req, res) => {
   const city = req.query.city as string;
   const queryOwner = req.query.owner as string;
   const queryPage = req.query.page as string;
+  const match = req.query.match as string;
 
   try {
+    if (match) {
+      const hotelsRes = await Hotel.find({ name: { $regex: { $regex: new RegExp(match, 'i') } } }).limit(10);
+      return res.send(hotelsRes);
+    }
     if (queryOwner || city) {
       if (queryOwner) {
         const hotelsRes = await Hotel.find({ userId: queryOwner });
@@ -72,7 +77,9 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelResponse = await Hotel.find(findParams);
       return res.send(hotelResponse);
     }
-    const hotelsRes = await Hotel.find().skip(queryPage? parseInt(queryPage) * 18 : 0).limit(18);
+    const hotelsRes = await Hotel.find()
+      .skip(queryPage ? parseInt(queryPage) * 18 : 0)
+      .limit(18);
     return res.send(hotelsRes);
   } catch {
     return res.sendStatus(500);

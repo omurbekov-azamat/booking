@@ -30,6 +30,15 @@ export const fetchNewPage = createAsyncThunk<Hotel[], number>('hotels/nextPage',
   }
 });
 
+export const fetchMatches = createAsyncThunk<Hotel[], string>('hotels/matches', async (match) => {
+  try {
+    const response = await axiosApi.get<Hotel[]>('hotels?match=' + match);
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
+
 export const fetchOneHotel = createAsyncThunk<Hotel, string>('hotels/fetchOne', async (id: string) => {
   try {
     const response = await axiosApi.get<Hotel>('/hotels/' + id);
