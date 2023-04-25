@@ -4,11 +4,15 @@ import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities
 import { useTranslation } from 'react-i18next';
 import { Box, Grid } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { SearchData } from '../../../types';
+import { useAppDispatch } from '../../../app/hooks';
+import { fetchSearchedHotels } from '../hotelsThunks';
 
 const SearchHotelForm = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<SearchData>({
     city: '',
     smoking: false,
     parking: false,
@@ -30,7 +34,7 @@ const SearchHotelForm = () => {
 
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(state);
+    dispatch(fetchSearchedHotels(state));
   };
 
   return (
