@@ -58,16 +58,16 @@ hotelsRouter.get('/', async (req, res) => {
 
       const findParams: HotelFact = {};
 
-      if (nonSmokingRooms) {
+      if (nonSmokingRooms === 'true') {
         findParams.nonSmokingRooms = true;
       }
-      if (parking) {
+      if (parking === 'true') {
         findParams.parking = true;
       }
-      if (swimmingPool) {
+      if (swimmingPool === 'true') {
         findParams.swimmingPool = true;
       }
-      if (petFriendly) {
+      if (petFriendly === 'true') {
         findParams.petFriendly = true;
       }
       if (city) {

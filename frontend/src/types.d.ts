@@ -108,3 +108,11 @@ export interface ValidationError {
 export interface GlobalError {
   error: string;
 }
+
+export interface SearchData {
+  city: string,
+  smoking: boolean,
+  parking: boolean,
+  pool: boolean,
+  petFriendly: boolean,
+}

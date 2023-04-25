@@ -112,7 +112,7 @@ const run = async () => {
       parking: true,
       swimmingPool: false,
       petFriendly: false,
-      city: 'issyk kul',
+      city: 'issykKul',
     },
     {
       userId: hotel._id,

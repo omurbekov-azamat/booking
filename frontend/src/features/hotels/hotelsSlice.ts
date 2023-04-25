@@ -6,6 +6,7 @@ import {
   fetchMatches,
   fetchNewPage,
   fetchOneHotel,
+  fetchSearchedHotels,
   removeHotel,
   togglePublishedHotel,
 } from './hotelsThunks';
@@ -127,6 +128,19 @@ export const hotelsSlice = createSlice({
     });
     builder.addCase(fetchMatches.rejected, (state) => {
       state.loadingMatch = true;
+    });
+    builder.addCase(fetchSearchedHotels.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(fetchSearchedHotels.fulfilled, (state, action) => {
+      state.loading = false;
+      state.hotels = action.payload;
+      state.error = false;
+    });
+    builder.addCase(fetchSearchedHotels.rejected, (state) => {
+      state.loading = false;
+      state.error = true;
     });
   },
 });

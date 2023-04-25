@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
-import { Hotel, HotelMutation, ValidationError } from '../../types';
+import { Hotel, HotelMutation, SearchData, ValidationError } from '../../types';
 import { RootState } from '../../app/store';
 import { isAxiosError } from 'axios';
 
@@ -20,6 +20,26 @@ export const fetchHotels = createAsyncThunk<Hotel[], string | undefined>(
     }
   },
 );
+
+export const fetchSearchedHotels = createAsyncThunk<Hotel[], SearchData>('hotels/searched', async (data) => {
+  try {
+    const response = await axiosApi.get<Hotel[]>(
+      '/hotels?nonSmoking=' +
+        data.smoking +
+        '&swimmingPool=' +
+        data.pool +
+        '&city=' +
+        data.city +
+        '&parking=' +
+        data.parking +
+        '&petFriendly=' +
+        data.petFriendly,
+    );
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
 
 export const fetchNewPage = createAsyncThunk<Hotel[], number>('hotels/nextPage', async (page) => {
   try {
