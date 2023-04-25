@@ -4,6 +4,7 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist
 import storage from 'redux-persist/lib/storage';
 import { usersReducer } from '../features/users/usersSlice';
 import { hotelsReducer } from '../features/hotels/hotelsSlice';
+import { apartmentsReducer } from '../features/Apartment/apartmentSlice';
 
 const usersPersistConfig = {
   key: 'booking:users',
@@ -14,6 +15,7 @@ const usersPersistConfig = {
 const rootReducer = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   hotels: hotelsReducer,
+  apartments: apartmentsReducer,
 });
 
 export const store = configureStore({
