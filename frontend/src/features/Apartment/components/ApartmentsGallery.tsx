@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Box, CardMedia, Grid, styled } from '@mui/material';
-import { arrowStyleGallery, ImagesApartments, itemData } from '../../../constants';
+import { apiURL, arrowStyleGallery } from '../../../constants';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { IApartment } from '../../../types';
 
 const MyGalleryContainer = styled('div')({
   width: '700px',
@@ -19,15 +20,27 @@ const MyGalleryRightArrow = styled(ArrowForwardIcon)({
   right: '10px',
 });
 
-const ApartmentsGallery: React.FC = () => {
+interface Props {
+  apartmentData: IApartment;
+}
+
+interface ImagesApartments {
+  img: string;
+  title: string;
+}
+
+const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
+  const data = apartmentData.images!;
+
   const [scrollPosition, setScrollPosition] = useState(0);
+
   const [selectedImage, setSelectedImage] = useState<ImagesApartments>({
-    img: itemData[0].img,
-    title: itemData[0].title,
+    img: data[0],
+    title: apartmentData.roomTypeId.name,
   });
 
-  const handleImageClick = (imageData: ImagesApartments) => {
-    setSelectedImage(imageData);
+  const handleImageClick = (img: string, title: string) => {
+    setSelectedImage({ img: img, title: title });
   };
 
   const handleScrollLeft = () => {
@@ -35,15 +48,15 @@ const ApartmentsGallery: React.FC = () => {
   };
 
   const handleScrollRight = () => {
-    if (scrollPosition < itemData.length * 200 - 200) {
+    if (scrollPosition < data.length * 200 - 200) {
       setScrollPosition((prevPosition) => prevPosition + 200);
     }
   };
 
   return (
     <>
-      <Box sx={{ width: '700px', height: '500px', p: 3 }}>
-        <CardMedia component="img" image={selectedImage.img} height="450" alt={selectedImage.title} />
+      <Box sx={{ width: '700px', height: '500px', p: 3, background: 'rgba(0, 0, 0, 0.2)' }}>
+        <CardMedia component="img" image={apiURL + '/' + selectedImage.img} height="450" alt={selectedImage.title} />
       </Box>
       <MyGalleryContainer>
         <MyGalleryLeftArrow onClick={handleScrollLeft} sx={arrowStyleGallery} />
@@ -54,7 +67,7 @@ const ApartmentsGallery: React.FC = () => {
           spacing={1}
           flexWrap="nowrap"
           sx={{
-            width: `${itemData.length * 200}px`,
+            width: `${data.length * 200}px`,
             height: '100%',
             position: 'absolute',
             top: 0,
@@ -63,15 +76,15 @@ const ApartmentsGallery: React.FC = () => {
             transform: `translateX(-${scrollPosition}px)`,
           }}
         >
-          {itemData.map((item) => (
-            <Grid item key={item.img} xs>
+          {data.map((item) => (
+            <Grid item key={item} xs>
               <CardMedia
                 component="img"
                 height="140"
-                image={item.img}
-                alt={item.title}
+                image={apiURL + '/' + item}
+                alt={apartmentData.roomTypeId.name}
                 sx={{ width: '200px' }}
-                onClick={() => handleImageClick(item)}
+                onClick={() => handleImageClick(item, apartmentData.roomTypeId.name)}
               />
             </Grid>
           ))}
