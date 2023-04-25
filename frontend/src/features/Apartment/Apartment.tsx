@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import { Grid } from '@mui/material';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
-const HotelRoomPage = () => {
+const Apartment = () => {
   const services = ['1', '2', '3'];
   return (
     <>
@@ -43,4 +43,4 @@ const HotelRoomPage = () => {
   );
 };
 
-export default HotelRoomPage;
+export default Apartment;

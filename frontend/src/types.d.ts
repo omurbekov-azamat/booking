@@ -34,6 +34,47 @@ export interface HotelMutation {
   nonSmokingRooms?: boolean;
 }
 
+export interface IApartment {
+  _id: string;
+  hotelId: string;
+  roomTypeId: string;
+  price: {
+    type: number;
+    till: number;
+  };
+  images?: string[];
+  description?: string;
+  aircon: boolean;
+  balcony: boolean;
+  bath: boolean;
+  family: boolean;
+  food: boolean;
+  place: number;
+  tv: boolean;
+  towel: boolean;
+  wifi: boolean;
+}
+
+export interface ApartmentMutation {
+  hotelId: string;
+  roomTypeId: string;
+  price: {
+    type: number;
+    till: number;
+  };
+  images?: string[];
+  description?: string;
+  aircon: boolean;
+  balcony: boolean;
+  bath: boolean;
+  family: boolean;
+  food: boolean;
+  place: number;
+  tv: boolean;
+  towel: boolean;
+  wifi: boolean;
+}
+
 export interface User {
   _id: string;
   email: string;
