@@ -9,6 +9,7 @@ import SearchHotelForm from './components/SearchHotelForm';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
+import SearchField from './components/SearchField/SearchField';
 
 const HotelsPage = () => {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ const HotelsPage = () => {
 
   return (
     <>
+      <SearchField />
       <SearchHotelForm />
       <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
         {hotels ? (
