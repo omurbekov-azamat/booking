@@ -1,21 +1,21 @@
 export interface HotelData {
   name: string;
   address: string;
-  city?: string;
+  city: string;
   location?: {
     latitude: number;
     longitude: number;
   };
   description?: string;
+  parking: boolean;
+  petFriendly: boolean;
+  swimmingPool: boolean;
+  nonSmokingRooms: boolean;
 }
 
 export interface HotelMutation extends HotelData {
   star: string;
   image: File | null;
-  parking?: boolean;
-  petFriendly?: boolean;
-  swimmingPool?: boolean;
-  nonSmokingRooms?: boolean;
 }
 
 export interface Hotel extends HotelData {
@@ -24,10 +24,6 @@ export interface Hotel extends HotelData {
   star: number;
   isPublished: boolean;
   image: string;
-  parking: boolean;
-  petFriendly: boolean;
-  swimmingPool: boolean;
-  nonSmokingRooms: boolean;
 }
 
 export interface HotelWithLabel extends Hotel {
