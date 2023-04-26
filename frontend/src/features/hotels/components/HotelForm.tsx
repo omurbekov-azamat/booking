@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { selectCreateHotelError, selectLoadingCreateHotel } from '../hotelsSlice';
-import { Box, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Box, Container, Grid, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
@@ -30,6 +30,8 @@ const HotelForm = () => {
     nonSmokingRooms: false,
   });
 
+  const [imageRequired, setImageRequired] = useState(false);
+
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setState((prev) => ({ ...prev, [name]: value }));
@@ -50,19 +52,23 @@ const HotelForm = () => {
 
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    await dispatch(createHotel(state));
-    await setState({
-      name: '',
-      city: '',
-      address: '',
-      star: '',
-      image: null,
-      parking: false,
-      petFriendly: false,
-      swimmingPool: false,
-      nonSmokingRooms: false,
-    });
-    await navigate('/profile');
+    if (!state.image) {
+      setImageRequired(true);
+    } else {
+      await dispatch(createHotel(state));
+      await setState({
+        name: '',
+        city: '',
+        address: '',
+        star: '',
+        image: null,
+        parking: false,
+        petFriendly: false,
+        swimmingPool: false,
+        nonSmokingRooms: false,
+      });
+      await navigate('/profile');
+    }
   };
 
   const getFieldError = (fieldName: string) => {
@@ -132,6 +138,9 @@ const HotelForm = () => {
               type="images/*"
               error={error}
             />
+          </Grid>
+          <Grid item xs>
+            {imageRequired && <Alert severity="error">Image is required</Alert>}
           </Grid>
           <Grid item xs>
             <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
