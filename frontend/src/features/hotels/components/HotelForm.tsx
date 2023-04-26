@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { selectCreateHotelError, selectLoadingCreateHotel } from '../hotelsSlice';
-import { Box, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Box, Container, Grid, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
+import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { createHotel } from '../hotelsThunks';
 import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
+import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 
 const HotelForm = () => {
   const dispatch = useAppDispatch();
@@ -18,10 +20,17 @@ const HotelForm = () => {
 
   const [state, setState] = useState<HotelMutation>({
     name: '',
+    city: '',
     address: '',
     star: '',
     image: null,
+    parking: false,
+    petFriendly: false,
+    swimmingPool: false,
+    nonSmokingRooms: false,
   });
+
+  const [imageRequired, setImageRequired] = useState(false);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -36,16 +45,30 @@ const HotelForm = () => {
     }));
   };
 
+  const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setState((prev) => ({ ...prev, [name]: checked }));
+  };
+
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    await dispatch(createHotel(state));
-    await setState({
-      name: '',
-      address: '',
-      star: '',
-      image: null,
-    });
-    await navigate('/profile');
+    if (!state.image) {
+      setImageRequired(true);
+    } else {
+      await dispatch(createHotel(state));
+      await setState({
+        name: '',
+        city: '',
+        address: '',
+        star: '',
+        image: null,
+        parking: false,
+        petFriendly: false,
+        swimmingPool: false,
+        nonSmokingRooms: false,
+      });
+      await navigate('/profile');
+    }
   };
 
   const getFieldError = (fieldName: string) => {
@@ -75,6 +98,9 @@ const HotelForm = () => {
               required
             />
           </Grid>
+          <Grid item>
+            <SelectCities onChange={inputChangeHandler} name="city" label={t('City')} />
+          </Grid>
           <Grid item xs>
             <TextField
               label={t('address')}
@@ -102,6 +128,9 @@ const HotelForm = () => {
             />
           </Grid>
           <Grid item xs>
+            <ListFacilities onChange={handleChangeCheckBox} width={400} />
+          </Grid>
+          <Grid item xs>
             <FileInput
               label={t('image')}
               onChange={fileInputChangeHandler}
@@ -109,6 +138,9 @@ const HotelForm = () => {
               type="images/*"
               error={error}
             />
+          </Grid>
+          <Grid item xs>
+            {imageRequired && <Alert severity="error">Image is required</Alert>}
           </Grid>
           <Grid item xs>
             <LoadingButton type="submit" color="success" variant="contained" loading={loading}>

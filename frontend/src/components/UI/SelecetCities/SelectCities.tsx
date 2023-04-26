@@ -26,7 +26,7 @@ const SelectCities: React.FC<Props> = ({ onChange, name, label, width }) => {
   };
 
   return (
-    <TextField select label={label} value={cityName} name={name} onChange={selectChangeHandler} sx={{ width }}>
+    <TextField select label={label} value={cityName} name={name} onChange={selectChangeHandler} sx={{ width }} required>
       {cities.map((city) => (
         <MenuItem key={city.id} value={city.id}>
           {city.title}
