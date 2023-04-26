@@ -5,10 +5,10 @@ import Card from '@mui/material/Card';
 import { Grid } from '@mui/material';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchOneApartment } from './apartmentThunks';
-import { selectOneApartment } from './apartmentSlice';
-import ApartmentsGallery from './components/ApartmentsGallery';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { fetchOneApartment } from '../apartmentThunks';
+import { selectOneApartment } from '../apartmentSlice';
+import ApartmentsGallery from './ApartmentsGallery';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();

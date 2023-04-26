@@ -15,7 +15,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
     const apartment = new Apartment({
       hotelId: req.body.hotelId,
       roomTypeId: req.body.roomTypeId,
-      price: req.body.price,
+      price: JSON.parse(req.body.price),
       images: req.files ? (req.files as Express.Multer.File[]).map((file) => file.path) : null,
       description: req.body.description ? req.body.description : null,
       aircon: req.body.aircon,
@@ -25,6 +25,8 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
       food: req.body.food,
       towel: req.body.towel,
       wifi: req.body.wifi,
+      place: parseFloat(req.body.place),
+      tv: req.body.tv,
     });
 
     await apartment.save();
