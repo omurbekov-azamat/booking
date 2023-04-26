@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectApartmentError, selectLoadingCreateApartment } from './apartmentSlice';
 import Button from '@mui/material/Button';
-import { createHotel } from '../hotels/hotelsThunks';
 import { createApartment } from './apartmentThunks';
 
 const ApartmentForm = () => {
@@ -97,6 +96,7 @@ const ApartmentForm = () => {
         roomTypeId: '6447a4f33285c6710e415c80',
       }),
     );
+    await navigate('/hotels/' + id);
   };
 
   return (
@@ -155,7 +155,6 @@ const ApartmentForm = () => {
                 autoComplete="current-description"
                 value={state.description}
                 onChange={inputChangeHandler}
-                required
               />
             </Grid>
             <Grid item xs>

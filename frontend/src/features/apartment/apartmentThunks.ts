@@ -14,7 +14,6 @@ export const createApartment = createAsyncThunk<
 >('apartments/createApartment', async (apartment, { getState, rejectWithValue }) => {
   try {
     const user = getState().users.user;
-    // console.log('thunk is here', apartment);
     if (user) {
       const formData = new FormData();
 
@@ -48,22 +47,6 @@ export const createApartment = createAsyncThunk<
 
       return response.data;
     }
-    //   const formData = new FormData();
-    //   const keys = Object.keys(apartment) as (keyof ApartmentMutation)[];
-    //
-    //   keys.forEach((key) => {
-    //     const value = apartment[key];
-    //     if (value !== null) {
-    //       if ((key as string) === 'location') {
-    //         formData.append(key, JSON.stringify(value));
-    //       } else {
-    //         formData.append(key, value as string | Blob);
-    //       }
-    //     }
-    //   });
-    //   console.log('form data is here', formData);
-    //   await axiosApi.post('/apartments', formData);
-    // }
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 400) {
       return rejectWithValue(e.response.data as ValidationError);
