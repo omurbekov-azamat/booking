@@ -21,9 +21,9 @@ const ListFacilities: React.FC<Props> = ({ onChange, width }) => {
   };
 
   const facilities = [
-    { id: 'smoking', title: t('noneSmokingRoom') },
+    { id: 'nonSmokingRooms', title: t('noneSmokingRoom') },
     { id: 'parking', title: t('parking') },
-    { id: 'pool', title: t('pool') },
+    { id: 'swimmingPool', title: t('pool') },
     { id: 'petFriendly', title: t('petFriendly') },
   ];
 

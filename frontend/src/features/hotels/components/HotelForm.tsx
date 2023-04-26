@@ -9,6 +9,7 @@ import { LoadingButton } from '@mui/lab';
 import { createHotel } from '../hotelsThunks';
 import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
+import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 
 const HotelForm = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,10 @@ const HotelForm = () => {
     address: '',
     star: '',
     image: null,
+    parking: false,
+    petFriendly: false,
+    swimmingPool: false,
+    nonSmokingRooms: false,
   });
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +43,11 @@ const HotelForm = () => {
     }));
   };
 
+  const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setState((prev) => ({ ...prev, [name]: checked }));
+  };
+
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     await dispatch(createHotel(state));
@@ -47,6 +57,10 @@ const HotelForm = () => {
       address: '',
       star: '',
       image: null,
+      parking: false,
+      petFriendly: false,
+      swimmingPool: false,
+      nonSmokingRooms: false,
     });
     await navigate('/profile');
   };
@@ -106,6 +120,9 @@ const HotelForm = () => {
               inputProps={{ min: 0, max: 5 }}
               required
             />
+          </Grid>
+          <Grid item xs>
+            <ListFacilities onChange={handleChangeCheckBox} width={400} />
           </Grid>
           <Grid item xs>
             <FileInput
