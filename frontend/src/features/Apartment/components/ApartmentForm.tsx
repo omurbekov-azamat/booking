@@ -16,7 +16,6 @@ import { ApartmentMutation, ImgType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectApartmentError, selectLoadingCreateApartment } from '../apartmentSlice';
-import Button from '@mui/material/Button';
 import { createApartment } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
