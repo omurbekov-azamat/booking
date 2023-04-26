@@ -41,8 +41,6 @@ const ApartmentForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log('state', state);
-
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
