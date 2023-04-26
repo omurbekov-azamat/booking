@@ -89,14 +89,16 @@ const ApartmentForm = () => {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    await dispatch(
-      createApartment({
-        ...state,
-        hotelId: id!,
-        roomTypeId: '6447a4f33285c6710e415c80',
-      }),
-    );
-    await navigate('/hotels/' + id);
+    if (id) {
+      await dispatch(
+        createApartment({
+          ...state,
+          hotelId: id,
+          roomTypeId: '6447a4f33285c6710e415c80',
+        }),
+      );
+      await navigate('/hotels/' + id);
+    }
   };
 
   return (
