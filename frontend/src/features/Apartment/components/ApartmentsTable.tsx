@@ -7,12 +7,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { fetchApartments } from '../apartmentThunks';
-import { selectApartments } from '../apartmentSlice';
 import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/material';
 import { Hotel } from '../../../types';
 import { useTranslation } from 'react-i18next';
+import { selectApartments } from '../apartmentSlice';
+import { fetchApartments } from '../apartmentThunks';
 
 const Link = styled(NavLink)({
   color: 'inherit',

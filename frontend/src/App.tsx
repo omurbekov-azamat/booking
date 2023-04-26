@@ -12,8 +12,8 @@ import { selectUser } from './features/users/usersSlice';
 import ProtectedRoute from './components/UI/ProtectedRoute/ProtectedRoute';
 import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
-import Apartment from './features/apartment/Apartment';
-import ApartmentForm from './features/apartment/ApartmentForm';
+import Apartment from './features/Apartment/components/Apartment';
+import ApartmentForm from './features/Apartment/components/ApartmentForm';
 
 function App() {
   const user = useAppSelector(selectUser);

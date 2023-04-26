@@ -12,7 +12,6 @@ const apartmentsRouter = express.Router();
 
 apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('images'), async (req, res, next) => {
   try {
-    console.log(parseFloat(req.body.price));
     const apartment = new Apartment({
       hotelId: req.body.hotelId,
       roomTypeId: req.body.roomTypeId,

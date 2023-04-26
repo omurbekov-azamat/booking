@@ -67,7 +67,7 @@ export interface IApartment extends ApartmentData {
     _id: string;
   };
   _id: string;
-  images?: string[];
+  images: string[];
 }
 
 export interface UpdateApartment {

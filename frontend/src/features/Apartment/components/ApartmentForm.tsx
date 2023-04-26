@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
-import { Box, Card, Checkbox, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
-import FileInput from '../../components/UI/FileInput/FileInput';
+import {
+  Box,
+  Card,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
-import { ApartmentMutation, ImgType } from '../../types';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { ApartmentMutation, ImgType } from '../../../types';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { selectApartmentError, selectLoadingCreateApartment } from './apartmentSlice';
+import { selectApartmentError, selectLoadingCreateApartment } from '../apartmentSlice';
 import Button from '@mui/material/Button';
-import { createApartment } from './apartmentThunks';
+import { createApartment } from '../apartmentThunks';
+import FileInput from '../../../components/UI/FileInput/FileInput';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -73,6 +84,7 @@ const ApartmentForm = () => {
     if (stateImg.image) {
       const mass = state.images;
       await mass?.push(stateImg.image);
+      await setState((prev) => ({ ...prev, images: mass }));
     }
   };
 
@@ -101,7 +113,7 @@ const ApartmentForm = () => {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="md">
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
           {'create Apartment'}
         </Typography>
@@ -233,19 +245,23 @@ const ApartmentForm = () => {
                     </Button>
                   </Grid>
                   <Grid item xs>
-                    {state.images?.map((item, index) => (
-                      <Grid container key={index}>
-                        <Grid item>
-                          <Typography>{item.name}</Typography>
-                          <button onClick={() => deleteImg(index)}>delete</button>
+                    {state.images &&
+                      state.images.length > 0 &&
+                      state.images.map((image, index) => (
+                        <Grid container key={index} marginLeft={3} mb={2}>
+                          <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
+                          <Grid item>
+                            <Typography>{image.name}</Typography>
+                            <IconButton onClick={() => deleteImg(index)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    ))}
+                      ))}
                   </Grid>
                 </Grid>
               </Grid>
             </Card>
-
             <Grid item xs>
               <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
                 {t('create')}
