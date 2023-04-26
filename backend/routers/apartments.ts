@@ -44,11 +44,11 @@ apartmentsRouter.get('/', async (req, res, next) => {
   try {
     const queryOwner = req.query.owner as string;
     if (queryOwner) {
-      const apartmentsRes = await Apartment.find({ hotelId: queryOwner });
-      res.send(apartmentsRes);
+      const apartmentsRes = await Apartment.find({ hotelId: queryOwner }).populate('roomTypeId');
+      return res.send(apartmentsRes);
     }
-    const apartmentsRes = await Apartment.find();
-    res.send(apartmentsRes);
+    const apartmentsRes = await Apartment.find().populate('roomTypeId');
+    return res.send(apartmentsRes);
   } catch (e) {
     return next(e);
   }
@@ -56,7 +56,7 @@ apartmentsRouter.get('/', async (req, res, next) => {
 
 apartmentsRouter.get('/:id', async (req, res, next) => {
   try {
-    const apartmentRes = await Apartment.findById(req.params.id);
+    const apartmentRes = await Apartment.findById(req.params.id).populate('roomTypeId');
     return res.send(apartmentRes);
   } catch (e) {
     return next(e);
