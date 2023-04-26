@@ -13,6 +13,7 @@ import ProtectedRoute from './components/UI/ProtectedRoute/ProtectedRoute';
 import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
 import Apartment from './features/apartment/Apartment';
+import ApartmentForm from './features/apartment/ApartmentForm';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/hotels/:id/:roomId" element={<Apartment />} />
+          <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
           <Route
             path="/addHotel"
             element={
