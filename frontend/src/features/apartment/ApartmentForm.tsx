@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectApartmentError, selectLoadingCreateApartment } from './apartmentSlice';
 import Button from '@mui/material/Button';
+import { createHotel } from '../hotels/hotelsThunks';
+import { createApartment } from './apartmentThunks';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -40,6 +42,8 @@ const ApartmentForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  console.log('state', state);
+
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -71,11 +75,7 @@ const ApartmentForm = () => {
   const onClickAdd = async () => {
     if (stateImg.image) {
       const mass = state.images;
-      await mass?.push(stateImg);
-      setState({
-        ...state,
-        images: mass,
-      });
+      await mass?.push(stateImg.image);
     }
   };
 
@@ -88,12 +88,15 @@ const ApartmentForm = () => {
     });
   };
 
-  const getFieldError = (fieldName: string) => {
-    try {
-      return error?.errors[fieldName].message;
-    } catch {
-      return undefined;
-    }
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await dispatch(
+      createApartment({
+        ...state,
+        hotelId: id!,
+        roomTypeId: '6447a4f33285c6710e415c80',
+      }),
+    );
   };
 
   return (
@@ -102,7 +105,7 @@ const ApartmentForm = () => {
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
           {'create Apartment'}
         </Typography>
-        <Box component="form" sx={{ mt: 2 }}>
+        <Box component="form" sx={{ mt: 2 }} onSubmit={onSubmit}>
           <Grid container spacing={2} textAlign="center" direction="column">
             <Grid item xs>
               <TextField
@@ -234,7 +237,7 @@ const ApartmentForm = () => {
                     {state.images?.map((item, index) => (
                       <Grid container key={index}>
                         <Grid item>
-                          <Typography>{item.image!.name}</Typography>
+                          <Typography>{item.name}</Typography>
                           <button onClick={() => deleteImg(index)}>delete</button>
                         </Grid>
                       </Grid>

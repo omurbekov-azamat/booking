@@ -14,23 +14,56 @@ export const createApartment = createAsyncThunk<
 >('apartments/createApartment', async (apartment, { getState, rejectWithValue }) => {
   try {
     const user = getState().users.user;
-
+    // console.log('thunk is here', apartment);
     if (user) {
       const formData = new FormData();
-      const keys = Object.keys(apartment) as (keyof ApartmentMutation)[];
 
-      keys.forEach((key) => {
-        const value = apartment[key];
-        if (value !== null) {
-          if ((key as string) === 'location') {
-            formData.append(key, JSON.stringify(value));
-          } else {
-            formData.append(key, value as string | Blob);
+      formData.append('hotelId', apartment.hotelId);
+      formData.append('roomTypeId', apartment.roomTypeId);
+      formData.append('price', JSON.stringify(apartment.price));
+      formData.append('description', apartment.description || '');
+      formData.append('aircon', apartment.aircon.toString());
+      formData.append('balcony', apartment.balcony.toString());
+      formData.append('bath', apartment.bath.toString());
+      formData.append('family', apartment.family.toString());
+      formData.append('food', apartment.food.toString());
+      formData.append('place', apartment.place.toString());
+      formData.append('tv', apartment.tv.toString());
+      formData.append('towel', apartment.towel.toString());
+      formData.append('wifi', apartment.wifi.toString());
+
+      if (apartment.images) {
+        for (const image of apartment.images) {
+          if (image) {
+            formData.append('images', image);
           }
         }
+      }
+
+      const response = await axiosApi.post('/apartments', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-      await axiosApi.post('/apartments', formData);
+
+      return response.data;
     }
+    //   const formData = new FormData();
+    //   const keys = Object.keys(apartment) as (keyof ApartmentMutation)[];
+    //
+    //   keys.forEach((key) => {
+    //     const value = apartment[key];
+    //     if (value !== null) {
+    //       if ((key as string) === 'location') {
+    //         formData.append(key, JSON.stringify(value));
+    //       } else {
+    //         formData.append(key, value as string | Blob);
+    //       }
+    //     }
+    //   });
+    //   console.log('form data is here', formData);
+    //   await axiosApi.post('/apartments', formData);
+    // }
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 400) {
       return rejectWithValue(e.response.data as ValidationError);

@@ -49,7 +49,6 @@ export interface ApartmentData {
   tv: boolean;
   towel: boolean;
   wifi: boolean;
-  images?: string[];
 }
 
 export interface ImgType {
@@ -59,15 +58,16 @@ export interface ImgType {
 export interface ApartmentMutation extends ApartmentData {
   hotelId: string;
   roomTypeId: string;
-  images?: ImgType[];
+  images?: File[];
 }
 
-export interface IApartment extends ApartmentMutation {
+export interface IApartment extends ApartmentData {
   roomTypeId: {
     name: string;
     _id: string;
   };
   _id: string;
+  images?: string[];
 }
 
 export interface UpdateApartment {
