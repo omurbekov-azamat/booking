@@ -20,6 +20,7 @@ import Button from '@mui/material/Button';
 import { createApartment } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -113,7 +114,7 @@ const ApartmentForm = () => {
 
   return (
     <>
-      <Container component="main" maxWidth="md">
+      <Container component="main" maxWidth="sm">
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
           {'create Apartment'}
         </Typography>
@@ -240,9 +241,9 @@ const ApartmentForm = () => {
                 />
                 <Grid container justifyContent={'end'} mt={3}>
                   <Grid item>
-                    <Button onClick={onClickAdd} variant="contained" color="success">
-                      Add
-                    </Button>
+                    <IconButton onClick={onClickAdd}>
+                      <AddCircleOutlineIcon />
+                    </IconButton>
                   </Grid>
                   <Grid item xs>
                     {state.images &&
