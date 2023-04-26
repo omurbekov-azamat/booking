@@ -3,6 +3,7 @@ import { selectCreateHotelError, selectLoadingCreateHotel } from '../hotelsSlice
 import { Box, Container, Grid, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
+import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { createHotel } from '../hotelsThunks';
@@ -18,6 +19,7 @@ const HotelForm = () => {
 
   const [state, setState] = useState<HotelMutation>({
     name: '',
+    city: '',
     address: '',
     star: '',
     image: null,
@@ -41,6 +43,7 @@ const HotelForm = () => {
     await dispatch(createHotel(state));
     await setState({
       name: '',
+      city: '',
       address: '',
       star: '',
       image: null,
@@ -74,6 +77,9 @@ const HotelForm = () => {
               helperText={getFieldError('name')}
               required
             />
+          </Grid>
+          <Grid item>
+            <SelectCities onChange={inputChangeHandler} name="city" label={t('City')} />
           </Grid>
           <Grid item xs>
             <TextField

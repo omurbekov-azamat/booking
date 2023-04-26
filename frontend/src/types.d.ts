@@ -1,7 +1,7 @@
 export interface HotelData {
   name: string;
   address: string;
-  city?: string;
+  city: string;
   location?: {
     latitude: number;
     longitude: number;
@@ -110,9 +110,9 @@ export interface GlobalError {
 }
 
 export interface SearchData {
-  city: string,
-  smoking: boolean,
-  parking: boolean,
-  pool: boolean,
-  petFriendly: boolean,
+  city: string;
+  smoking: boolean;
+  parking: boolean;
+  pool: boolean;
+  petFriendly: boolean;
 }
