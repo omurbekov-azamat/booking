@@ -5,6 +5,7 @@ import User from './models/User';
 import RoomType from './models/RoomType';
 import Hotel from './models/Hotel';
 import Apartment from './models/Apartment';
+import Order from './models/Order';
 
 const run = async () => {
   mongoose.set('strictQuery', false);
@@ -16,11 +17,12 @@ const run = async () => {
     await db.dropCollection('roomtypes');
     await db.dropCollection('hotels');
     await db.dropCollection('apartments');
+    await db.dropCollection('orders');
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
   }
 
-  const [admin, user, hotel, director] = await User.create(
+  const [admin, user, hotel, director, user2] = await User.create(
     {
       email: 'admin@gmail.com',
       firstName: 'Admin',
@@ -62,6 +64,17 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'director',
       phoneNumber: '0555 888888',
+      status: 'super',
+      cashback: '0',
+    },
+    {
+      email: 'user2@gmail.com',
+      firstName: 'User2',
+      lastName: 'Userovich',
+      password: '123',
+      token: crypto.randomUUID(),
+      role: 'user',
+      phoneNumber: '0555 9999998',
       status: 'super',
       cashback: '0',
     },
@@ -281,6 +294,66 @@ const run = async () => {
       tv: false,
       towel: false,
       wifi: false,
+    },
+  );
+
+  const apart = await Apartment.create({
+    hotelId: lulu,
+    roomTypeId: tripleRoom,
+    price: { from: 200, till: 300 },
+    aircon: true,
+    balcony: true,
+    bath: true,
+    family: true,
+    food: true,
+    place: 10,
+    tv: true,
+    towel: true,
+    wifi: true,
+  });
+
+  await Order.create(
+    {
+      userId: user._id,
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '28.04.2023',
+      dateDeparture: '29.04.2023',
+    },
+    {
+      userId: user._id,
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '28.04.2023',
+      dateDeparture: '30.04.2023',
+    },
+    {
+      userId: user._id,
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '30.04.2023',
+      dateDeparture: '02.05.2023',
+    },
+    {
+      userId: user2._id,
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '30.04.2023',
+      dateDeparture: '01.05.2023',
+    },
+    {
+      userId: user2._id,
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '01.05.2023',
+      dateDeparture: '02.05.2023',
+    },
+    {
+      userId: user2._id,
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '01.05.2023',
+      dateDeparture: '04.05.2023',
     },
   );
 
