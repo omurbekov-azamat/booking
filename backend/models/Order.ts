@@ -18,7 +18,6 @@ const OrderSchema = new Schema({
   adminId: {
     type: Schema.Types.ObjectId || null,
     ref: 'User',
-    required: true,
     default: null,
     validate: {
       validator: async (value: Types.ObjectId) => {
