@@ -7,6 +7,7 @@ import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
 import { promises as fs } from 'fs';
 import Hotel from '../models/Hotel';
+import config from '../config';
 
 const apartmentsRouter = express.Router();
 
@@ -66,10 +67,36 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
   try {
     const user = (req as RequestWithUser).user;
 
-    const apartment: HydratedDocument<IApartment> | null = await Apartment.findById(req.params.id);
+    const updatedFields = { ...req.body };
+
+    const apartment: HydratedDocument<IApartment> | null = await Apartment.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: updatedFields },
+      { new: true },
+    );
 
     if (!apartment) {
       return res.status(404).send({ message: 'Not found apartment!' });
+    }
+
+    if (apartment) {
+      if (apartment.images) {
+        if (apartment.images.length > 0) {
+          const oldImages = apartment.images;
+          if (req.files) {
+            const arrayFiles = req.files as [];
+            if (arrayFiles.length > 0) {
+              oldImages.forEach((imagePath) => {
+                fs.unlink(config.publicPath + '/' + imagePath);
+              });
+              apartment.images = (req.files as Express.Multer.File[]).map((file) => file.filename);
+              await apartment.save();
+            } else {
+              apartment.images = oldImages;
+            }
+          }
+        }
+      }
     }
 
     const hotel: HydratedDocument<IHotel> | null = await Hotel.findById(apartment.hotelId);
@@ -79,42 +106,12 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
     }
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
-      apartment.roomTypeId = req.body.roomType;
-      apartment.price = req.body.price;
-
-      if (req.files) {
-        apartment.images = (req.files as Express.Multer.File[]).map((file) => file.path);
-      } else {
-        apartment.images = null;
-      }
-
-      apartment.description = req.body.description ? req.body.description : null;
-
-      await apartment.save();
-
-      res.send({ message: 'Changed successfully' });
+      res.send({ message: 'Changed successfully', apartment });
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
     }
   } catch (e) {
-    if (req.files && Array.isArray(req.files)) {
-      await Promise.all(
-        req.files.map(async (file) => {
-          try {
-            await fs.unlink(file.path);
-            console.log(`File ${file.path} deleted successfully`);
-          } catch (err) {
-            console.error(`Failed to delete file: ${file.path}`);
-          }
-        }),
-      );
-    }
-
-    if (e instanceof mongoose.Error.ValidationError) {
-      return res.status(400).send(e);
-    } else {
-      return next(e);
-    }
+    return next(e);
   }
 });
 
