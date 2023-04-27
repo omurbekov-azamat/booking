@@ -78,6 +78,17 @@ const run = async () => {
       status: 'super',
       cashback: '0',
     },
+    {
+      email: 'hotel2@gmail.com',
+      firstName: 'Hotel2',
+      lastName: 'Hotelovich',
+      password: '123',
+      token: crypto.randomUUID(),
+      role: 'hotel',
+      phoneNumber: '0555 888888',
+      status: 'super',
+      cashback: '0',
+    },
   );
 
   const [singleRoom, doubleRoom, tripleRoom] = await RoomType.create(
