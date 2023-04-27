@@ -47,7 +47,7 @@ hotelsRouter.get('/', async (req, res) => {
 
   try {
     if (match) {
-      const hotelsRes = await Hotel.find({ name: { $regex: { $regex: new RegExp(match, 'i') } } }).limit(10);
+      const hotelsRes = await Hotel.find({ name: { $regex: new RegExp(match, 'i') } }).limit(10);
       return res.send(hotelsRes);
     }
     if (queryOwner || city) {
