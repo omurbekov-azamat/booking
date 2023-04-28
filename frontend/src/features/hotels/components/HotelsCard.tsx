@@ -61,9 +61,11 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
             </Button>
           )}
 
-          <Button variant="outlined" color="error" onClick={unPublishButton}>
-            Publish
-          </Button>
+          {(user?.role === 'admin' || user?.role === 'director') && (
+            <Button variant="outlined" color="error" onClick={unPublishButton}>
+              Publish
+            </Button>
+          )}
         </Stack>
       </Box>
 
