@@ -38,8 +38,9 @@ const OrderSchema = new Schema<IOrder>({
     },
   },
   createdAt: {
-    type: Date,
+    type: String,
     required: true,
+    default: new Date().toISOString(),
   },
   comment: {
     type: String,

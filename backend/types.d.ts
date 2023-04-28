@@ -66,7 +66,7 @@ export interface IOrder {
   userId: ObjectId;
   adminId: ObjectId | undefined;
   apartmentId: ObjectId;
-  createdAt: Date;
+  createdAt: string;
   comment: string;
   dateArrival: string;
   dateDeparture: string;

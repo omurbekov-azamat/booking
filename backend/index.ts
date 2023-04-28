@@ -6,6 +6,7 @@ import usersRouter from './routers/users';
 import hotelsRouter from './routers/hotels';
 import roomTypesRouter from './routers/roomTypes';
 import apartmentsRouter from './routers/apartments';
+import ordersRouter from './routers/orders';
 
 const app = express();
 const port = 8000;
@@ -17,6 +18,7 @@ app.use('/users', usersRouter);
 app.use('/hotels', hotelsRouter);
 app.use('/roomTypes', roomTypesRouter);
 app.use('/apartments', apartmentsRouter);
+app.use('/orders', ordersRouter);
 
 const run = async () => {
   mongoose.set('strictQuery', false);
