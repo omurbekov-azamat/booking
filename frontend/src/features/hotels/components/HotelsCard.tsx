@@ -14,9 +14,10 @@ interface Props {
   title: string;
   rating: number;
   onHotelClick: MouseEventHandler;
+  publish: boolean;
 }
 
-const HotelsCard: React.FC<Props> = ({ id, image, title, rating, onHotelClick }) => {
+const HotelsCard: React.FC<Props> = ({ publish, id, image, title, rating, onHotelClick }) => {
   const cardImage = apiURL + '/' + image;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -48,6 +49,9 @@ const HotelsCard: React.FC<Props> = ({ id, image, title, rating, onHotelClick })
           Publish
         </Button>
       </Stack>
+      <Box textAlign={'center'}>
+        <Typography color={'red'}>{!publish && 'Un Publish'}</Typography>
+      </Box>
     </Card>
   );
 };

@@ -41,6 +41,7 @@ const HotelsPage = () => {
                 title={el.name}
                 rating={el.star}
                 onHotelClick={() => navigate('/hotels/' + el._id)}
+                publish={el.isPublished}
               />
             </Grid>
           ))
