@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
 import { selectUser } from '../../users/usersSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   id: string;
@@ -22,6 +23,7 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const { t } = useTranslation();
 
   const unPublishButton = async () => {
     await dispatch(togglePublishedHotel(id));
@@ -48,22 +50,22 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
       </CardActionArea>
 
       <Box>
-        <Stack direction="row" spacing={2} justifyContent="space-around" mb={1}>
+        <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
             <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + id)}>
-              Edit
+              {t('edit')}
             </Button>
           )}
 
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
             <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteButton}>
-              Delete
+              {t('delete')}
             </Button>
           )}
 
           {(user?.role === 'admin' || user?.role === 'director') && (
-            <Button variant="outlined" color="error" onClick={unPublishButton}>
-              Publish
+            <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={unPublishButton}>
+              {publish ? t('publish') : t('unPublish')}
             </Button>
           )}
         </Stack>

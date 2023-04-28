@@ -38,5 +38,10 @@
   "food": "Food delivery",
   "more": "more",
   "roomType": "Room type",
-  "price": "Price"
+  "price": "Price",
+  "delete": "Delete",
+  "edit": "Edit",
+  "publish": "publish",
+  "unPublish": "Un publish",
+  "UnPublished": "Un published"
 }
