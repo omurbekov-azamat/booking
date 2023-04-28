@@ -57,6 +57,10 @@ export interface ApartmentMutation extends ApartmentData {
   images?: File[];
 }
 
+export interface ApartmentPopulated extends ApartmentData {
+  hotelId: Hotel;
+}
+
 export interface IApartment extends ApartmentData {
   roomTypeId: {
     name: string;
@@ -121,4 +125,16 @@ export interface SearchData {
   parking: boolean;
   pool: boolean;
   petFriendly: boolean;
+}
+
+export interface OrderData {
+  _id: string
+  userId: User;
+  adminId: User;
+  apartmentId: ApartmentPopulated;
+  createdAt: string;
+  comment: string;
+  dateArrival: string;
+  dateDeparture: string;
+  status: string;
 }
