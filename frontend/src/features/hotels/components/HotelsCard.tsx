@@ -1,6 +1,9 @@
 import React, { MouseEventHandler } from 'react';
 import { Box, Card, CardActionArea, CardContent, CardMedia, Rating, Typography } from '@mui/material';
 import { apiURL } from '../../../constants';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Stack from '@mui/material/Stack';
 
 interface Props {
   image: string;
@@ -25,6 +28,20 @@ const HotelsCard: React.FC<Props> = ({ image, title, rating, onHotelClick }) => 
           </Box>
         </CardContent>
       </CardActionArea>
+
+      <Stack direction="row" spacing={2} justifyContent={'space-around'} mb={1}>
+        <Button variant="contained" size="medium">
+          Edit
+        </Button>
+
+        <Button variant="outlined" startIcon={<DeleteIcon />}>
+          Delete
+        </Button>
+
+        <Button variant="outlined" color="error">
+          Publish
+        </Button>
+      </Stack>
     </Card>
   );
 };
