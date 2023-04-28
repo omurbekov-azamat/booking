@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import User from '../models/User';
+import auth from '../middleware/auth';
+import permit from '../middleware/permit';
 
 const usersRouter = express.Router();
 
@@ -43,6 +45,15 @@ usersRouter.post('/sessions', async (req, res, next) => {
     await user.save();
 
     return res.send({ message: 'Email and password correct!', user });
+  } catch (e) {
+    return next(e);
+  }
+});
+
+usersRouter.get('/admins', auth, permit('director'), async (req, res, next) => {
+  try {
+    const admins = await User.find({ role: 'admin' }).select('-token');
+    return res.send({ message: 'Yours admins', admins });
   } catch (e) {
     return next(e);
   }
