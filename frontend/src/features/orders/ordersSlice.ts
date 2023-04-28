@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Order, ValidationError } from '../../types';
-import { changeStatusOrder, getOrders, sendOrder } from './ordersThunks';
+import { changeStatusOrder, deleteOrder, getOrders, sendOrder } from './ordersThunks';
 import { RootState } from '../../app/store';
 
 interface OrdersState {
@@ -8,7 +8,8 @@ interface OrdersState {
   sendOrderError: ValidationError | null;
   fetchOrdersLoading: boolean;
   orders: Order[];
-  changeOrderStatusLoading: boolean;
+  changeOrderStatusLoading: string | false;
+  deleteOrderLoading: string | false;
 }
 
 const initialState: OrdersState = {
@@ -17,6 +18,7 @@ const initialState: OrdersState = {
   fetchOrdersLoading: false,
   orders: [],
   changeOrderStatusLoading: false,
+  deleteOrderLoading: false,
 };
 
 export const ordersSlice = createSlice({
@@ -45,14 +47,23 @@ export const ordersSlice = createSlice({
     builder.addCase(getOrders.rejected, (state) => {
       state.fetchOrdersLoading = false;
     });
-    builder.addCase(changeStatusOrder.pending, (state) => {
-      state.changeOrderStatusLoading = true;
+    builder.addCase(changeStatusOrder.pending, (state, { meta }) => {
+      state.changeOrderStatusLoading = meta.arg.id;
     });
     builder.addCase(changeStatusOrder.fulfilled, (state) => {
       state.changeOrderStatusLoading = false;
     });
     builder.addCase(changeStatusOrder.rejected, (state) => {
       state.changeOrderStatusLoading = false;
+    });
+    builder.addCase(deleteOrder.pending, (state, { meta }) => {
+      state.deleteOrderLoading = meta.arg;
+    });
+    builder.addCase(deleteOrder.fulfilled, (state) => {
+      state.deleteOrderLoading = false;
+    });
+    builder.addCase(deleteOrder.rejected, (state) => {
+      state.deleteOrderLoading = false;
     });
   },
 });
@@ -64,3 +75,4 @@ export const selectSendOrderError = (state: RootState) => state.orders.sendOrder
 export const selectFetchOrdersLoading = (state: RootState) => state.orders.fetchOrdersLoading;
 export const selectOrders = (state: RootState) => state.orders.orders;
 export const selectOrderChangeStatusLoading = (state: RootState) => state.orders.changeOrderStatusLoading;
+export const selectOrderDeleteLoading = (state: RootState) => state.orders.deleteOrderLoading;

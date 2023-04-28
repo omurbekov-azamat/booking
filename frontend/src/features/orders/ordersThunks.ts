@@ -34,3 +34,7 @@ export interface ChangeStatusProps {
 export const changeStatusOrder = createAsyncThunk<void, ChangeStatusProps>('orders/changeStatus', async (data) => {
   await axiosApi.patch('/orders/' + data.id, data.status);
 });
+
+export const deleteOrder = createAsyncThunk<void, string>('orders/deleteOrder', async (id) => {
+  await axiosApi.delete('/orders/' + id);
+});
