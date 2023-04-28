@@ -59,6 +59,7 @@ export interface ApartmentMutation extends ApartmentData {
 
 export interface ApartmentPopulated extends ApartmentData {
   hotelId: Hotel;
+  roomTypeId: {name: string}
 }
 
 export interface IApartment extends ApartmentData {
@@ -127,7 +128,7 @@ export interface SearchData {
   petFriendly: boolean;
 }
 
-export interface OrderData {
+export interface Order {
   _id: string
   userId: User;
   adminId: User;
