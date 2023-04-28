@@ -49,9 +49,11 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
 
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" mb={1}>
-          <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + id)}>
-            Edit
-          </Button>
+          {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
+            <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + id)}>
+              Edit
+            </Button>
+          )}
 
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
             <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteButton}>
