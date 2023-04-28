@@ -2,14 +2,14 @@ import React from 'react';
 import { Order } from '../../../types';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 
 interface props {
   prop: Order;
 }
 
 const OrderCard: React.FC<props> = ({ prop }) => {
-  const statusColor = prop.status === 'open'? 'red' : prop.status === 'in progress'? 'yellow': 'green'
+  const statusColor = prop.status === 'open' ? 'red' : prop.status === 'in progress' ? 'yellow' : 'green';
   return (
     <Card sx={{ minWidth: 300 }}>
       <CardContent>
@@ -34,27 +34,23 @@ const OrderCard: React.FC<props> = ({ prop }) => {
             <Typography variant="body2">Комната : {prop.apartmentId.roomTypeId.name}</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="body1">
-              Заезд : {dayjs(prop.dateArrival).format('DD-MM-YYYY')}
-            </Typography>
+            <Typography variant="body1">Заезд : {dayjs(prop.dateArrival).format('DD-MM-YYYY')}</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="body1">
-              Выезд : {dayjs(prop.dateDeparture).format('DD-MM-YYYY')}</Typography>
+            <Typography variant="body1">Выезд : {dayjs(prop.dateDeparture).format('DD-MM-YYYY')}</Typography>
           </Grid>
-          <Grid item xs={12} textAlign='end'>
-            <Typography variant="body1" color={statusColor} textAlign='end'>
+          <Grid item xs={12} textAlign="end">
+            <Typography variant="body1" color={statusColor} textAlign="end">
               {prop.status}
             </Typography>
           </Grid>
-          <Grid item xs={12} textAlign='center'>
+          <Grid item xs={12} textAlign="center">
             <Typography variant="h2">
-             Оператор :  {prop.adminId.lastName} {prop.adminId.firstName}
+              Оператор : {prop.adminId ? prop.adminId.lastName : 'no admin'}{' '}
+              {prop.adminId ? prop.adminId.firstName : 'no admin'}
             </Typography>
           </Grid>
-          <Paper>
-            {prop.comment}
-          </Paper>
+          <Paper>{prop.comment}</Paper>
         </Grid>
       </CardContent>
     </Card>
