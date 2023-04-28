@@ -37,6 +37,7 @@ const HotelsPage = () => {
             <Grid item xs={12} sm={6} lg={4} key={Math.random()} alignItems="stretch">
               <HotelsCard
                 id={el._id}
+                userId={el.userId}
                 image={el.image}
                 title={el.name}
                 rating={el.star}
