@@ -53,4 +53,29 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
   }
 });
 
+ordersRouter.delete('/:id', auth, permit('admin', 'director', 'user'), async (req, res, next) => {
+  const user = (req as RequestWithUser).user;
+  const order = await Order.findById(req.params.id);
+  try {
+    if (order) {
+      if (user.role === 'admin' || user.role === 'director') {
+        await Order.deleteOne({ _id: req.params.id });
+        return res.send({ message: 'Deleted successfully' });
+      }
+
+      if (user.role === 'user') {
+        if (order.userId.toString() === user._id.toString()) {
+          await Order.deleteOne({ _id: req.params.id, userId: user._id });
+          return res.send({ message: 'Deleted successfully' });
+        } else {
+          return res.send({ message: 'You cant delete' });
+        }
+      }
+    } else {
+      return res.status(404).send({ message: 'Cant find order' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
 export default ordersRouter;
