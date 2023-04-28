@@ -22,8 +22,21 @@ export const sendOrder = createAsyncThunk<void, OrderMutation, { state: RootStat
 );
 
 export const getOrders = createAsyncThunk<Order[]>('orders/getOrders', async () => {
-  const responseOrders = await axiosApi.get<Order[]>('/orders');
-  return responseOrders.data;
+  try {
+    const responseOrders = await axiosApi.get<Order[]>('/orders');
+    return responseOrders.data;
+  } catch {
+    throw new Error();
+  }
+});
+
+export const getForAdminHisOrders = createAsyncThunk<Order[], string>('orders/getOrdersForAdmin', async (id) => {
+  try {
+    const responseOrders = await axiosApi.get<Order[]>('/orders?admin=' + id);
+    return responseOrders.data;
+  } catch {
+    throw new Error();
+  }
 });
 
 export interface ChangeStatusProps {
@@ -32,9 +45,17 @@ export interface ChangeStatusProps {
 }
 
 export const changeStatusOrder = createAsyncThunk<void, ChangeStatusProps>('orders/changeStatus', async (data) => {
-  await axiosApi.patch('/orders/' + data.id, data.status);
+  try {
+    await axiosApi.patch('/orders/' + data.id, data.status);
+  } catch {
+    throw new Error();
+  }
 });
 
 export const deleteOrder = createAsyncThunk<void, string>('orders/deleteOrder', async (id) => {
-  await axiosApi.delete('/orders/' + id);
+  try {
+    await axiosApi.delete('/orders/' + id);
+  } catch {
+    throw new Error();
+  }
 });

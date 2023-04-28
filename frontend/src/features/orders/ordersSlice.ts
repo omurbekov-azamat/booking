@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Order, ValidationError } from '../../types';
-import { changeStatusOrder, deleteOrder, getOrders, sendOrder } from './ordersThunks';
+import { changeStatusOrder, deleteOrder, getForAdminHisOrders, getOrders, sendOrder } from './ordersThunks';
 import { RootState } from '../../app/store';
 
 interface OrdersState {
@@ -10,6 +10,8 @@ interface OrdersState {
   orders: Order[];
   changeOrderStatusLoading: string | false;
   deleteOrderLoading: string | false;
+  fetchOrdersForAdminLoading: boolean;
+  adminMyOrders: Order[];
 }
 
 const initialState: OrdersState = {
@@ -19,6 +21,8 @@ const initialState: OrdersState = {
   orders: [],
   changeOrderStatusLoading: false,
   deleteOrderLoading: false,
+  fetchOrdersForAdminLoading: false,
+  adminMyOrders: [],
 };
 
 export const ordersSlice = createSlice({
@@ -65,6 +69,16 @@ export const ordersSlice = createSlice({
     builder.addCase(deleteOrder.rejected, (state) => {
       state.deleteOrderLoading = false;
     });
+    builder.addCase(getForAdminHisOrders.pending, (state) => {
+      state.fetchOrdersForAdminLoading = true;
+    });
+    builder.addCase(getForAdminHisOrders.fulfilled, (state, { payload: orders }) => {
+      state.fetchOrdersForAdminLoading = false;
+      state.adminMyOrders = orders;
+    });
+    builder.addCase(getForAdminHisOrders.rejected, (state) => {
+      state.fetchOrdersForAdminLoading = false;
+    });
   },
 });
 
@@ -76,3 +90,5 @@ export const selectFetchOrdersLoading = (state: RootState) => state.orders.fetch
 export const selectOrders = (state: RootState) => state.orders.orders;
 export const selectOrderChangeStatusLoading = (state: RootState) => state.orders.changeOrderStatusLoading;
 export const selectOrderDeleteLoading = (state: RootState) => state.orders.deleteOrderLoading;
+export const selectFetchOrdersForAdminLoading = (state: RootState) => state.orders.fetchOrdersForAdminLoading;
+export const selectAdminMyOrders = (state: RootState) => state.orders.adminMyOrders;
