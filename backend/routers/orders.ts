@@ -1,8 +1,9 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
+import { IApartment } from '../types';
 
 const ordersRouter = express.Router();
 
@@ -48,6 +49,28 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
       const yourOrders = await Order.find({ userId: user.id });
       return res.send({ message: 'Your orders', yourOrders });
     }
+  } catch (e) {
+    return next(e);
+  }
+});
+
+ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
+  const user = (req as RequestWithUser).user;
+  try {
+    const updatedFields = { ...req.body };
+    updatedFields.adminId = user._id;
+
+    const order: HydratedDocument<IApartment> | null = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: updatedFields },
+      { new: true },
+    );
+
+    if (!order) {
+      return res.status(404).send({ message: 'Cant find order' });
+    }
+
+    return res.status(200).send({ message: 'Order updated successfully' });
   } catch (e) {
     return next(e);
   }
