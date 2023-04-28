@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
 import { RootState } from '../../app/store';
-import { OrderMutation, ValidationError } from '../../types';
+import { Order, OrderMutation, ValidationError } from '../../types';
 
 export const sendOrder = createAsyncThunk<void, OrderMutation, { state: RootState; rejectValue: ValidationError }>(
   'orders/sendOrder',
@@ -20,3 +20,8 @@ export const sendOrder = createAsyncThunk<void, OrderMutation, { state: RootStat
     }
   },
 );
+
+export const getOrders = createAsyncThunk<Order[]>('orders/getOrders', async () => {
+  const responseOrders = await axiosApi.get<Order[]>('/orders');
+  return responseOrders.data;
+});

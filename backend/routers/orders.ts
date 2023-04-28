@@ -35,31 +35,31 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
     if (user.role === 'admin') {
       if (req.query.admin) {
         const adminOrders = await Order.find({ adminId: req.query.admin })
-            .populate('userId', '-token')
-            .populate('adminId', '-token')
-            .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
-        return res.send({ message: 'Admin orders', adminOrders });
+          .populate('userId', '-token')
+          .populate('adminId', '-token')
+          .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+        return res.send(adminOrders);
       } else {
         const openOrders = await Order.find({ status: 'open' })
           .populate('userId', '-token')
           .populate('adminId', '-token')
           .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
-        return res.send({ message: 'Open orders', openOrders });
+        return res.send(openOrders);
       }
     }
     if (user.role === 'director') {
       const closedOrders = await Order.find({ status: 'closed' })
-          .populate('userId', '-token')
-          .populate('adminId', '-token')
-          .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
-      return res.send({ message: 'Closed order', closedOrders });
+        .populate('userId', '-token')
+        .populate('adminId', '-token')
+        .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+      return res.send(closedOrders);
     }
     if (user.role === 'user') {
       const yourOrders = await Order.find({ userId: user.id })
-          .populate('userId', '-token')
-          .populate('adminId', '-token')
-          .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
-      return res.send({ message: 'Your orders', yourOrders });
+        .populate('userId', '-token')
+        .populate('adminId', '-token')
+        .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+      return res.send(yourOrders);
     }
   } catch (e) {
     return next(e);
