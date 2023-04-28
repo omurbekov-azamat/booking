@@ -25,3 +25,12 @@ export const getOrders = createAsyncThunk<Order[]>('orders/getOrders', async () 
   const responseOrders = await axiosApi.get<Order[]>('/orders');
   return responseOrders.data;
 });
+
+export interface ChangeStatusProps {
+  id: string;
+  status: string;
+}
+
+export const changeStatusOrder = createAsyncThunk<void, ChangeStatusProps>('orders/changeStatus', async (data) => {
+  await axiosApi.patch('/orders/' + data.id, data.status);
+});

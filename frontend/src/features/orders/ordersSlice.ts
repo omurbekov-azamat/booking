@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Order, ValidationError } from '../../types';
-import { getOrders, sendOrder } from './ordersThunks';
+import { changeStatusOrder, getOrders, sendOrder } from './ordersThunks';
 import { RootState } from '../../app/store';
 
 interface OrdersState {
@@ -8,6 +8,7 @@ interface OrdersState {
   sendOrderError: ValidationError | null;
   fetchOrdersLoading: boolean;
   orders: Order[];
+  changeOrderStatusLoading: boolean;
 }
 
 const initialState: OrdersState = {
@@ -15,6 +16,7 @@ const initialState: OrdersState = {
   sendOrderError: null,
   fetchOrdersLoading: false,
   orders: [],
+  changeOrderStatusLoading: false,
 };
 
 export const ordersSlice = createSlice({
@@ -43,6 +45,15 @@ export const ordersSlice = createSlice({
     builder.addCase(getOrders.rejected, (state) => {
       state.fetchOrdersLoading = false;
     });
+    builder.addCase(changeStatusOrder.pending, (state) => {
+      state.changeOrderStatusLoading = true;
+    });
+    builder.addCase(changeStatusOrder.fulfilled, (state) => {
+      state.changeOrderStatusLoading = false;
+    });
+    builder.addCase(changeStatusOrder.rejected, (state) => {
+      state.changeOrderStatusLoading = false;
+    });
   },
 });
 
@@ -52,3 +63,4 @@ export const selectSendOrderLoading = (state: RootState) => state.orders.sendOrd
 export const selectSendOrderError = (state: RootState) => state.orders.sendOrderError;
 export const selectFetchOrdersLoading = (state: RootState) => state.orders.fetchOrdersLoading;
 export const selectOrders = (state: RootState) => state.orders.orders;
+export const selectOrderChangeStatusLoading = (state: RootState) => state.orders.changeOrderStatusLoading;
