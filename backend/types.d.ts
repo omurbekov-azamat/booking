@@ -61,3 +61,14 @@ export interface IApartment {
   towel: boolean;
   wifi: boolean;
 }
+
+export interface IOrder {
+  userId: ObjectId;
+  adminId: ObjectId | undefined;
+  apartmentId: ObjectId;
+  createdAt: Date;
+  comment: string;
+  dateArrival: string;
+  dateDeparture: string;
+  status: string;
+}

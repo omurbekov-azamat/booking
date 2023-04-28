@@ -1,11 +1,9 @@
-import mongoose, { HydratedDocument, Types } from 'mongoose';
+import mongoose, { HydratedDocument, Types, Schema } from 'mongoose';
 import User from './User';
-import { IUser } from '../types';
 import Apartment from './Apartment';
+import { IOrder, IUser } from '../types';
 
-const Schema = mongoose.Schema;
-
-const OrderSchema = new Schema({
+const OrderSchema = new Schema<IOrder>({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -16,7 +14,7 @@ const OrderSchema = new Schema({
     },
   },
   adminId: {
-    type: Schema.Types.ObjectId || null,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     default: null,
     validate: {
@@ -62,6 +60,6 @@ const OrderSchema = new Schema({
   },
 });
 
-const Order = mongoose.model('Order', OrderSchema);
+const Order = mongoose.model<IOrder>('Order', OrderSchema);
 
 export default Order;
