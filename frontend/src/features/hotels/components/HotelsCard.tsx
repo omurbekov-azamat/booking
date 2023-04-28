@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../app/hooks';
+import { removeHotel } from '../hotelsThunks';
 
 interface Props {
   id: string;
@@ -17,6 +19,7 @@ interface Props {
 const HotelsCard: React.FC<Props> = ({ id, image, title, rating, onHotelClick }) => {
   const cardImage = apiURL + '/' + image;
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <Card sx={{ maxWidth: 350 }}>
@@ -37,7 +40,7 @@ const HotelsCard: React.FC<Props> = ({ id, image, title, rating, onHotelClick })
           Edit
         </Button>
 
-        <Button variant="outlined" startIcon={<DeleteIcon />}>
+        <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => dispatch(removeHotel(id))}>
           Delete
         </Button>
 
