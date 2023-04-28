@@ -57,9 +57,8 @@ export interface ApartmentMutation extends ApartmentData {
   images?: File[];
 }
 
-export interface ApartmentPopulated extends ApartmentData {
+export interface ApartmentPopulated extends IApartment {
   hotelId: Hotel;
-  roomTypeId: {name: string}
 }
 
 export interface IApartment extends ApartmentData {
@@ -128,14 +127,21 @@ export interface SearchData {
   petFriendly: boolean;
 }
 
-export interface Order {
-  _id: string
-  userId: User;
-  adminId: User;
-  apartmentId: ApartmentPopulated;
-  createdAt: string;
-  comment: string;
+export interface OrderData {
   dateArrival: string;
   dateDeparture: string;
-  status: string;
+  comment: string;
+}
+
+export interface OrderMutation extends OrderData {
+  apartmentId: string;
+}
+
+export interface Order extends OrderData {
+  adminId: User | null;
+  apartmentId: ApartmentPopulated;
+  createdAt: string;
+  status: 'open' | 'in progress' | 'closed';
+  userId: User;
+  _id: string;
 }

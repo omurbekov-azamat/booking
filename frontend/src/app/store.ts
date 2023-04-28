@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import { usersReducer } from '../features/users/usersSlice';
 import { hotelsReducer } from '../features/hotels/hotelsSlice';
 import { apartmentsReducer } from '../features/Apartment/apartmentSlice';
+import { ordersReducer } from '../features/orders/ordersSlice';
 
 const usersPersistConfig = {
   key: 'booking:users',
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   hotels: hotelsReducer,
   apartments: apartmentsReducer,
+  orders: ordersReducer,
 });
 
 export const store = configureStore({
