@@ -1,14 +1,16 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import { Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import HotelsCard from '../../hotels/components/HotelsCard';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   hotels: Hotel[];
-  onHotelClick: MouseEventHandler;
 }
 
-const MyHotels: React.FC<Props> = ({ hotels, onHotelClick }) => {
+const MyHotels: React.FC<Props> = ({ hotels }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Typography variant={'h4'} component={'h4'}>
@@ -24,7 +26,7 @@ const MyHotels: React.FC<Props> = ({ hotels, onHotelClick }) => {
             image={hotel.image}
             title={hotel.name}
             rating={hotel.star}
-            onHotelClick={onHotelClick}
+            onHotelClick={() => navigate('/hotels/' + hotel._id)}
             key={hotel._id}
           />
         );
