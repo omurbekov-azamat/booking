@@ -34,7 +34,7 @@ const OrderSchema = new Schema<IOrder>({
     required: true,
     validate: {
       validator: async (value: Types.ObjectId) => await Apartment.findById(value),
-      message: 'Apartment not found!',
+      message: 'apartments not found!',
     },
   },
   createdAt: {

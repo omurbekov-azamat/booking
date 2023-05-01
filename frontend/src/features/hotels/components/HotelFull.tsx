@@ -11,7 +11,7 @@ import Parking from '../../../components/Icons/HotelIcons/Parking';
 import PetFriendly from '../../../components/Icons/HotelIcons/PetFriendly';
 import Pool from '../../../components/Icons/HotelIcons/Pool';
 import Smoking from '../../../components/Icons/HotelIcons/Smoking';
-import ApartmentsTable from '../../Apartment/components/ApartmentsTable';
+import ApartmentsTable from '../../apartments/components/ApartmentsTable';
 
 interface Props {
   hotel: Hotel;
