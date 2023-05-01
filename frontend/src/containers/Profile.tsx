@@ -1,31 +1,18 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { LoadingButton } from '@mui/lab';
-import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../app/hooks';
+import { selectUser } from '../features/users/usersSlice';
+import UserCabinet from '../features/cabinets/UserCabinet';
 
 const Profile = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const user = useAppSelector(selectUser);
 
-  const openCreateHotelForm = () => {
-    navigate('/addHotel');
-  };
+  let showCabinet: JSX.Element = <></>;
 
-  return (
-    <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 3 }}>
-      <Grid item>
-        <Typography component="div" variant="h5">
-          {t('profile')}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <LoadingButton variant="contained" color="warning" onClick={openCreateHotelForm}>
-          {t('createHotel')}
-        </LoadingButton>
-      </Grid>
-    </Grid>
-  );
+  if (user && user.role === 'user') {
+    showCabinet = <UserCabinet />;
+  }
+
+  return showCabinet;
 };
 
 export default Profile;
