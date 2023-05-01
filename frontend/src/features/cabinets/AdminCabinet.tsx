@@ -9,6 +9,7 @@ import { selectUser } from '../users/usersSlice';
 import { selectAdminMyOrders } from '../orders/ordersSlice';
 import { getForAdminHisOrders } from '../orders/ordersThunks';
 import OrderCard from '../orders/components/OrderCard';
+import { useTranslation } from 'react-i18next';
 
 const AdminCabinet = () => {
   const [state, setState] = useState({
@@ -29,6 +30,7 @@ const AdminCabinet = () => {
   const orders = useAppSelector(selectAdminMyOrders);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) {
@@ -41,16 +43,16 @@ const AdminCabinet = () => {
     <>
       <Container>
         <Typography variant="h4" component="p" textAlign={'center'}>
-          {'Admin cabinet'}
+          {t('adminCabinet')}
         </Typography>
         <RadioGroup>
           <FormControlLabel
             control={<Radio checked={state.myHotels} onChange={handleChange} name="myHotels" />}
-            label="My Hotels"
+            label={t('myHotels')}
           />
           <FormControlLabel
             control={<Radio checked={state.orders} onChange={handleChange} name="orders" />}
-            label="Orders"
+            label={t('myOrders')}
           />
         </RadioGroup>
       </Container>
