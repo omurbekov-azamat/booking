@@ -3,6 +3,7 @@ import { Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import HotelsCard from '../../hotels/components/HotelsCard';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   hotels: Hotel[];
@@ -10,11 +11,12 @@ interface Props {
 
 const MyHotels: React.FC<Props> = ({ hotels }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div>
       <Typography variant={'h4'} component={'h4'}>
-        Мои отели
+        {t('myHotels')}
       </Typography>
 
       {hotels.map((hotel) => {
