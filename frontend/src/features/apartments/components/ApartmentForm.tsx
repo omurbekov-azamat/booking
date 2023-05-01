@@ -115,7 +115,7 @@ const ApartmentForm = () => {
     <>
       <Container component="main" maxWidth="sm">
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
-          {'create Apartment'}
+          {'create apartments'}
         </Typography>
         <Box component="form" sx={{ mt: 2 }} onSubmit={onSubmit}>
           <Grid container spacing={2} textAlign="center" direction="column">
