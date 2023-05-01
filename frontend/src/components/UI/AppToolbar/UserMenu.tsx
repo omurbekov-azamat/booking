@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Grid, Menu, MenuItem, styled } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Button, Grid, Menu, MenuItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { logout } from '../../../features/users/usersThunks';
 import { useAppDispatch } from '../../../app/hooks';
@@ -23,13 +23,10 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     setAnchorEl(null);
   };
 
-  const Link = styled(NavLink)({
-    color: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: 'inherit',
-    },
-  });
+  const onMenuItemClick = (path: string) => {
+    handleClose();
+    navigate(path);
+  };
 
   const handleLogout = async () => {
     await dispatch(logout());
@@ -44,9 +41,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         </Button>
       </Grid>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem>
-          <Link to={'/profile'}>{t('profile')}</Link>
-        </MenuItem>
+        <MenuItem onClick={() => onMenuItemClick('/profile')}>{t('profile')}</MenuItem>
         <MenuItem onClick={handleLogout}>{t('logout')}</MenuItem>
       </Menu>
     </>
