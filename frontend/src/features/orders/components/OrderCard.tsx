@@ -1,8 +1,8 @@
 import React from 'react';
-import { Order } from '../../../types';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import Paper from '@mui/material/Paper';
+import { Order } from '../../../types';
 
 interface props {
   prop: Order;
@@ -28,7 +28,9 @@ const OrderCard: React.FC<props> = ({ prop }) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body2">Отель : {prop.apartmentId.hotelId.name}</Typography>
+            <Typography variant="body2">
+              Отель : {prop.apartmentId.hotelId ? prop.apartmentId.hotelId.name : 'hotel name'}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body2">Комната : {prop.apartmentId.roomTypeId.name}</Typography>

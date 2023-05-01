@@ -4,7 +4,7 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist
 import storage from 'redux-persist/lib/storage';
 import { usersReducer } from '../features/users/usersSlice';
 import { hotelsReducer } from '../features/hotels/hotelsSlice';
-import { apartmentsReducer } from '../features/Apartment/apartmentSlice';
+import { apartmentsReducer } from '../features/apartments/apartmentSlice';
 import { ordersReducer } from '../features/orders/ordersSlice';
 
 const usersPersistConfig = {
