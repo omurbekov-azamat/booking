@@ -12,6 +12,7 @@ import PetFriendly from '../../../components/Icons/HotelIcons/PetFriendly';
 import Pool from '../../../components/Icons/HotelIcons/Pool';
 import Smoking from '../../../components/Icons/HotelIcons/Smoking';
 import ApartmentsTable from '../../apartments/components/ApartmentsTable';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface Props {
   hotel: Hotel;
@@ -19,7 +20,9 @@ interface Props {
 
 const HotelFull: React.FC<Props> = ({ hotel }) => {
   const cardImage = apiURL + '/' + hotel.image;
+  const { id } = useParams() as { id: string };
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -57,7 +60,12 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
           </Grid>
         </CardContent>
       </Card>
-      <Button variant={'outlined'} color={'success'}>
+      <Button
+        variant={'outlined'}
+        color={'success'}
+        style={{ margin: '10px auto', display: 'block' }}
+        onClick={() => navigate('/hotels/' + id + '/createApartment')}
+      >
         {t('createRoom')}
       </Button>
       <ApartmentsTable hotel={hotel} />
