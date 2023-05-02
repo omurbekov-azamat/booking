@@ -65,7 +65,7 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
 
           {(user?.role === 'admin' || user?.role === 'director') && (
             <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={unPublishButton}>
-              {publish ? t('publish') : t('unPublish')}
+              {!publish ? t('publish') : t('unPublish')}
             </Button>
           )}
         </Stack>
