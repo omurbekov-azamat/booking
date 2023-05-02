@@ -48,11 +48,19 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
       }
     }
     if (user.role === 'director') {
-      const closedOrders = await Order.find({ status: 'closed' })
-        .populate('userId', '-token')
-        .populate('adminId', '-token')
-        .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
-      return res.send(closedOrders);
+      if (req.query.admin) {
+        const adminClosedOrders = await Order.find({ adminId: req.query.admin, status: 'closed' })
+          .populate('userId', '-token')
+          .populate('adminId', '-token')
+          .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+        return res.send(adminClosedOrders);
+      } else {
+        const closedOrders = await Order.find({ status: 'closed' })
+          .populate('userId', '-token')
+          .populate('adminId', '-token')
+          .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+        return res.send(closedOrders);
+      }
     }
     if (user.role === 'user') {
       const yourOrders = await Order.find({ userId: user.id })

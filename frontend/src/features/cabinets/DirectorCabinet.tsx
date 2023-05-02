@@ -13,19 +13,25 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PersonIcon from '@mui/icons-material/Person';
+import { getForAdminHisOrders } from '../orders/ordersThunks';
 
 const DirectorCabinet = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(!open);
-  };
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectGetAdminsLoading);
   const admins = useAppSelector(selectAdmins);
+  const [openAdmins, setOpenAdmins] = React.useState(false);
 
   useEffect(() => {
     dispatch(getAdmins());
   }, [dispatch]);
+
+  const handleClickAdminName = (id: string) => {
+    dispatch(getForAdminHisOrders(id));
+  };
+
+  const handleClickShowAdmins = () => {
+    setOpenAdmins(!openAdmins);
+  };
 
   return (
     <>
@@ -54,17 +60,17 @@ const DirectorCabinet = () => {
                   </ListItemIcon>
                   <ListItemText primary="тут может быть что нибудь" />
                 </ListItemButton>
-                <ListItemButton onClick={handleClick}>
+                <ListItemButton onClick={handleClickShowAdmins}>
                   <ListItemIcon>
                     <PeopleAltIcon />
                   </ListItemIcon>
                   <ListItemText primary="Admins" />
-                  {open ? <ExpandLess /> : <ExpandMore />}
+                  {openAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Collapse in={openAdmins} timeout="auto" unmountOnExit>
                   {admins.map((admin) => (
                     <List key={admin._id} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(admin._id)}>
                         <ListItemIcon>
                           <PersonIcon />
                         </ListItemIcon>
