@@ -10,10 +10,10 @@ import HotelForm from './features/hotels/components/HotelForm';
 import { useAppSelector } from './app/hooks';
 import { selectUser } from './features/users/usersSlice';
 import ProtectedRoute from './components/UI/ProtectedRoute/ProtectedRoute';
-import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
 import Apartment from './features/apartments/components/Apartment';
 import ApartmentForm from './features/apartments/components/ApartmentForm';
+import Cabinet from './features/cabinets/Cabinet';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -38,10 +38,10 @@ function App() {
             }
           />
           <Route
-            path="/profile"
+            path="/my-cabinet"
             element={
               <ProtectedRoute isAllowed={user && Boolean(user)}>
-                <Profile />
+                <Cabinet />
               </ProtectedRoute>
             }
           />
