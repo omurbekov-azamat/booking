@@ -16,7 +16,7 @@ commentsRouter.get('/', async (req, res, next) => {
   }
 });
 
-commentsRouter.post('/', async (req, res, next) => {
+commentsRouter.post('/', auth, async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
 
