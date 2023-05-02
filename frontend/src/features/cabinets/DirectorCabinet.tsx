@@ -14,11 +14,16 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import { getForAdminHisOrders } from '../orders/ordersThunks';
+import { selectAdminMyOrders } from '../orders/ordersSlice';
+import OrderCard from '../orders/components/OrderCard';
+import { useTranslation } from 'react-i18next';
 
 const DirectorCabinet = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectGetAdminsLoading);
   const admins = useAppSelector(selectAdmins);
+  const adminOrders = useAppSelector(selectAdminMyOrders);
+  const { t } = useTranslation();
   const [openAdmins, setOpenAdmins] = React.useState(false);
 
   useEffect(() => {
@@ -29,6 +34,10 @@ const DirectorCabinet = () => {
     dispatch(getForAdminHisOrders(id));
   };
 
+  const handleClickListItem = () => {
+    setOpenAdmins(false);
+  };
+
   const handleClickShowAdmins = () => {
     setOpenAdmins(!openAdmins);
   };
@@ -37,7 +46,7 @@ const DirectorCabinet = () => {
     <>
       {loading && <Typography>loading...</Typography>}
       <Typography variant="h5" fontWeight="bold" textAlign="center" mt={3}>
-        Director Cabinet
+        {t('directorCabinet')}
       </Typography>
       <Card>
         <CardContent>
@@ -48,13 +57,13 @@ const DirectorCabinet = () => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                <ListItemButton>
+                <ListItemButton onClick={handleClickListItem}>
                   <ListItemIcon>
                     <SendIcon />
                   </ListItemIcon>
                   <ListItemText primary="тут может быть что нибудь" />
                 </ListItemButton>
-                <ListItemButton>
+                <ListItemButton onClick={handleClickListItem}>
                   <ListItemIcon>
                     <DraftsIcon />
                   </ListItemIcon>
@@ -82,7 +91,13 @@ const DirectorCabinet = () => {
               </List>
             </Grid>
             <Grid item xs>
-              тут может быть что нибудь
+              <Grid container spacing={3}>
+                {openAdmins ? (
+                  adminOrders.map((order) => <OrderCard key={order._id} prop={order} />)
+                ) : (
+                  <Typography mt={3}>тут может быть что нибудь</Typography>
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </CardContent>

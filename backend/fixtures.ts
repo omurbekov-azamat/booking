@@ -346,6 +346,15 @@ const run = async () => {
     },
     {
       userId: user._id,
+      adminId: admin._id,
+      status: 'closed',
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '28.04.2023',
+      dateDeparture: '29.04.2023',
+    },
+    {
+      userId: user._id,
       adminId: admin2._id,
       status: 'closed',
       apartmentId: apart._id,
