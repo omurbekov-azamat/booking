@@ -25,7 +25,7 @@ export const fetchSearchedHotels = createAsyncThunk<Hotel[], SearchData>('hotels
   try {
     const response = await axiosApi.get<Hotel[]>(
       '/hotels?nonSmoking=' +
-        data.smoking +
+        data.nonSmokingRooms +
         '&swimmingPool=' +
         data.pool +
         '&city=' +
