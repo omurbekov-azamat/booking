@@ -58,7 +58,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
         </CardContent>
       </Card>
       <Button variant={'outlined'} color={'success'}>
-        Добавить номер
+        {t('createRoom')}
       </Button>
       <ApartmentsTable hotel={hotel} />
     </>
