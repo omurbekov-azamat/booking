@@ -72,3 +72,10 @@ export interface IOrder {
   dateDeparture: string;
   status: string;
 }
+
+export interface IComment {
+  author: ObjectId;
+  hotel: ObjectId;
+  text: string;
+  createdAt: Date;
+}
