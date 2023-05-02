@@ -59,3 +59,25 @@ commentsRouter.patch('/:id', auth, async (req, res, next) => {
     return next(error);
   }
 });
+
+commentsRouter.delete('/:id', auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+
+    if (user.role === 'user' || user.role === 'hotel') {
+      const result = await Comment.deleteOne({ _id: req.params.id, user: user._id });
+      if (result.deletedCount) {
+        return res.send({ message: 'Comment removed' });
+      } else {
+        res.status(403).send({ message: 'Forbidden' });
+      }
+    } else {
+      await Comment.deleteOne({ _id: req.params.id });
+      return res.send({ message: 'Comment removed' });
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
+export default commentsRouter;
