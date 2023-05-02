@@ -19,6 +19,7 @@ app.use('/hotels', hotelsRouter);
 app.use('/roomTypes', roomTypesRouter);
 app.use('/apartments', apartmentsRouter);
 app.use('/orders', ordersRouter);
+app.use('/comments', ordersRouter);
 
 const run = async () => {
   mongoose.set('strictQuery', false);
