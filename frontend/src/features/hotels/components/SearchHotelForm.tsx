@@ -14,7 +14,7 @@ const SearchHotelForm = () => {
 
   const [state, setState] = useState<SearchData>({
     city: '',
-    smoking: false,
+    nonSmokingRooms: false,
     parking: false,
     pool: false,
     petFriendly: false,

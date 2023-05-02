@@ -121,7 +121,7 @@ export interface GlobalError {
 
 export interface SearchData {
   city: string;
-  smoking: boolean;
+  nonSmokingRooms: boolean;
   parking: boolean;
   pool: boolean;
   petFriendly: boolean;
