@@ -41,7 +41,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         </Button>
       </Grid>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={() => onMenuItemClick('/profile')}>{t('profile')}</MenuItem>
+        <MenuItem onClick={() => onMenuItemClick('/my-cabinet')}>{t('profile')}</MenuItem>
         <MenuItem onClick={handleLogout}>{t('logout')}</MenuItem>
       </Menu>
     </>

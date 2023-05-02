@@ -14,6 +14,7 @@ import Profile from './containers/Profile';
 import HotelPage from './features/hotels/HotelPage';
 import Apartment from './features/apartments/components/Apartment';
 import ApartmentForm from './features/apartments/components/ApartmentForm';
+import Cabinet from './features/cabinets/Cabinet';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -26,6 +27,7 @@ function App() {
           <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/my-cabinet" element={<Cabinet />} />
           <Route path="/:hotelName/apartment/:id" element={<Apartment />} />
           <Route path="/hotels/:id/:roomId" element={<Apartment />} />
           <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />

@@ -21,6 +21,8 @@ const Cabinet = () => {
     case 'admin':
       showCabinet = <AdminCabinet />;
       break;
+    case 'director':
+      break;
     default:
       showCabinet = <Navigate to="/login" />;
   }
