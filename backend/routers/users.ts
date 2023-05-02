@@ -53,7 +53,7 @@ usersRouter.post('/sessions', async (req, res, next) => {
 usersRouter.get('/admins', auth, permit('director'), async (req, res, next) => {
   try {
     const admins = await User.find({ role: 'admin' }).select('-token');
-    return res.send({ message: 'Yours admins', admins });
+    return res.send(admins);
   } catch (e) {
     return next(e);
   }

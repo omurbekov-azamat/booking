@@ -80,7 +80,7 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  token: string;
+  token?: string;
   role: string;
   phoneNumber: string;
   status?: string;
