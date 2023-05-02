@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Box, Grid, Rating } from '@mui/material';
+import { Box, Button, Grid, Rating } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { apiURL } from '../../../constants';
 import type { Hotel } from '../../../types';
@@ -57,6 +57,9 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
           </Grid>
         </CardContent>
       </Card>
+      <Button variant={'outlined'} color={'success'}>
+        Добавить номер
+      </Button>
       <ApartmentsTable hotel={hotel} />
     </>
   );
