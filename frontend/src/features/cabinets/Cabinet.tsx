@@ -5,6 +5,7 @@ import UserCabinet from './UserCabinet';
 import HotelCabinet from './HotelCabinet';
 import AdminCabinet from './AdminCabinet';
 import { Navigate } from 'react-router-dom';
+import DirectorCabinet from './DirectorCabinet';
 
 const Cabinet = () => {
   const user = useAppSelector(selectUser);
@@ -22,6 +23,7 @@ const Cabinet = () => {
       showCabinet = <AdminCabinet />;
       break;
     case 'director':
+      showCabinet = <DirectorCabinet />;
       break;
     default:
       showCabinet = <Navigate to="/login" />;
