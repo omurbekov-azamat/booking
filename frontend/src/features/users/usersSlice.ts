@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GlobalError, User, ValidationError } from '../../types';
-import { login, logout, register } from './usersThunks';
+import { getAdmins, login, logout, register } from './usersThunks';
 import { RootState } from '../../app/store';
 
 interface UsersState {
@@ -11,6 +11,8 @@ interface UsersState {
   logoutLoading: boolean;
   loginError: GlobalError | null;
   modalCoverState: boolean;
+  getAdminsLoading: boolean;
+  admins: User[];
 }
 
 const initialState: UsersState = {
@@ -21,6 +23,8 @@ const initialState: UsersState = {
   logoutLoading: false,
   loginError: null,
   modalCoverState: false,
+  getAdminsLoading: false,
+  admins: [],
 };
 
 export const usersSlice = createSlice({
@@ -62,7 +66,6 @@ export const usersSlice = createSlice({
       state.loginLoading = false;
       state.loginError = error || null;
     });
-
     builder.addCase(logout.pending, (state) => {
       state.logoutLoading = true;
     });
@@ -71,6 +74,16 @@ export const usersSlice = createSlice({
     });
     builder.addCase(logout.rejected, (state) => {
       state.logoutLoading = false;
+    });
+    builder.addCase(getAdmins.pending, (state) => {
+      state.getAdminsLoading = true;
+    });
+    builder.addCase(getAdmins.fulfilled, (state, { payload: admins }) => {
+      state.getAdminsLoading = false;
+      state.admins = admins;
+    });
+    builder.addCase(getAdmins.rejected, (state) => {
+      state.getAdminsLoading = false;
     });
   },
 });
@@ -86,3 +99,5 @@ export const selectLoginLoading = (state: RootState) => state.users.loginLoading
 export const selectLoginError = (state: RootState) => state.users.loginError;
 export const selectLogoutLoading = (state: RootState) => state.users.logoutLoading;
 export const selectModalCoverState = (state: RootState) => state.users.modalCoverState;
+export const selectGetAdminsLoading = (state: RootState) => state.users.getAdminsLoading;
+export const selectAdmins = (state: RootState) => state.users.admins;

@@ -22,11 +22,22 @@ const run = async () => {
     console.log('Collections were not present, skipping drop...');
   }
 
-  const [admin, user, hotel, director, user2] = await User.create(
+  const [admin, admin2, user, hotel, director, user2] = await User.create(
     {
       email: 'admin@gmail.com',
       firstName: 'Admin',
       lastName: 'Adminich',
+      password: '123',
+      token: crypto.randomUUID(),
+      role: 'admin',
+      phoneNumber: '0555 777777',
+      status: 'super',
+      cashback: '0',
+    },
+    {
+      email: 'admin2@gmail.com',
+      firstName: 'Admin2',
+      lastName: 'Adminich2',
       password: '123',
       token: crypto.randomUUID(),
       role: 'admin',
@@ -326,6 +337,8 @@ const run = async () => {
   await Order.create(
     {
       userId: user._id,
+      adminId: admin._id,
+      status: 'closed',
       apartmentId: apart._id,
       createdAt: Date.now(),
       dateArrival: '28.04.2023',
@@ -333,6 +346,17 @@ const run = async () => {
     },
     {
       userId: user._id,
+      adminId: admin._id,
+      status: 'closed',
+      apartmentId: apart._id,
+      createdAt: Date.now(),
+      dateArrival: '28.04.2023',
+      dateDeparture: '29.04.2023',
+    },
+    {
+      userId: user._id,
+      adminId: admin2._id,
+      status: 'closed',
       apartmentId: apart._id,
       createdAt: Date.now(),
       dateArrival: '28.04.2023',

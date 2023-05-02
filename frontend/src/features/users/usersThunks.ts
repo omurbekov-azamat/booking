@@ -38,3 +38,12 @@ export const logout = createAsyncThunk('users/logout', async (_, { dispatch }) =
   await axiosApi.delete('/users/sessions');
   dispatch(unsetUser());
 });
+
+export const getAdmins = createAsyncThunk<User[]>('users/getAdmins', async () => {
+  try {
+    const responseAdmins = await axiosApi.get<User[]>('/users/admins');
+    return responseAdmins.data;
+  } catch {
+    throw new Error();
+  }
+});
