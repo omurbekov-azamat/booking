@@ -138,6 +138,20 @@ const HotelForm = () => {
             />
           </Grid>
           <Grid item xs>
+            <TextField
+              label={t('founding')}
+              type="number"
+              name="founding"
+              autoComplete="current-founding"
+              value={state.founding}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('founding'))}
+              helperText={getFieldError('founding')}
+              inputProps={{ min: 1500 }}
+              required
+            />
+          </Grid>
+          <Grid item xs>
             <ListFacilities onChange={handleChangeCheckBox} width={400} />
           </Grid>
           <Grid item xs>
