@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MenuItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
@@ -7,12 +7,11 @@ interface Props {
   name: string;
   label: string;
   width?: number;
+  value: string;
 }
 
-const SelectCities: React.FC<Props> = ({ onChange, name, label, width }) => {
+const SelectCities: React.FC<Props> = ({ onChange, name, label, width, value }) => {
   const { t } = useTranslation();
-
-  const [cityName, setCityName] = useState('');
 
   const cities = [
     { id: 'bishkek', title: t('bishkek') },
@@ -21,12 +20,11 @@ const SelectCities: React.FC<Props> = ({ onChange, name, label, width }) => {
   ];
 
   const selectChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCityName(e.target.value);
     onChange(e);
   };
 
   return (
-    <TextField select label={label} value={cityName} name={name} onChange={selectChangeHandler} sx={{ width }} required>
+    <TextField select label={label} value={value} name={name} onChange={selectChangeHandler} sx={{ width }} required>
       {cities.map((city) => (
         <MenuItem key={city.id} value={city.id}>
           {city.title}

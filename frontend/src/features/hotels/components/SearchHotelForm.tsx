@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { fetchSearchedHotels } from '../hotelsThunks';
-import { useAppDispatch } from '../../../app/hooks';
+import { fetchHotels, fetchSearchedHotels } from '../hotelsThunks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectFetchSearchedHotelsLoading } from '../hotelsSlice';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, FormGroup, Grid, Menu, Rating } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -10,6 +11,7 @@ import { SearchData } from '../../../types';
 
 const SearchHotelForm = () => {
   const dispatch = useAppDispatch();
+  const loadingSearch = useAppSelector(selectFetchSearchedHotelsLoading);
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -19,7 +21,7 @@ const SearchHotelForm = () => {
     parking: false,
     swimmingPool: false,
     petFriendly: false,
-    star: 0,
+    star: 5,
   });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -42,6 +44,18 @@ const SearchHotelForm = () => {
     setState((prev) => ({ ...prev, [name]: checked }));
   };
 
+  const onClickClearButton = async () => {
+    await setState({
+      city: '',
+      nonSmokingRooms: false,
+      parking: false,
+      swimmingPool: false,
+      petFriendly: false,
+      star: 5,
+    });
+    await dispatch(fetchHotels());
+  };
+
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(fetchSearchedHotels(state));
@@ -51,12 +65,12 @@ const SearchHotelForm = () => {
     <Box component="form" mt={5} onSubmit={submitFormHandler} textAlign="center">
       <Grid container alignItems="center" spacing={2}>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-          <SelectCities onChange={inputChangeHandler} name="city" label={t('whereAreYouGoing')} />
+          <SelectCities onChange={inputChangeHandler} name="city" label={t('whereAreYouGoing')} value={state.city} />
         </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={1} xl={1}>
+        <Grid item xs={12} sm={6} md={2} lg={1} xl={1}>
           <ListFacilities onChange={handleChangeCheckBox} />
         </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={2} xl={2}>
+        <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
           <Button
             onClick={handleClick}
             sx={{
@@ -67,7 +81,7 @@ const SearchHotelForm = () => {
               fontSize: '18px',
             }}
           >
-            property rating
+            {t('propertyRating')}
           </Button>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <FormGroup sx={{ p: 1 }}>
@@ -82,9 +96,20 @@ const SearchHotelForm = () => {
             </FormGroup>
           </Menu>
         </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={1} xl={1}>
-          <LoadingButton variant="outlined" color="success" sx={{ p: 1.5 }} type="submit">
+        <Grid item xs={12} sm={6} md={2} lg={1} xl={1}>
+          <LoadingButton variant="outlined" color="success" sx={{ p: 1.5 }} type="submit" loading={loadingSearch}>
             {t('search')}
+          </LoadingButton>
+        </Grid>
+        <Grid item xs={12} sm={6} md={2} lg={2} xl={2}>
+          <LoadingButton
+            variant="outlined"
+            color="error"
+            sx={{ p: 1.5 }}
+            onClick={onClickClearButton}
+            disabled={loadingSearch}
+          >
+            {t('clearFilter')}
           </LoadingButton>
         </Grid>
       </Grid>
