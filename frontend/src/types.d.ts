@@ -125,6 +125,7 @@ export interface SearchData {
   parking: boolean;
   swimmingPool: boolean;
   petFriendly: boolean;
+  star: number;
 }
 
 export interface OrderData {
