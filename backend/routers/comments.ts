@@ -7,9 +7,9 @@ const commentsRouter = express.Router();
 
 commentsRouter.get('/', async (req, res, next) => {
   try {
-    const hotelId = req.query.hotelId as string;
+    const hotelId = req.query.hotel as string;
 
-    const comments = await Comment.find({ hotel: hotelId });
+    const comments = await Comment.find({ hotel: hotelId }).populate('author');
     return res.send(comments);
   } catch (e) {
     return next(e);
@@ -65,7 +65,8 @@ commentsRouter.delete('/:id', auth, async (req, res, next) => {
     const user = (req as RequestWithUser).user;
 
     if (user.role === 'user' || user.role === 'hotel') {
-      const result = await Comment.deleteOne({ _id: req.params.id, user: user._id });
+      const result = await Comment.deleteOne({ _id: req.params.id, author: user._id });
+
       if (result.deletedCount) {
         return res.send({ message: 'Comment removed' });
       } else {

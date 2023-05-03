@@ -6,6 +6,7 @@ import { usersReducer } from '../features/users/usersSlice';
 import { hotelsReducer } from '../features/hotels/hotelsSlice';
 import { apartmentsReducer } from '../features/apartments/apartmentSlice';
 import { ordersReducer } from '../features/orders/ordersSlice';
+import { commentsReducer } from '../features/comments/commentsSlice';
 
 const usersPersistConfig = {
   key: 'booking:users',
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   hotels: hotelsReducer,
   apartments: apartmentsReducer,
   orders: ordersReducer,
+  comments: commentsReducer,
 });
 
 export const store = configureStore({
