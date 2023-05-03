@@ -16,7 +16,7 @@ const SearchHotelForm = () => {
     city: '',
     nonSmokingRooms: false,
     parking: false,
-    pool: false,
+    swimmingPool: false,
     petFriendly: false,
   });
 
