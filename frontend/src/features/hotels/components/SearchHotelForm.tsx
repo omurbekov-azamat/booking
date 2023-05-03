@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchSearchedHotels } from '../hotelsThunks';
+import { fetchHotels, fetchSearchedHotels } from '../hotelsThunks';
 import { useAppDispatch } from '../../../app/hooks';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, FormGroup, Grid, Menu, Rating } from '@mui/material';
@@ -42,6 +42,18 @@ const SearchHotelForm = () => {
     setState((prev) => ({ ...prev, [name]: checked }));
   };
 
+  const onClickClearButton = async () => {
+    await setState({
+      city: '',
+      nonSmokingRooms: false,
+      parking: false,
+      swimmingPool: false,
+      petFriendly: false,
+      star: 5,
+    });
+    await dispatch(fetchHotels());
+  };
+
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(fetchSearchedHotels(state));
@@ -51,7 +63,7 @@ const SearchHotelForm = () => {
     <Box component="form" mt={5} onSubmit={submitFormHandler} textAlign="center">
       <Grid container alignItems="center" spacing={2}>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-          <SelectCities onChange={inputChangeHandler} name="city" label={t('whereAreYouGoing')} />
+          <SelectCities onChange={inputChangeHandler} name="city" label={t('whereAreYouGoing')} value={state.city} />
         </Grid>
         <Grid item xs={12} sm={6} md={2} lg={1} xl={1}>
           <ListFacilities onChange={handleChangeCheckBox} />
@@ -88,7 +100,7 @@ const SearchHotelForm = () => {
           </LoadingButton>
         </Grid>
         <Grid item xs={12} sm={6} md={2} lg={2} xl={2}>
-          <LoadingButton variant="outlined" color="error" sx={{ p: 1.5 }}>
+          <LoadingButton variant="outlined" color="error" sx={{ p: 1.5 }} onClick={onClickClearButton}>
             {t('clearFilter')}
           </LoadingButton>
         </Grid>
