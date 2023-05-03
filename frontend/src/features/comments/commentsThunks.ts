@@ -57,3 +57,11 @@ export const updateComment = createAsyncThunk<void, updatedData, { state: RootSt
     }
   },
 );
+
+export const removeComment = createAsyncThunk<void, string>('comments/removeOne', async (id) => {
+  try {
+    await axiosApi.delete('/comments/' + id);
+  } catch {
+    throw new Error();
+  }
+});
