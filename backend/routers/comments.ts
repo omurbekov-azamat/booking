@@ -9,7 +9,7 @@ commentsRouter.get('/', async (req, res, next) => {
   try {
     const hotelId = req.query.hotel as string;
 
-    const comments = await Comment.find({ hotel: hotelId });
+    const comments = await Comment.find({ hotel: hotelId }).populate('author');
     return res.send(comments);
   } catch (e) {
     return next(e);

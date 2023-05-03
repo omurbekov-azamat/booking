@@ -26,15 +26,15 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
 
   return (
     <Grid container flexDirection={'column'} border={1} my={2} p={2}>
-      <Grid item>{'From: ' + comment.author} </Grid>
+      <Grid item>{'From: ' + comment.author.firstName + ' ' + comment.author.lastName} </Grid>
       <Grid item>
         <Typography variant={'h6'} component={'p'}>
           {comment.text}
         </Typography>
       </Grid>
       <Grid item>{dayjs(comment.createdAt).format('DD-MM-YYYY HH:mm')} </Grid>
-      {user?._id === comment.author ? editBtn : null}
-      {user?.role === 'admin' || user?.role === 'director' || user?._id === comment.author ? deleteBtn : null}
+      {user?._id === comment.author._id ? editBtn : null}
+      {user?.role === 'admin' || user?.role === 'director' || user?._id === comment.author._id ? deleteBtn : null}
     </Grid>
   );
 };

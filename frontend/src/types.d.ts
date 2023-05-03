@@ -148,7 +148,11 @@ export interface Order extends OrderData {
 
 export interface Comment {
   _id: string;
-  author: string;
+  author: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
   hotel: string;
   text: string;
   createdAt: string;
