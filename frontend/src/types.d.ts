@@ -123,8 +123,9 @@ export interface SearchData {
   city: string;
   nonSmokingRooms: boolean;
   parking: boolean;
-  pool: boolean;
+  swimmingPool: boolean;
   petFriendly: boolean;
+  star: number;
 }
 
 export interface OrderData {

@@ -40,6 +40,7 @@ hotelsRouter.get('/', async (req, res) => {
   const swimmingPool = req.query.swimmingPool as string;
   const parking = req.query.parking as string;
   const petFriendly = req.query.petFriendly as string;
+  const star = req.query.star as string;
   const city = req.query.city as string;
   const queryOwner = req.query.owner as string;
   const queryPage = req.query.page as string;
@@ -72,6 +73,9 @@ hotelsRouter.get('/', async (req, res) => {
       }
       if (city) {
         findParams.city = city;
+      }
+      if (star) {
+        findParams.star = star;
       }
 
       const hotelResponse = await Hotel.find(findParams);
