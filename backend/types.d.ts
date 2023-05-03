@@ -40,6 +40,11 @@ export interface IHotel {
   swimmingPool: boolean;
   petFriendly: boolean;
   city: string;
+  founding: number;
+  lowestPrice: {
+    som: number;
+    dollar: number;
+  };
 }
 
 export interface IApartment {
