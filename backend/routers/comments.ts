@@ -7,7 +7,7 @@ const commentsRouter = express.Router();
 
 commentsRouter.get('/', async (req, res, next) => {
   try {
-    const hotelId = req.query.hotelId as string;
+    const hotelId = req.query.hotel as string;
 
     const comments = await Comment.find({ hotel: hotelId });
     return res.send(comments);
