@@ -145,3 +145,11 @@ export interface Order extends OrderData {
   userId: User;
   _id: string;
 }
+
+export interface Comment {
+  _id: string;
+  author: string;
+  hotel: string;
+  text: string;
+  createdAt: string;
+}
