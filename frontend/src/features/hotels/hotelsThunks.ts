@@ -79,11 +79,12 @@ export const createHotel = createAsyncThunk<void, HotelMutation, { state: RootSt
       if (user) {
         const formData = new FormData();
         const keys = Object.keys(hotel) as (keyof HotelMutation)[];
-
         keys.forEach((key) => {
           const value = hotel[key];
           if (value !== null) {
             if (key === 'location') {
+              formData.append(key, JSON.stringify(value));
+            } else if (key === 'lowestPrice') {
               formData.append(key, JSON.stringify(value));
             } else {
               formData.append(key, value as string | Blob);

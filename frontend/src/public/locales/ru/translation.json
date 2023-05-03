@@ -48,5 +48,9 @@
   "myHotels": "Мои отели",
   "adminCabinet": "Кабинет администратора",
   "directorCabinet": "Кабинет директора",
-  "createRoom": "Добавить комнату"
+  "createRoom": "Добавить комнату",
+  "founding": "Основан",
+  "som": "Сом",
+  "dollar": "Доллар",
+  "lowestPrice": "Минимальна цена"
 }

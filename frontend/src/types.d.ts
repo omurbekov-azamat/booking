@@ -7,10 +7,17 @@ export interface HotelData {
     longitude: number;
   };
   description?: string;
+  founding: number;
+  lowestPrice: LowestPriceType;
   parking: boolean;
   petFriendly: boolean;
   swimmingPool: boolean;
   nonSmokingRooms: boolean;
+}
+
+export interface LowestPriceType {
+  som: number;
+  dollar: number;
 }
 
 export interface HotelMutation extends HotelData {
