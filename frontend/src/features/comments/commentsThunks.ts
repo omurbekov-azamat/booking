@@ -34,3 +34,26 @@ export const createComment = createAsyncThunk<
     throw e;
   }
 });
+
+interface updatedData {
+  comment: CommentMutation;
+  id: string;
+}
+
+export const updateComment = createAsyncThunk<void, updatedData, { state: RootState; rejectValue: ValidationError }>(
+  'comments/updateComment',
+  async (updatedData, { getState, rejectWithValue }) => {
+    try {
+      const user = getState().users.user;
+
+      if (user) {
+        await axiosApi.patch('/comments/' + updatedData.id, updatedData.comment);
+      }
+    } catch (e) {
+      if (isAxiosError(e) && e.response && e.response.status === 400) {
+        return rejectWithValue(e.response.data as ValidationError);
+      }
+      throw e;
+    }
+  },
+);
