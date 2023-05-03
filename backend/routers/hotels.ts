@@ -23,6 +23,8 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       swimmingPool: req.body.swimmingPool,
       petFriendly: req.body.petFriendly,
       city: req.body.city,
+      founding: req.body.founding,
+      lowestPrice: req.body.lowestPrice,
     });
 
     await hotel.save();
@@ -111,6 +113,8 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         location: req.body.location ? req.body.location : null,
         star: req.body.star,
         image: req.file && req.file.filename,
+        founding: req.body.founding,
+        lowestPrice: req.body.lowestPrice,
       },
     });
     if (hotel.modifiedCount < 1) {
