@@ -153,3 +153,8 @@ export interface Comment {
   text: string;
   createdAt: string;
 }
+
+export interface CommentMutation {
+  hotel: string;
+  text: string;
+}
