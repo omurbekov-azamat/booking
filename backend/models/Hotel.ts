@@ -59,6 +59,35 @@ const HotelSchema = new Schema<IHotel>({
     type: String,
     required: true,
   },
+  founding: {
+    type: Number,
+    required: true,
+    validate: {
+      validator: (value: number) => value > 1500,
+      message: 'The founding year must be greater than 1500!',
+    },
+  },
+  lowestPrice: {
+    type: {
+      som: {
+        type: Number,
+        required: true,
+        validate: {
+          validator: (value: number) => value > 0,
+          message: 'The lowest price in som must be a positive number!',
+        },
+      },
+      dollar: {
+        type: Number,
+        required: true,
+        validate: {
+          validator: (value: number) => value > 0,
+          message: 'The lowest price in dollar must be a positive number!',
+        },
+      },
+    },
+    required: true,
+  },
 });
 
 const Hotel = mongoose.model('Hotel', HotelSchema);
