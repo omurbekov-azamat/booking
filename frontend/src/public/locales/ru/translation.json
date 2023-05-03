@@ -49,5 +49,8 @@
   "adminCabinet": "Кабинет администратора",
   "directorCabinet": "Кабинет директора",
   "createRoom": "Добавить комнату",
-  "founding": "Основан"
+  "founding": "Основан",
+  "som": "Сом",
+  "dollar": "Доллар",
+  "lowestPrice": "Минимальна цена"
 }

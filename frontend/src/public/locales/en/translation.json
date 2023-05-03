@@ -49,5 +49,8 @@
   "adminCabinet": "Admin cabinet",
   "directorCabinet": "Director cabinet",
   "createRoom": "Create apartment",
-  "founding": "Founding"
+  "founding": "Founding",
+  "som": "Som",
+  "dollar": "Dollar",
+  "lowestPrice": "Lowest price"
 }

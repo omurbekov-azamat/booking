@@ -11,6 +11,7 @@ const hotelsRouter = express.Router();
 hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
+
     const hotel = new Hotel({
       userId: user._id,
       name: req.body.name,
@@ -23,8 +24,8 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       swimmingPool: req.body.swimmingPool,
       petFriendly: req.body.petFriendly,
       city: req.body.city,
-      founding: req.body.founding,
-      lowestPrice: req.body.lowestPrice,
+      founding: parseFloat(req.body.founding),
+      lowestPrice: JSON.parse(req.body.lowestPrice),
     });
 
     await hotel.save();

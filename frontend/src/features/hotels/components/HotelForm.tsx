@@ -39,7 +39,17 @@ const HotelForm = () => {
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setState((prev) => ({ ...prev, [name]: value }));
+    if (name === 'som' || name === 'dollar') {
+      setState((prev) => ({
+        ...prev,
+        lowestPrice: {
+          ...prev.lowestPrice,
+          [name]: parseFloat(value),
+        },
+      }));
+    } else {
+      setState((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,6 +161,38 @@ const HotelForm = () => {
               required
             />
           </Grid>
+
+          <Grid item xs>
+            <Grid container justifyContent={'space-around'}>
+              <h3>{t('lowestPrice')}</h3>
+              <Grid item xs={3}>
+                <TextField
+                  type={'number'}
+                  label={t('som')}
+                  name="som"
+                  autoComplete="current-som"
+                  value={state.lowestPrice.som}
+                  onChange={inputChangeHandler}
+                  inputProps={{ min: 1 }}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={3}>
+                <TextField
+                  type={'number'}
+                  label={t('dollar')}
+                  name="dollar"
+                  autoComplete="current-dollar"
+                  value={state.lowestPrice.dollar}
+                  onChange={inputChangeHandler}
+                  inputProps={{ min: 1 }}
+                  required
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+
           <Grid item xs>
             <ListFacilities onChange={handleChangeCheckBox} width={400} />
           </Grid>
