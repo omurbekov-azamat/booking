@@ -22,6 +22,7 @@ export interface HotelFact {
   swimmingPool?: boolean;
   petFriendly?: boolean;
   city?: string;
+  star?: string;
 }
 
 export interface IHotel {

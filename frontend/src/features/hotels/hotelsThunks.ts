@@ -32,6 +32,8 @@ export const fetchSearchedHotels = createAsyncThunk<Hotel[], SearchData>('hotels
         data.city +
         '&parking=' +
         data.parking +
+        '&star=' +
+        data.star +
         '&petFriendly=' +
         data.petFriendly,
     );
