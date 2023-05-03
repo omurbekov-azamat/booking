@@ -53,10 +53,10 @@ const SearchHotelForm = () => {
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <SelectCities onChange={inputChangeHandler} name="city" label={t('whereAreYouGoing')} />
         </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={1} xl={1}>
+        <Grid item xs={12} sm={6} md={2} lg={1} xl={1}>
           <ListFacilities onChange={handleChangeCheckBox} />
         </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={2} xl={2}>
+        <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
           <Button
             onClick={handleClick}
             sx={{
@@ -82,9 +82,14 @@ const SearchHotelForm = () => {
             </FormGroup>
           </Menu>
         </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={1} xl={1}>
+        <Grid item xs={12} sm={6} md={2} lg={1} xl={1}>
           <LoadingButton variant="outlined" color="success" sx={{ p: 1.5 }} type="submit">
             {t('search')}
+          </LoadingButton>
+        </Grid>
+        <Grid item xs={12} sm={6} md={2} lg={2} xl={2}>
+          <LoadingButton variant="outlined" color="error" sx={{ p: 1.5 }}>
+            {t('clearFilter')}
           </LoadingButton>
         </Grid>
       </Grid>

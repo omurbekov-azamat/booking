@@ -53,5 +53,6 @@
   "som": "Сом",
   "dollar": "Доллар",
   "lowestPrice": "Минимальна цена",
-  "propertyRating": "Оценка объекта"
+  "propertyRating": "Оценка объекта",
+  "clearFilter": "Очистить фильтр"
 }

@@ -53,5 +53,6 @@
   "som": "Som",
   "dollar": "Dollar",
   "lowestPrice": "Lowest price",
-  "propertyRating": "Property rating"
+  "propertyRating": "Property rating",
+  "clearFilter": "Clear filter"
 }
