@@ -87,7 +87,7 @@ const HotelForm = () => {
           dollar: 0,
         },
       });
-      await navigate('/profile');
+      await navigate('/my-cabinet');
     }
   };
 
