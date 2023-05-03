@@ -28,6 +28,11 @@ const HotelForm = () => {
     petFriendly: false,
     swimmingPool: false,
     nonSmokingRooms: false,
+    founding: 0,
+    lowestPrice: {
+      som: 0,
+      dollar: 0,
+    },
   });
 
   const [imageRequired, setImageRequired] = useState(false);
@@ -66,6 +71,11 @@ const HotelForm = () => {
         petFriendly: false,
         swimmingPool: false,
         nonSmokingRooms: false,
+        founding: 0,
+        lowestPrice: {
+          som: 0,
+          dollar: 0,
+        },
       });
       await navigate('/profile');
     }
