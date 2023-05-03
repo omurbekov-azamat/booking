@@ -65,7 +65,8 @@ commentsRouter.delete('/:id', auth, async (req, res, next) => {
     const user = (req as RequestWithUser).user;
 
     if (user.role === 'user' || user.role === 'hotel') {
-      const result = await Comment.deleteOne({ _id: req.params.id, user: user._id });
+      const result = await Comment.deleteOne({ _id: req.params.id, author: user._id });
+
       if (result.deletedCount) {
         return res.send({ message: 'Comment removed' });
       } else {

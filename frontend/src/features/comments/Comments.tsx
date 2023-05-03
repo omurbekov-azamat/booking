@@ -11,9 +11,9 @@ const Comments = () => {
   const navigate = useNavigate();
   const comments = useAppSelector(selectComments);
 
-  const deleteComment = async (id: string) => {
-    await dispatch(removeComment(id));
-    await dispatch(fetchComments(id));
+  const deleteComment = async (commentId: string, hotelId: string) => {
+    await dispatch(removeComment(commentId));
+    await dispatch(fetchComments(hotelId));
   };
 
   useEffect(() => {
@@ -26,8 +26,8 @@ const Comments = () => {
         return (
           <CommentMessage
             comment={comment}
-            onDeleteBtnClick={() => deleteComment(id)}
-            onEditBtnClick={() => navigate('/hotels/' + id + '/edit-comment')}
+            onDeleteBtnClick={() => deleteComment(comment._id, id)}
+            onEditBtnClick={() => navigate('/comments/' + comment._id + '/edit-comment')}
             key={comment._id}
           />
         );
