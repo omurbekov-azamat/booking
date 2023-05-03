@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { fetchHotels, fetchSearchedHotels } from '../hotelsThunks';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectFetchSearchedHotelsLoading } from '../hotelsSlice';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, FormGroup, Grid, Menu, Rating } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -10,6 +11,7 @@ import { SearchData } from '../../../types';
 
 const SearchHotelForm = () => {
   const dispatch = useAppDispatch();
+  const loadingSearch = useAppSelector(selectFetchSearchedHotelsLoading);
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -95,12 +97,18 @@ const SearchHotelForm = () => {
           </Menu>
         </Grid>
         <Grid item xs={12} sm={6} md={2} lg={1} xl={1}>
-          <LoadingButton variant="outlined" color="success" sx={{ p: 1.5 }} type="submit">
+          <LoadingButton variant="outlined" color="success" sx={{ p: 1.5 }} type="submit" loading={loadingSearch}>
             {t('search')}
           </LoadingButton>
         </Grid>
         <Grid item xs={12} sm={6} md={2} lg={2} xl={2}>
-          <LoadingButton variant="outlined" color="error" sx={{ p: 1.5 }} onClick={onClickClearButton}>
+          <LoadingButton
+            variant="outlined"
+            color="error"
+            sx={{ p: 1.5 }}
+            onClick={onClickClearButton}
+            disabled={loadingSearch}
+          >
             {t('clearFilter')}
           </LoadingButton>
         </Grid>

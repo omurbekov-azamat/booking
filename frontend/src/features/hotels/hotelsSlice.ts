@@ -24,6 +24,7 @@ interface ArtistsState {
   loadingTogglePublished: false | string;
   error: boolean;
   createHotelError: ValidationError | null;
+  fetchSearchedHotelsLoading: boolean;
 }
 
 const initialState: ArtistsState = {
@@ -38,6 +39,7 @@ const initialState: ArtistsState = {
   loadingTogglePublished: false,
   error: false,
   createHotelError: null,
+  fetchSearchedHotelsLoading: false,
 };
 
 export const hotelsSlice = createSlice({
@@ -130,16 +132,16 @@ export const hotelsSlice = createSlice({
       state.loadingMatch = true;
     });
     builder.addCase(fetchSearchedHotels.pending, (state) => {
-      state.loading = true;
+      state.fetchSearchedHotelsLoading = true;
       state.error = false;
     });
     builder.addCase(fetchSearchedHotels.fulfilled, (state, action) => {
-      state.loading = false;
+      state.fetchSearchedHotelsLoading = false;
       state.hotels = action.payload;
       state.error = false;
     });
     builder.addCase(fetchSearchedHotels.rejected, (state) => {
-      state.loading = false;
+      state.fetchSearchedHotelsLoading = false;
       state.error = true;
     });
   },
@@ -155,3 +157,4 @@ export const selectLoadingTogglePublished = (state: RootState) => state.hotels.l
 export const selectCreateHotelError = (state: RootState) => state.hotels.createHotelError;
 export const selectPageOfHotels = (state: RootState) => state.hotels.page;
 export const selectSearchHotels = (state: RootState) => state.hotels.search;
+export const selectFetchSearchedHotelsLoading = (state: RootState) => state.hotels.fetchSearchedHotelsLoading;
