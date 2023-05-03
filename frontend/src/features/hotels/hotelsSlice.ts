@@ -12,7 +12,7 @@ import {
 } from './hotelsThunks';
 import type { Hotel, ValidationError } from '../../types';
 
-interface ArtistsState {
+interface HotelsState {
   hotels: Hotel[];
   hotel: Hotel | null;
   page: number;
@@ -26,7 +26,7 @@ interface ArtistsState {
   createHotelError: ValidationError | null;
 }
 
-const initialState: ArtistsState = {
+const initialState: HotelsState = {
   hotels: [],
   hotel: null,
   page: 1,
