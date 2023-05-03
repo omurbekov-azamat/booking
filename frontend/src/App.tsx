@@ -14,6 +14,7 @@ import HotelPage from './features/hotels/HotelPage';
 import Apartment from './features/apartments/components/Apartment';
 import ApartmentForm from './features/apartments/components/ApartmentForm';
 import Cabinet from './features/cabinets/Cabinet';
+import Comments from './features/comments/Comments';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -29,6 +30,7 @@ function App() {
           <Route path="/:hotelName/apartment/:id" element={<Apartment />} />
           <Route path="/hotels/:id/:roomId" element={<Apartment />} />
           <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
+          <Route path="/hotels/:id/comments" element={<Comments />} />
           <Route
             path="/addHotel"
             element={
