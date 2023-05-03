@@ -19,7 +19,7 @@ const SearchHotelForm = () => {
     parking: false,
     swimmingPool: false,
     petFriendly: false,
-    star: 0,
+    star: 5,
   });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -67,7 +67,7 @@ const SearchHotelForm = () => {
               fontSize: '18px',
             }}
           >
-            property rating
+            {t('propertyRating')}
           </Button>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <FormGroup sx={{ p: 1 }}>
