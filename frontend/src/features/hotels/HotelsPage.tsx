@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchHotels, fetchNewPage } from './hotelsThunks';
+import { fetchHotels, fetchNewPage, removeHotel, togglePublishedHotel } from './hotelsThunks';
 import { selectHotels, selectLoading, selectPageOfHotels } from './hotelsSlice';
 import { Grid } from '@mui/material';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -27,6 +27,16 @@ const HotelsPage = () => {
     dispatch(fetchNewPage(pageNum));
   };
 
+  const unPublishButton = async (id: string) => {
+    await dispatch(togglePublishedHotel(id));
+    await dispatch(fetchHotels());
+  };
+
+  const deleteButton = async (id: string) => {
+    await dispatch(removeHotel(id));
+    await dispatch(fetchHotels());
+  };
+
   return (
     <>
       <SearchField />
@@ -35,7 +45,12 @@ const HotelsPage = () => {
         {hotels ? (
           hotels.map((el) => (
             <Grid item xs={12} sm={6} lg={4} key={Math.random()} alignItems="stretch">
-              <HotelsCard hotel={el} onHotelClick={() => navigate('/hotels/' + el._id)} />
+              <HotelsCard
+                hotel={el}
+                onHotelClick={() => navigate('/hotels/' + el._id)}
+                onDeleteBtnClick={() => deleteButton(el._id)}
+                onPublishBtnClick={() => unPublishButton(el._id)}
+              />
             </Grid>
           ))
         ) : (

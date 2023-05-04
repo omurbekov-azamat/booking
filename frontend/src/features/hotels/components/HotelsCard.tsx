@@ -2,8 +2,7 @@ import React, { MouseEventHandler } from 'react';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { fetchHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
+import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
@@ -12,24 +11,15 @@ import { Hotel } from '../../../types';
 interface Props {
   hotel: Hotel;
   onHotelClick: MouseEventHandler;
+  onDeleteBtnClick?: MouseEventHandler;
+  onPublishBtnClick?: MouseEventHandler;
 }
 
-const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick }) => {
+const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick, onDeleteBtnClick, onPublishBtnClick }) => {
   const cardImage = apiURL + '/' + hotel.image;
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
-
-  const unPublishButton = async () => {
-    await dispatch(togglePublishedHotel(id));
-    await dispatch(fetchHotels());
-  };
-
-  const deleteButton = async () => {
-    await dispatch(removeHotel(id));
-    await dispatch(fetchHotels());
-  };
 
   return (
     <Card sx={{ maxWidth: 350 }}>
@@ -48,19 +38,19 @@ const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick }) => {
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
-            <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + id)}>
+            <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + hotel._id)}>
               {t('edit')}
             </Button>
           )}
 
-          {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
-            <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteButton}>
+          {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+            <Button variant="outlined" startIcon={<DeleteIcon />} onClick={onDeleteBtnClick}>
               {t('delete')}
             </Button>
           )}
 
-          {(user?.role === 'admin' || user?.role === 'director') && !publish && (
-            <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={unPublishButton}>
+          {(user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
+            <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={onPublishBtnClick}>
               {t('publish')}
             </Button>
           )}
