@@ -51,6 +51,16 @@ usersRouter.post('/sessions', async (req, res, next) => {
   }
 });
 
+usersRouter.post('/session/token', auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    await user.save();
+    return res.send({ message: 're-authorization was successful', user });
+  } catch (e) {
+    return next(e);
+  }
+});
+
 usersRouter.get('/admins', auth, permit('director'), async (req, res, next) => {
   try {
     const admins = await User.find({ role: 'admin' }).select('-token');
