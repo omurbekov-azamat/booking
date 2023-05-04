@@ -7,19 +7,15 @@ import { fetchHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks'
 import { selectUser } from '../../users/usersSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
+import { Hotel } from '../../../types';
 
 interface Props {
-  id: string;
-  image: string;
-  title: string;
-  rating: number;
+  hotel: Hotel;
   onHotelClick: MouseEventHandler;
-  publish: boolean;
-  userId: string;
 }
 
-const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating, onHotelClick }) => {
-  const cardImage = apiURL + '/' + image;
+const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick }) => {
+  const cardImage = apiURL + '/' + hotel.image;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
@@ -38,20 +34,20 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
   return (
     <Card sx={{ maxWidth: 350 }}>
       <CardActionArea onClick={onHotelClick}>
-        <CardMedia component="img" height="140" image={cardImage} alt={title} />
+        <CardMedia component="img" height="140" image={cardImage} alt={hotel.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" align="center">
-            {title}
+            {hotel.name}
           </Typography>
           <Box textAlign="center">
-            <Rating name="read-only" value={rating} precision={0.5} readOnly />
+            <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
           </Box>
         </CardContent>
       </CardActionArea>
 
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
-          {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
+          {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
             <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + id)}>
               {t('edit')}
             </Button>
@@ -72,7 +68,7 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
       </Box>
 
       <Box textAlign="center">
-        <Typography color="red">{!publish && 'Un publish'}</Typography>
+        <Typography color="red">{!hotel.isPublished && 'Un publish'}</Typography>
       </Box>
     </Card>
   );
