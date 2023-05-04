@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
-import { changeFavorites } from '../../users/usersThunks';
+import { changeFavorites, reAuthorization } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -40,11 +40,13 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
 
   const favorite = user?.role === 'user' && user.favorites.includes(id);
 
-  const onclickFavourite = (id: string) => {
+  const onclickFavourite = async (id: string) => {
     if (!favorite) {
-      dispatch(changeFavorites({ addHotel: id }));
+      await dispatch(changeFavorites({ addHotel: id }));
+      await dispatch(reAuthorization());
     } else {
-      dispatch(changeFavorites({ deleteHotel: id }));
+      await dispatch(changeFavorites({ deleteHotel: id }));
+      await dispatch(reAuthorization());
     }
   };
 

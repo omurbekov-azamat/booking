@@ -61,3 +61,12 @@ export const changeFavorites = createAsyncThunk<void, changeProps>('users/change
     throw new Error();
   }
 });
+
+export const reAuthorization = createAsyncThunk<User>('user/reAuthorization', async () => {
+  try {
+    const response = await axiosApi.post<RegisterResponse>('/users/session/token');
+    return response.data.user;
+  } catch {
+    throw new Error();
+  }
+});
