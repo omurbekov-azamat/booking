@@ -1,8 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import User from '../models/User';
-import auth from '../middleware/auth';
+import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
+import Hotel from '../models/Hotel';
 
 const usersRouter = express.Router();
 
@@ -54,6 +55,38 @@ usersRouter.get('/admins', auth, permit('director'), async (req, res, next) => {
   try {
     const admins = await User.find({ role: 'admin' }).select('-token');
     return res.send(admins);
+  } catch (e) {
+    return next(e);
+  }
+});
+
+usersRouter.patch('/toggleAddHotelToFavorites', auth, permit('user'), async (req, res, next) => {
+  const user = (req as RequestWithUser).user;
+  const addHotelId = req.body.addHotel;
+  const deleteHotelId = req.body.deleteHotel;
+  try {
+    if (addHotelId) {
+      const foundHotel = await Hotel.findById(addHotelId);
+      if (!foundHotel) {
+        return res.send({ error: 'Hotel is not found' });
+      }
+
+      if (user.favorites.includes(addHotelId)) {
+        return res.send({ message: 'The hotel is already in the favorites' });
+      } else {
+        user.favorites.push(addHotelId);
+        user.save();
+        return res.send({ message: 'Hotel added to favorites successfully' });
+      }
+    }
+    if (deleteHotelId) {
+      if (!user.favorites.includes(deleteHotelId)) {
+        return res.send({ message: 'You dont have this hotel in the favorites' });
+      }
+      user.favorites = user.favorites.filter((favHotel) => favHotel.toString() !== deleteHotelId);
+      await user.save();
+      return res.send({ message: 'you have successfully removed the hotel from your favorites' });
+    }
   } catch (e) {
     return next(e);
   }
