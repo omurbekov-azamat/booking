@@ -31,6 +31,11 @@ export interface Hotel extends HotelData {
   star: number;
   isPublished: boolean;
   image: string;
+  founding: number;
+  lowestPrice: {
+    som: number;
+    dollar: number;
+  };
 }
 
 export interface HotelWithLabel extends Hotel {
