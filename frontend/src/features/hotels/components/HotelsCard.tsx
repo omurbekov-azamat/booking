@@ -32,6 +32,10 @@ const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick, onDeleteBtnClick, on
           <Box textAlign="center">
             <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
           </Box>
+          <Box textAlign="center">
+            <Typography color={'grey'}>{'founding in ' + hotel.founding}</Typography>
+            <Typography color={'grey'}>{'price from: ' + hotel.lowestPrice.dollar + ' USD'}</Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
 
