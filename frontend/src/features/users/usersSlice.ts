@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GlobalError, User, ValidationError } from '../../types';
-import { getAdmins, login, logout, register } from './usersThunks';
+import { getAdmins, login, logout, reAuthorization, register } from './usersThunks';
 import { RootState } from '../../app/store';
 
 interface UsersState {
@@ -84,6 +84,9 @@ export const usersSlice = createSlice({
     });
     builder.addCase(getAdmins.rejected, (state) => {
       state.getAdminsLoading = false;
+    });
+    builder.addCase(reAuthorization.fulfilled, (state, { payload: user }) => {
+      state.user = user;
     });
   },
 });
