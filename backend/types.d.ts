@@ -10,6 +10,7 @@ export interface IUser {
   status?: string;
   cashback?: string;
   token: string;
+  favorites: ObjectId[];
 }
 
 export interface IRoomType {

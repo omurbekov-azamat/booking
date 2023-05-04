@@ -55,6 +55,9 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
   },
+  favorites: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'Hotel' }],
+  },
 });
 
 UserSchema.pre('save', async function (next) {
