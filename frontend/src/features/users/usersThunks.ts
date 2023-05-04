@@ -47,3 +47,17 @@ export const getAdmins = createAsyncThunk<User[]>('users/getAdmins', async () =>
     throw new Error();
   }
 });
+
+interface changeProps {
+  addHotel?: string;
+  deleteHotel?: string;
+}
+
+export const changeFavorites = createAsyncThunk<void, changeProps>('users/changeFavorites', async (data) => {
+  try {
+    const payload = data.addHotel ? { addHotel: data.addHotel } : { deleteHotel: data.deleteHotel };
+    await axiosApi.patch('/users/toggleAddHotelToFavorites', payload);
+  } catch {
+    throw new Error();
+  }
+});

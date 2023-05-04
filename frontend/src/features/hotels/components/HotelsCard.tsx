@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
+import { changeFavorites } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -37,33 +38,25 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
     await dispatch(fetchHotels());
   };
 
-  let favorite = false;
+  const favorite = user?.role === 'user' && user.favorites.includes(id);
 
-  if (user && user.role === 'user') {
-    user.favorites.forEach((fav) => {
-      if (fav === id) {
-        favorite = true;
-      }
-    });
-  }
-
-  const onclickFavourite = () => {
+  const onclickFavourite = (id: string) => {
     if (!favorite) {
-      console.log('add to favorite');
+      dispatch(changeFavorites({ addHotel: id }));
     } else {
-      console.log('remove');
+      dispatch(changeFavorites({ deleteHotel: id }));
     }
   };
 
   return (
     <Card sx={{ maxWidth: 350 }}>
       {user && user.role === 'user' && favorite ? (
-        <Box onClick={onclickFavourite} textAlign="right">
+        <Box onClick={() => onclickFavourite(id)} textAlign="right">
           <FavoriteIcon color="error" />
         </Box>
       ) : (
         user?.role === 'user' && (
-          <Box onClick={onclickFavourite} textAlign="right">
+          <Box onClick={() => onclickFavourite(id)} textAlign="right">
             <FavoriteBorderIcon />
           </Box>
         )
