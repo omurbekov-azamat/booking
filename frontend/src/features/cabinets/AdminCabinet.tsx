@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material';
+import { Button, Container, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectHotels } from '../hotels/hotelsSlice';
 import HotelsCard from '../hotels/components/HotelsCard';
@@ -9,6 +9,7 @@ import { selectAdminMyOrders } from '../orders/ordersSlice';
 import { getForAdminHisOrders } from '../orders/ordersThunks';
 import OrderCard from '../orders/components/OrderCard';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const AdminCabinet = () => {
   const user = useAppSelector(selectUser);
@@ -16,6 +17,7 @@ const AdminCabinet = () => {
   const orders = useAppSelector(selectAdminMyOrders);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     myHotels: false,
@@ -43,6 +45,11 @@ const AdminCabinet = () => {
         <Typography variant="h4" component="p" textAlign={'center'}>
           {t('adminCabinet')}
         </Typography>
+        <Grid container justifyContent={'end'}>
+          <Button variant="contained" color="success" onClick={() => navigate('/addHotel')}>
+            {t('createHotel')}
+          </Button>
+        </Grid>
         <RadioGroup>
           <FormControlLabel
             control={<Radio checked={state.myHotels} onChange={handleChange} name="myHotels" />}
