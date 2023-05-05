@@ -45,7 +45,7 @@ const WhatsAppButton = () => {
 
   const handleConfirm = () => {
     setOpen(false);
-    window.open('https://api.whatsapp.com/send?phone=<your_phone_number>', '_blank');
+    window.open('https://wa.me/996558389288?text=Здравствуйте,%20я%20хочу%20связаться%20с%20вами!', '_blank');
   };
 
   const { t } = useTranslation();
