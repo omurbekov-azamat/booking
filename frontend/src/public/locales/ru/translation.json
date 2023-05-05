@@ -54,5 +54,6 @@
   "dollar": "Доллар",
   "lowestPrice": "Минимальна цена",
   "propertyRating": "Оценка объекта",
-  "clearFilter": "Очистить фильтр"
+  "clearFilter": "Очистить фильтр",
+  "myFavorites": "Избранные"
 }
