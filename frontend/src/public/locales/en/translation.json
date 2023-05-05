@@ -54,5 +54,6 @@
   "dollar": "Dollar",
   "lowestPrice": "Lowest price",
   "propertyRating": "Property rating",
-  "clearFilter": "Clear filter"
+  "clearFilter": "Clear filter",
+  "currency": "currency "
 }
