@@ -15,6 +15,7 @@ import Apartment from './features/apartments/components/Apartment';
 import ApartmentForm from './features/apartments/components/ApartmentForm';
 import Cabinet from './features/cabinets/Cabinet';
 import Comments from './features/comments/Comments';
+import WhatsAppButton from './components/UI/WhatsAppButton/WhatsAppButton';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -22,6 +23,7 @@ function App() {
     <>
       <CssBaseline />
       <Layout>
+        <WhatsAppButton />
         <Routes>
           <Route path={'/'} element={<HotelsPage />} />
           <Route path={'/hotels/:id'} element={<HotelPage />} />
