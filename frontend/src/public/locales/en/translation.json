@@ -55,5 +55,8 @@
   "lowestPrice": "Lowest price",
   "propertyRating": "Property rating",
   "clearFilter": "Clear filter",
-  "currency": "currency "
+  "currency": "currency ",
+  "myFavorites": "Favorites",
+  "addToFavorite": "Hotel added to favorites successfully",
+  "removeFavorite": "You have successfully removed the hotel from your favorites"
 }

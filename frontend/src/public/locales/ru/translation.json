@@ -55,5 +55,8 @@
   "lowestPrice": "Минимальна цена",
   "propertyRating": "Оценка объекта",
   "clearFilter": "Очистить фильтр",
+  "myFavorites": "Избранные",
+  "addToFavorite": "Отель успешно добавлен в избранное",
+  "removeFavorite": "Вы успешно удалили отель из избранного",
   "currency": "валюта "
 }

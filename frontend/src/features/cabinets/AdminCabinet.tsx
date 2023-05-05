@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectHotels } from '../hotels/hotelsSlice';
-import { useNavigate } from 'react-router-dom';
 import HotelsCard from '../hotels/components/HotelsCard';
 import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
@@ -12,6 +11,12 @@ import OrderCard from '../orders/components/OrderCard';
 import { useTranslation } from 'react-i18next';
 
 const AdminCabinet = () => {
+  const user = useAppSelector(selectUser);
+  const hotelsState = useAppSelector(selectHotels);
+  const orders = useAppSelector(selectAdminMyOrders);
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
   const [state, setState] = useState({
     myHotels: false,
     orders: false,
@@ -24,13 +29,6 @@ const AdminCabinet = () => {
       [e.target.name === 'myHotels' ? 'orders' : 'myHotels']: false,
     });
   };
-
-  const user = useAppSelector(selectUser);
-  const hotelsState = useAppSelector(selectHotels);
-  const orders = useAppSelector(selectAdminMyOrders);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) {
@@ -62,7 +60,7 @@ const AdminCabinet = () => {
           <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
             {hotelsState.map((el) => (
               <Grid item xs={12} sm={6} lg={4} key={Math.random()} alignItems="stretch">
-                <HotelsCard hotel={el} onHotelClick={() => navigate('/hotels/' + el._id)} />
+                <HotelsCard hotel={el} />
               </Grid>
             ))}
           </Grid>

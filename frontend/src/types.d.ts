@@ -97,6 +97,7 @@ export interface User {
   phoneNumber: string;
   status?: string;
   cashback?: string;
+  favorites: string[];
 }
 
 export interface LoginMutation {

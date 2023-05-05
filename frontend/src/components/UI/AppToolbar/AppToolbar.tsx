@@ -27,34 +27,32 @@ const AppToolbar = () => {
   });
 
   return (
-    <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Grid container justifyContent="space-between" alignItems="center">
-              <Typography variant="h6" component="div">
-                <Link to="/">Booking</Link>
-              </Typography>
-              <Grid item>
-                <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('ru')}>
-                  <img src={RUIcon} alt="ru language" style={{ width: '100%', height: 'auto' }} />
-                </IconButton>
-                <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('en')}>
-                  <img src={USAIcon} alt="eng language" style={{ width: '100%', height: 'auto' }} />
-                </IconButton>
-              </Grid>
-              <Grid item>
-                <Typography variant="h6" display="inline-block">
-                  {t('currency')}
-                </Typography>
-                <CurrencySwitcher />
-              </Grid>
-              <Grid item>{user ? <UserMenu user={user} /> : <AnonymousMenu />}</Grid>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Typography variant="h6" component="div">
+              <Link to="/">Booking</Link>
+            </Typography>
+            <Grid item>
+              <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('ru')}>
+                <img src={RUIcon} alt="ru language" style={{ width: '100%', height: 'auto' }} />
+              </IconButton>
+              <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('en')}>
+                <img src={USAIcon} alt="eng language" style={{ width: '100%', height: 'auto' }} />
+              </IconButton>
             </Grid>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </div>
+            <Grid item>
+              <Typography variant="h6" display="inline-block">
+                {t('currency')}
+              </Typography>
+              <CurrencySwitcher />
+            </Grid>
+            <Grid item>{user ? <UserMenu user={user} /> : <AnonymousMenu />}</Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 

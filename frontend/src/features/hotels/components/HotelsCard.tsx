@@ -1,29 +1,65 @@
 import React, { MouseEventHandler } from 'react';
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../app/hooks';
-import { selectUser } from '../../users/usersSlice';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useTranslation } from 'react-i18next';
+import { getFavoriteHotels } from '../hotelsThunks';
+import { changeFavorites, reAuthorization } from '../../users/usersThunks';
+import { selectUser } from '../../users/usersSlice';
+import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
+import { enqueueSnackbar, SnackbarProvider } from 'notistack';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
 
 interface Props {
   hotel: Hotel;
-  onHotelClick: MouseEventHandler;
   onDeleteBtnClick?: MouseEventHandler;
   onPublishBtnClick?: MouseEventHandler;
 }
 
-const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick, onDeleteBtnClick, onPublishBtnClick }) => {
-  const cardImage = apiURL + '/' + hotel.image;
+const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
+  const cardImage = apiURL + '/' + hotel.image;
+
+  const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
+
+  const onClickFavorite = async (id: string) => {
+    if (!favorite) {
+      await dispatch(changeFavorites({ addHotel: id }));
+      await dispatch(reAuthorization());
+      await enqueueSnackbar(t('addToFavorite'), { variant: 'success' });
+    } else {
+      await dispatch(changeFavorites({ deleteHotel: id }));
+      await dispatch(reAuthorization());
+      await dispatch(getFavoriteHotels());
+      await enqueueSnackbar(t('removeFavorite'), { variant: 'success' });
+    }
+  };
+
+  const onClickCard = async (id: string) => {
+    await navigate('/hotels/' + id);
+  };
 
   return (
     <Card sx={{ maxWidth: 350 }}>
-      <CardActionArea onClick={onHotelClick}>
+      {user && user.role === 'user' && favorite ? (
+        <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
+          <FavoriteIcon color="error" />
+        </Box>
+      ) : (
+        user?.role === 'user' && (
+          <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
+            <FavoriteBorderIcon />
+          </Box>
+        )
+      )}
+      <SnackbarProvider />
+      <CardActionArea onClick={() => onClickCard(hotel._id)}>
         <CardMedia component="img" height="140" image={cardImage} alt={hotel.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" align="center">
@@ -38,7 +74,6 @@ const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick, onDeleteBtnClick, on
           </Box>
         </CardContent>
       </CardActionArea>
-
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
@@ -60,7 +95,6 @@ const HotelsCard: React.FC<Props> = ({ hotel, onHotelClick, onDeleteBtnClick, on
           )}
         </Stack>
       </Box>
-
       <Box textAlign="center">
         <Typography color="red">{!hotel.isPublished && 'Un publish'}</Typography>
       </Box>
