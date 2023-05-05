@@ -62,15 +62,7 @@ const AdminCabinet = () => {
           <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
             {hotelsState.map((el) => (
               <Grid item xs={12} sm={6} lg={4} key={Math.random()} alignItems="stretch">
-                <HotelsCard
-                  id={el._id}
-                  userId={el.userId}
-                  image={el.image}
-                  title={el.name}
-                  rating={el.star}
-                  onHotelClick={() => navigate('/hotels/' + el._id)}
-                  publish={el.isPublished}
-                />
+                <HotelsCard hotel={el} onHotelClick={() => navigate('/hotels/' + el._id)} />
               </Grid>
             ))}
           </Grid>

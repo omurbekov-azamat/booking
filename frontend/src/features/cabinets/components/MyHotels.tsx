@@ -20,18 +20,7 @@ const MyHotels: React.FC<Props> = ({ hotels }) => {
       </Typography>
 
       {hotels.map((hotel) => {
-        return (
-          <HotelsCard
-            id={hotel._id}
-            publish={hotel.isPublished}
-            userId={hotel.userId}
-            image={hotel.image}
-            title={hotel.name}
-            rating={hotel.star}
-            onHotelClick={() => navigate('/hotels/' + hotel._id)}
-            key={hotel._id}
-          />
-        );
+        return <HotelsCard hotel={hotel} onHotelClick={() => navigate('/hotels/' + hotel._id)} key={hotel._id} />;
       })}
     </div>
   );
