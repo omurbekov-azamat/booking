@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Card, CardContent, Grid, List, Typography } from '@mui/material';
+import { Box, Card, CardContent, Grid, List } from '@mui/material';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import ListItemButton from '@mui/material/ListItemButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Orders from '../orders/components/Orders';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getFavoriteHotels } from '../hotels/hotelsThunks';
+import { selectFavoriteHotels, selectFetchFavoriteHotelsLoading } from '../hotels/hotelsSlice';
+import HotelsCard from '../hotels/components/HotelsCard';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const UserCabinet = () => {
   const dispatch = useAppDispatch();
+  const loading = useAppSelector(selectFetchFavoriteHotelsLoading);
+  const favoriteHotels = useAppSelector(selectFavoriteHotels);
   const { t } = useTranslation();
 
   const [state, setState] = React.useState({
@@ -61,7 +66,16 @@ const UserCabinet = () => {
             <Grid item xs>
               <Box overflow="auto" height="300px">
                 {state.orders && <Orders />}
-                {state.favorites && <Typography>Here will be favorites</Typography>}
+                {loading && <Spinner />}
+                {state.favorites && (
+                  <Grid container spacing={3}>
+                    {favoriteHotels.map((hotel) => (
+                      <Grid item key={hotel._id}>
+                        <HotelsCard hotel={hotel} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                )}
               </Box>
             </Grid>
           </Grid>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { fetchHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
+import { fetchHotels, getFavoriteHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
@@ -42,6 +42,7 @@ const HotelsCard: React.FC<Props> = ({ hotel }) => {
     } else {
       await dispatch(changeFavorites({ deleteHotel: id }));
       await dispatch(reAuthorization());
+      await dispatch(getFavoriteHotels());
     }
   };
 

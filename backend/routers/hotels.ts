@@ -156,7 +156,7 @@ hotelsRouter.get('/get/favorites', auth, permit('user'), async (req, res, next) 
   try {
     const user = (req as RequestWithUser).user;
     const favoriteHotelIds = user.favorites;
-    const hotels = await Hotel.find({ _id: { $in: favoriteHotelIds } });
+    const hotels = await Hotel.find({ _id: { $in: favoriteHotelIds }, isPublished: true });
     if (!hotels) {
       return res.send({ message: 'You do not have favorites hotels' });
     }

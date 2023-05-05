@@ -7,6 +7,7 @@ import {
   fetchNewPage,
   fetchOneHotel,
   fetchSearchedHotels,
+  getFavoriteHotels,
   removeHotel,
   togglePublishedHotel,
 } from './hotelsThunks';
@@ -25,6 +26,8 @@ interface HotelsState {
   error: boolean;
   createHotelError: ValidationError | null;
   fetchSearchedHotelsLoading: boolean;
+  favoriteHotels: Hotel[];
+  fetchFavoriteHotelsLoading: boolean;
 }
 
 const initialState: HotelsState = {
@@ -40,6 +43,8 @@ const initialState: HotelsState = {
   error: false,
   createHotelError: null,
   fetchSearchedHotelsLoading: false,
+  favoriteHotels: [],
+  fetchFavoriteHotelsLoading: false,
 };
 
 export const hotelsSlice = createSlice({
@@ -144,6 +149,17 @@ export const hotelsSlice = createSlice({
       state.fetchSearchedHotelsLoading = false;
       state.error = true;
     });
+    builder.addCase(getFavoriteHotels.pending, (state) => {
+      state.favoriteHotels = [];
+      state.fetchFavoriteHotelsLoading = true;
+    });
+    builder.addCase(getFavoriteHotels.fulfilled, (state, { payload: favoriteHotels }) => {
+      state.fetchFavoriteHotelsLoading = false;
+      state.favoriteHotels = favoriteHotels;
+    });
+    builder.addCase(getFavoriteHotels.rejected, (state) => {
+      state.fetchFavoriteHotelsLoading = false;
+    });
   },
 });
 export const hotelsReducer = hotelsSlice.reducer;
@@ -158,3 +174,5 @@ export const selectCreateHotelError = (state: RootState) => state.hotels.createH
 export const selectPageOfHotels = (state: RootState) => state.hotels.page;
 export const selectSearchHotels = (state: RootState) => state.hotels.search;
 export const selectFetchSearchedHotelsLoading = (state: RootState) => state.hotels.fetchSearchedHotelsLoading;
+export const selectFavoriteHotels = (state: RootState) => state.hotels.favoriteHotels;
+export const selectFetchFavoriteHotelsLoading = (state: RootState) => state.hotels.fetchFavoriteHotelsLoading;
