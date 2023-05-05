@@ -11,6 +11,7 @@ import {
   ThemeProvider,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const WhatsAppButton = () => {
   const [open, setOpen] = useState(false);
@@ -47,6 +48,8 @@ const WhatsAppButton = () => {
     window.open('https://api.whatsapp.com/send?phone=<your_phone_number>', '_blank');
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -55,13 +58,13 @@ const WhatsAppButton = () => {
         </MyButton>
       </ThemeProvider>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Переход в WhatsApp</DialogTitle>
+        <DialogTitle>{t('transfer_to_WhatsApp')}</DialogTitle>
         <DialogContent>
-          <Typography variant="body1">Вы собираетесь перейти на WhatsApp. Хотите продолжить?</Typography>
+          <Typography variant="body1">{t('are_you_sure_WhatsApp')}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>Отмена</Button>
-          <Button onClick={handleConfirm}>Продолжить</Button>
+          <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
+          <Button onClick={handleConfirm}>{t('continue')}</Button>
         </DialogActions>
       </Dialog>
     </>

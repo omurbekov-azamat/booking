@@ -58,5 +58,9 @@
   "currency": "currency ",
   "myFavorites": "Favorites",
   "addToFavorite": "Hotel added to favorites successfully",
-  "removeFavorite": "You have successfully removed the hotel from your favorites"
+  "removeFavorite": "You have successfully removed the hotel from your favorites",
+  "transfer_to_WhatsApp": "Transfer to WhatsApp",
+  "are_you_sure_WhatsApp": "You are about to switch to WhatsApp. Do you want to continue?",
+  "cancel": "Cancel",
+  "continue": "Continue"
 }

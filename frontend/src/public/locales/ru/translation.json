@@ -58,5 +58,9 @@
   "myFavorites": "Избранные",
   "addToFavorite": "Отель успешно добавлен в избранное",
   "removeFavorite": "Вы успешно удалили отель из избранного",
-  "currency": "валюта "
+  "currency": "валюта ",
+  "transfer_to_WhatsApp": "Переход в WhatsApp",
+  "are_you_sure_WhatsApp": "Вы собираетесь перейти на WhatsApp. Хотите продолжить?",
+  "cancel": "Отмена",
+  "continue": "Продолжить"
 }
