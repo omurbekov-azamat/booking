@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -10,37 +10,32 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { apiURL } from '../../../constants';
+import { Hotel } from '../../../types';
 
 interface Props {
-  id: string;
-  image: string;
-  title: string;
-  rating: number;
-  onHotelClick: MouseEventHandler;
-  publish: boolean;
-  userId: string;
+  hotel: Hotel;
 }
 
-const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating, onHotelClick }) => {
-  const cardImage = apiURL + '/' + image;
-  const navigate = useNavigate();
+const HotelsCard: React.FC<Props> = ({ hotel }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const cardImage = apiURL + '/' + hotel.image;
 
   const unPublishButton = async () => {
-    await dispatch(togglePublishedHotel(id));
+    await dispatch(togglePublishedHotel(hotel._id));
     await dispatch(fetchHotels());
   };
 
   const deleteButton = async () => {
-    await dispatch(removeHotel(id));
+    await dispatch(removeHotel(hotel._id));
     await dispatch(fetchHotels());
   };
 
-  const favorite = user?.role === 'user' && user.favorites.includes(id);
+  const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
 
-  const onclickFavourite = async (id: string) => {
+  const onClickFavorite = async (id: string) => {
     if (!favorite) {
       await dispatch(changeFavorites({ addHotel: id }));
       await dispatch(reAuthorization());
@@ -50,43 +45,47 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
     }
   };
 
+  const onClickCard = async (id: string) => {
+    await navigate('/hotels/' + id);
+  };
+
   return (
     <Card sx={{ maxWidth: 350 }}>
       {user && user.role === 'user' && favorite ? (
-        <Box onClick={() => onclickFavourite(id)} textAlign="right">
+        <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
           <FavoriteIcon color="error" />
         </Box>
       ) : (
         user?.role === 'user' && (
-          <Box onClick={() => onclickFavourite(id)} textAlign="right">
+          <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
             <FavoriteBorderIcon />
           </Box>
         )
       )}
-      <CardActionArea onClick={onHotelClick}>
-        <CardMedia component="img" height="140" image={cardImage} alt={title} />
+      <CardActionArea onClick={() => onClickCard(hotel._id)}>
+        <CardMedia component="img" height="140" image={cardImage} alt={hotel.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" align="center">
-            {title}
+            {hotel.name}
           </Typography>
           <Box textAlign="center">
-            <Rating name="read-only" value={rating} precision={0.5} readOnly />
+            <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
           </Box>
         </CardContent>
       </CardActionArea>
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
-          {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
-            <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + id)}>
+          {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+            <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + hotel._id)}>
               {t('edit')}
             </Button>
           )}
-          {(user?.role === 'admin' || user?.role === 'director' || user?._id === userId) && (
+          {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
             <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteButton}>
               {t('delete')}
             </Button>
           )}
-          {(user?.role === 'admin' || user?.role === 'director') && !publish && (
+          {(user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
             <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={unPublishButton}>
               {t('publish')}
             </Button>
@@ -94,7 +93,7 @@ const HotelsCard: React.FC<Props> = ({ userId, publish, id, image, title, rating
         </Stack>
       </Box>
       <Box textAlign="center">
-        <Typography color="red">{!publish && 'Un publish'}</Typography>
+        <Typography color="red">{!hotel.isPublished && 'Un publish'}</Typography>
       </Box>
     </Card>
   );
