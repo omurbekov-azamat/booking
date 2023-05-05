@@ -8,10 +8,11 @@ import AnonymousMenu from './AnonymousMenu';
 import { useTranslation } from 'react-i18next';
 import RUIcon from '../../../assets/images/russiaIcon.png';
 import USAIcon from '../../../assets/images/usaIcon.png';
+import CurrencySwitcher from '../../../features/currency/CurrencySwitcher';
 
 const AppToolbar = () => {
   const user = useAppSelector(selectUser);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -40,6 +41,12 @@ const AppToolbar = () => {
               <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('en')}>
                 <img src={USAIcon} alt="eng language" style={{ width: '100%', height: 'auto' }} />
               </IconButton>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6" display="inline-block">
+                {t('currency')}
+              </Typography>
+              <CurrencySwitcher />
             </Grid>
             <Grid item>{user ? <UserMenu user={user} /> : <AnonymousMenu />}</Grid>
           </Grid>

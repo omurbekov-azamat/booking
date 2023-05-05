@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
+import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { fetchHotels, getFavoriteHotels, removeHotel, togglePublishedHotel } from '../hotelsThunks';
+import { useTranslation } from 'react-i18next';
+import { getFavoriteHotels } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
@@ -10,29 +11,20 @@ import { enqueueSnackbar, SnackbarProvider } from 'notistack';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { apiURL } from '../../../constants';
 import { Hotel } from '../../../types';
 
 interface Props {
   hotel: Hotel;
+  onDeleteBtnClick?: MouseEventHandler;
+  onPublishBtnClick?: MouseEventHandler;
 }
 
-const HotelsCard: React.FC<Props> = ({ hotel }) => {
+const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick }) => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
   const navigate = useNavigate();
+  const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const cardImage = apiURL + '/' + hotel.image;
-
-  const unPublishButton = async () => {
-    await dispatch(togglePublishedHotel(hotel._id));
-    await dispatch(fetchHotels());
-  };
-
-  const deleteButton = async () => {
-    await dispatch(removeHotel(hotel._id));
-    await dispatch(fetchHotels());
-  };
 
   const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
 
@@ -76,6 +68,10 @@ const HotelsCard: React.FC<Props> = ({ hotel }) => {
           <Box textAlign="center">
             <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
           </Box>
+          <Box textAlign="center">
+            <Typography color={'grey'}>{t('founding') + ' ' + hotel.founding}</Typography>
+            <Typography color={'grey'}>{t('lowestPrice') + ' ' + hotel.lowestPrice.dollar + ' USD'}</Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
       <Box>
@@ -85,13 +81,15 @@ const HotelsCard: React.FC<Props> = ({ hotel }) => {
               {t('edit')}
             </Button>
           )}
+
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
-            <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteButton}>
+            <Button variant="outlined" startIcon={<DeleteIcon />} onClick={onDeleteBtnClick}>
               {t('delete')}
             </Button>
           )}
+
           {(user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
-            <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={unPublishButton}>
+            <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={onPublishBtnClick}>
               {t('publish')}
             </Button>
           )}

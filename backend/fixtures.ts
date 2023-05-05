@@ -131,6 +131,11 @@ const run = async () => {
       swimmingPool: true,
       petFriendly: false,
       city: 'bishkek',
+      founding: 2000,
+      lowestPrice: {
+        som: 1000,
+        dollar: 12,
+      },
     },
     {
       userId: hotel._id,
@@ -148,6 +153,11 @@ const run = async () => {
       swimmingPool: false,
       petFriendly: false,
       city: 'issykKul',
+      founding: 2001,
+      lowestPrice: {
+        som: 1100,
+        dollar: 13,
+      },
     },
     {
       userId: hotel._id,
@@ -165,6 +175,11 @@ const run = async () => {
       swimmingPool: true,
       petFriendly: true,
       city: 'osh',
+      founding: 2003,
+      lowestPrice: {
+        som: 1200,
+        dollar: 14,
+      },
     },
     {
       userId: hotel._id,
@@ -182,6 +197,11 @@ const run = async () => {
       swimmingPool: false,
       petFriendly: true,
       city: 'bishkek',
+      founding: 2005,
+      lowestPrice: {
+        som: 1400,
+        dollar: 15,
+      },
     },
     {
       userId: hotel._id,
@@ -199,6 +219,11 @@ const run = async () => {
       swimmingPool: true,
       petFriendly: false,
       city: 'bishkek',
+      founding: 2008,
+      lowestPrice: {
+        som: 1700,
+        dollar: 16,
+      },
     },
   );
 
