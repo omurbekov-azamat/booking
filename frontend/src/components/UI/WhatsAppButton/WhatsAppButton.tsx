@@ -1,8 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { styled } from '@mui/material/styles';
-import { createTheme, ThemeProvider } from '@mui/material';
+import {
+  createTheme,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  ThemeProvider,
+  Typography,
+} from '@mui/material';
 
 const WhatsAppButton = () => {
   const [open, setOpen] = useState(false);
@@ -41,6 +49,16 @@ const WhatsAppButton = () => {
           <WhatsAppIcon sx={{ color: '#ffffff' }} />
         </MyButton>
       </ThemeProvider>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Переход в WhatsApp</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">Вы собираетесь перейти на WhatsApp. Хотите продолжить?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button>Отмена</Button>
+          <Button>Продолжить</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
