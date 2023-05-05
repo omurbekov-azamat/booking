@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Card, CardContent, Grid, List, Typography } from '@mui/material';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -7,13 +7,23 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Orders from '../orders/components/Orders';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { useAppDispatch } from '../../app/hooks';
+import { getFavoriteHotels } from '../hotels/hotelsThunks';
 
 const UserCabinet = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
   const [state, setState] = React.useState({
     orders: true,
     favorites: false,
   });
+
+  useEffect(() => {
+    if (state.favorites) {
+      dispatch(getFavoriteHotels());
+    }
+  }, [dispatch, state.favorites]);
 
   const handleClickOrders = () => {
     setState((prev) => ({ ...prev, orders: true, favorites: false }));

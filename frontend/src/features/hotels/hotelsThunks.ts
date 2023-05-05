@@ -117,3 +117,12 @@ export const togglePublishedHotel = createAsyncThunk<void, string>('hotels/toggl
     throw new Error();
   }
 });
+
+export const getFavoriteHotels = createAsyncThunk<Hotel[]>('hotels/getFavoriteHotels', async () => {
+  try {
+    const responseFavoriteHotels = await axiosApi.get<Hotel[]>('/hotels/get/favorites');
+    return responseFavoriteHotels.data;
+  } catch {
+    throw new Error();
+  }
+});
