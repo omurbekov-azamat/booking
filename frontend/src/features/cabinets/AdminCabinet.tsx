@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material';
+import { Button, Container, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectHotels } from '../hotels/hotelsSlice';
 import HotelsCard from '../hotels/components/HotelsCard';
@@ -43,6 +43,11 @@ const AdminCabinet = () => {
         <Typography variant="h4" component="p" textAlign={'center'}>
           {t('adminCabinet')}
         </Typography>
+        <Grid container justifyContent={'end'}>
+          <Button variant="contained" color="success">
+            {t('createHotel')}
+          </Button>
+        </Grid>
         <RadioGroup>
           <FormControlLabel
             control={<Radio checked={state.myHotels} onChange={handleChange} name="myHotels" />}
