@@ -152,6 +152,20 @@ hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, re
   }
 });
 
+hotelsRouter.get('/get/favorites', auth, permit('user'), async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const favoriteHotelIds = user.favorites;
+    const hotels = await Hotel.find({ _id: { $in: favoriteHotelIds } });
+    if (!hotels) {
+      return res.send({ message: 'You do not have favorites hotels' });
+    }
+    return res.json(hotels);
+  } catch (e) {
+    return next(e);
+  }
+});
+
 hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
