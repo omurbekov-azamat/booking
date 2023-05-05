@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { styled } from '@mui/material/styles';
 import { createTheme, ThemeProvider } from '@mui/material';
 
 const WhatsAppButton = () => {
+  const [open, setOpen] = useState(false);
+
   const MyButton = styled(Button)({
     position: 'fixed',
     bottom: 40,
@@ -27,10 +29,15 @@ const WhatsAppButton = () => {
       },
     },
   });
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <MyButton>
+        <MyButton onClick={handleClick}>
           <WhatsAppIcon sx={{ color: '#ffffff' }} />
         </MyButton>
       </ThemeProvider>
