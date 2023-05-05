@@ -55,5 +55,7 @@
   "lowestPrice": "Lowest price",
   "propertyRating": "Property rating",
   "clearFilter": "Clear filter",
-  "myFavorites": "Favorites"
+  "myFavorites": "Favorites",
+  "addToFavorite": "Hotel added to favorites successfully",
+  "removeFavorite": "You have successfully removed the hotel from your favorites"
 }
