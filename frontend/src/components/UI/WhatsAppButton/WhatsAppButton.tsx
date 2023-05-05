@@ -42,6 +42,11 @@ const WhatsAppButton = () => {
     setOpen(true);
   };
 
+  const handleConfirm = () => {
+    setOpen(false);
+    window.open('https://api.whatsapp.com/send?phone=<your_phone_number>', '_blank');
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -55,8 +60,8 @@ const WhatsAppButton = () => {
           <Typography variant="body1">Вы собираетесь перейти на WhatsApp. Хотите продолжить?</Typography>
         </DialogContent>
         <DialogActions>
-          <Button>Отмена</Button>
-          <Button>Продолжить</Button>
+          <Button onClick={() => setOpen(false)}>Отмена</Button>
+          <Button onClick={handleConfirm}>Продолжить</Button>
         </DialogActions>
       </Dialog>
     </>
