@@ -206,4 +206,13 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
   }
 });
 
+hotelsRouter.get('/random/recommended', async (req, res, next) => {
+  try {
+    const hotels = await Hotel.aggregate([{ $match: { status: 'premium' } }, { $sample: { size: 6 } }]);
+    return res.send(hotels);
+  } catch (e) {
+    next(e);
+  }
+});
+
 export default hotelsRouter;
