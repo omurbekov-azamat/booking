@@ -20,3 +20,25 @@ export const arrowStyleGallery = {
   borderRadius: '50%',
   zIndex: 1,
 };
+
+export const cities = [
+  'bishkek',
+  'issykKul',
+  'osh',
+  'kara-balta',
+  'tokmok',
+  'kant',
+  'talas',
+  'kara-suu',
+  'nookat',
+  'uzgen',
+  'jalal-abad',
+  'suzak',
+  'kara-kulja',
+  'naryn',
+  'atbashi',
+  'kochkor',
+  'isfana',
+  'kyzyl-kiya',
+  'leylek',
+];

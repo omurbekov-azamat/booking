@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { cities } from '../../../constants';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,13 +13,6 @@ interface Props {
 
 const SelectCities: React.FC<Props> = ({ onChange, name, label, width, value }) => {
   const { t } = useTranslation();
-
-  const cities = [
-    { id: 'bishkek', title: t('bishkek') },
-    { id: 'issykKul', title: t('issykKul') },
-    { id: 'osh', title: t('osh') },
-  ];
-
   const selectChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e);
   };
@@ -26,8 +20,8 @@ const SelectCities: React.FC<Props> = ({ onChange, name, label, width, value }) 
   return (
     <TextField select label={label} value={value} name={name} onChange={selectChangeHandler} sx={{ width }} required>
       {cities.map((city) => (
-        <MenuItem key={city.id} value={city.id}>
-          {city.title}
+        <MenuItem key={city} value={city}>
+          {t(city)}
         </MenuItem>
       ))}
     </TextField>
