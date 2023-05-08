@@ -36,6 +36,7 @@ export interface Hotel extends HotelData {
     som: number;
     dollar: number;
   };
+  status: string;
 }
 
 export interface HotelWithLabel extends Hotel {
