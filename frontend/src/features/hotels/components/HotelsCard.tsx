@@ -46,7 +46,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
   };
 
   return (
-    <Card sx={{ maxWidth: 350 }}>
+    <Card sx={{ maxWidth: '100%' }}>
       {user && user.role === 'user' && favorite ? (
         <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
           <FavoriteIcon color="error" />
