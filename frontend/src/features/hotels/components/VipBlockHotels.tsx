@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectHotels } from '../hotelsSlice';
+import { fetchHotels } from '../hotelsThunks';
 
 const VipBlockHotels = () => {
+  const hotels = useAppSelector(selectHotels);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchHotels());
+  }, [dispatch]);
+
   return (
     <>
       <Box
