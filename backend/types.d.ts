@@ -7,8 +7,8 @@ export interface IUser {
   lastName: string;
   role: string;
   phoneNumber: string;
-  status?: string;
-  cashback?: string;
+  status: string;
+  cashback: number;
   token: string;
   favorites: ObjectId[];
 }

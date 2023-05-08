@@ -49,8 +49,21 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
   },
-  status: String,
-  cashback: String,
+  status: {
+    type: String,
+    required: true,
+    default: 'standard',
+    enum: ['standard', 'vip', 'royal'],
+  },
+  cashback: {
+    type: Number,
+    required: true,
+    default: 0,
+    validate: {
+      validator: (value: number) => value >= 0,
+      message: "cashback can't be negative",
+    },
+  },
   token: {
     type: String,
     required: true,
