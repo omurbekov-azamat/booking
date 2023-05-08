@@ -143,19 +143,31 @@ export interface SearchData {
 }
 
 export interface OrderData {
-  dateArrival: string;
-  dateDeparture: string;
   comment: string;
+  personalTranslator: boolean;
+  meetingAirport: boolean;
+  tourManagement: boolean;
+  eventManagement: boolean;
 }
 
 export interface OrderMutation extends OrderData {
   apartmentId: string;
+  dateArrival: Date | null;
+  dateDeparture: Date | null;
+}
+
+export interface OrderSend extends OrderData {
+  apartmentId: string;
+  dateArrival: string;
+  dateDeparture: string;
 }
 
 export interface Order extends OrderData {
   adminId: User | null;
   apartmentId: ApartmentPopulated;
   createdAt: string;
+  dateArrival: string;
+  dateDeparture: string;
   status: 'open' | 'in progress' | 'closed';
   userId: User;
   _id: string;

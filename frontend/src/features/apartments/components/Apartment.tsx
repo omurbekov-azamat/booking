@@ -2,22 +2,34 @@ import React, { useEffect } from 'react';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import { Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchOneApartment } from '../apartmentThunks';
 import { selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
+import { useTranslation } from 'react-i18next';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const apartment = useAppSelector(selectOneApartment);
-  const { hotelName, id } = useParams() as { hotelName: string; id: string };
+  const navigate = useNavigate();
+
+  const { hotelName, hotelId, apartmentId } = useParams() as {
+    hotelName: string;
+    hotelId: string;
+    apartmentId: string;
+  };
 
   useEffect(() => {
-    dispatch(fetchOneApartment(id));
-  }, [dispatch, id]);
+    dispatch(fetchOneApartment(apartmentId));
+  }, [dispatch, apartmentId]);
+
+  const onClickResolveApartment = () => {
+    navigate(`/book-apartment/${hotelName}/${hotelId}/apartment/${apartmentId}`);
+  };
 
   const services = ['1', '2', '3'];
   return (
@@ -53,6 +65,11 @@ const Apartment = () => {
         </CardContent>
       </Card>
       {apartment && <ApartmentsGallery apartmentData={apartment} />}
+      <Box textAlign="right">
+        <Button variant="outlined" sx={{ background: 'lightgreen' }} onClick={onClickResolveApartment}>
+          {t('reserve')}
+        </Button>
+      </Box>
     </>
   );
 };

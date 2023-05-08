@@ -17,6 +17,10 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
       comment: req.body.comment,
       dateArrival: req.body.dateArrival,
       dateDeparture: req.body.dateDeparture,
+      personalTranslator: req.body.personalTranslator,
+      meetingAirport: req.body.meetingAirport,
+      tourManagement: req.body.tourManagement,
+      eventManagement: req.body.eventManagement,
     });
 
     await order.save();

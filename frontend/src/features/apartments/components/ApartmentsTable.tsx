@@ -57,7 +57,7 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
           {apartments.map((data) => (
             <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row" sx={{ textTransform: 'capitalize' }}>
-                <Link to={'/' + hotel.name + '/apartment/' + data._id}>{data.roomTypeId.name}</Link>
+                <Link to={'/' + hotel.name + '/' + hotel._id + '/apartment/' + data._id}>{data.roomTypeId.name}</Link>
               </TableCell>
               <TableCell align="right">{data.price.from + ' - ' + data.price.till}</TableCell>
             </TableRow>
