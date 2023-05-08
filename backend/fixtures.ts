@@ -31,8 +31,8 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'admin',
       phoneNumber: '0555 777777',
-      status: 'super',
-      cashback: '0',
+      status: 'royal',
+      cashback: '10',
     },
     {
       email: 'admin2@gmail.com',
@@ -42,8 +42,8 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'admin',
       phoneNumber: '0555 777777',
-      status: 'super',
-      cashback: '0',
+      status: 'vip',
+      cashback: '20',
     },
     {
       email: 'user@gmail.com',
@@ -53,8 +53,8 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'user',
       phoneNumber: '0555 9999999',
-      status: 'super',
-      cashback: '0',
+      status: 'vip',
+      cashback: '30',
     },
     {
       email: 'hotel@gmail.com',
@@ -64,8 +64,8 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'hotel',
       phoneNumber: '0555 444444',
-      status: 'super',
-      cashback: '0',
+      status: 'royal',
+      cashback: '40',
     },
     {
       email: 'director@gmail.com',
@@ -75,7 +75,7 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'director',
       phoneNumber: '0555 888888',
-      status: 'super',
+      status: 'vip',
       cashback: '0',
     },
     {
@@ -86,8 +86,8 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'user',
       phoneNumber: '0555 9999998',
-      status: 'super',
-      cashback: '0',
+      status: 'royal',
+      cashback: '220',
     },
     {
       email: 'hotel2@gmail.com',
@@ -97,8 +97,8 @@ const run = async () => {
       token: crypto.randomUUID(),
       role: 'hotel',
       phoneNumber: '0555 888888',
-      status: 'super',
-      cashback: '0',
+      status: 'vip',
+      cashback: '370',
     },
   );
 
