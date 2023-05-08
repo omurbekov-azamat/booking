@@ -35,7 +35,7 @@ const VipBlockHotels = () => {
         borderRadius={5}
         p={2}
         mt={2}
-        sx={{ position: 'relative', minHeight: '300px' }}
+        sx={{ position: 'relative', minHeight: '300px', background: '#78d5d8' }}
       >
         <Box textAlign="center" fontWeight="bold" mt={2}>
           Best Hotels
@@ -57,7 +57,7 @@ const VipBlockHotels = () => {
         borderRadius={5}
         p={2}
         mt={2}
-        sx={{ position: 'relative', minHeight: '300px' }}
+        sx={{ position: 'relative', minHeight: '300px', background: 'rgba(111,185,240,0.58)' }}
       >
         <Box textAlign="center" fontWeight="bold" mt={2}>
           Recommended
