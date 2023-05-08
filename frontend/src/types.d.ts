@@ -176,3 +176,22 @@ export interface CommentMutation {
   hotel: string;
   text: string;
 }
+
+export interface ReservationData {
+  apartmentId: string;
+  comment: string;
+  personalTranslator: boolean;
+  meetingAirport: boolean;
+  tourManagement: boolean;
+  eventManagement: boolean;
+}
+
+export interface ReservationMutation extends ReservationData {
+  dateArrival: Date | null;
+  dateDeparture: Date | null;
+}
+
+export interface ReservationForSend extends ReservationData {
+  dateArrival: string;
+  dateDeparture: string;
+}
