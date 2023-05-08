@@ -16,6 +16,16 @@ const VipBlockHotels = () => {
     dispatch(fetchHotels());
   }, [dispatch]);
 
+  useEffect(() => {
+    const vipHotels = hotels.filter((hotel) => hotel.status === 'premium');
+    const shuffledVipHotels = vipHotels.sort(() => 0.5 - Math.random());
+    setVipHotels(shuffledVipHotels.slice(0, 6));
+
+    const businessHotels = hotels.filter((hotel) => hotel.status === 'business');
+    const shuffledBusinessHotels = businessHotels.sort(() => 0.5 - Math.random());
+    setBusinessHotels(shuffledBusinessHotels.slice(0, 6));
+  }, [hotels]);
+
   return (
     <>
       <Box
