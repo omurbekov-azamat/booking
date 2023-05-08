@@ -117,6 +117,52 @@ const run = async () => {
   const [plaza, hyatt, lulu] = await Hotel.create(
     {
       userId: hotel._id,
+      name: 'Hotel Resident Bishkek',
+      address: 'Yunusaliev Avenue Юнусалиева 102/4 Джантошева, 720005 Бишкек, Киргизия',
+      location: {
+        latitude: 300,
+        longitude: 800,
+      },
+      star: 5,
+      isPublished: true,
+      image: 'fixtures/hyatt.jpg',
+      nonSmokingRooms: false,
+      parking: true,
+      swimmingPool: true,
+      petFriendly: false,
+      city: 'bishkek',
+      founding: 2000,
+      lowestPrice: {
+        som: 5000,
+        dollar: 15,
+      },
+      status: 'business',
+    },
+    {
+      userId: hotel._id,
+      name: 'Central Park Resident',
+      address: ' Chokmorov Street 105 , 720040 Бишкек, Киргизия',
+      location: {
+        latitude: 200,
+        longitude: 500,
+      },
+      star: 5,
+      isPublished: true,
+      image: 'fixtures/plaza.jpg',
+      nonSmokingRooms: false,
+      parking: true,
+      swimmingPool: true,
+      petFriendly: false,
+      city: 'bishkek',
+      founding: 2000,
+      lowestPrice: {
+        som: 1000,
+        dollar: 12,
+      },
+      status: 'premium',
+    },
+    {
+      userId: hotel._id,
       name: 'Plaza Hotel Bishkek',
       address: 'Улица Тоголок Молдо 52, 720044 Бишкек, Кыргызстан',
       location: {
