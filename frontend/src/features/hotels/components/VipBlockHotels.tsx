@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectHotels } from '../hotelsSlice';
 import { fetchHotels } from '../hotelsThunks';
 import { Hotel } from '../../../types';
+import HotelsCard from './HotelsCard';
 
 const VipBlockHotels = () => {
   const [vipHotels, setVipHotels] = useState<Hotel[]>([]);
@@ -39,7 +40,15 @@ const VipBlockHotels = () => {
         <Box textAlign="center" fontWeight="bold" mt={2}>
           Best Hotels
         </Box>
-        <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}></Grid>
+        <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
+          {vipHotels.map((hotel) => (
+            <Grid item xs={12} sm={6} lg={4} key={hotel._id} alignItems="stretch">
+              <Box border={5} borderColor="gold" borderRadius={5} p={2} sx={{ height: '100%' }}>
+                <HotelsCard hotel={hotel} />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
 
       <Box
