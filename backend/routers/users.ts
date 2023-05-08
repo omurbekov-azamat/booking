@@ -70,6 +70,20 @@ usersRouter.get('/admins', auth, permit('director'), async (req, res, next) => {
   }
 });
 
+usersRouter.patch('/status/:id', auth, permit('director'), async (req, res, next) => {
+  try {
+    const currentUser = await User.findById(req.params.id);
+    if (currentUser) {
+      await User.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
+      res.send({ message: 'status changed' });
+    } else {
+      res.status(400).send({ message: 'User is not found' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 usersRouter.patch('/toggleAddHotelToFavorites', auth, permit('user'), async (req, res, next) => {
   const user = (req as RequestWithUser).user;
   const addHotelId = req.body.addHotel;
