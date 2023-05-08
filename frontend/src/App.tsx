@@ -16,6 +16,7 @@ import ApartmentForm from './features/apartments/components/ApartmentForm';
 import Cabinet from './features/cabinets/Cabinet';
 import Comments from './features/comments/Comments';
 import WhatsAppButton from './components/UI/WhatsAppButton/WhatsAppButton';
+import ReservationForm from './features/orders/components/ReservationForm';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -29,10 +30,18 @@ function App() {
           <Route path={'/hotels/:id'} element={<HotelPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/:hotelName/apartment/:id" element={<Apartment />} />
+          <Route path="/:hotelName/:hotelId/apartment/:apartmentId" element={<Apartment />} />
           <Route path="/hotels/:id/:roomId" element={<Apartment />} />
           <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
           <Route path="/hotels/:id/comments" element={<Comments />} />
+          <Route
+            path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
+            element={
+              <ProtectedRoute isAllowed={user && Boolean(user)}>
+                <ReservationForm />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/addHotel"
             element={

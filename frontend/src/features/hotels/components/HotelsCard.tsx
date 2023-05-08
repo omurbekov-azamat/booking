@@ -32,12 +32,12 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
     if (!favorite) {
       await dispatch(changeFavorites({ addHotel: id }));
       await dispatch(reAuthorization());
-      await enqueueSnackbar(t('addToFavorite'), { variant: 'success' });
+      await enqueueSnackbar(`${hotel.name}, ${t('addToFavorite')}`, { variant: 'success' });
     } else {
       await dispatch(changeFavorites({ deleteHotel: id }));
       await dispatch(reAuthorization());
       await dispatch(getFavoriteHotels());
-      await enqueueSnackbar(t('removeFavorite'), { variant: 'success' });
+      await enqueueSnackbar(`${hotel.name}, ${t('removeFavorite')}`, { variant: 'success' });
     }
   };
 

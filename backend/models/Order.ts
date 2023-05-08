@@ -59,6 +59,10 @@ const OrderSchema = new Schema<IOrder>({
     default: 'open',
     enum: ['open', 'in progress', 'closed'],
   },
+  personalTranslator: Boolean,
+  meetingAirport: Boolean,
+  tourManagement: Boolean,
+  eventManagement: Boolean,
 });
 
 const Order = mongoose.model<IOrder>('Order', OrderSchema);
