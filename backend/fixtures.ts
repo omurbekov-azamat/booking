@@ -136,6 +136,7 @@ const run = async () => {
         som: 1000,
         dollar: 12,
       },
+      status: 'premium',
     },
     {
       userId: hotel._id,
@@ -158,6 +159,7 @@ const run = async () => {
         som: 1100,
         dollar: 13,
       },
+      status: 'premium',
     },
     {
       userId: hotel._id,
@@ -180,6 +182,7 @@ const run = async () => {
         som: 1200,
         dollar: 14,
       },
+      status: 'business',
     },
     {
       userId: hotel._id,
@@ -202,6 +205,7 @@ const run = async () => {
         som: 1400,
         dollar: 15,
       },
+      status: 'business',
     },
     {
       userId: hotel._id,
@@ -224,6 +228,7 @@ const run = async () => {
         som: 1700,
         dollar: 16,
       },
+      status: 'standard',
     },
   );
 

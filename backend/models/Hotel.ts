@@ -88,6 +88,12 @@ const HotelSchema = new Schema<IHotel>({
     },
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+    enum: ['standard', 'premium', 'business'],
+    default: 'standard',
+  },
 });
 
 const Hotel = mongoose.model('Hotel', HotelSchema);
