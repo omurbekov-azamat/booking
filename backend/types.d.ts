@@ -47,6 +47,7 @@ export interface IHotel {
     som: number;
     dollar: number;
   };
+  status: string;
 }
 
 export interface IApartment {

@@ -84,9 +84,42 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelResponse = await Hotel.find(findParams);
       return res.send(hotelResponse);
     }
-    const hotelsRes = await Hotel.find()
-      .skip(queryPage ? parseInt(queryPage) * 18 : 0)
-      .limit(18);
+
+    const pageNumber: number = parseInt(queryPage) || 1;
+
+    const hotelsRes = await Hotel.aggregate([
+      {
+        $facet: {
+          premiumHotels: [{ $match: { status: 'premium', isPublished: true } }, { $limit: 18 }],
+          businessHotels: [{ $match: { status: 'business', isPublished: true } }, { $limit: 18 }],
+          standardHotels: [{ $match: { status: 'standard', isPublished: true } }, { $limit: 18 }],
+          totalCount: [{ $group: { _id: null, count: { $sum: 1 } } }],
+        },
+      },
+      {
+        $project: {
+          hotels: {
+            $concatArrays: [
+              '$premiumHotels',
+              { $slice: ['$businessHotels', 0, { $subtract: [18, { $size: '$premiumHotels' }] }] },
+              {
+                $slice: [
+                  '$standardHotels',
+                  0,
+                  { $subtract: [18, { $size: { $concatArrays: ['$premiumHotels', '$businessHotels'] } }] },
+                ],
+              },
+            ],
+          },
+          totalCount: { $arrayElemAt: ['$totalCount.count', 0] },
+        },
+      },
+      { $unwind: '$hotels' },
+      { $replaceRoot: { newRoot: '$hotels' } },
+      { $skip: (pageNumber - 1) * 18 },
+      { $limit: 18 },
+    ]);
+
     return res.send(hotelsRes);
   } catch {
     return res.sendStatus(500);
@@ -184,6 +217,15 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
     }
   } catch (e) {
     return next(e);
+  }
+});
+
+hotelsRouter.get('/random/recommended', async (req, res, next) => {
+  try {
+    const hotels = await Hotel.aggregate([{ $match: { status: 'premium' } }, { $sample: { size: 6 } }]);
+    return res.send(hotels);
+  } catch (e) {
+    next(e);
   }
 });
 
