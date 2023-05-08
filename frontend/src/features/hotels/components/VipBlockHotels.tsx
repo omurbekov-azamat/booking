@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectHotels } from '../hotelsSlice';
+import { selectHotels, selectLoading } from '../hotelsSlice';
 import { fetchHotels } from '../hotelsThunks';
 import { Hotel } from '../../../types';
 import HotelsCard from './HotelsCard';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 const VipBlockHotels = () => {
   const [vipHotels, setVipHotels] = useState<Hotel[]>([]);
@@ -12,6 +13,7 @@ const VipBlockHotels = () => {
 
   const hotels = useAppSelector(selectHotels);
   const dispatch = useAppDispatch();
+  const loading = useAppSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchHotels());
@@ -40,17 +42,22 @@ const VipBlockHotels = () => {
         <Box textAlign="center" fontWeight="bold" mt={2}>
           Best Hotels
         </Box>
-        <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
-          {vipHotels.map((hotel) => (
-            <Grid item xs={12} sm={6} lg={4} key={hotel._id} alignItems="stretch">
-              <Box border={5} borderColor="gold" borderRadius={5} p={2} sx={{ height: '100%' }}>
-                <HotelsCard hotel={hotel} />
-              </Box>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
+              {vipHotels.map((hotel) => (
+                <Grid item xs={12} sm={6} lg={4} key={hotel._id} alignItems="stretch">
+                  <Box border={5} borderColor="gold" borderRadius={5} p={2} sx={{ height: '100%' }}>
+                    <HotelsCard hotel={hotel} />
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </>
+        )}
       </Box>
-
       <Box
         border={3}
         borderColor="gray"
@@ -62,15 +69,21 @@ const VipBlockHotels = () => {
         <Box textAlign="center" fontWeight="bold" mt={2}>
           Recommended
         </Box>
-        <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
-          {businessHotels.map((hotel) => (
-            <Grid item xs={12} sm={6} lg={4} key={hotel._id} alignItems="stretch">
-              <Box border={5} borderColor="silver" borderRadius={5} p={2} sx={{ height: '100%' }}>
-                <HotelsCard hotel={hotel} />
-              </Box>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
+              {businessHotels.map((hotel) => (
+                <Grid item xs={12} sm={6} lg={4} key={hotel._id} alignItems="stretch">
+                  <Box border={5} borderColor="silver" borderRadius={5} p={2} sx={{ height: '100%' }}>
+                    <HotelsCard hotel={hotel} />
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </>
+        )}
       </Box>
     </>
   );
