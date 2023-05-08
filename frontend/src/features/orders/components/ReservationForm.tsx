@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -16,13 +16,20 @@ import {
   Typography,
 } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { ReservationMutation } from '../../../types';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { sendOrder } from '../ordersThunks';
+import { selectSendOrderLoading } from '../ordersSlice';
+import { OrderMutation, OrderSend } from '../../../types';
+import { LoadingButton } from '@mui/lab';
 
 const ReservationForm = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const loading = useAppSelector(selectSendOrderLoading);
   const { apartmentId } = useParams() as { apartmentId: string };
 
-  const [reservation, setReservation] = useState<ReservationMutation>({
+  const [reservation, setReservation] = useState<OrderMutation>({
     apartmentId: apartmentId,
     dateArrival: null,
     dateDeparture: null,
@@ -74,22 +81,13 @@ const ReservationForm = () => {
     e.preventDefault();
     if (reservation.dateArrival && reservation.dateDeparture) {
       setRequired(false);
-      const reservationData = {
+      const reservationData: OrderSend = {
         ...reservation,
-        dateArrival: reservation.dateArrival?.toDateString(),
-        dateDeparture: reservation.dateDeparture?.toDateString(),
+        dateArrival: reservation.dateArrival.toDateString(),
+        dateDeparture: reservation.dateDeparture.toDateString(),
       };
-      console.log(reservationData);
-      setReservation({
-        apartmentId: apartmentId,
-        dateArrival: null,
-        dateDeparture: null,
-        comment: '',
-        personalTranslator: false,
-        meetingAirport: false,
-        tourManagement: false,
-        eventManagement: false,
-      });
+      await dispatch(sendOrder(reservationData));
+      await navigate('/my-cabinet');
     } else {
       setRequired(true);
     }
@@ -165,9 +163,9 @@ const ReservationForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained" color="success" type="submit">
+            <LoadingButton loading={loading} variant="contained" color="success" type="submit">
               {t('send')}
-            </Button>
+            </LoadingButton>
           </Grid>
         </Grid>
       </LocalizationProvider>
