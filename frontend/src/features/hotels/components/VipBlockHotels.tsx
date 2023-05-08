@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectHotels } from '../hotelsSlice';
 import { fetchHotels } from '../hotelsThunks';
+import { Hotel } from '../../../types';
 
 const VipBlockHotels = () => {
+  const [vipHotels, setVipHotels] = useState<Hotel[]>([]);
+  const [businessHotels, setBusinessHotels] = useState<Hotel[]>([]);
+
   const hotels = useAppSelector(selectHotels);
   const dispatch = useAppDispatch();
 
