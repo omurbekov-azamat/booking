@@ -78,5 +78,16 @@
   "isfana": "Isfana",
   "kyzyl-kiya": "Kyzyl-Kiya",
   "leylek": "Leylek",
-  "reserve": "Reserve"
+  "reserve": "Reserve",
+  "dateArrival": "Date arrival",
+  "dateDeparture": "Date Departure",
+  "additionalServices": "Additional services",
+  "personalTranslator": "Personal translator",
+  "meetingAirport": "Airport pickup",
+  "tourOrganization": "Tour organization",
+  "eventOrganization": "Event organization",
+  "selectDates": "Select dates",
+  "writeComment": "Write a comment...",
+  "forAdditionalServices": "For additional services a separate fee is charged",
+  "send": "Send"
 }

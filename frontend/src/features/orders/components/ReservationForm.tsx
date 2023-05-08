@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {
@@ -18,6 +19,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { ReservationMutation } from '../../../types';
 
 const ReservationForm = () => {
+  const { t } = useTranslation();
   const { apartmentId } = useParams() as { apartmentId: string };
 
   const [reservation, setReservation] = useState<ReservationMutation>({
@@ -34,17 +36,10 @@ const ReservationForm = () => {
   const [required, setRequired] = useState<boolean>(false);
 
   const additionalServices = [
-    { name: 'Personal translator', selected: reservation.personalTranslator },
-    { name: 'Meeting from the airport', selected: reservation.meetingAirport },
-    { name: 'Tour Organization', selected: reservation.tourManagement },
-    { name: 'Event Organization', selected: reservation.eventManagement },
-  ];
-
-  const facilities = [
-    { id: 'personalTranslator', title: 'Personal translator' },
-    { id: 'meetingAirport', title: 'Meeting from the airport' },
-    { id: 'tourManagement', title: 'Tour Organization' },
-    { id: 'eventManagement', title: 'Event Organization' },
+    { selected: reservation.personalTranslator, id: 'personalTranslator', title: t('personalTranslator') },
+    { selected: reservation.meetingAirport, id: 'meetingAirport', title: t('meetingAirport') },
+    { selected: reservation.tourManagement, id: 'tourManagement', title: t('tourOrganization') },
+    { selected: reservation.eventManagement, id: 'eventManagement', title: t('eventOrganization') },
   ];
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -77,7 +72,7 @@ const ReservationForm = () => {
 
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (reservation.dateArrival && reservation.dateArrival) {
+    if (reservation.dateArrival && reservation.dateDeparture) {
       setRequired(false);
       const reservationData = {
         ...reservation,
@@ -105,14 +100,14 @@ const ReservationForm = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Grid container textAlign="center" spacing={3}>
           <Grid item xs={12} sm={6} lg={6}>
-            <DatePicker label="Date arrival" value={reservation.dateArrival} onChange={handleArrivalDate} />
+            <DatePicker label={t('dateArrival')} value={reservation.dateArrival} onChange={handleArrivalDate} />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <DatePicker label="Date departure" value={reservation.dateDeparture} onChange={handleDepartureDate} />
+            <DatePicker label={t('dateDeparture')} value={reservation.dateDeparture} onChange={handleDepartureDate} />
           </Grid>
           {required && (
             <Grid item xs={12}>
-              <Alert severity="error">Select dates!</Alert>
+              <Alert severity="error">{t('selectDates')}</Alert>
             </Grid>
           )}
           <Grid item xs={12}>
@@ -127,11 +122,11 @@ const ReservationForm = () => {
                 width: '100%',
               }}
             >
-              {'additional services'}
+              {t('additionalServices')}
             </Button>
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
               <FormGroup sx={{ p: 1 }}>
-                {facilities.map((facility) => (
+                {additionalServices.map((facility) => (
                   <FormControlLabel
                     key={facility.id}
                     control={<Checkbox onChange={handleChangeCheckBox} name={facility.id} />}
@@ -145,15 +140,15 @@ const ReservationForm = () => {
             {additionalServices.map(
               (service) =>
                 service.selected && (
-                  <Grid item key={service.name}>
-                    {service.name}
+                  <Grid item key={service.title}>
+                    {service.title}
                   </Grid>
                 ),
             )}
             {additionalServices.some((service) => service.selected) && (
               <Grid item>
                 <Typography variant="subtitle2" color="grey">
-                  For additional services a separate fee is charged
+                  {t('forAdditionalServices')}
                 </Typography>
               </Grid>
             )}
@@ -164,14 +159,14 @@ const ReservationForm = () => {
               value={reservation.comment}
               multiline
               rows={4}
-              label="Write comment..."
+              label={t('writeComment')}
               name="comment"
               autoComplete="new-comment"
             />
           </Grid>
           <Grid item xs={12}>
             <Button variant="contained" color="success" type="submit">
-              send
+              {t('send')}
             </Button>
           </Grid>
         </Grid>

@@ -79,5 +79,16 @@
   "isfana": "Исфана",
   "kyzyl-kiya": " Кызыл-Кия",
   "leylek": "Лейлек",
-  "reserve": "Забронировать"
+  "reserve": "Забронировать",
+  "dateArrival": "Дата прибытия",
+  "dateDeparture": "Дата вылета",
+  "additionalServices": "Дополнительные услуги",
+  "personalTranslator": "Персональный переводчик",
+  "meetingAirport": "Встреча с аэропорта",
+  "tourOrganization": "Организация экскурсии",
+  "eventOrganization": "Организация мероприятий",
+  "selectDates": "Выберите даты",
+  "writeComment": "Напишите коментарий...",
+  "forAdditionalServices": "За дополнительные услуги взимается отдельная плата",
+  "send": "Отправить"
 }
