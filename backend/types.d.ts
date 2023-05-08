@@ -78,6 +78,10 @@ export interface IOrder {
   dateArrival: string;
   dateDeparture: string;
   status: string;
+  personalTranslator: boolean;
+  meetingAirport: boolean;
+  tourManagement: boolean;
+  eventManagement: boolean;
 }
 
 export interface IComment {
