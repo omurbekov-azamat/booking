@@ -1,5 +1,6 @@
 import React from 'react';
 import royal from '../../../assets/images/royal.png';
+import { Box } from '@mui/material';
 
 const RoyalStyles = {
   backgroundColor: 'grey',
@@ -15,7 +16,11 @@ const RoyalStyles = {
 };
 
 const Royal = () => {
-  return <div style={RoyalStyles}>Royal</div>;
+  return (
+    <Box sx={{ fontFamily: 'Monospace', fontStyle: 'oblique' }} style={RoyalStyles}>
+      Royal
+    </Box>
+  );
 };
 
 export default Royal;
