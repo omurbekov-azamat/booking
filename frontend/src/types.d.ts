@@ -189,3 +189,7 @@ export interface CommentMutation {
   hotel: string;
   text: string;
 }
+
+export interface IRoomType {
+  name: string;
+}
