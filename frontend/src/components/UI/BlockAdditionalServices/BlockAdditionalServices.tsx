@@ -6,25 +6,25 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 const BlockAdditionalServices = () => {
   const itemData = [
     {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
-      author: '@rollelflex_graphy726',
+      img: 'https://static.tildacdn.com/tild6665-6264-4463-b666-363063393565/20610.jpg',
+      title: 'Языковые переводы',
+      author: 'Услуги языковых переводов',
     },
     {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
-      author: '@helloimnik',
+      img: 'https://thumb.tildacdn.com/tild3735-3830-4364-b530-353363623832/-/format/webp/Chauffeur-London.jpg',
+      title: 'Трансфер / Логистика / Доставка',
+      author: 'Надежные авто в любом классе',
     },
     {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
-      author: '@nolanissac',
+      img: 'https://static.tildacdn.com/tild3731-6339-4534-a561-336639663935/two-day-ala-kul-trek.jpg',
+      title: 'Достигай вершин с нами',
+      author: 'Самые красивые точки Кыргызстана',
       cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
-      author: '@hjrc33',
+      img: 'https://thumb.tildacdn.com/tild3932-3562-4863-b864-383336383562/-/format/webp/64954.jpg',
+      title: 'Team Building / Seminars',
+      author: 'Организуем мероприятия любого формата',
       cols: 2,
     },
   ];
