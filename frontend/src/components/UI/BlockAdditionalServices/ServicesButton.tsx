@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent, Grid, Typography } from '@mui/material';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import BlockAdditionalServices from './BlockAdditionalServices';
+import CloseIcon from '@mui/icons-material/Close';
 
 const MyButton = styled(Button)({
   position: 'fixed',
@@ -35,13 +36,15 @@ const ServicesButton = () => {
         <DesignServicesIcon sx={{ color: '#ffffff' }} />
       </MyButton>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>{t('additionalServices')}</DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ p: 1 }}>
+          <Grid container alignItems="center" justifyContent="space-between">
+            <Typography>{t('additionalServices')}</Typography>
+            <Button sx={{ p: 0 }} onClick={() => setOpen(false)}>
+              <CloseIcon />
+            </Button>
+          </Grid>
           <BlockAdditionalServices />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
-        </DialogActions>
       </Dialog>
     </>
   );
