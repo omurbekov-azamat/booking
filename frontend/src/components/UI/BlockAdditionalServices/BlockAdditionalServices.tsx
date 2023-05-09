@@ -4,32 +4,35 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { IconButton } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useTranslation } from 'react-i18next';
 
 const BlockAdditionalServices = () => {
+  const { t } = useTranslation();
+
   const itemData = [
     {
       img: 'https://static.tildacdn.com/tild6665-6264-4463-b666-363063393565/20610.jpg',
-      title: 'Языковые переводы',
-      author: 'Услуги языковых переводов',
+      title: t('languageTranslations'),
+      author: t('languageTranslationServices'),
       link: 'http://www.eventm.kg/traslate',
     },
     {
       img: 'https://thumb.tildacdn.com/tild3735-3830-4364-b530-353363623832/-/format/webp/Chauffeur-London.jpg',
-      title: 'Трансфер / Логистика / Доставка',
-      author: 'Надежные авто в любом классе',
+      title: t('transfer'),
+      author: t('reliableCarsInAnyClass'),
       link: 'http://www.eventm.kg/transport1',
     },
     {
       img: 'https://static.tildacdn.com/tild3731-6339-4534-a561-336639663935/two-day-ala-kul-trek.jpg',
-      title: 'Достигай вершин с нами',
-      author: 'Самые красивые точки Кыргызстана',
+      title: t('excursions'),
+      author: t('theMostBeautifulPlacesInKyrgyzstan'),
       cols: 2,
       link: 'http://www.eventm.kg/traveling',
     },
     {
       img: 'https://thumb.tildacdn.com/tild3932-3562-4863-b864-383336383562/-/format/webp/64954.jpg',
-      title: 'Team Building / Seminars',
-      author: 'Организуем мероприятия любого формата',
+      title: t('businessEvents'),
+      author: t('eventsOfAnyFormat'),
       cols: 2,
       link: 'http://www.eventm.kg/corporate',
     },
