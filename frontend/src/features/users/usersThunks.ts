@@ -48,6 +48,15 @@ export const getAdmins = createAsyncThunk<User[]>('users/getAdmins', async () =>
   }
 });
 
+export const getUsers = createAsyncThunk<User[], string>('users/getMatched', async (match) => {
+  try {
+    const responseUsers = await axiosApi.get<User[]>('/users/getMatched?' + match);
+    return responseUsers.data;
+  } catch {
+    throw new Error();
+  }
+});
+
 interface changeProps {
   addHotel?: string;
   deleteHotel?: string;
