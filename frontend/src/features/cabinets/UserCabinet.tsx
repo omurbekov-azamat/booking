@@ -12,6 +12,8 @@ import { getFavoriteHotels } from '../hotels/hotelsThunks';
 import { selectFavoriteHotels, selectFetchFavoriteHotelsLoading } from '../hotels/hotelsSlice';
 import HotelsCard from '../hotels/components/HotelsCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import HomeIcon from '@mui/icons-material/Home';
+import MyInformation from './components/MyInformation';
 
 const UserCabinet = () => {
   const dispatch = useAppDispatch();
@@ -20,8 +22,9 @@ const UserCabinet = () => {
   const { t } = useTranslation();
 
   const [state, setState] = React.useState({
-    orders: true,
+    orders: false,
     favorites: false,
+    myInfo: true,
   });
 
   useEffect(() => {
@@ -31,24 +34,34 @@ const UserCabinet = () => {
   }, [dispatch, state.favorites]);
 
   const handleClickOrders = () => {
-    setState((prev) => ({ ...prev, orders: true, favorites: false }));
+    setState((prev) => ({ ...prev, orders: true, favorites: false, myInfo: false }));
   };
 
   const handleClickFavorites = () => {
-    setState((prev) => ({ ...prev, orders: false, favorites: true }));
+    setState((prev) => ({ ...prev, orders: false, favorites: true, myInfo: false }));
+  };
+
+  const handleClickMyInfo = () => {
+    setState((prev) => ({ ...prev, orders: false, favorites: false, myInfo: true }));
   };
 
   return (
     <Box mt={3}>
-      <Card>
+      <Card sx={{ minHeight: '600px' }}>
         <CardContent>
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
-            <Grid item xs>
+            <Grid item xs={12} sm={6} md={3}>
               <List
-                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', border: '2px solid #c5c5c5' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
+                <ListItemButton onClick={handleClickMyInfo}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t('myInfo')} />
+                </ListItemButton>
                 <ListItemButton onClick={handleClickOrders}>
                   <ListItemIcon>
                     <MapsHomeWorkIcon />
@@ -64,19 +77,18 @@ const UserCabinet = () => {
               </List>
             </Grid>
             <Grid item xs>
-              <Box overflow="auto" height="300px">
-                {state.orders && <Orders />}
-                {loading && <Spinner />}
-                {state.favorites && (
-                  <Grid container spacing={3}>
-                    {favoriteHotels.map((hotel) => (
-                      <Grid item key={hotel._id}>
-                        <HotelsCard hotel={hotel} />
-                      </Grid>
-                    ))}
-                  </Grid>
-                )}
-              </Box>
+              {state.myInfo && <MyInformation />}
+              {state.orders && <Orders />}
+              {loading && <Spinner />}
+              {state.favorites && (
+                <Grid container spacing={3}>
+                  {favoriteHotels.map((hotel) => (
+                    <Grid item key={hotel._id}>
+                      <HotelsCard hotel={hotel} />
+                    </Grid>
+                  ))}
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </CardContent>
