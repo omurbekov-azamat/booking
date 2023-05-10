@@ -119,7 +119,7 @@ const HotelForm = () => {
             />
           </Grid>
           <Grid item>
-            <SelectCities onChange={inputChangeHandler} name="city" label={t('City')} value={state.city} />
+            <SelectCities onChange={inputChangeHandler} name="city" label={t('city')} value={state.city} />
           </Grid>
           <Grid item xs>
             <TextField
