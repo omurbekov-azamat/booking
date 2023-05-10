@@ -13,6 +13,7 @@
   "phoneError": "Invalid phone number",
   "extraServices": "Extra services:",
   "createHotel": "Create hotel",
+  "createApartment": "Create apartment",
   "hotelName": "Hotel name",
   "address": "Address",
   "stars": "Stars 0-5",
@@ -90,5 +91,11 @@
   "writeComment": "Write a comment...",
   "forAdditionalServices": "For additional services a separate fee is charged",
   "send": "Send",
-  "myInfo": "My Info"
+  "myInfo": "My Info",
+  "roomArea": "Room area",
+  "singleRoom": "Single room",
+  "doubleRoom": "Double room",
+  "tripleRoom": "Triple room",
+  "AC": "AC"
+
 }

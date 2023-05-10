@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
-import { ApartmentMutation, ImgType } from '../../../types';
+import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
@@ -22,7 +22,7 @@ import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-import PoolIcon from '@mui/icons-material/Pool';
+import BathtubIcon from '@mui/icons-material/Bathtub';
 import BalconyIcon from '@mui/icons-material/Balcony';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PetsIcon from '@mui/icons-material/Pets';
@@ -139,17 +139,27 @@ const ApartmentForm = () => {
     setState({ ...state, [checkboxName]: isChecked });
   };
 
+  const name = (name: IRoomType) => {
+    if (name.name === 'single room') {
+      return t('singleRoom');
+    } else if (name.name === 'double room') {
+      return t('doubleRoom');
+    } else if (name.name === 'triple room') {
+      return t('tripleRoom');
+    }
+  };
+
   return (
     <>
       <Container component="main" maxWidth="sm">
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
-          {'create apartments'}
+          {t('createApartment')}
         </Typography>
         <Box component="form" sx={{ mt: 2 }} onSubmit={onSubmit}>
           <Grid container spacing={2} textAlign="center" direction="column">
             <Grid item xs>
               <TextField
-                label={'Room area'}
+                label={t('roomArea')}
                 type={'number'}
                 name="place"
                 autoComplete="current-place"
@@ -161,22 +171,24 @@ const ApartmentForm = () => {
             <Grid item xs>
               <TextField
                 select
-                label="Room type"
+                label={t('roomType')}
                 name="roomTypeId"
                 value={state.roomTypeId}
                 onChange={inputChangeHandler}
                 required
               >
-                {roomType.map((option) => (
-                  <MenuItem key={option._id} value={option._id}>
-                    {option.name}
-                  </MenuItem>
-                ))}
+                {roomType.map((option) => {
+                  return (
+                    <MenuItem key={option._id} value={option._id}>
+                      {name(option)}
+                    </MenuItem>
+                  );
+                })}
               </TextField>
             </Grid>
             <Grid item xs>
               <Grid container justifyContent={'space-around'}>
-                <h3>Price</h3>
+                <h3>{t('price')}</h3>
                 <Grid item xs={3}>
                   <TextField
                     type={'number'}
@@ -230,7 +242,7 @@ const ApartmentForm = () => {
             <Grid container spacing={3}>
               <Grid item xs>
                 <Card sx={{ mt: 5, p: 3 }}>
-                  <Typography>Доп услуги</Typography>
+                  <Typography>{t('extraServices')}</Typography>
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -242,22 +254,22 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="AC"
+                    label={t('AC')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
                   <FormControlLabel
                     control={
                       <Checkbox
-                        icon={<PoolIcon />}
-                        checkedIcon={<PoolIcon color="primary" />}
+                        icon={<BathtubIcon />}
+                        checkedIcon={<BathtubIcon color="primary" />}
                         color="primary"
                         checked={state.bath}
                         onChange={handleCheckboxChange}
                         name="bath"
                       />
                     }
-                    label="Bath"
+                    label={t('bath')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
@@ -272,7 +284,7 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="Balcony"
+                    label={t('balcony')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
@@ -287,7 +299,7 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="Food"
+                    label={t('food')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
@@ -302,7 +314,7 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="Pet friendly"
+                    label={t('petFriendly')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
@@ -317,7 +329,7 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="Towels"
+                    label={t('towel')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
@@ -332,7 +344,7 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="Wi-Fi"
+                    label={t('wiFi')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
@@ -347,7 +359,7 @@ const ApartmentForm = () => {
                         color="primary"
                       />
                     }
-                    label="TV"
+                    label={t('tv')}
                     labelPlacement="end"
                     sx={{ textAlign: 'left', width: '90%' }}
                   />
