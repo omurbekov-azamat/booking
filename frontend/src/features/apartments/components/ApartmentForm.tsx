@@ -29,6 +29,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import WifiIcon from '@mui/icons-material/Wifi';
 import TvIcon from '@mui/icons-material/Tv';
+import { fetchOneHotel } from '../../hotels/hotelsThunks';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -40,10 +41,10 @@ const ApartmentForm = () => {
     },
     images: [],
     price: {
-      usd: 0,
-      kgs: 0,
+      usd: undefined,
+      kgs: undefined,
     },
-    place: 0,
+    place: undefined,
     AC: false,
     bath: false,
     balcony: false,
@@ -72,7 +73,7 @@ const ApartmentForm = () => {
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    if (name === 'from' || name === 'till') {
+    if (name === 'usd' || name === 'kgs') {
       setState((prev) => ({
         ...prev,
         price: {
@@ -127,6 +128,7 @@ const ApartmentForm = () => {
           hotelId: id,
         }),
       );
+      await dispatch(fetchOneHotel(id));
       await navigate('/hotels/' + id);
     }
   };
@@ -134,7 +136,7 @@ const ApartmentForm = () => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checkboxName = event.target.name;
     const isChecked = event.target.checked;
-    setState({ ...state, [checkboxName]: isChecked }); // update main state
+    setState({ ...state, [checkboxName]: isChecked });
   };
 
   return (
@@ -190,7 +192,6 @@ const ApartmentForm = () => {
                 <Grid item xs={3}>
                   <TextField
                     type={'number'}
-                    inputProps={{ min: state.price.usd + 1 }}
                     label={'Kgs'}
                     name="kgs"
                     autoComplete="current-kgs"
