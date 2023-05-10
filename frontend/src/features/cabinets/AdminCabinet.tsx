@@ -16,6 +16,7 @@ import { selectAdminMyOrders } from '../orders/ordersSlice';
 import OrderCard from '../orders/components/OrderCard';
 import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
+import MyInformation from './components/MyInformation';
 
 const AdminCabinet = () => {
   const dispatch = useAppDispatch();
@@ -118,6 +119,7 @@ const AdminCabinet = () => {
                 </Grid>
               )}
               {state.createHotel && <HotelForm />}
+              {state.myInfo && <MyInformation />}
             </Grid>
           </Grid>
         </CardContent>
