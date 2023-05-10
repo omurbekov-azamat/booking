@@ -20,7 +20,23 @@ import MyInformation from './components/MyInformation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 
-const AdminCabinet = () => {
+export interface AdminState {
+  [key: string]: boolean;
+}
+
+const initialState: AdminState = {
+  myInfo: true,
+  myOrders: false,
+  myHotels: false,
+  createHotel: false,
+  unacceptedOrders: false,
+};
+
+interface Props {
+  exist?: AdminState;
+}
+
+const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const user = useAppSelector(selectUser);
@@ -28,14 +44,7 @@ const AdminCabinet = () => {
   const orders = useAppSelector(selectAdminMyOrders);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
-
-  const [state, setState] = React.useState({
-    myInfo: true,
-    myOrders: false,
-    myHotels: false,
-    createHotel: false,
-    freeOrders: false,
-  });
+  const [state, setState] = React.useState<AdminState>(exist);
 
   useEffect(() => {
     if (user) {
@@ -48,65 +57,18 @@ const AdminCabinet = () => {
     }
   }, [dispatch, user, state.myHotels, state.myOrders]);
 
-  const handleClickMyInfo = () => {
-    setState((prev) => ({
-      ...prev,
-      myOrders: false,
-      myHotels: false,
-      myInfo: true,
-      createHotel: false,
-      freeOrders: false,
-    }));
-    setSelectedIndex(0);
+  const handleClickOption = (option: string, index: number) => {
+    setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
+    setSelectedIndex(index);
   };
 
-  const handleClickMyOrders = () => {
-    setState((prev) => ({
-      ...prev,
-      myOrders: true,
-      myHotels: false,
-      myInfo: false,
-      createHotel: false,
-      freeOrders: false,
-    }));
-    setSelectedIndex(1);
-  };
-
-  const handleClickMyHotels = () => {
-    setState((prev) => ({
-      ...prev,
-      myOrders: false,
-      myHotels: true,
-      myInfo: false,
-      createHotel: false,
-      freeOrders: false,
-    }));
-    setSelectedIndex(2);
-  };
-
-  const handleClickCreateHotel = () => {
-    setState((prev) => ({
-      ...prev,
-      myOrders: false,
-      myHotels: false,
-      myInfo: false,
-      createHotel: true,
-      freeOrders: false,
-    }));
-    setSelectedIndex(3);
-  };
-
-  const handleClickFreeOrders = () => {
-    setState((prev) => ({
-      ...prev,
-      myOrders: false,
-      myHotels: false,
-      myInfo: false,
-      createHotel: false,
-      freeOrders: true,
-    }));
-    setSelectedIndex(4);
-  };
+  const options = [
+    { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
+    { option: 'myOrders', icon: <WorkIcon />, text: t('myOrders') },
+    { option: 'unacceptedOrders', icon: <WorkspacesIcon />, text: t('unacceptedOrders') },
+    { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
+    { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
+  ];
 
   return (
     <Box mt={3}>
@@ -124,36 +86,16 @@ const AdminCabinet = () => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                <ListItemButton selected={selectedIndex === 0} onClick={handleClickMyInfo}>
-                  <ListItemIcon>
-                    <PersonIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={t('myInfo')} />
-                </ListItemButton>
-                <ListItemButton selected={selectedIndex === 1} onClick={handleClickMyOrders}>
-                  <ListItemIcon>
-                    <WorkIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={t('myOrders')} />
-                </ListItemButton>
-                <ListItemButton selected={selectedIndex === 4} onClick={handleClickFreeOrders}>
-                  <ListItemIcon>
-                    <WorkspacesIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={t('unacceptedOrders')} />
-                </ListItemButton>
-                <ListItemButton selected={selectedIndex === 2} onClick={handleClickMyHotels}>
-                  <ListItemIcon>
-                    <MapsHomeWorkIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={t('myHotels')} />
-                </ListItemButton>
-                <ListItemButton selected={selectedIndex === 3} onClick={handleClickCreateHotel}>
-                  <ListItemIcon>
-                    <AddCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={t('createHotel')} />
-                </ListItemButton>
+                {options.map((option, index) => (
+                  <ListItemButton
+                    key={index}
+                    selected={selectedIndex === index}
+                    onClick={() => handleClickOption(option.option, index)}
+                  >
+                    <ListItemIcon>{option.icon}</ListItemIcon>
+                    <ListItemText primary={option.text} />
+                  </ListItemButton>
+                ))}
               </List>
             </Grid>
             <Grid item xs>
@@ -175,7 +117,7 @@ const AdminCabinet = () => {
               )}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
-              {state.freeOrders && <Typography>free orders</Typography>}
+              {state.unacceptedOrders && <Typography>free orders</Typography>}
             </Grid>
           </Grid>
         </CardContent>
