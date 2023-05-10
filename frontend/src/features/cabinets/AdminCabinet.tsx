@@ -6,7 +6,7 @@ import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { selectAdminMyOrders } from '../orders/ordersSlice';
 import { selectHotels } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
+import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import WorkIcon from '@mui/icons-material/Work';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -18,6 +18,7 @@ import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
 import MyInformation from './components/MyInformation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
 
 const AdminCabinet = () => {
   const dispatch = useAppDispatch();
@@ -30,9 +31,10 @@ const AdminCabinet = () => {
 
   const [state, setState] = React.useState({
     myInfo: true,
-    myHotels: false,
     myOrders: false,
+    myHotels: false,
     createHotel: false,
+    freeOrders: false,
   });
 
   useEffect(() => {
@@ -47,23 +49,63 @@ const AdminCabinet = () => {
   }, [dispatch, user, state.myHotels, state.myOrders]);
 
   const handleClickMyInfo = () => {
-    setState((prev) => ({ ...prev, myOrders: false, myHotels: false, myInfo: true, createHotel: false }));
+    setState((prev) => ({
+      ...prev,
+      myOrders: false,
+      myHotels: false,
+      myInfo: true,
+      createHotel: false,
+      freeOrders: false,
+    }));
     setSelectedIndex(0);
   };
 
   const handleClickMyOrders = () => {
-    setState((prev) => ({ ...prev, myOrders: true, myHotels: false, myInfo: false, createHotel: false }));
+    setState((prev) => ({
+      ...prev,
+      myOrders: true,
+      myHotels: false,
+      myInfo: false,
+      createHotel: false,
+      freeOrders: false,
+    }));
     setSelectedIndex(1);
   };
 
   const handleClickMyHotels = () => {
-    setState((prev) => ({ ...prev, myOrders: false, myHotels: true, myInfo: false, createHotel: false }));
+    setState((prev) => ({
+      ...prev,
+      myOrders: false,
+      myHotels: true,
+      myInfo: false,
+      createHotel: false,
+      freeOrders: false,
+    }));
     setSelectedIndex(2);
   };
 
   const handleClickCreateHotel = () => {
-    setState((prev) => ({ ...prev, myOrders: false, myHotels: false, myInfo: false, createHotel: true }));
+    setState((prev) => ({
+      ...prev,
+      myOrders: false,
+      myHotels: false,
+      myInfo: false,
+      createHotel: true,
+      freeOrders: false,
+    }));
     setSelectedIndex(3);
+  };
+
+  const handleClickFreeOrders = () => {
+    setState((prev) => ({
+      ...prev,
+      myOrders: false,
+      myHotels: false,
+      myInfo: false,
+      createHotel: false,
+      freeOrders: true,
+    }));
+    setSelectedIndex(4);
   };
 
   return (
@@ -93,6 +135,12 @@ const AdminCabinet = () => {
                     <WorkIcon />
                   </ListItemIcon>
                   <ListItemText primary={t('myOrders')} />
+                </ListItemButton>
+                <ListItemButton selected={selectedIndex === 4} onClick={handleClickFreeOrders}>
+                  <ListItemIcon>
+                    <WorkspacesIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t('unacceptedOrders')} />
                 </ListItemButton>
                 <ListItemButton selected={selectedIndex === 2} onClick={handleClickMyHotels}>
                   <ListItemIcon>
@@ -127,6 +175,7 @@ const AdminCabinet = () => {
               )}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
+              {state.freeOrders && <Typography>free orders</Typography>}
             </Grid>
           </Grid>
         </CardContent>
