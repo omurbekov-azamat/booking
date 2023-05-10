@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import type { IApartment, IRoomType, ValidationError } from '../../types';
 import {
@@ -21,6 +21,7 @@ interface ApartmentsState {
   loadingApartmentEdit: boolean;
   roomType: IRoomType[];
   roomTypeLoading: boolean;
+  notistackShow: boolean;
 }
 
 const initialState: ApartmentsState = {
@@ -34,12 +35,17 @@ const initialState: ApartmentsState = {
   loadingApartmentEdit: false,
   roomType: [],
   roomTypeLoading: false,
+  notistackShow: false,
 };
 
 export const apartmentsSlice = createSlice({
   name: 'apartments',
   initialState,
-  reducers: {},
+  reducers: {
+    notistackShow: (state, action: PayloadAction<boolean>) => {
+      state.notistackShow = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchApartments.pending, (state) => {
       state.loadingApartment = true;
@@ -127,3 +133,5 @@ export const selectApartmentError = (state: RootState) => state.apartments.apart
 export const selectLoadingEdit = (state: RootState) => state.apartments.loadingApartmentEdit;
 export const selectRoomType = (state: RootState) => state.apartments.roomType;
 export const selectLoadingRoomType = (state: RootState) => state.apartments.roomTypeLoading;
+export const selectNotistackShow = (state: RootState) => state.apartments.notistackShow;
+export const { notistackShow } = apartmentsSlice.actions;

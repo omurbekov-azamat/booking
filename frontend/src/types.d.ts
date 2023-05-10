@@ -45,8 +45,8 @@ export interface HotelWithLabel extends Hotel {
 
 export interface ApartmentData {
   price: {
-    usd: number | undefined;
-    kgs: number | undefined;
+    usd: number;
+    kgs: number;
   };
   description: {
     ru: string;
@@ -57,7 +57,7 @@ export interface ApartmentData {
   bath: boolean;
   petFriendly: boolean;
   food: boolean;
-  place: number | undefined;
+  place: number;
   tv: boolean;
   towel: boolean;
   wifi: boolean;

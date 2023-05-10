@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
+import { notistackShow, selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
 import { createApartment, fetchRoomType } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -41,10 +41,10 @@ const ApartmentForm = () => {
     },
     images: [],
     price: {
-      usd: undefined,
-      kgs: undefined,
+      usd: 0,
+      kgs: 0,
     },
-    place: undefined,
+    place: 0,
     AC: false,
     bath: false,
     balcony: false,
@@ -128,8 +128,9 @@ const ApartmentForm = () => {
           hotelId: id,
         }),
       );
-      await dispatch(fetchOneHotel(id));
       await navigate('/hotels/' + id);
+      await dispatch(fetchOneHotel(id));
+      await dispatch(notistackShow(true));
     }
   };
 
@@ -163,7 +164,6 @@ const ApartmentForm = () => {
                 type={'number'}
                 name="place"
                 autoComplete="current-place"
-                value={state.place}
                 onChange={inputChangeHandler}
                 required
               />
@@ -195,7 +195,6 @@ const ApartmentForm = () => {
                     label={'Usd'}
                     name="usd"
                     autoComplete="current-usd"
-                    value={state.price.usd}
                     onChange={inputChangeHandler}
                     required
                   />
@@ -207,7 +206,6 @@ const ApartmentForm = () => {
                     label={'Kgs'}
                     name="kgs"
                     autoComplete="current-kgs"
-                    value={state.price.kgs}
                     onChange={inputChangeHandler}
                     required
                   />

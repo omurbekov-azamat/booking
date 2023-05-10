@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,7 +12,10 @@ import PetFriendly from '../../../components/Icons/HotelIcons/PetFriendly';
 import Pool from '../../../components/Icons/HotelIcons/Pool';
 import Smoking from '../../../components/Icons/HotelIcons/Smoking';
 import ApartmentsTable from '../../apartments/components/ApartmentsTable';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { notistackShow, selectNotistackShow } from '../../apartments/apartmentSlice';
+import { enqueueSnackbar, SnackbarProvider } from 'notistack';
 
 interface Props {
   hotel: Hotel;
@@ -23,10 +26,23 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
   const { id } = useParams() as { id: string };
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const selectNotistack = useAppSelector(selectNotistackShow);
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (selectNotistack) {
+      enqueueSnackbar('Apartment created successfully!', { variant: 'success' });
+    }
+    if (location) {
+      dispatch(notistackShow(false));
+    }
+  }, [dispatch, location, selectNotistack]);
 
   return (
     <>
       <Card>
+        <SnackbarProvider />
         <CardContent>
           <Typography variant="h4" component="p" textAlign={'center'}>
             {hotel.name}
