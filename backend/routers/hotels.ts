@@ -38,6 +38,20 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
   }
 });
 
+hotelsRouter.get('/getMatchedHotels', auth, permit('director', 'admin'), async (req, res, next) => {
+  try {
+    const nameMatch = req.query.nameMatch as string;
+    if (nameMatch) {
+      const matched = await Hotel.find({
+        name: { $regex: new RegExp(nameMatch, 'i') },
+      }).limit(6);
+      return res.send(matched);
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 hotelsRouter.get('/', async (req, res) => {
   const nonSmokingRooms = req.query.nonSmoking as string;
   const swimmingPool = req.query.swimmingPool as string;
