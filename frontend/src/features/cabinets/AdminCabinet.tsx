@@ -15,18 +15,20 @@ import { selectHotels } from '../hotels/hotelsSlice';
 import { selectAdminMyOrders } from '../orders/ordersSlice';
 import OrderCard from '../orders/components/OrderCard';
 import HotelsCard from '../hotels/components/HotelsCard';
+import HotelForm from '../hotels/components/HotelForm';
 
 const AdminCabinet = () => {
-  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const user = useAppSelector(selectUser);
   const hotelsState = useAppSelector(selectHotels);
   const orders = useAppSelector(selectAdminMyOrders);
 
   const [state, setState] = React.useState({
     myInfo: true,
     myHotels: false,
-    orders: false,
+    myOrders: false,
+    createHotel: false,
   });
 
   useEffect(() => {
@@ -34,22 +36,26 @@ const AdminCabinet = () => {
       if (state.myHotels) {
         dispatch(fetchHotels(user._id));
       }
-      if (state.orders) {
+      if (state.myOrders) {
         dispatch(getForAdminHisOrders(user._id));
       }
     }
-  }, [dispatch, user, state.myHotels, state.orders]);
+  }, [dispatch, user, state.myHotels, state.myOrders]);
 
   const handleClickMyInfo = () => {
-    setState((prev) => ({ ...prev, orders: false, myHotels: false, myInfo: true }));
+    setState((prev) => ({ ...prev, myOrders: false, myHotels: false, myInfo: true, createHotel: false }));
   };
 
   const handleClickMyHotels = () => {
-    setState((prev) => ({ ...prev, orders: false, myHotels: true, myInfo: false }));
+    setState((prev) => ({ ...prev, myOrders: false, myHotels: true, myInfo: false, createHotel: false }));
   };
 
-  const handleClickOrders = () => {
-    setState((prev) => ({ ...prev, orders: true, myHotels: false, myInfo: false }));
+  const handleClickMyOrders = () => {
+    setState((prev) => ({ ...prev, myOrders: true, myHotels: false, myInfo: false, createHotel: false }));
+  };
+
+  const handleClickCreateHotel = () => {
+    setState((prev) => ({ ...prev, myOrders: false, myHotels: false, myInfo: false, createHotel: true }));
   };
 
   return (
@@ -74,7 +80,7 @@ const AdminCabinet = () => {
                   </ListItemIcon>
                   <ListItemText primary={t('myInfo')} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClickOrders}>
+                <ListItemButton onClick={handleClickMyOrders}>
                   <ListItemIcon>
                     <MapsHomeWorkIcon />
                   </ListItemIcon>
@@ -86,10 +92,16 @@ const AdminCabinet = () => {
                   </ListItemIcon>
                   <ListItemText primary={t('myHotels')} />
                 </ListItemButton>
+                <ListItemButton onClick={handleClickCreateHotel}>
+                  <ListItemIcon>
+                    <FavoriteIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t('createHotel')} />
+                </ListItemButton>
               </List>
             </Grid>
             <Grid item xs>
-              {state.orders && (
+              {state.myOrders && (
                 <Grid container spacing={2}>
                   {orders.map((item) => {
                     return <OrderCard prop={item} key={item._id} />;
@@ -97,7 +109,7 @@ const AdminCabinet = () => {
                 </Grid>
               )}
               {state.myHotels && (
-                <Grid container spacing={2} alignItems="stretch">
+                <Grid container spacing={2}>
                   {hotelsState.map((el) => (
                     <Grid item key={el._id}>
                       <HotelsCard hotel={el} />
@@ -105,6 +117,7 @@ const AdminCabinet = () => {
                   ))}
                 </Grid>
               )}
+              {state.createHotel && <HotelForm />}
             </Grid>
           </Grid>
         </CardContent>
