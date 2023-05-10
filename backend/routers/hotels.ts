@@ -77,10 +77,9 @@ hotelsRouter.get('/', async (req, res) => {
       if (city) {
         findParams.city = city;
       }
-      if (star) {
+      if (star !== 'null') {
         findParams.star = star;
       }
-
       const hotelResponse = await Hotel.find(findParams);
       return res.send(hotelResponse);
     }
