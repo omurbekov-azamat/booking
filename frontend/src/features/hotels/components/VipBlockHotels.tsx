@@ -6,7 +6,7 @@ import { fetchHotels } from '../hotelsThunks';
 import { Hotel } from '../../../types';
 import HotelsCard from './HotelsCard';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import {useTranslation} from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 const VipBlockHotels = () => {
   const [vipHotels, setVipHotels] = useState<Hotel[]>([]);
