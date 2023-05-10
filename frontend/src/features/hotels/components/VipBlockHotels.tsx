@@ -6,6 +6,7 @@ import { fetchHotels } from '../hotelsThunks';
 import { Hotel } from '../../../types';
 import HotelsCard from './HotelsCard';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import {useTranslation} from "react-i18next";
 
 const VipBlockHotels = () => {
   const [vipHotels, setVipHotels] = useState<Hotel[]>([]);
@@ -14,6 +15,7 @@ const VipBlockHotels = () => {
   const hotels = useAppSelector(selectHotels);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectLoading);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchHotels());
@@ -40,7 +42,7 @@ const VipBlockHotels = () => {
         sx={{ position: 'relative', minHeight: '300px', background: '#78d5d8' }}
       >
         <Box textAlign="center" fontWeight="bold" mt={2}>
-          Best Hotels
+          {t('bestHotels')}
         </Box>
         {loading ? (
           <Spinner />
@@ -67,7 +69,7 @@ const VipBlockHotels = () => {
         sx={{ position: 'relative', minHeight: '300px', background: 'rgba(111,185,240,0.58)' }}
       >
         <Box textAlign="center" fontWeight="bold" mt={2}>
-          Recommended
+          {t('recommended')}
         </Box>
         {loading ? (
           <Spinner />

@@ -27,7 +27,9 @@ export const createApartment = createAsyncThunk<
       formData.append('bath', apartment.bath.toString());
       formData.append('petFriendly', apartment.petFriendly.toString());
       formData.append('food', apartment.food.toString());
-      formData.append('place', apartment.place!.toString());
+      if (apartment.place) {
+        formData.append('place', apartment.place.toString());
+      }
       formData.append('tv', apartment.tv.toString());
       formData.append('towel', apartment.towel.toString());
       formData.append('wifi', apartment.wifi.toString());
