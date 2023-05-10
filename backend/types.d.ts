@@ -54,8 +54,8 @@ export interface IApartment {
   hotelId: ObjectId;
   roomTypeId: ObjectId;
   price: {
-    from: number;
-    till: number;
+    usd: number;
+    kgs: number;
   };
   images: string[] | null;
   description: {

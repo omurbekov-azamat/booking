@@ -26,11 +26,11 @@ const ApartmentSchema = new Schema<IApartment>({
   },
   price: {
     type: {
-      from: {
+      usd: {
         type: Number,
         required: true,
       },
-      till: {
+      kgs: {
         type: Number,
         required: true,
       },
