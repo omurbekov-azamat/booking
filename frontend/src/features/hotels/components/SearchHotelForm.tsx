@@ -21,7 +21,7 @@ const SearchHotelForm = () => {
     parking: false,
     swimmingPool: false,
     petFriendly: false,
-    star: 5,
+    star: null,
   });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -51,7 +51,7 @@ const SearchHotelForm = () => {
       parking: false,
       swimmingPool: false,
       petFriendly: false,
-      star: 5,
+      star: null,
     });
     await dispatch(fetchHotels());
   };
