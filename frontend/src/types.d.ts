@@ -48,7 +48,10 @@ export interface ApartmentData {
     from: number;
     till: number;
   };
-  description?: string;
+  description: {
+    ru: string;
+    en: string;
+  };
   AC: boolean;
   balcony: boolean;
   bath: boolean;

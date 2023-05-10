@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-  Button,
   Card,
   Checkbox,
   Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   FormControlLabel,
   Grid,
   IconButton,
@@ -39,7 +34,10 @@ const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
     roomTypeId: '',
     hotelId: '',
-    description: '',
+    description: {
+      ru: '',
+      en: '',
+    },
     images: [],
     price: {
       from: 0,
@@ -80,6 +78,14 @@ const ApartmentForm = () => {
         price: {
           ...prev.price,
           [name]: parseInt(value),
+        },
+      }));
+    } else if (name === 'ru' || name === 'en') {
+      setState((prev) => ({
+        ...prev,
+        description: {
+          ...prev.description,
+          [name]: value,
         },
       }));
     } else {
@@ -195,14 +201,28 @@ const ApartmentForm = () => {
                 </Grid>
               </Grid>
             </Grid>
+
             <Grid item xs>
               <TextField
-                label={'Description'}
+                label={'Описание на русском'}
                 type="text"
-                name="description"
+                name="ru"
                 autoComplete="current-description"
-                value={state.description}
+                value={state.description.ru}
                 onChange={inputChangeHandler}
+                required
+              />
+            </Grid>
+
+            <Grid item xs>
+              <TextField
+                label={'Description in english'}
+                type="text"
+                name="en"
+                autoComplete="current-description"
+                value={state.description.en}
+                onChange={inputChangeHandler}
+                required
               />
             </Grid>
 
