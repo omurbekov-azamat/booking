@@ -40,8 +40,8 @@ const ApartmentForm = () => {
     },
     images: [],
     price: {
-      from: 0,
-      till: 0,
+      usd: 0,
+      kgs: 0,
     },
     place: 0,
     AC: false,
@@ -178,10 +178,10 @@ const ApartmentForm = () => {
                 <Grid item xs={3}>
                   <TextField
                     type={'number'}
-                    label={'From'}
-                    name="from"
-                    autoComplete="current-from"
-                    value={state.price.from}
+                    label={'Usd'}
+                    name="usd"
+                    autoComplete="current-usd"
+                    value={state.price.usd}
                     onChange={inputChangeHandler}
                     required
                   />
@@ -190,11 +190,11 @@ const ApartmentForm = () => {
                 <Grid item xs={3}>
                   <TextField
                     type={'number'}
-                    inputProps={{ min: state.price.from + 1 }}
-                    label={'Till'}
-                    name="till"
-                    autoComplete="current-till"
-                    value={state.price.till}
+                    inputProps={{ min: state.price.usd + 1 }}
+                    label={'Kgs'}
+                    name="kgs"
+                    autoComplete="current-kgs"
+                    value={state.price.kgs}
                     onChange={inputChangeHandler}
                     required
                   />

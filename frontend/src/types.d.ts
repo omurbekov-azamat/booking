@@ -45,8 +45,8 @@ export interface HotelWithLabel extends Hotel {
 
 export interface ApartmentData {
   price: {
-    from: number;
-    till: number;
+    usd: number;
+    kgs: number;
   };
   description: {
     ru: string;

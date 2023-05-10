@@ -59,7 +59,7 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
               <TableCell component="th" scope="row" sx={{ textTransform: 'capitalize' }}>
                 <Link to={'/' + hotel.name + '/' + hotel._id + '/apartment/' + data._id}>{data.roomTypeId.name}</Link>
               </TableCell>
-              <TableCell align="right">{data.price.from + ' - ' + data.price.till}</TableCell>
+              <TableCell align="right">{data.price.usd + ' - ' + data.price.kgs}</TableCell>
             </TableRow>
           ))}
         </TableBody>
