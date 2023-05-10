@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GlobalError, User, ValidationError } from '../../types';
-import { getAdmins, login, logout, reAuthorization, register } from './usersThunks';
+import { getAdmins, getUsers, login, logout, reAuthorization, register } from './usersThunks';
 import { RootState } from '../../app/store';
 
 interface UsersState {
@@ -10,9 +10,11 @@ interface UsersState {
   loginLoading: boolean;
   logoutLoading: boolean;
   loginError: GlobalError | null;
+  userLoading: boolean;
   modalCoverState: boolean;
   getAdminsLoading: boolean;
   admins: User[];
+  users: User[];
 }
 
 const initialState: UsersState = {
@@ -24,7 +26,9 @@ const initialState: UsersState = {
   loginError: null,
   modalCoverState: false,
   getAdminsLoading: false,
+  userLoading: false,
   admins: [],
+  users: [],
 };
 
 export const usersSlice = createSlice({
@@ -85,6 +89,16 @@ export const usersSlice = createSlice({
     builder.addCase(getAdmins.rejected, (state) => {
       state.getAdminsLoading = false;
     });
+    builder.addCase(getUsers.pending, (state) => {
+      state.userLoading = true;
+    });
+    builder.addCase(getUsers.fulfilled, (state, { payload: users }) => {
+      state.userLoading = false;
+      state.users = users;
+    });
+    builder.addCase(getUsers.rejected, (state) => {
+      state.userLoading = false;
+    });
     builder.addCase(reAuthorization.fulfilled, (state, { payload: user }) => {
       state.user = user;
     });
@@ -104,3 +118,5 @@ export const selectLogoutLoading = (state: RootState) => state.users.logoutLoadi
 export const selectModalCoverState = (state: RootState) => state.users.modalCoverState;
 export const selectGetAdminsLoading = (state: RootState) => state.users.getAdminsLoading;
 export const selectAdmins = (state: RootState) => state.users.admins;
+export const selectUsers = (state: RootState) => state.users.users;
+export const selectUsersLoading = (state: RootState) => state.users.userLoading;

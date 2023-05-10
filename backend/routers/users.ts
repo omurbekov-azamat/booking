@@ -70,6 +70,29 @@ usersRouter.get('/admins', auth, permit('director'), async (req, res, next) => {
   }
 });
 
+usersRouter.get('/getMatched', auth, permit('director'), async (req, res, next) => {
+  try {
+    const lastNameMatch = req.query.nameMatch as string;
+    const emailMatch = req.query.emailMatch as string;
+    if (lastNameMatch) {
+      const matchedUsers = await User.find({
+        lastName: { $regex: new RegExp(lastNameMatch, 'i') },
+        role: 'user',
+      }).limit(20);
+      return res.send(matchedUsers);
+    }
+    if (emailMatch) {
+      const matchedUsers = await User.find({
+        email: { $regex: new RegExp(emailMatch, 'i') },
+        role: 'user',
+      }).limit(20);
+      return res.send(matchedUsers);
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 usersRouter.patch('/status/:id', auth, permit('director'), async (req, res, next) => {
   try {
     const currentUser = await User.findById(req.params.id);

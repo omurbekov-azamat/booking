@@ -48,6 +48,15 @@ export const getAdmins = createAsyncThunk<User[]>('users/getAdmins', async () =>
   }
 });
 
+export const getUsers = createAsyncThunk<User[], string>('users/getMatched', async (match) => {
+  try {
+    const responseUsers = await axiosApi.get<User[]>('/users/getMatched?' + match);
+    return responseUsers.data;
+  } catch {
+    throw new Error();
+  }
+});
+
 interface changeProps {
   addHotel?: string;
   deleteHotel?: string;
@@ -57,6 +66,19 @@ export const changeFavorites = createAsyncThunk<void, changeProps>('users/change
   try {
     const payload = data.addHotel ? { addHotel: data.addHotel } : { deleteHotel: data.deleteHotel };
     await axiosApi.patch('/users/toggleAddHotelToFavorites', payload);
+  } catch {
+    throw new Error();
+  }
+});
+
+interface statusProps {
+  id: string;
+  status: string;
+}
+
+export const changeStatus = createAsyncThunk<void, statusProps>('users/changeStatus', async ({ status, id }) => {
+  try {
+    await axiosApi.patch('/users/status/' + id, { status });
   } catch {
     throw new Error();
   }
