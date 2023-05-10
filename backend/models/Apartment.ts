@@ -44,7 +44,7 @@ const ApartmentSchema = new Schema<IApartment>({
   description: {
     type: String,
   },
-  aircon: {
+  AC: {
     type: Boolean,
     required: true,
   },

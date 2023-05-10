@@ -59,7 +59,7 @@ export interface IApartment {
   };
   images: string[] | null;
   description: string;
-  aircon: boolean;
+  AC: boolean;
   balcony: boolean;
   bath: boolean;
   family: boolean;

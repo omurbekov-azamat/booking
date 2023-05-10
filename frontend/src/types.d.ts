@@ -49,7 +49,7 @@ export interface ApartmentData {
     till: number;
   };
   description?: string;
-  aircon: boolean;
+  AC: boolean;
   balcony: boolean;
   bath: boolean;
   family: boolean;

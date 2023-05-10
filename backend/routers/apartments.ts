@@ -19,7 +19,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
       price: JSON.parse(req.body.price),
       images: req.files ? (req.files as Express.Multer.File[]).map((file) => file.path) : null,
       description: req.body.description ? req.body.description : null,
-      aircon: req.body.aircon,
+      AC: req.body.AC,
       balcony: req.body.balcony,
       bath: req.body.bath,
       family: req.body.family,

@@ -38,7 +38,7 @@ const ApartmentForm = () => {
       till: 0,
     },
     place: 0,
-    aircon: false,
+    AC: false,
     bath: false,
     balcony: false,
     food: false,
@@ -234,12 +234,7 @@ const ApartmentForm = () => {
                     <DialogContent>
                       <FormControlLabel
                         control={
-                          <Checkbox
-                            checked={state.aircon}
-                            onChange={handleCheckboxChange}
-                            name="aircon"
-                            color="primary"
-                          />
+                          <Checkbox checked={state.AC} onChange={handleCheckboxChange} name="AC" color="primary" />
                         }
                         label="Air conditioning"
                         labelPlacement="end"
