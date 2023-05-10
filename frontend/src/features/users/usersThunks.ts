@@ -71,6 +71,19 @@ export const changeFavorites = createAsyncThunk<void, changeProps>('users/change
   }
 });
 
+interface statusProps {
+  id: string;
+  status: string;
+}
+
+export const changeStatus = createAsyncThunk<void, statusProps>('users/changeStatus', async ({ status, id }) => {
+  try {
+    await axiosApi.patch('/users/status/' + id, { status });
+  } catch {
+    throw new Error();
+  }
+});
+
 export const reAuthorization = createAsyncThunk<User>('user/reAuthorization', async () => {
   try {
     const response = await axiosApi.post<RegisterResponse>('/users/session/token');
