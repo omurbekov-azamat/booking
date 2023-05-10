@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getAdmins } from '../users/usersThunks';
-import { selectAdmins, selectGetAdminsLoading, selectUsers } from '../users/usersSlice';
+import { selectAdmins, selectGetAdminsLoading } from '../users/usersSlice';
 import { Card, CardContent, Grid, List, Typography } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -26,6 +26,7 @@ const DirectorCabinet = () => {
   const adminOrders = useAppSelector(selectAdminMyOrders);
   const { t } = useTranslation();
   const [openAdmins, setOpenAdmins] = React.useState(false);
+  const [openUsers, setOpenUsers] = React.useState(false);
 
   useEffect(() => {
     dispatch(getAdmins());
@@ -35,12 +36,18 @@ const DirectorCabinet = () => {
     dispatch(getForAdminHisOrders(id));
   };
 
+  const handleClickShowUsers = () => {
+    setOpenAdmins(false);
+    setOpenUsers(true);
+  };
+
   const handleClickListItem = () => {
     setOpenAdmins(false);
   };
 
   const handleClickShowAdmins = () => {
     setOpenAdmins(!openAdmins);
+    setOpenUsers(false);
   };
 
   return (
@@ -58,11 +65,11 @@ const DirectorCabinet = () => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                <ListItemButton onClick={handleClickListItem}>
+                <ListItemButton onClick={handleClickShowUsers}>
                   <ListItemIcon>
-                    <SendIcon />
+                    <AssignmentIndIcon />
                   </ListItemIcon>
-                  <ListItemText primary="тут может быть что нибудь" />
+                  <ListItemText primary="Статус пользователей" />
                 </ListItemButton>
                 <ListItemButton onClick={handleClickListItem}>
                   <ListItemIcon>
@@ -91,8 +98,12 @@ const DirectorCabinet = () => {
                 </Collapse>
               </List>
             </Grid>
-            <Grid item xs={6}>
-              {openAdmins ? adminOrders.map((order) => <OrderCard key={order._id} prop={order} />) : <UsersStatus />}
+            <Grid item xs={12} md={6}>
+              {openAdmins ? (
+                adminOrders.map((order) => <OrderCard key={order._id} prop={order} />)
+              ) : openUsers ? (
+                <UsersStatus />
+              ) : null}
             </Grid>
           </Grid>
         </CardContent>
