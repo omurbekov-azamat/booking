@@ -178,6 +178,20 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
   }
 });
 
+hotelsRouter.patch('/status/:id', auth, permit('director', 'admin'), async (req, res, next) => {
+  try {
+    const currentHotel = await Hotel.findById(req.params.id);
+    if (currentHotel) {
+      await Hotel.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
+      res.send({ message: 'status changed' });
+    } else {
+      res.status(400).send({ message: 'Hotel is not found' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, res) => {
   try {
     const hotel = await Hotel.updateOne(
