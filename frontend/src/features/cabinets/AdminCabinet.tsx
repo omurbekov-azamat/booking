@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
-import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { getForAdminHisOrders } from '../orders/ordersThunks';
+import { fetchHotels } from '../hotels/hotelsThunks';
+import { selectUser } from '../users/usersSlice';
+import { selectAdminMyOrders } from '../orders/ordersSlice';
+import { selectHotels } from '../hotels/hotelsSlice';
+import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
-import HomeIcon from '@mui/icons-material/Home';
+import WorkIcon from '@mui/icons-material/Work';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import PersonIcon from '@mui/icons-material/Person';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectUser } from '../users/usersSlice';
-import { fetchHotels } from '../hotels/hotelsThunks';
-import { getForAdminHisOrders } from '../orders/ordersThunks';
-import { selectHotels } from '../hotels/hotelsSlice';
-import { selectAdminMyOrders } from '../orders/ordersSlice';
 import OrderCard from '../orders/components/OrderCard';
 import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
 import MyInformation from './components/MyInformation';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const AdminCabinet = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,8 @@ const AdminCabinet = () => {
   const user = useAppSelector(selectUser);
   const hotelsState = useAppSelector(selectHotels);
   const orders = useAppSelector(selectAdminMyOrders);
+
+  const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
 
   const [state, setState] = React.useState({
     myInfo: true,
@@ -45,18 +48,22 @@ const AdminCabinet = () => {
 
   const handleClickMyInfo = () => {
     setState((prev) => ({ ...prev, myOrders: false, myHotels: false, myInfo: true, createHotel: false }));
-  };
-
-  const handleClickMyHotels = () => {
-    setState((prev) => ({ ...prev, myOrders: false, myHotels: true, myInfo: false, createHotel: false }));
+    setSelectedIndex(0);
   };
 
   const handleClickMyOrders = () => {
     setState((prev) => ({ ...prev, myOrders: true, myHotels: false, myInfo: false, createHotel: false }));
+    setSelectedIndex(1);
+  };
+
+  const handleClickMyHotels = () => {
+    setState((prev) => ({ ...prev, myOrders: false, myHotels: true, myInfo: false, createHotel: false }));
+    setSelectedIndex(2);
   };
 
   const handleClickCreateHotel = () => {
     setState((prev) => ({ ...prev, myOrders: false, myHotels: false, myInfo: false, createHotel: true }));
+    setSelectedIndex(3);
   };
 
   return (
@@ -75,27 +82,27 @@ const AdminCabinet = () => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                <ListItemButton onClick={handleClickMyInfo}>
+                <ListItemButton selected={selectedIndex === 0} onClick={handleClickMyInfo}>
                   <ListItemIcon>
-                    <HomeIcon />
+                    <PersonIcon />
                   </ListItemIcon>
                   <ListItemText primary={t('myInfo')} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClickMyOrders}>
+                <ListItemButton selected={selectedIndex === 1} onClick={handleClickMyOrders}>
                   <ListItemIcon>
-                    <MapsHomeWorkIcon />
+                    <WorkIcon />
                   </ListItemIcon>
                   <ListItemText primary={t('myOrders')} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClickMyHotels}>
+                <ListItemButton selected={selectedIndex === 2} onClick={handleClickMyHotels}>
                   <ListItemIcon>
-                    <FavoriteIcon />
+                    <MapsHomeWorkIcon />
                   </ListItemIcon>
                   <ListItemText primary={t('myHotels')} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClickCreateHotel}>
+                <ListItemButton selected={selectedIndex === 3} onClick={handleClickCreateHotel}>
                   <ListItemIcon>
-                    <FavoriteIcon />
+                    <AddCircleIcon />
                   </ListItemIcon>
                   <ListItemText primary={t('createHotel')} />
                 </ListItemButton>
