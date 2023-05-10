@@ -19,6 +19,7 @@ import HotelForm from '../hotels/components/HotelForm';
 import MyInformation from './components/MyInformation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 export interface AdminState {
   [key: string]: boolean;
@@ -30,6 +31,7 @@ const initialState: AdminState = {
   myHotels: false,
   createHotel: false,
   unacceptedOrders: false,
+  hotelStatus: false,
 };
 
 interface Props {
@@ -72,6 +74,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'unacceptedOrders', icon: <WorkspacesIcon />, text: t('unacceptedOrders') },
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
+    { option: 'hotelStatus', icon: <LocationCityIcon />, text: 'Hotel status' },
   ];
 
   return (
@@ -128,6 +131,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   })}
                 </Grid>
               )}
+              {state.hotelStatus && <>hotel status is here</>}
             </Grid>
           </Grid>
         </CardContent>
