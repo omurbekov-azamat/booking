@@ -26,6 +26,14 @@ import { createApartment, fetchRoomType } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import PoolIcon from '@mui/icons-material/Pool';
+import BalconyIcon from '@mui/icons-material/Balcony';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import PetsIcon from '@mui/icons-material/Pets';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
+import WifiIcon from '@mui/icons-material/Wifi';
+import TvIcon from '@mui/icons-material/Tv';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -230,23 +238,39 @@ const ApartmentForm = () => {
                     <DialogContent>
                       <FormControlLabel
                         control={
-                          <Checkbox checked={state.AC} onChange={handleCheckboxChange} name="AC" color="primary" />
+                          <Checkbox
+                            icon={<AcUnitIcon />}
+                            checkedIcon={<AcUnitIcon color="primary" />}
+                            checked={state.AC}
+                            onChange={handleCheckboxChange}
+                            name="AC"
+                            color="primary"
+                          />
                         }
-                        label="Air conditioning"
+                        label="AC"
                         labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={state.bath} onChange={handleCheckboxChange} name="bath" color="primary" />
-                        }
-                        label="Bath"
-                        labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
+                        sx={{ textAlign: 'left', width: '90%' }}
                       />
                       <FormControlLabel
                         control={
                           <Checkbox
+                            icon={<PoolIcon />}
+                            checkedIcon={<PoolIcon color="primary" />}
+                            color="primary"
+                            checked={state.bath}
+                            onChange={handleCheckboxChange}
+                            name="bath"
+                          />
+                        }
+                        label="Bath"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '90%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            icon={<BalconyIcon />}
+                            checkedIcon={<BalconyIcon color="primary" />}
                             checked={state.balcony}
                             onChange={handleCheckboxChange}
                             name="balcony"
@@ -255,32 +279,43 @@ const ApartmentForm = () => {
                         }
                         label="Balcony"
                         labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={state.food} onChange={handleCheckboxChange} name="food" color="primary" />
-                        }
-                        label="Food"
-                        labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
+                        sx={{ textAlign: 'left', width: '90%' }}
                       />
                       <FormControlLabel
                         control={
                           <Checkbox
+                            icon={<RestaurantIcon />}
+                            checkedIcon={<RestaurantIcon color="primary" />}
+                            checked={state.food}
+                            onChange={handleCheckboxChange}
+                            name="food"
+                            color="primary"
+                          />
+                        }
+                        label="Food"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '90%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            icon={<PetsIcon />}
+                            checkedIcon={<PetsIcon color="primary" />}
                             checked={state.petFriendly}
                             onChange={handleCheckboxChange}
                             name="petFriendly"
                             color="primary"
                           />
                         }
-                        label="Family-friendly"
+                        label="Pet friendly"
                         labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
+                        sx={{ textAlign: 'left', width: '90%' }}
                       />
                       <FormControlLabel
                         control={
                           <Checkbox
+                            icon={<DryCleaningIcon />}
+                            checkedIcon={<DryCleaningIcon color="primary" />}
                             checked={state.towel}
                             onChange={handleCheckboxChange}
                             name="towel"
@@ -289,23 +324,37 @@ const ApartmentForm = () => {
                         }
                         label="Towels"
                         labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
+                        sx={{ textAlign: 'left', width: '90%' }}
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox checked={state.wifi} onChange={handleCheckboxChange} name="wifi" color="primary" />
+                          <Checkbox
+                            icon={<WifiIcon />}
+                            checkedIcon={<WifiIcon color="primary" />}
+                            checked={state.wifi}
+                            onChange={handleCheckboxChange}
+                            name="wifi"
+                            color="primary"
+                          />
                         }
                         label="Wi-Fi"
                         labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
+                        sx={{ textAlign: 'left', width: '90%' }}
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox checked={state.tv} onChange={handleCheckboxChange} name="tv" color="primary" />
+                          <Checkbox
+                            icon={<TvIcon />}
+                            checkedIcon={<TvIcon color="primary" />}
+                            checked={state.tv}
+                            onChange={handleCheckboxChange}
+                            name="tv"
+                            color="primary"
+                          />
                         }
                         label="TV"
                         labelPlacement="end"
-                        sx={{ textAlign: 'left', width: '100%' }}
+                        sx={{ textAlign: 'left', width: '90%' }}
                       />
                     </DialogContent>
                     <DialogActions>
