@@ -191,5 +191,6 @@ export interface CommentMutation {
 }
 
 export interface IRoomType {
+  _id: string;
   name: string;
 }

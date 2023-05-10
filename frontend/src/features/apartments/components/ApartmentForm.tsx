@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Grid,
   IconButton,
+  MenuItem,
   TextField,
   Typography,
 } from '@mui/material';
@@ -109,7 +110,6 @@ const ApartmentForm = () => {
         createApartment({
           ...state,
           hotelId: id,
-          roomTypeId: '6447a4f33285c6710e415c80',
         }),
       );
       await navigate('/hotels/' + id);
@@ -134,6 +134,22 @@ const ApartmentForm = () => {
                 onChange={inputChangeHandler}
                 required
               />
+            </Grid>
+            <Grid item xs>
+              <TextField
+                select
+                label="Room type"
+                name="roomTypeId"
+                value={state.roomTypeId}
+                onChange={inputChangeHandler}
+                required
+              >
+                {roomType.map((option) => (
+                  <MenuItem key={option._id} value={option._id}>
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
             <Grid item xs>
               <Grid container justifyContent={'space-around'}>
