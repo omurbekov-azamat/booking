@@ -44,7 +44,7 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
           .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
         return res.send(adminOrders);
       } else {
-        const openOrders = await Order.find({ status: 'open' })
+        const openOrders = await Order.find({ status: 'open', adminId: null })
           .populate('userId', '-token')
           .populate('adminId', '-token')
           .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
