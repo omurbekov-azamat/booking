@@ -22,7 +22,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
       AC: req.body.AC,
       balcony: req.body.balcony,
       bath: req.body.bath,
-      family: req.body.family,
+      petFriendly: req.body.petFriendly,
       food: req.body.food,
       towel: req.body.towel,
       wifi: req.body.wifi,

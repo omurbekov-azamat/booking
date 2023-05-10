@@ -52,7 +52,7 @@ export interface ApartmentData {
   AC: boolean;
   balcony: boolean;
   bath: boolean;
-  family: boolean;
+  petFriendly: boolean;
   food: boolean;
   place: number;
   tv: boolean;

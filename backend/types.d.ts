@@ -62,7 +62,7 @@ export interface IApartment {
   AC: boolean;
   balcony: boolean;
   bath: boolean;
-  family: boolean;
+  petFriendly: boolean;
   food: boolean;
   place: number;
   tv: boolean;

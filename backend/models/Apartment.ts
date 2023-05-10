@@ -56,7 +56,7 @@ const ApartmentSchema = new Schema<IApartment>({
     type: Boolean,
     required: true,
   },
-  family: {
+  petFriendly: {
     type: Boolean,
     required: true,
   },

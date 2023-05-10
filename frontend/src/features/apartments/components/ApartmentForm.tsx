@@ -42,7 +42,7 @@ const ApartmentForm = () => {
     bath: false,
     balcony: false,
     food: false,
-    family: false,
+    petFriendly: false,
     towel: false,
     wifi: false,
     tv: false,
@@ -77,10 +77,6 @@ const ApartmentForm = () => {
     } else {
       setState((prev) => ({ ...prev, [name]: value }));
     }
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -272,9 +268,9 @@ const ApartmentForm = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={state.family}
+                            checked={state.petFriendly}
                             onChange={handleCheckboxChange}
-                            name="family"
+                            name="petFriendly"
                             color="primary"
                           />
                         }
