@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getAdmins } from '../users/usersThunks';
-import { selectAdmins, selectGetAdminsLoading } from '../users/usersSlice';
-import { Card, CardContent, Grid, List, Typography } from '@mui/material';
+import { selectAdmins, selectGetAdminsLoading, unsetCabinetUsers } from '../users/usersSlice';
+import { Box, Card, CardContent, Grid, List, Typography } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -18,6 +17,9 @@ import { selectAdminMyOrders } from '../orders/ordersSlice';
 import OrderCard from '../orders/components/OrderCard';
 import { useTranslation } from 'react-i18next';
 import UsersStatus from './components/UsersStatus';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import HotelsStatus from './components/HotelsStatus';
+import { unsetCabinetHotels } from '../hotels/hotelsSlice';
 
 const DirectorCabinet = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +29,7 @@ const DirectorCabinet = () => {
   const { t } = useTranslation();
   const [openAdmins, setOpenAdmins] = React.useState(false);
   const [openUsers, setOpenUsers] = React.useState(false);
+  const [openHotels, setOpenHotels] = React.useState(false);
 
   useEffect(() => {
     dispatch(getAdmins());
@@ -37,31 +40,41 @@ const DirectorCabinet = () => {
   };
 
   const handleClickShowUsers = () => {
+    dispatch(unsetCabinetUsers());
+    dispatch(unsetCabinetHotels());
     setOpenAdmins(false);
     setOpenUsers(true);
+    setOpenHotels(false);
   };
 
-  const handleClickListItem = () => {
+  const handleClickShowHotels = () => {
+    dispatch(unsetCabinetUsers());
+    dispatch(unsetCabinetHotels());
     setOpenAdmins(false);
+    setOpenUsers(false);
+    setOpenHotels(true);
   };
 
   const handleClickShowAdmins = () => {
+    dispatch(unsetCabinetUsers());
+    dispatch(unsetCabinetHotels());
     setOpenAdmins(!openAdmins);
     setOpenUsers(false);
+    setOpenHotels(false);
   };
 
   return (
-    <>
+    <Box mt={3}>
       {loading && <Typography>loading...</Typography>}
       <Typography variant="h5" fontWeight="bold" textAlign="center" mt={3}>
         {t('directorCabinet')}
       </Typography>
-      <Card>
+      <Card sx={{ minHeight: '600px' }}>
         <CardContent>
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} md={3}>
               <List
-                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', border: '2px solid #c5c5c5' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
@@ -71,11 +84,11 @@ const DirectorCabinet = () => {
                   </ListItemIcon>
                   <ListItemText primary="Статус пользователей" />
                 </ListItemButton>
-                <ListItemButton onClick={handleClickListItem}>
+                <ListItemButton onClick={handleClickShowHotels}>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <LocationCityIcon />
                   </ListItemIcon>
-                  <ListItemText primary="тут может быть что нибудь" />
+                  <ListItemText primary="Статус отелей" />
                 </ListItemButton>
                 <ListItemButton onClick={handleClickShowAdmins}>
                   <ListItemIcon>
@@ -98,17 +111,19 @@ const DirectorCabinet = () => {
                 </Collapse>
               </List>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs>
               {openAdmins ? (
                 adminOrders.map((order) => <OrderCard key={order._id} prop={order} />)
               ) : openUsers ? (
                 <UsersStatus />
-              ) : null}
+              ) : (
+                openHotels && <HotelsStatus />
+              )}
             </Grid>
           </Grid>
         </CardContent>
       </Card>
-    </>
+    </Box>
   );
 };
 

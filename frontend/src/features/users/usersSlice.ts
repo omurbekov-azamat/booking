@@ -44,6 +44,9 @@ export const usersSlice = createSlice({
     closeModalCover: (state) => {
       state.modalCoverState = false;
     },
+    unsetCabinetUsers: (state) => {
+      state.users = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(register.pending, (state) => {
@@ -107,7 +110,7 @@ export const usersSlice = createSlice({
 
 export const usersReducer = usersSlice.reducer;
 
-export const { unsetUser, openModalCover, closeModalCover } = usersSlice.actions;
+export const { unsetUser, openModalCover, closeModalCover, unsetCabinetUsers } = usersSlice.actions;
 
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterLoading = (state: RootState) => state.users.registerLoading;

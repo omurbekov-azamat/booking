@@ -70,6 +70,28 @@ export const fetchOneHotel = createAsyncThunk<Hotel, string>('hotels/fetchOne', 
   }
 });
 
+export const getCabinetHotels = createAsyncThunk<Hotel[], string>('hotels/getCabinetHotels', async (match) => {
+  try {
+    const responseUsers = await axiosApi.get<Hotel[]>('/hotels/getMatchedHotels?' + match);
+    return responseUsers.data;
+  } catch {
+    throw new Error();
+  }
+});
+
+interface statusProps {
+  id: string;
+  status: string;
+}
+
+export const changeStatusHotels = createAsyncThunk<void, statusProps>('users/changeStatus', async ({ status, id }) => {
+  try {
+    await axiosApi.patch('/hotels/status/' + id, { status });
+  } catch {
+    throw new Error();
+  }
+});
+
 export const createHotel = createAsyncThunk<void, HotelMutation, { state: RootState; rejectValue: ValidationError }>(
   'hotels/createHotel',
   async (hotel, { getState, rejectWithValue }) => {
