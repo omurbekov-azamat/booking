@@ -58,7 +58,10 @@ export interface IApartment {
     till: number;
   };
   images: string[] | null;
-  description: string;
+  description: {
+    ru: string;
+    en: string;
+  };
   AC: boolean;
   balcony: boolean;
   bath: boolean;

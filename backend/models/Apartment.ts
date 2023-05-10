@@ -42,7 +42,17 @@ const ApartmentSchema = new Schema<IApartment>({
     default: [],
   },
   description: {
-    type: String,
+    type: {
+      ru: {
+        type: String,
+        required: true,
+      },
+      en: {
+        type: String,
+        required: true,
+      },
+    },
+    required: true,
   },
   AC: {
     type: Boolean,
