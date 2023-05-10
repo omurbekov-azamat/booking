@@ -99,5 +99,7 @@
   "excursions": "Экскурсии",
   "theMostBeautifulPlacesInKyrgyzstan": "Самые красивые точки Кыргызстана",
   "businessEvents": "Деловые мероприятия",
-  "eventsOfAnyFormat": "Мероприятия любого формата"
+  "unacceptedOrders": "Не принятые заказы",
+  "eventsOfAnyFormat": "Мероприятия любого формата",
+  "city": "Город"
 }
