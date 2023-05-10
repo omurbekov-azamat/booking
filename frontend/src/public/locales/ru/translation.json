@@ -91,5 +91,13 @@
   "writeComment": "Напишите коментарий...",
   "forAdditionalServices": "За дополнительные услуги взимается отдельная плата",
   "send": "Отправить",
-  "myInfo": "Мои данные"
+  "myInfo": "Мои данные",
+  "languageTranslations": "Языковые переводы",
+  "languageTranslationServices": "Услуги языковых переводов",
+  "transfer": "Трансфер",
+  "reliableCarsInAnyClass": "Надежные авто в любом классе",
+  "excursions": "Экскурсии",
+  "theMostBeautifulPlacesInKyrgyzstan": "Самые красивые точки Кыргызстана",
+  "businessEvents": "Деловые мероприятия",
+  "eventsOfAnyFormat": "Мероприятия любого формата"
 }

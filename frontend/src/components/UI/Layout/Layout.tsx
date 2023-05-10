@@ -9,7 +9,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <header>
         <AppToolbar />
       </header>
-      <Container component="main" sx={{ flex: 1, m: 'auto' }}>
+      <Container maxWidth={'xl'} component="main" sx={{ flex: 1, m: 'auto' }}>
         {children}
       </Container>
       <footer style={{ flexShrink: 0 }}>
