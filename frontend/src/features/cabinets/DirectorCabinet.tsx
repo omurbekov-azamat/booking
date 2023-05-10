@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getAdmins } from '../users/usersThunks';
-import { selectAdmins, selectGetAdminsLoading } from '../users/usersSlice';
+import { selectAdmins, selectGetAdminsLoading, selectUsers } from '../users/usersSlice';
 import { Card, CardContent, Grid, List, Typography } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -17,6 +17,7 @@ import { getForAdminHisOrders } from '../orders/ordersThunks';
 import { selectAdminMyOrders } from '../orders/ordersSlice';
 import OrderCard from '../orders/components/OrderCard';
 import { useTranslation } from 'react-i18next';
+import UsersStatus from './components/UsersStatus';
 
 const DirectorCabinet = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +52,7 @@ const DirectorCabinet = () => {
       <Card>
         <CardContent>
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
-            <Grid item xs>
+            <Grid item xs={6}>
               <List
                 sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
                 component="nav"
@@ -90,14 +91,8 @@ const DirectorCabinet = () => {
                 </Collapse>
               </List>
             </Grid>
-            <Grid item xs>
-              <Grid container spacing={3}>
-                {openAdmins ? (
-                  adminOrders.map((order) => <OrderCard key={order._id} prop={order} />)
-                ) : (
-                  <Typography mt={3}>тут может быть что нибудь</Typography>
-                )}
-              </Grid>
+            <Grid item xs={6}>
+              {openAdmins ? adminOrders.map((order) => <OrderCard key={order._id} prop={order} />) : <UsersStatus />}
             </Grid>
           </Grid>
         </CardContent>
