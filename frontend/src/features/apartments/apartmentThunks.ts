@@ -20,7 +20,7 @@ export const createApartment = createAsyncThunk<
       formData.append('hotelId', apartment.hotelId);
       formData.append('roomTypeId', apartment.roomTypeId);
       formData.append('price', JSON.stringify(apartment.price));
-      formData.append('description.ru', apartment.description.ru);
+      formData.append('description', JSON.stringify(apartment.description));
       formData.append('description.en', apartment.description.en);
       formData.append('AC', apartment.AC.toString());
       formData.append('balcony', apartment.balcony.toString());
