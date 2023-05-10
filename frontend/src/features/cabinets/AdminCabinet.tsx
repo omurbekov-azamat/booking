@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { getForAdminHisOrders } from '../orders/ordersThunks';
+import { getForAdminHisOrders, getOrders } from '../orders/ordersThunks';
 import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
-import { selectAdminMyOrders } from '../orders/ordersSlice';
+import { selectAdminMyOrders, selectOrders } from '../orders/ordersSlice';
 import { selectHotels } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
+import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import WorkIcon from '@mui/icons-material/Work';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -42,6 +42,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const user = useAppSelector(selectUser);
   const hotelsState = useAppSelector(selectHotels);
   const orders = useAppSelector(selectAdminMyOrders);
+  const unacceptedOrders = useAppSelector(selectOrders);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<AdminState>(exist);
@@ -54,8 +55,11 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
       if (state.myOrders) {
         dispatch(getForAdminHisOrders(user._id));
       }
+      if (state.unacceptedOrders) {
+        dispatch(getOrders());
+      }
     }
-  }, [dispatch, user, state.myHotels, state.myOrders]);
+  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders]);
 
   const handleClickOption = (option: string, index: number) => {
     setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
@@ -117,7 +121,13 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               )}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
-              {state.unacceptedOrders && <Typography>free orders</Typography>}
+              {state.unacceptedOrders && (
+                <Grid container spacing={2}>
+                  {unacceptedOrders.map((item) => {
+                    return <OrderCard prop={item} key={item._id} />;
+                  })}
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </CardContent>
