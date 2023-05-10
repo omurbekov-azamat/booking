@@ -7,6 +7,7 @@ import {
   fetchNewPage,
   fetchOneHotel,
   fetchSearchedHotels,
+  getCabinetHotels,
   getFavoriteHotels,
   removeHotel,
   togglePublishedHotel,
@@ -27,6 +28,8 @@ interface HotelsState {
   createHotelError: ValidationError | null;
   fetchSearchedHotelsLoading: boolean;
   favoriteHotels: Hotel[];
+  cabinetHotels: Hotel[];
+  cabinetLoading: boolean;
   fetchFavoriteHotelsLoading: boolean;
 }
 
@@ -44,13 +47,19 @@ const initialState: HotelsState = {
   createHotelError: null,
   fetchSearchedHotelsLoading: false,
   favoriteHotels: [],
+  cabinetHotels: [],
+  cabinetLoading: false,
   fetchFavoriteHotelsLoading: false,
 };
 
 export const hotelsSlice = createSlice({
   name: 'hotels',
   initialState,
-  reducers: {},
+  reducers: {
+    unsetCabinetHotels: (state) => {
+      state.cabinetHotels = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchHotels.pending, (state) => {
       state.loading = true;
@@ -160,6 +169,16 @@ export const hotelsSlice = createSlice({
     builder.addCase(getFavoriteHotels.rejected, (state) => {
       state.fetchFavoriteHotelsLoading = false;
     });
+    builder.addCase(getCabinetHotels.pending, (state) => {
+      state.cabinetLoading = true;
+    });
+    builder.addCase(getCabinetHotels.fulfilled, (state, { payload: hotels }) => {
+      state.cabinetLoading = false;
+      state.cabinetHotels = hotels;
+    });
+    builder.addCase(getCabinetHotels.rejected, (state) => {
+      state.cabinetLoading = false;
+    });
   },
 });
 export const hotelsReducer = hotelsSlice.reducer;
@@ -176,3 +195,6 @@ export const selectSearchHotels = (state: RootState) => state.hotels.search;
 export const selectFetchSearchedHotelsLoading = (state: RootState) => state.hotels.fetchSearchedHotelsLoading;
 export const selectFavoriteHotels = (state: RootState) => state.hotels.favoriteHotels;
 export const selectFetchFavoriteHotelsLoading = (state: RootState) => state.hotels.fetchFavoriteHotelsLoading;
+export const selectCabinetHotels = (state: RootState) => state.hotels.cabinetHotels;
+export const selectCabinetLoading = (state: RootState) => state.hotels.cabinetLoading;
+export const { unsetCabinetHotels } = hotelsSlice.actions;

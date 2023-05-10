@@ -142,7 +142,7 @@ export interface SearchData {
   parking: boolean;
   swimmingPool: boolean;
   petFriendly: boolean;
-  star: number;
+  star: number | null;
 }
 
 export interface OrderData {

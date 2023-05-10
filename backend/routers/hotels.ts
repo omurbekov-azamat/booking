@@ -38,6 +38,20 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
   }
 });
 
+hotelsRouter.get('/getMatchedHotels', auth, permit('director', 'admin'), async (req, res, next) => {
+  try {
+    const nameMatch = req.query.nameMatch as string;
+    if (nameMatch) {
+      const matched = await Hotel.find({
+        name: { $regex: new RegExp(nameMatch, 'i') },
+      }).limit(6);
+      return res.send(matched);
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 hotelsRouter.get('/', async (req, res) => {
   const nonSmokingRooms = req.query.nonSmoking as string;
   const swimmingPool = req.query.swimmingPool as string;
@@ -77,10 +91,9 @@ hotelsRouter.get('/', async (req, res) => {
       if (city) {
         findParams.city = city;
       }
-      if (star) {
+      if (star !== 'null') {
         findParams.star = star;
       }
-
       const hotelResponse = await Hotel.find(findParams);
       return res.send(hotelResponse);
     }
@@ -162,6 +175,20 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
     }
   } catch {
     return res.sendStatus(500);
+  }
+});
+
+hotelsRouter.patch('/status/:id', auth, permit('director', 'admin'), async (req, res, next) => {
+  try {
+    const currentHotel = await Hotel.findById(req.params.id);
+    if (currentHotel) {
+      await Hotel.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
+      res.send({ message: 'status changed' });
+    } else {
+      res.status(400).send({ message: 'Hotel is not found' });
+    }
+  } catch (e) {
+    return next(e);
   }
 });
 
