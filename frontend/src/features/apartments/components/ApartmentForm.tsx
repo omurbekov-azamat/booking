@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
+  Button,
   Card,
   Checkbox,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControlLabel,
   Grid,
   IconButton,
@@ -116,6 +121,30 @@ const ApartmentForm = () => {
     }
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState<string[]>([]);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checkboxName = event.target.name;
+    const isChecked = event.target.checked;
+    setState({ ...state, [checkboxName]: isChecked }); // update main state
+
+    if (isChecked) {
+      setSelectedCheckboxes([...selectedCheckboxes, checkboxName]); // add selected checkbox to the state
+    } else {
+      setSelectedCheckboxes(selectedCheckboxes.filter((name) => name !== checkboxName)); // remove unchecked checkbox from the state
+    }
+  };
+
   return (
     <>
       <Container component="main" maxWidth="sm">
@@ -190,65 +219,128 @@ const ApartmentForm = () => {
                 onChange={inputChangeHandler}
               />
             </Grid>
-            <Grid item xs>
-              <Card sx={{ mt: 5, p: 3 }}>
-                <Grid container spacing={3}>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={state.aircon} onChange={handleChange} name="aircon" color="primary" />
-                      }
-                      label="Air conditioning"
-                    />
+
+            <Grid container spacing={3}>
+              <Grid item xs>
+                <Card sx={{ mt: 5, p: 3 }}>
+                  <Typography style={{ textAlign: 'center' }} mb={2}>
+                    Доп услуги
+                  </Typography>
+                  <Button variant="contained" onClick={handleOpen}>
+                    выбрать
+                  </Button>
+                  <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Choose your options</DialogTitle>
+                    <DialogContent>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={state.aircon}
+                            onChange={handleCheckboxChange}
+                            name="aircon"
+                            color="primary"
+                          />
+                        }
+                        label="Air conditioning"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={state.bath} onChange={handleCheckboxChange} name="bath" color="primary" />
+                        }
+                        label="Bath"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={state.balcony}
+                            onChange={handleCheckboxChange}
+                            name="balcony"
+                            color="primary"
+                          />
+                        }
+                        label="Balcony"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={state.food} onChange={handleCheckboxChange} name="food" color="primary" />
+                        }
+                        label="Food"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={state.family}
+                            onChange={handleCheckboxChange}
+                            name="family"
+                            color="primary"
+                          />
+                        }
+                        label="Family-friendly"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={state.towel}
+                            onChange={handleCheckboxChange}
+                            name="towel"
+                            color="primary"
+                          />
+                        }
+                        label="Towels"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={state.wifi} onChange={handleCheckboxChange} name="wifi" color="primary" />
+                        }
+                        label="Wi-Fi"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={state.tv} onChange={handleCheckboxChange} name="tv" color="primary" />
+                        }
+                        label="TV"
+                        labelPlacement="end"
+                        sx={{ textAlign: 'left', width: '100%' }}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Close</Button>
+                      <Button onClick={handleClose} variant="contained">
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                  <Grid container direction="column">
+                    {selectedCheckboxes.map((item, index) => (
+                      <Typography
+                        key={index}
+                        style={{
+                          textAlign: 'left',
+                          borderBottom: '1px solid black',
+                          padding: '2px',
+                          marginBottom: '2px',
+                        }}
+                      >
+                        {item}
+                      </Typography>
+                    ))}
                   </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.bath} onChange={handleChange} name="bath" color="primary" />}
-                      label="Bath"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={state.balcony} onChange={handleChange} name="balcony" color="primary" />
-                      }
-                      label="Balcony"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.food} onChange={handleChange} name="food" color="primary" />}
-                      label="Food"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={state.family} onChange={handleChange} name="family" color="primary" />
-                      }
-                      label="Family-friendly"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.towel} onChange={handleChange} name="towel" color="primary" />}
-                      label="Towels"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.wifi} onChange={handleChange} name="wifi" color="primary" />}
-                      label="Wi-Fi"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.tv} onChange={handleChange} name="tv" color="primary" />}
-                      label="TV"
-                    />
-                  </Grid>
-                </Grid>
-              </Card>
+                </Card>
+              </Grid>
             </Grid>
             <Card sx={{ mt: 5, p: 3 }}>
               <Grid item xs>
