@@ -109,5 +109,12 @@
   "businessEvents": "Деловые мероприятия",
   "unacceptedOrders": "Не принятые заказы",
   "eventsOfAnyFormat": "Мероприятия любого формата",
-  "city": "Город"
+  "city": "Город",
+  "order": "Заказ",
+  "creationDate": "Дата создания",
+  "customerName": "Имя заказчика",
+  "telephoneNumber": "Номер телефона",
+  "thereAreNoOrders": "Нет никаких заказов",
+  "commentary": "Коментарий",
+  "status": "Статус"
 }

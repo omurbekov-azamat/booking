@@ -4,7 +4,7 @@ import { Box, Card, CardContent, Grid, List } from '@mui/material';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import ListItemButton from '@mui/material/ListItemButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Orders from '../orders/components/Orders';
+import OrderItems from '../orders/components/OrderItems';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -14,9 +14,12 @@ import HotelsCard from '../hotels/components/HotelsCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import HomeIcon from '@mui/icons-material/Home';
 import MyInformation from './components/MyInformation';
+import { getOrders } from '../orders/ordersThunks';
+import { selectOrders } from '../orders/ordersSlice';
 
 const UserCabinet = () => {
   const dispatch = useAppDispatch();
+  const orders = useAppSelector(selectOrders);
   const loading = useAppSelector(selectFetchFavoriteHotelsLoading);
   const favoriteHotels = useAppSelector(selectFavoriteHotels);
   const { t } = useTranslation();
@@ -31,7 +34,10 @@ const UserCabinet = () => {
     if (state.favorites) {
       dispatch(getFavoriteHotels());
     }
-  }, [dispatch, state.favorites]);
+    if (state.orders) {
+      dispatch(getOrders());
+    }
+  }, [dispatch, state.favorites, state.orders]);
 
   const handleClickOrders = () => {
     setState((prev) => ({ ...prev, orders: true, favorites: false, myInfo: false }));
@@ -52,7 +58,12 @@ const UserCabinet = () => {
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
             <Grid item xs={12} sm={6} md={3}>
               <List
-                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', border: '2px solid #c5c5c5' }}
+                sx={{
+                  width: '100%',
+                  maxWidth: 360,
+                  bgcolor: 'background.paper',
+                  border: '2px solid #c5c5c5',
+                }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
@@ -78,7 +89,7 @@ const UserCabinet = () => {
             </Grid>
             <Grid item xs>
               {state.myInfo && <MyInformation />}
-              {state.orders && <Orders />}
+              {state.orders && <OrderItems ordersItems={orders} />}
               {loading && <Spinner />}
               {state.favorites && (
                 <Grid container spacing={3}>
