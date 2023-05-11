@@ -14,8 +14,12 @@ interface props {
 
 const OrderItem: React.FC<props> = ({ prop }) => {
   const { t } = useTranslation();
+
+  const background =
+    prop.status === 'open' ? 'lightcoral' : prop.status === 'in progress' ? 'lightyellow' : 'lightgreen';
+
   return (
-    <Accordion>
+    <Accordion sx={{ background }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
         <Grid container justifyContent="space-between">
           <Grid item xs={12} sm={12} lg={6} xl={3}>
