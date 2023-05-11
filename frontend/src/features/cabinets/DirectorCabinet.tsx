@@ -14,12 +14,12 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import { getForAdminHisOrders } from '../orders/ordersThunks';
 import { selectAdminMyOrders } from '../orders/ordersSlice';
-import OrderCard from '../orders/components/OrderCard';
 import { useTranslation } from 'react-i18next';
 import UsersStatus from './components/UsersStatus';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import HotelsStatus from './components/HotelsStatus';
 import { unsetCabinetHotels } from '../hotels/hotelsSlice';
+import OrderItems from '../orders/components/OrderItems';
 
 const DirectorCabinet = () => {
   const dispatch = useAppDispatch();
@@ -74,7 +74,12 @@ const DirectorCabinet = () => {
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
             <Grid item xs={12} sm={6} md={3}>
               <List
-                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', border: '2px solid #c5c5c5' }}
+                sx={{
+                  width: '100%',
+                  maxWidth: 360,
+                  bgcolor: 'background.paper',
+                  border: '2px solid #c5c5c5',
+                }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
@@ -113,7 +118,7 @@ const DirectorCabinet = () => {
             </Grid>
             <Grid item xs>
               {openAdmins ? (
-                adminOrders.map((order) => <OrderCard key={order._id} prop={order} />)
+                <OrderItems ordersItems={adminOrders} />
               ) : openUsers ? (
                 <UsersStatus />
               ) : (

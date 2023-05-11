@@ -13,7 +13,6 @@ import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import OrderCard from '../orders/components/OrderCard';
 import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
 import MyInformation from './components/MyInformation';
@@ -21,6 +20,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import HotelsStatus from './components/HotelsStatus';
+import OrderItems from '../orders/components/OrderItems';
 
 export interface AdminState {
   [key: string]: boolean;
@@ -107,13 +107,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               </List>
             </Grid>
             <Grid item xs>
-              {state.myOrders && (
-                <Grid container spacing={2}>
-                  {orders.map((item) => {
-                    return <OrderCard prop={item} key={item._id} />;
-                  })}
-                </Grid>
-              )}
+              {state.myOrders && <OrderItems ordersItems={orders} />}
               {state.myHotels && (
                 <Grid container spacing={2}>
                   {hotelsState.map((el) => (
@@ -125,13 +119,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               )}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
-              {state.unacceptedOrders && (
-                <Grid container spacing={2}>
-                  {unacceptedOrders.map((item) => {
-                    return <OrderCard prop={item} key={item._id} />;
-                  })}
-                </Grid>
-              )}
+              {state.unacceptedOrders && <OrderItems ordersItems={unacceptedOrders} />}
               {state.hotelStatus && <HotelsStatus />}
             </Grid>
           </Grid>
