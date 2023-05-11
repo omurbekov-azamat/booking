@@ -1,14 +1,16 @@
 import React from 'react';
-import { Box, Button, Grid, Typography } from '@mui/material';
-import dayjs from 'dayjs';
-import Accordion from '@mui/material/Accordion';
+import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
+import { selectOrderChangeStatusLoading } from '../ordersSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useTranslation } from 'react-i18next';
+import { selectUser } from '../../users/usersSlice';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useTranslation } from 'react-i18next';
-import { selectUser } from '../../users/usersSlice';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
+import { Box, Grid, Typography } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import { LoadingButton } from '@mui/lab';
+import dayjs from 'dayjs';
 import { Order } from '../../../types';
 
 interface Props {
@@ -18,6 +20,7 @@ interface Props {
 const OrderItem: React.FC<Props> = ({ prop }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
   const { t } = useTranslation();
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
@@ -111,16 +114,26 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
         )}
         {user && user.role === 'admin' && prop.status === 'open' && (
           <Box textAlign="right">
-            <Button variant="contained" color="success" onClick={() => handleClickOnCheckout(prop._id)}>
+            <LoadingButton
+              variant="contained"
+              loading={buttonLoading === prop._id}
+              color="success"
+              onClick={() => handleClickOnCheckout(prop._id)}
+            >
               Оформить бронь
-            </Button>
+            </LoadingButton>
           </Box>
         )}
         {user && user.role === 'admin' && prop.status === 'in progress' && (
           <Box textAlign="right">
-            <Button variant="contained" color="secondary" onClick={() => handleClickOnClose(prop._id)}>
+            <LoadingButton
+              variant="contained"
+              loading={buttonLoading === prop._id}
+              color="secondary"
+              onClick={() => handleClickOnClose(prop._id)}
+            >
               закрыть
-            </Button>
+            </LoadingButton>
           </Box>
         )}
       </AccordionDetails>
