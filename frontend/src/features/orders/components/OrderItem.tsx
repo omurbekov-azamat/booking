@@ -19,8 +19,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
-  const background =
-    prop.status === 'open' ? 'lightcoral' : prop.status === 'in progress' ? 'lightyellow' : 'lightgreen';
+  const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
   const handleClickOnCheckout = async (id: string) => {
     await dispatch(changeStatusOrder({ id: id, status: 'in progress' }));
