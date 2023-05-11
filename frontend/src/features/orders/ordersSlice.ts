@@ -42,6 +42,7 @@ export const ordersSlice = createSlice({
       state.sendOrderError = error || null;
     });
     builder.addCase(getOrders.pending, (state) => {
+      state.orders = [];
       state.fetchOrdersLoading = true;
     });
     builder.addCase(getOrders.fulfilled, (state, { payload: orders }) => {
@@ -70,6 +71,7 @@ export const ordersSlice = createSlice({
       state.deleteOrderLoading = false;
     });
     builder.addCase(getForAdminHisOrders.pending, (state) => {
+      state.adminMyOrders = [];
       state.fetchOrdersForAdminLoading = true;
     });
     builder.addCase(getForAdminHisOrders.fulfilled, (state, { payload: orders }) => {

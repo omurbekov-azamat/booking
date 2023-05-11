@@ -8,22 +8,30 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import { selectUser } from '../../users/usersSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { changeStatusOrder } from '../ordersThunks';
+import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
 import { Order } from '../../../types';
 
-interface props {
+interface Props {
   prop: Order;
 }
 
-const OrderItem: React.FC<props> = ({ prop }) => {
+const OrderItem: React.FC<Props> = ({ prop }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const background =
     prop.status === 'open' ? 'lightcoral' : prop.status === 'in progress' ? 'lightyellow' : 'lightgreen';
 
-  const handleClickOnCheckout = (id: string) => {
-    dispatch(changeStatusOrder({ id: id, status: 'in progress' }));
+  const handleClickOnCheckout = async (id: string) => {
+    await dispatch(changeStatusOrder({ id: id, status: 'in progress' }));
+    await dispatch(getOrders());
+  };
+
+  const handleClickOnClose = async (id: string) => {
+    if (user?._id) {
+      await dispatch(changeStatusOrder({ id: id, status: 'closed' }));
+      await dispatch(getForAdminHisOrders(user?._id));
+    }
   };
 
   return (
@@ -60,22 +68,22 @@ const OrderItem: React.FC<props> = ({ prop }) => {
           {t('dateDeparture')}: {dayjs(prop.dateDeparture).format('DD-MM-YYYY')}
         </Typography>
         {prop.eventManagement && (
-          <Typography color="red">
+          <Typography color="red" fontWeight="bold">
             {t('meetingAirport')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.personalTranslator && (
-          <Typography color="red">
+          <Typography color="red" fontWeight="bold">
             {t('personalTranslator')}: {prop.personalTranslator && <>&#9745;</>}
           </Typography>
         )}
         {prop.tourManagement && (
-          <Typography color="red">
+          <Typography color="red" fontWeight="bold">
             {t('tourOrganization')}: {prop.tourManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.eventManagement && (
-          <Typography color="red">
+          <Typography color="red" fontWeight="bold">
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
@@ -97,10 +105,22 @@ const OrderItem: React.FC<props> = ({ prop }) => {
         <Typography sx={{ background }}>
           {t('status')}: {prop.status}
         </Typography>
+        {user && (user.role === 'admin' || user.role === 'director') && prop.adminId && (
+          <Typography fontWeight="bolder" color="blueviolet">
+            Бронь оформил: {prop.adminId.firstName} {prop.adminId.lastName}
+          </Typography>
+        )}
         {user && user.role === 'admin' && prop.status === 'open' && (
           <Box textAlign="right">
             <Button variant="contained" color="success" onClick={() => handleClickOnCheckout(prop._id)}>
-              {t('checkout')}
+              Оформить бронь
+            </Button>
+          </Box>
+        )}
+        {user && user.role === 'admin' && prop.status === 'in progress' && (
+          <Box textAlign="right">
+            <Button variant="contained" color="secondary" onClick={() => handleClickOnClose(prop._id)}>
+              закрыть
             </Button>
           </Box>
         )}
