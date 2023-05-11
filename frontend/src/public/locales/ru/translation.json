@@ -114,5 +114,6 @@
   "creationDate": "Дата создания",
   "customerName": "Имя заказчика",
   "telephoneNumber": "Номер телефона",
-  "thereAreNoOrders": "Нет никаких заказов"
+  "thereAreNoOrders": "Нет никаких заказов",
+  "commentary": "Коментарий"
 }

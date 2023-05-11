@@ -113,5 +113,6 @@
   "creationDate": "Creation date",
   "customerName": "Customer name",
   "telephoneNumber": "Telephone number",
-  "thereAreNoOrders": "There are no orders"
+  "thereAreNoOrders": "There are no orders",
+  "commentary": "Commentary"
 }

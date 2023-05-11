@@ -1,12 +1,12 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { Order } from '../../../types';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
+import { Order } from '../../../types';
 
 interface props {
   prop: Order;
@@ -14,7 +14,6 @@ interface props {
 
 const OrderItem: React.FC<props> = ({ prop }) => {
   const { t } = useTranslation();
-
   const background =
     prop.status === 'open' ? 'lightcoral' : prop.status === 'in progress' ? 'lightyellow' : 'lightgreen';
 
@@ -44,10 +43,47 @@ const OrderItem: React.FC<props> = ({ prop }) => {
           </Grid>
         </Grid>
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails sx={{ background: 'WhiteSmoke' }}>
         <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo
-          lobortis eget.
+          {t('dateArrival')}: {dayjs(prop.dateArrival).format('DD-MM-YYYY')}
+        </Typography>
+        <Typography>
+          {t('dateDeparture')}: {dayjs(prop.dateDeparture).format('DD-MM-YYYY')}
+        </Typography>
+        {prop.eventManagement && (
+          <Typography color="red">
+            {t('meetingAirport')}: {prop.eventManagement && <>&#9745;</>}
+          </Typography>
+        )}
+        {prop.personalTranslator && (
+          <Typography color="red">
+            {t('personalTranslator')}: {prop.personalTranslator && <>&#9745;</>}
+          </Typography>
+        )}
+        {prop.tourManagement && (
+          <Typography color="red">
+            {t('tourOrganization')}: {prop.tourManagement && <>&#9745;</>}
+          </Typography>
+        )}
+        {prop.eventManagement && (
+          <Typography color="red">
+            {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
+          </Typography>
+        )}
+        <Typography textTransform="capitalize">
+          {t('city')}: {prop.apartmentId.hotelId.city}
+        </Typography>
+        <Typography textTransform="capitalize">
+          {t('address')}: {prop.apartmentId.hotelId.address}
+        </Typography>
+        <Typography textTransform="capitalize">
+          {t('hotelName')}: {prop.apartmentId.hotelId.name}
+        </Typography>
+        <Typography textTransform="capitalize">
+          {t('roomType')}: {prop.apartmentId.roomTypeId.name}
+        </Typography>
+        <Typography>
+          {t('commentary')}: {prop.comment}
         </Typography>
       </AccordionDetails>
     </Accordion>
