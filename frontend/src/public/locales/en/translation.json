@@ -108,5 +108,10 @@
   "businessEvents": "Business events",
   "eventsOfAnyFormat": "Events of any format",
   "unacceptedOrders": "Unaccepted orders",
-  "city": "City"
+  "city": "City",
+  "order": "Order",
+  "creationDate": "Creation date",
+  "customerName": "Customer name",
+  "telephoneNumber": "Telephone number",
+  "thereAreNoOrders": "There are no orders"
 }
