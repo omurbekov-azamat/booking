@@ -93,5 +93,5 @@ const ApartmentSchema = new Schema<IApartment>({
   },
 });
 
-const Apartment = mongoose.model<IApartment>('Apartment', ApartmentSchema);
+const Apartment = mongoose.model('Apartment', ApartmentSchema);
 export default Apartment;
