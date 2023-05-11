@@ -114,7 +114,26 @@ const run = async () => {
     },
   );
 
-  const [plaza, hyatt, lulu] = await Hotel.create(
+  const [
+    dragon,
+    demar,
+    sara,
+    discovery,
+    salut,
+    aurum,
+    asia,
+    navat,
+    madison,
+    silkroad,
+    сaesar,
+    palace,
+    central,
+    plaza,
+    hyatt,
+    lulu,
+    dostuk,
+    jannat,
+  ] = await Hotel.create(
     {
       userId: hotel._id,
       name: 'Golden Dragon',
@@ -347,7 +366,7 @@ const run = async () => {
     },
     {
       userId: hotel._id,
-      name: 'Madison Ave Hotel Bishkek',
+      name: 'Caesar Hotel Bishkek',
       address: '210 Kiev Street, 720001 Бишкек, Киргизия – Великолепное расположение',
       location: {
         latitude: 300,
@@ -370,7 +389,7 @@ const run = async () => {
     },
     {
       userId: hotel._id,
-      name: 'Hotel Resident Bishkek',
+      name: 'Palace Resident Bishkek',
       address: 'Yunusaliev Avenue Юнусалиева 102/4 Джантошева, 720005 Бишкек, Киргизия',
       location: {
         latitude: 300,
