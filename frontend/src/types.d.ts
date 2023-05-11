@@ -45,14 +45,17 @@ export interface HotelWithLabel extends Hotel {
 
 export interface ApartmentData {
   price: {
-    from: number;
-    till: number;
+    usd: number;
+    kgs: number;
   };
-  description?: string;
-  aircon: boolean;
+  description: {
+    ru: string;
+    en: string;
+  };
+  AC: boolean;
   balcony: boolean;
   bath: boolean;
-  family: boolean;
+  petFriendly: boolean;
   food: boolean;
   place: number;
   tv: boolean;
@@ -188,4 +191,9 @@ export interface Comment {
 export interface CommentMutation {
   hotel: string;
   text: string;
+}
+
+export interface IRoomType {
+  _id: string;
+  name: string;
 }

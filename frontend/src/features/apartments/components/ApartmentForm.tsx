@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Card,
@@ -7,36 +7,49 @@ import {
   FormControlLabel,
   Grid,
   IconButton,
+  MenuItem,
   TextField,
   Typography,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
-import { ApartmentMutation, ImgType } from '../../../types';
+import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { selectApartmentError, selectLoadingCreateApartment } from '../apartmentSlice';
-import { createApartment } from '../apartmentThunks';
+import { notistackShow, selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
+import { createApartment, fetchRoomType } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import BathtubIcon from '@mui/icons-material/Bathtub';
+import BalconyIcon from '@mui/icons-material/Balcony';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import PetsIcon from '@mui/icons-material/Pets';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
+import WifiIcon from '@mui/icons-material/Wifi';
+import TvIcon from '@mui/icons-material/Tv';
+import { fetchOneHotel } from '../../hotels/hotelsThunks';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
     roomTypeId: '',
     hotelId: '',
-    description: '',
+    description: {
+      ru: '',
+      en: '',
+    },
     images: [],
     price: {
-      from: 0,
-      till: 0,
+      usd: 0,
+      kgs: 0,
     },
     place: 0,
-    aircon: false,
+    AC: false,
     bath: false,
     balcony: false,
     food: false,
-    family: false,
+    petFriendly: false,
     towel: false,
     wifi: false,
     tv: false,
@@ -51,11 +64,16 @@ const ApartmentForm = () => {
   const loading = useAppSelector(selectLoadingCreateApartment);
   const navigate = useNavigate();
   const { id } = useParams();
+  const roomType = useAppSelector(selectRoomType);
+
+  useEffect(() => {
+    dispatch(fetchRoomType());
+  }, [dispatch]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    if (name === 'from' || name === 'till') {
+    if (name === 'usd' || name === 'kgs') {
       setState((prev) => ({
         ...prev,
         price: {
@@ -63,13 +81,17 @@ const ApartmentForm = () => {
           [name]: parseInt(value),
         },
       }));
+    } else if (name === 'ru' || name === 'en') {
+      setState((prev) => ({
+        ...prev,
+        description: {
+          ...prev.description,
+          [name]: value,
+        },
+      }));
     } else {
       setState((prev) => ({ ...prev, [name]: value }));
     }
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,10 +126,27 @@ const ApartmentForm = () => {
         createApartment({
           ...state,
           hotelId: id,
-          roomTypeId: '6447a4f33285c6710e415c80',
         }),
       );
       await navigate('/hotels/' + id);
+      await dispatch(fetchOneHotel(id));
+      await dispatch(notistackShow(true));
+    }
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checkboxName = event.target.name;
+    const isChecked = event.target.checked;
+    setState({ ...state, [checkboxName]: isChecked });
+  };
+
+  const name = (name: IRoomType) => {
+    if (name.name === 'single room') {
+      return t('singleRoom');
+    } else if (name.name === 'double room') {
+      return t('doubleRoom');
+    } else if (name.name === 'triple room') {
+      return t('tripleRoom');
     }
   };
 
@@ -115,31 +154,47 @@ const ApartmentForm = () => {
     <>
       <Container component="main" maxWidth="sm">
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
-          {'create apartments'}
+          {t('createApartment')}
         </Typography>
         <Box component="form" sx={{ mt: 2 }} onSubmit={onSubmit}>
           <Grid container spacing={2} textAlign="center" direction="column">
             <Grid item xs>
               <TextField
-                label={'Room area'}
+                label={t('roomArea')}
                 type={'number'}
                 name="place"
                 autoComplete="current-place"
-                value={state.place}
                 onChange={inputChangeHandler}
                 required
               />
             </Grid>
             <Grid item xs>
+              <TextField
+                select
+                label={t('roomType')}
+                name="roomTypeId"
+                value={state.roomTypeId}
+                onChange={inputChangeHandler}
+                required
+              >
+                {roomType.map((option) => {
+                  return (
+                    <MenuItem key={option._id} value={option._id}>
+                      {name(option)}
+                    </MenuItem>
+                  );
+                })}
+              </TextField>
+            </Grid>
+            <Grid item xs>
               <Grid container justifyContent={'space-around'}>
-                <h3>Price</h3>
+                <h3>{t('price')}</h3>
                 <Grid item xs={3}>
                   <TextField
                     type={'number'}
-                    label={'From'}
-                    name="from"
-                    autoComplete="current-from"
-                    value={state.price.from}
+                    label={'Usd'}
+                    name="usd"
+                    autoComplete="current-usd"
                     onChange={inputChangeHandler}
                     required
                   />
@@ -148,86 +203,166 @@ const ApartmentForm = () => {
                 <Grid item xs={3}>
                   <TextField
                     type={'number'}
-                    inputProps={{ min: state.price.from + 1 }}
-                    label={'Till'}
-                    name="till"
-                    autoComplete="current-till"
-                    value={state.price.till}
+                    label={'Kgs'}
+                    name="kgs"
+                    autoComplete="current-kgs"
                     onChange={inputChangeHandler}
                     required
                   />
                 </Grid>
               </Grid>
             </Grid>
+
             <Grid item xs>
               <TextField
-                label={'Description'}
+                label={'Описание на русском'}
                 type="text"
-                name="description"
+                name="ru"
                 autoComplete="current-description"
-                value={state.description}
+                value={state.description.ru}
                 onChange={inputChangeHandler}
+                required
               />
             </Grid>
+
             <Grid item xs>
-              <Card sx={{ mt: 5, p: 3 }}>
-                <Grid container spacing={3}>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={state.aircon} onChange={handleChange} name="aircon" color="primary" />
-                      }
-                      label="Air conditioning"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.bath} onChange={handleChange} name="bath" color="primary" />}
-                      label="Bath"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={state.balcony} onChange={handleChange} name="balcony" color="primary" />
-                      }
-                      label="Balcony"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.food} onChange={handleChange} name="food" color="primary" />}
-                      label="Food"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={state.family} onChange={handleChange} name="family" color="primary" />
-                      }
-                      label="Family-friendly"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.towel} onChange={handleChange} name="towel" color="primary" />}
-                      label="Towels"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.wifi} onChange={handleChange} name="wifi" color="primary" />}
-                      label="Wi-Fi"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <FormControlLabel
-                      control={<Checkbox checked={state.tv} onChange={handleChange} name="tv" color="primary" />}
-                      label="TV"
-                    />
-                  </Grid>
-                </Grid>
-              </Card>
+              <TextField
+                label={'Description in english'}
+                type="text"
+                name="en"
+                autoComplete="current-description"
+                value={state.description.en}
+                onChange={inputChangeHandler}
+                required
+              />
+            </Grid>
+
+            <Grid container spacing={3}>
+              <Grid item xs>
+                <Card sx={{ mt: 5, p: 3 }}>
+                  <Typography>{t('extraServices')}</Typography>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<AcUnitIcon />}
+                        checkedIcon={<AcUnitIcon color="primary" />}
+                        checked={state.AC}
+                        onChange={handleCheckboxChange}
+                        name="AC"
+                        color="primary"
+                      />
+                    }
+                    label={t('AC')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<BathtubIcon />}
+                        checkedIcon={<BathtubIcon color="primary" />}
+                        color="primary"
+                        checked={state.bath}
+                        onChange={handleCheckboxChange}
+                        name="bath"
+                      />
+                    }
+                    label={t('bath')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<BalconyIcon />}
+                        checkedIcon={<BalconyIcon color="primary" />}
+                        checked={state.balcony}
+                        onChange={handleCheckboxChange}
+                        name="balcony"
+                        color="primary"
+                      />
+                    }
+                    label={t('balcony')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<RestaurantIcon />}
+                        checkedIcon={<RestaurantIcon color="primary" />}
+                        checked={state.food}
+                        onChange={handleCheckboxChange}
+                        name="food"
+                        color="primary"
+                      />
+                    }
+                    label={t('food')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<PetsIcon />}
+                        checkedIcon={<PetsIcon color="primary" />}
+                        checked={state.petFriendly}
+                        onChange={handleCheckboxChange}
+                        name="petFriendly"
+                        color="primary"
+                      />
+                    }
+                    label={t('petFriendly')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<DryCleaningIcon />}
+                        checkedIcon={<DryCleaningIcon color="primary" />}
+                        checked={state.towel}
+                        onChange={handleCheckboxChange}
+                        name="towel"
+                        color="primary"
+                      />
+                    }
+                    label={t('towel')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<WifiIcon />}
+                        checkedIcon={<WifiIcon color="primary" />}
+                        checked={state.wifi}
+                        onChange={handleCheckboxChange}
+                        name="wifi"
+                        color="primary"
+                      />
+                    }
+                    label={t('wiFi')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<TvIcon />}
+                        checkedIcon={<TvIcon color="primary" />}
+                        checked={state.tv}
+                        onChange={handleCheckboxChange}
+                        name="tv"
+                        color="primary"
+                      />
+                    }
+                    label={t('tv')}
+                    labelPlacement="end"
+                    sx={{ textAlign: 'left', width: '90%' }}
+                  />
+                </Card>
+              </Grid>
             </Grid>
             <Card sx={{ mt: 5, p: 3 }}>
               <Grid item xs>

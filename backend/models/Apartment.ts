@@ -26,11 +26,11 @@ const ApartmentSchema = new Schema<IApartment>({
   },
   price: {
     type: {
-      from: {
+      usd: {
         type: Number,
         required: true,
       },
-      till: {
+      kgs: {
         type: Number,
         required: true,
       },
@@ -42,9 +42,19 @@ const ApartmentSchema = new Schema<IApartment>({
     default: [],
   },
   description: {
-    type: String,
+    type: {
+      ru: {
+        type: String,
+        required: true,
+      },
+      en: {
+        type: String,
+        required: true,
+      },
+    },
+    required: true,
   },
-  aircon: {
+  AC: {
     type: Boolean,
     required: true,
   },
@@ -56,7 +66,7 @@ const ApartmentSchema = new Schema<IApartment>({
     type: Boolean,
     required: true,
   },
-  family: {
+  petFriendly: {
     type: Boolean,
     required: true,
   },

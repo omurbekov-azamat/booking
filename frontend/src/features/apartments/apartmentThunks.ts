@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IApartment, ApartmentMutation, ValidationError, UpdateApartment } from '../../types';
+import { IApartment, ApartmentMutation, ValidationError, UpdateApartment, IRoomType } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
@@ -20,11 +20,12 @@ export const createApartment = createAsyncThunk<
       formData.append('hotelId', apartment.hotelId);
       formData.append('roomTypeId', apartment.roomTypeId);
       formData.append('price', JSON.stringify(apartment.price));
-      formData.append('description', apartment.description || '');
-      formData.append('aircon', apartment.aircon.toString());
+      formData.append('description', JSON.stringify(apartment.description));
+      formData.append('description.en', apartment.description.en);
+      formData.append('AC', apartment.AC.toString());
       formData.append('balcony', apartment.balcony.toString());
       formData.append('bath', apartment.bath.toString());
-      formData.append('family', apartment.family.toString());
+      formData.append('petFriendly', apartment.petFriendly.toString());
       formData.append('food', apartment.food.toString());
       formData.append('place', apartment.place.toString());
       formData.append('tv', apartment.tv.toString());
@@ -119,6 +120,15 @@ export const editApartment = createAsyncThunk<
 export const removeApartment = createAsyncThunk<void, string>('apartments/removeOne', async (id) => {
   try {
     await axiosApi.delete('/apartments/' + id);
+  } catch {
+    throw new Error();
+  }
+});
+
+export const fetchRoomType = createAsyncThunk<IRoomType[]>('apartments/fetchRoomTypeAll', async () => {
+  try {
+    const response = await axiosApi.get<IRoomType[]>('/roomTypes');
+    return response.data;
   } catch {
     throw new Error();
   }

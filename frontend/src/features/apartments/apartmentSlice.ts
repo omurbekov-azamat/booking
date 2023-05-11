@@ -1,7 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import type { IApartment, ValidationError } from '../../types';
-import { createApartment, editApartment, fetchApartments, fetchOneApartment, removeApartment } from './apartmentThunks';
+import type { IApartment, IRoomType, ValidationError } from '../../types';
+import {
+  createApartment,
+  editApartment,
+  fetchApartments,
+  fetchOneApartment,
+  fetchRoomType,
+  removeApartment,
+} from './apartmentThunks';
 
 interface ApartmentsState {
   apartments: IApartment[];
@@ -12,6 +19,9 @@ interface ApartmentsState {
   error: boolean;
   apartmentError: ValidationError | null;
   loadingApartmentEdit: boolean;
+  roomType: IRoomType[];
+  roomTypeLoading: boolean;
+  notistackShow: boolean;
 }
 
 const initialState: ApartmentsState = {
@@ -23,12 +33,19 @@ const initialState: ApartmentsState = {
   error: false,
   apartmentError: null,
   loadingApartmentEdit: false,
+  roomType: [],
+  roomTypeLoading: false,
+  notistackShow: false,
 };
 
 export const apartmentsSlice = createSlice({
   name: 'apartments',
   initialState,
-  reducers: {},
+  reducers: {
+    notistackShow: (state, action: PayloadAction<boolean>) => {
+      state.notistackShow = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchApartments.pending, (state) => {
       state.loadingApartment = true;
@@ -90,6 +107,19 @@ export const apartmentsSlice = createSlice({
       state.loadingApartmentEdit = false;
       state.apartmentError = error || null;
     });
+    builder.addCase(fetchRoomType.pending, (state) => {
+      state.roomTypeLoading = true;
+      state.error = false;
+    });
+    builder.addCase(fetchRoomType.fulfilled, (state, action) => {
+      state.roomTypeLoading = false;
+      state.roomType = action.payload;
+      state.error = false;
+    });
+    builder.addCase(fetchRoomType.rejected, (state) => {
+      state.roomTypeLoading = false;
+      state.error = true;
+    });
   },
 });
 export const apartmentsReducer = apartmentsSlice.reducer;
@@ -101,3 +131,7 @@ export const selectLoadingCreateApartment = (state: RootState) => state.apartmen
 export const selectLoadingRemoveApartment = (state: RootState) => state.apartments.loadingRemoveApartment;
 export const selectApartmentError = (state: RootState) => state.apartments.apartmentError;
 export const selectLoadingEdit = (state: RootState) => state.apartments.loadingApartmentEdit;
+export const selectRoomType = (state: RootState) => state.apartments.roomType;
+export const selectLoadingRoomType = (state: RootState) => state.apartments.roomTypeLoading;
+export const selectNotistackShow = (state: RootState) => state.apartments.notistackShow;
+export const { notistackShow } = apartmentsSlice.actions;

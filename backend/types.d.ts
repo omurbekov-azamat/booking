@@ -54,15 +54,18 @@ export interface IApartment {
   hotelId: ObjectId;
   roomTypeId: ObjectId;
   price: {
-    from: number;
-    till: number;
+    usd: number;
+    kgs: number;
   };
   images: string[] | null;
-  description: string;
-  aircon: boolean;
+  description: {
+    ru: string;
+    en: string;
+  };
+  AC: boolean;
   balcony: boolean;
   bath: boolean;
-  family: boolean;
+  petFriendly: boolean;
   food: boolean;
   place: number;
   tv: boolean;
