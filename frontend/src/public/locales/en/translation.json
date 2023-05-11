@@ -114,5 +114,7 @@
   "customerName": "Customer name",
   "telephoneNumber": "Telephone number",
   "thereAreNoOrders": "There are no orders",
-  "commentary": "Commentary"
+  "commentary": "Commentary",
+  "status": "Status",
+  "checkout": "Checkout"
 }

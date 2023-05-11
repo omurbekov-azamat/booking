@@ -1,11 +1,13 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
+import { selectUser } from '../../users/usersSlice';
+import { useAppSelector } from '../../../app/hooks';
 import { Order } from '../../../types';
 
 interface props {
@@ -13,9 +15,14 @@ interface props {
 }
 
 const OrderItem: React.FC<props> = ({ prop }) => {
+  const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const background =
     prop.status === 'open' ? 'lightcoral' : prop.status === 'in progress' ? 'lightyellow' : 'lightgreen';
+
+  const handleClickOnCheckout = (id: string) => {
+    console.log(id);
+  };
 
   return (
     <Accordion sx={{ background }}>
@@ -85,6 +92,16 @@ const OrderItem: React.FC<props> = ({ prop }) => {
         <Typography>
           {t('commentary')}: {prop.comment}
         </Typography>
+        <Typography sx={{ background }}>
+          {t('status')}: {prop.status}
+        </Typography>
+        {user && user.role === 'admin' && prop.status === 'open' && (
+          <Box textAlign="right">
+            <Button variant="contained" color="success" onClick={() => handleClickOnCheckout(prop._id)}>
+              {t('checkout')}
+            </Button>
+          </Box>
+        )}
       </AccordionDetails>
     </Accordion>
   );

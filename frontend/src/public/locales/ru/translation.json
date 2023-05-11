@@ -115,5 +115,7 @@
   "customerName": "Имя заказчика",
   "telephoneNumber": "Номер телефона",
   "thereAreNoOrders": "Нет никаких заказов",
-  "commentary": "Коментарий"
+  "commentary": "Коментарий",
+  "status": "Статус",
+  "checkout": "Оформить бронь"
 }
