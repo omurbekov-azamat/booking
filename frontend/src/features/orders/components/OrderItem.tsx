@@ -7,7 +7,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import { selectUser } from '../../users/usersSlice';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { changeStatusOrder } from '../ordersThunks';
 import { Order } from '../../../types';
 
 interface props {
@@ -15,13 +16,14 @@ interface props {
 }
 
 const OrderItem: React.FC<props> = ({ prop }) => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const background =
     prop.status === 'open' ? 'lightcoral' : prop.status === 'in progress' ? 'lightyellow' : 'lightgreen';
 
   const handleClickOnCheckout = (id: string) => {
-    console.log(id);
+    dispatch(changeStatusOrder({ id: id, status: 'in progress' }));
   };
 
   return (
@@ -40,7 +42,7 @@ const OrderItem: React.FC<props> = ({ prop }) => {
           </Grid>
           <Grid item xs={12} sm={12} lg={6} xl={3}>
             <Typography variant="subtitle2">
-              {t('creationDate')}: {dayjs(prop.createdAt).format('DD-MM-YYYY')}
+              {t('creationDate')}: {dayjs(prop.createdAt).format('DD-MM-YYYY HH:mm:ss')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} lg={6} xl={3}>

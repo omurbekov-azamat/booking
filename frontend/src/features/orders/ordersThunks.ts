@@ -46,7 +46,7 @@ export interface ChangeStatusProps {
 
 export const changeStatusOrder = createAsyncThunk<void, ChangeStatusProps>('orders/changeStatus', async (data) => {
   try {
-    await axiosApi.patch('/orders/' + data.id, data.status);
+    await axiosApi.patch('/orders/' + data.id, { status: data.status });
   } catch {
     throw new Error();
   }
