@@ -228,7 +228,7 @@ hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, re
     } else {
       res.send({
         message: {
-          en: 'Hotel status successfully',
+          en: 'Hotel status successfully changed',
           ru: 'статус отеля успешно изменен',
         },
       });
