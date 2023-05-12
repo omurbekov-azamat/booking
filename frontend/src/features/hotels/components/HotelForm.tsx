@@ -10,6 +10,7 @@ import { createHotel } from '../hotelsThunks';
 import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
+import SelectType from '../../../components/UI/SelectType/SelectType';
 
 const HotelForm = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ const HotelForm = () => {
     swimmingPool: false,
     nonSmokingRooms: false,
     founding: 0,
+    type: '',
     lowestPrice: {
       som: 0,
       dollar: 0,
@@ -75,6 +77,7 @@ const HotelForm = () => {
         name: '',
         city: '',
         address: '',
+        type: '',
         star: '',
         image: null,
         parking: false,
@@ -132,6 +135,9 @@ const HotelForm = () => {
               helperText={getFieldError('address')}
               required
             />
+          </Grid>
+          <Grid item>
+            <SelectType onChange={inputChangeHandler} name="type" label={t('type')} value={state.type} />
           </Grid>
           <Grid item xs>
             <TextField
