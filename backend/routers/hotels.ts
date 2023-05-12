@@ -30,7 +30,12 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
     });
 
     await hotel.save();
-    return res.send({ message: 'Created successfully' });
+    return res.send({
+      message: {
+        en: 'Hotel created successfully',
+        ru: 'Отель успешно создан',
+      },
+    });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);
@@ -177,7 +182,12 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
     if (hotel.modifiedCount < 1) {
       res.status(404).send({ message: 'Cant find hotel' });
     } else {
-      res.send({ message: 'Successfully Updated' });
+      res.send({
+        message: {
+          en: 'Hotel updated successfully',
+          ru: 'Отель успешно изменен',
+        },
+      });
     }
   } catch {
     return res.sendStatus(500);
@@ -189,7 +199,12 @@ hotelsRouter.patch('/status/:id', auth, permit('director', 'admin'), async (req,
     const currentHotel = await Hotel.findById(req.params.id);
     if (currentHotel) {
       await Hotel.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
-      res.send({ message: 'status changed' });
+      res.send({
+        message: {
+          en: 'Hotel status successfully',
+          ru: 'статус отеля успешно изменен',
+        },
+      });
     } else {
       res.status(400).send({ message: 'Hotel is not found' });
     }
@@ -211,7 +226,12 @@ hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, re
     if (hotel.modifiedCount < 1) {
       res.status(404).send({ message: 'Cant find hotel' });
     } else {
-      res.send({ message: 'Successfully Updated' });
+      res.send({
+        message: {
+          en: 'Hotel status successfully',
+          ru: 'статус отеля успешно изменен',
+        },
+      });
     }
   } catch {
     return res.sendStatus(500);
@@ -243,7 +263,12 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
       }
       if (user && user.role === 'hotel') {
         await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
-        return res.send({ message: 'Deleted successfully' });
+        return res.send({
+          message: {
+            en: 'Hotel deleted successfully',
+            ru: 'Отель успешно удалён',
+          },
+        });
       }
     } else {
       res.status(404).send({ message: 'Cant find hotel' });
