@@ -19,14 +19,33 @@ import NoFoundPage from './components/UI/NoFoundPage/NoFoundPage';
 import { selectOrderSuccess, setOrderSuccessNull } from './features/orders/ordersSlice';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
+import { selectHotelsSuccess, setHotelsSuccessNull } from './features/hotels/hotelsSlice';
 
 function App() {
   const user = useAppSelector(selectUser);
   const orderSuccess = useAppSelector(selectOrderSuccess);
   const favoriteSuccess = useAppSelector(selectFavoriteSuccess);
+  const hotelsSuccess = useAppSelector(selectHotelsSuccess);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (hotelsSuccess) {
+      if (i18n.language === 'en') {
+        enqueueSnackbar(hotelsSuccess.message.en, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      } else {
+        enqueueSnackbar(hotelsSuccess.message.ru, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      }
+    }
+    dispatch(setHotelsSuccessNull());
+  }, [hotelsSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   useEffect(() => {
     if (favoriteSuccess) {
