@@ -1,17 +1,17 @@
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useEffect } from 'react';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useTranslation } from 'react-i18next';
 import { getFavoriteHotels } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
-import { selectUser } from '../../users/usersSlice';
+import { selectFavoriteSuccess, selectUser, setFavoriteSuccessNull } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
-import { enqueueSnackbar, SnackbarProvider } from 'notistack';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
+import { useSnackbar } from 'notistack';
 
 interface Props {
   hotel: Hotel;
@@ -21,23 +21,40 @@ interface Props {
 
 const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick }) => {
   const dispatch = useAppDispatch();
+  const favoriteSuccess = useAppSelector(selectFavoriteSuccess);
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const cardImage = apiURL + '/' + hotel.image;
 
   const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
+
+  useEffect(() => {
+    if (favoriteSuccess) {
+      if (i18n.language === 'en') {
+        enqueueSnackbar(favoriteSuccess.message.en, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      } else {
+        enqueueSnackbar(favoriteSuccess.message.ru, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      }
+    }
+    dispatch(setFavoriteSuccessNull());
+  }, [favoriteSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   const onClickFavorite = async (id: string) => {
     if (!favorite) {
       await dispatch(changeFavorites({ addHotel: id }));
       await dispatch(reAuthorization());
-      await enqueueSnackbar(`${hotel.name}, ${t('addToFavorite')}`, { variant: 'success' });
     } else {
       await dispatch(changeFavorites({ deleteHotel: id }));
       await dispatch(reAuthorization());
       await dispatch(getFavoriteHotels());
-      await enqueueSnackbar(`${hotel.name}, ${t('removeFavorite')}`, { variant: 'success' });
     }
   };
 
@@ -58,7 +75,6 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
           </Box>
         )
       )}
-      <SnackbarProvider />
       <CardActionArea onClick={() => onClickCard(hotel._id)}>
         <CardMedia component="img" height="140" image={cardImage} alt={hotel.name} />
         <CardContent>
