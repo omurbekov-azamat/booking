@@ -62,8 +62,9 @@ export const ordersSlice = createSlice({
     builder.addCase(changeStatusOrder.pending, (state, { meta }) => {
       state.changeOrderStatusLoading = meta.arg.id;
     });
-    builder.addCase(changeStatusOrder.fulfilled, (state) => {
+    builder.addCase(changeStatusOrder.fulfilled, (state, { payload: success }) => {
       state.changeOrderStatusLoading = false;
+      state.orderSuccess = success;
     });
     builder.addCase(changeStatusOrder.rejected, (state) => {
       state.changeOrderStatusLoading = false;
@@ -71,8 +72,9 @@ export const ordersSlice = createSlice({
     builder.addCase(deleteOrder.pending, (state, { meta }) => {
       state.deleteOrderLoading = meta.arg;
     });
-    builder.addCase(deleteOrder.fulfilled, (state) => {
+    builder.addCase(deleteOrder.fulfilled, (state, { payload: success }) => {
       state.deleteOrderLoading = false;
+      state.orderSuccess = success;
     });
     builder.addCase(deleteOrder.rejected, (state) => {
       state.deleteOrderLoading = false;

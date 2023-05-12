@@ -45,17 +45,22 @@ export interface ChangeStatusProps {
   status: string;
 }
 
-export const changeStatusOrder = createAsyncThunk<void, ChangeStatusProps>('orders/changeStatus', async (data) => {
-  try {
-    await axiosApi.patch('/orders/' + data.id, { status: data.status });
-  } catch {
-    throw new Error();
-  }
-});
+export const changeStatusOrder = createAsyncThunk<GlobalSuccess, ChangeStatusProps>(
+  'orders/changeStatus',
+  async (data) => {
+    try {
+      const response = await axiosApi.patch<GlobalSuccess>('/orders/' + data.id, { status: data.status });
+      return response.data;
+    } catch {
+      throw new Error();
+    }
+  },
+);
 
-export const deleteOrder = createAsyncThunk<void, string>('orders/deleteOrder', async (id) => {
+export const deleteOrder = createAsyncThunk<GlobalSuccess, string>('orders/deleteOrder', async (id) => {
   try {
-    await axiosApi.delete('/orders/' + id);
+    const response = await axiosApi.delete<GlobalSuccess>('/orders/' + id);
+    return response.data;
   } catch {
     throw new Error();
   }
