@@ -37,7 +37,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
     if (location) {
       dispatch(notistackShow(false));
     }
-  }, [dispatch, location, selectNotistack]);
+  }, [dispatch, location, selectNotistack, t]);
 
   return (
     <>

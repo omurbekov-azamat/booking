@@ -35,6 +35,7 @@ function App() {
           <Route path="/:hotelName/:hotelId/apartment/:apartmentId" element={<Apartment />} />
           <Route path="/hotels/:id/:roomId" element={<Apartment />} />
           <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
+          <Route path="/hotels/:id/editApartment/:id" element={<ApartmentForm />} />
           <Route path="/hotels/:id/comments" element={<Comments />} />
           <Route
             path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
