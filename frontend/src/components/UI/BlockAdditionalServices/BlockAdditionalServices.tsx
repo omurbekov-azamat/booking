@@ -3,7 +3,6 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { IconButton } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
 
 const BlockAdditionalServices = () => {
@@ -39,31 +38,29 @@ const BlockAdditionalServices = () => {
   ];
 
   return (
-    <>
-      <ImageList>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={item.title}
-              subtitle={item.author}
-              actionIcon={
-                <IconButton sx={{ color: 'rgba(255, 255, 255, 0.54)' }} aria-label={`info about ${item.title}`}>
-                  <a href={item.link} target="_blank" rel="noreferrer">
-                    <MoreHorizIcon />
-                  </a>
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </>
+    <ImageList>
+      {itemData.map((item) => (
+        <ImageListItem key={item.img}>
+          <img
+            src={`${item.img}?w=248&fit=crop&auto=format`}
+            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            alt={item.title}
+            loading="lazy"
+          />
+          <ImageListItemBar
+            title={item.title}
+            subtitle={item.author}
+            actionIcon={
+              <IconButton sx={{ color: 'rgba(255, 255, 255, 0.54)' }} aria-label={`info about ${item.title}`}>
+                <a href={item.link} target="_blank" rel="noreferrer" style={{ color: 'white', textDecoration: 'none' }}>
+                  Read more
+                </a>
+              </IconButton>
+            }
+          />
+        </ImageListItem>
+      ))}
+    </ImageList>
   );
 };
 
