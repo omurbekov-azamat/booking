@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { notistackShow, selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
+import { selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
 import { createApartment, fetchRoomType } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -130,7 +130,6 @@ const ApartmentForm = () => {
       );
       await navigate('/hotels/' + id);
       await dispatch(fetchOneHotel(id));
-      await dispatch(notistackShow(true));
     }
   };
 

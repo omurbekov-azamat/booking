@@ -21,6 +21,7 @@ import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { selectHotelsSuccess, setHotelsSuccessNull } from './features/hotels/hotelsSlice';
 import { selectCommentsSuccess, setCommentsSuccessNull } from './features/comments/commentsSlice';
+import { selectApartmentSuccess, setApartmentsSuccessNull } from './features/apartments/apartmentSlice';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -28,9 +29,27 @@ function App() {
   const favoriteSuccess = useAppSelector(selectFavoriteSuccess);
   const hotelsSuccess = useAppSelector(selectHotelsSuccess);
   const commentsSuccess = useAppSelector(selectCommentsSuccess);
+  const apartmentsSuccess = useAppSelector(selectApartmentSuccess);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (apartmentsSuccess) {
+      if (i18n.language === 'en') {
+        enqueueSnackbar(apartmentsSuccess.message.en, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      } else {
+        enqueueSnackbar(apartmentsSuccess.message.ru, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      }
+    }
+    dispatch(setApartmentsSuccessNull());
+  }, [apartmentsSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   useEffect(() => {
     if (commentsSuccess) {
