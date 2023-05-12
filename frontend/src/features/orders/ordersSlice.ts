@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Order, ValidationError } from '../../types';
+import { GlobalSuccess, Order, ValidationError } from '../../types';
 import { changeStatusOrder, deleteOrder, getForAdminHisOrders, getOrders, sendOrder } from './ordersThunks';
 import { RootState } from '../../app/store';
 
@@ -8,6 +8,7 @@ interface OrdersState {
   sendOrderError: ValidationError | null;
   fetchOrdersLoading: boolean;
   orders: Order[];
+  orderSuccess: GlobalSuccess | null;
   changeOrderStatusLoading: string | false;
   deleteOrderLoading: string | false;
   fetchOrdersForAdminLoading: boolean;
@@ -17,6 +18,7 @@ interface OrdersState {
 const initialState: OrdersState = {
   sendOrderLoading: false,
   sendOrderError: null,
+  orderSuccess: null,
   fetchOrdersLoading: false,
   orders: [],
   changeOrderStatusLoading: false,
@@ -28,14 +30,19 @@ const initialState: OrdersState = {
 export const ordersSlice = createSlice({
   name: 'orders',
   initialState,
-  reducers: {},
+  reducers: {
+    setOrderSuccessNull: (state) => {
+      state.orderSuccess = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(sendOrder.pending, (state) => {
       state.sendOrderError = null;
       state.sendOrderLoading = true;
     });
-    builder.addCase(sendOrder.fulfilled, (state) => {
+    builder.addCase(sendOrder.fulfilled, (state, { payload: success }) => {
       state.sendOrderLoading = false;
+      state.orderSuccess = success;
     });
     builder.addCase(sendOrder.rejected, (state, { payload: error }) => {
       state.sendOrderLoading = false;
@@ -86,6 +93,7 @@ export const ordersSlice = createSlice({
 
 export const ordersReducer = ordersSlice.reducer;
 
+export const { setOrderSuccessNull } = ordersSlice.actions;
 export const selectSendOrderLoading = (state: RootState) => state.orders.sendOrderLoading;
 export const selectSendOrderError = (state: RootState) => state.orders.sendOrderError;
 export const selectFetchOrdersLoading = (state: RootState) => state.orders.fetchOrdersLoading;
@@ -94,3 +102,4 @@ export const selectOrderChangeStatusLoading = (state: RootState) => state.orders
 export const selectOrderDeleteLoading = (state: RootState) => state.orders.deleteOrderLoading;
 export const selectFetchOrdersForAdminLoading = (state: RootState) => state.orders.fetchOrdersForAdminLoading;
 export const selectAdminMyOrders = (state: RootState) => state.orders.adminMyOrders;
+export const selectOrderSuccess = (state: RootState) => state.orders.orderSuccess;

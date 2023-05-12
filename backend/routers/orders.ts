@@ -24,7 +24,12 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
     });
 
     await order.save();
-    return res.send({ message: 'Created successfully' });
+    return res.send({
+      message: {
+        en: 'Order created successfully',
+        ru: 'Заказ успешно создан',
+      },
+    });
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(e);
