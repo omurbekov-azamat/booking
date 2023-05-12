@@ -1,17 +1,16 @@
-import React, { MouseEventHandler, useEffect } from 'react';
+import React, { MouseEventHandler } from 'react';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useTranslation } from 'react-i18next';
 import { getFavoriteHotels } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
-import { selectFavoriteSuccess, selectUser, setFavoriteSuccessNull } from '../../users/usersSlice';
+import { selectUser } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
-import { useSnackbar } from 'notistack';
 
 interface Props {
   hotel: Hotel;
@@ -21,31 +20,12 @@ interface Props {
 
 const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick }) => {
   const dispatch = useAppDispatch();
-  const favoriteSuccess = useAppSelector(selectFavoriteSuccess);
-  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const cardImage = apiURL + '/' + hotel.image;
 
   const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
-
-  useEffect(() => {
-    if (favoriteSuccess) {
-      if (i18n.language === 'en') {
-        enqueueSnackbar(favoriteSuccess.message.en, {
-          variant: 'success',
-          preventDuplicate: true,
-        });
-      } else {
-        enqueueSnackbar(favoriteSuccess.message.ru, {
-          variant: 'success',
-          preventDuplicate: true,
-        });
-      }
-    }
-    dispatch(setFavoriteSuccessNull());
-  }, [favoriteSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   const onClickFavorite = async (id: string) => {
     if (!favorite) {

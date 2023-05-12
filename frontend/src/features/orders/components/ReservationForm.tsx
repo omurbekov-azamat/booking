@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -18,34 +18,16 @@ import {
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { sendOrder } from '../ordersThunks';
-import { selectOrderSuccess, selectSendOrderLoading, setOrderSuccessNull } from '../ordersSlice';
+import { selectSendOrderLoading } from '../ordersSlice';
 import { OrderMutation, OrderSend } from '../../../types';
 import { LoadingButton } from '@mui/lab';
-import { useSnackbar } from 'notistack';
 
 const ReservationForm = () => {
   const dispatch = useAppDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const loading = useAppSelector(selectSendOrderLoading);
-  const orderSuccess = useAppSelector(selectOrderSuccess);
-  const { enqueueSnackbar } = useSnackbar();
   const { apartmentId } = useParams() as { apartmentId: string };
-
-  useEffect(() => {
-    if (orderSuccess) {
-      if (i18n.language === 'en') {
-        enqueueSnackbar(orderSuccess.message.en, {
-          variant: 'success',
-        });
-      } else {
-        enqueueSnackbar(orderSuccess.message.ru, {
-          variant: 'success',
-        });
-      }
-      dispatch(setOrderSuccessNull());
-    }
-  }, [orderSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   const [reservation, setReservation] = useState<OrderMutation>({
     apartmentId: apartmentId,
