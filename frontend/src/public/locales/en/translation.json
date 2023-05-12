@@ -115,5 +115,10 @@
   "telephoneNumber": "Telephone number",
   "thereAreNoOrders": "There are no orders",
   "commentary": "Commentary",
-  "status": "Status"
+  "status": "Status",
+  "hotel": "Hotel",
+  "guestHouse": "Guest House",
+  "pension": "Pension",
+  "Hostel": "Hostel",
+  "type": "Type"
 }
