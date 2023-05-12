@@ -4,7 +4,6 @@ import RecommendedHotels from '../features/hotels/components/RecommendedHotels';
 const MainPage = () => {
   return (
     <>
-      Main Page
       <RecommendedHotels />
     </>
   );

@@ -9,6 +9,7 @@ import {
   fetchSearchedHotels,
   getCabinetHotels,
   getFavoriteHotels,
+  getRecommendedHotels,
   removeHotel,
   togglePublishedHotel,
 } from './hotelsThunks';
@@ -31,6 +32,8 @@ interface HotelsState {
   cabinetHotels: Hotel[];
   cabinetLoading: boolean;
   fetchFavoriteHotelsLoading: boolean;
+  recommendedHotels: Hotel[];
+  fetchRecommendedHotelsLoading: boolean;
 }
 
 const initialState: HotelsState = {
@@ -50,6 +53,8 @@ const initialState: HotelsState = {
   cabinetHotels: [],
   cabinetLoading: false,
   fetchFavoriteHotelsLoading: false,
+  recommendedHotels: [],
+  fetchRecommendedHotelsLoading: false,
 };
 
 export const hotelsSlice = createSlice({
@@ -179,9 +184,21 @@ export const hotelsSlice = createSlice({
     builder.addCase(getCabinetHotels.rejected, (state) => {
       state.cabinetLoading = false;
     });
+    builder.addCase(getRecommendedHotels.pending, (state) => {
+      state.fetchRecommendedHotelsLoading = true;
+    });
+    builder.addCase(getRecommendedHotels.fulfilled, (state, { payload: hotels }) => {
+      state.fetchRecommendedHotelsLoading = false;
+      state.recommendedHotels = hotels;
+    });
+    builder.addCase(getRecommendedHotels.rejected, (state) => {
+      state.fetchRecommendedHotelsLoading = false;
+    });
   },
 });
 export const hotelsReducer = hotelsSlice.reducer;
+
+export const { unsetCabinetHotels } = hotelsSlice.actions;
 
 export const selectHotels = (state: RootState) => state.hotels.hotels;
 export const selectOneHotel = (state: RootState) => state.hotels.hotel;
@@ -197,4 +214,5 @@ export const selectFavoriteHotels = (state: RootState) => state.hotels.favoriteH
 export const selectFetchFavoriteHotelsLoading = (state: RootState) => state.hotels.fetchFavoriteHotelsLoading;
 export const selectCabinetHotels = (state: RootState) => state.hotels.cabinetHotels;
 export const selectCabinetLoading = (state: RootState) => state.hotels.cabinetLoading;
-export const { unsetCabinetHotels } = hotelsSlice.actions;
+export const selectRecommendedHotels = (state: RootState) => state.hotels.recommendedHotels;
+export const selectFetchRecommendedHotelsLoading = (state: RootState) => state.hotels.fetchRecommendedHotelsLoading;
