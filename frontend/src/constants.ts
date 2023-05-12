@@ -42,3 +42,5 @@ export const cities = [
   'kyzyl-kiya',
   'leylek',
 ];
+
+export const typeOfHotel = ['hostel', 'pension', 'hotel', 'guestHouse'];
