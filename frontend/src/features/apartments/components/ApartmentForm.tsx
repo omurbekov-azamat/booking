@@ -75,10 +75,35 @@ const ApartmentForm = () => {
 
   useEffect(() => {
     dispatch(fetchRoomType());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (idEditApartment) {
       dispatch(fetchOneApartment(idEditApartment));
     }
   }, [dispatch, idEditApartment]);
+
+  useEffect(() => {
+    if (oneApartment) {
+      if (id) {
+        setState({
+          roomTypeId: oneApartment.roomTypeId._id,
+          hotelId: id,
+          description: oneApartment.description,
+          price: oneApartment.price,
+          place: oneApartment.place,
+          AC: oneApartment.AC,
+          bath: oneApartment.bath,
+          balcony: oneApartment.balcony,
+          food: oneApartment.food,
+          petFriendly: oneApartment.petFriendly,
+          towel: oneApartment.towel,
+          wifi: oneApartment.wifi,
+          tv: oneApartment.tv,
+        });
+      }
+    }
+  }, [oneApartment, id, setState]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -175,6 +200,7 @@ const ApartmentForm = () => {
                 name="place"
                 autoComplete="current-place"
                 onChange={inputChangeHandler}
+                value={state.place}
                 required
               />
             </Grid>
@@ -206,6 +232,7 @@ const ApartmentForm = () => {
                     name="usd"
                     autoComplete="current-usd"
                     onChange={inputChangeHandler}
+                    value={state.price.usd}
                     required
                   />
                 </Grid>
@@ -217,6 +244,7 @@ const ApartmentForm = () => {
                     name="kgs"
                     autoComplete="current-kgs"
                     onChange={inputChangeHandler}
+                    value={state.price.kgs}
                     required
                   />
                 </Grid>
