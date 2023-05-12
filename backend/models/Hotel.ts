@@ -94,6 +94,12 @@ const HotelSchema = new Schema<IHotel>({
     enum: ['standard', 'premium', 'business'],
     default: 'standard',
   },
+  type: {
+    type: String,
+    required: true,
+    enum: ['hostel', 'pension', 'hotel', 'guestHouse'],
+    default: 'hotel',
+  },
 });
 
 const Hotel = mongoose.model('Hotel', HotelSchema);
