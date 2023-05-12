@@ -148,3 +148,12 @@ export const getFavoriteHotels = createAsyncThunk<Hotel[]>('hotels/getFavoriteHo
     throw new Error();
   }
 });
+
+export const getRecommendedHotels = createAsyncThunk<Hotel[]>('hotels/getRecommendedHotels', async () => {
+  try {
+    const responseRecommendedHotels = await axiosApi.get<Hotel[]>('/hotels/random/recommended');
+    return responseRecommendedHotels.data;
+  } catch {
+    throw new Error();
+  }
+});
