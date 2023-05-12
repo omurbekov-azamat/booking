@@ -116,5 +116,10 @@
   "telephoneNumber": "Номер телефона",
   "thereAreNoOrders": "Нет никаких заказов",
   "commentary": "Коментарий",
-  "status": "Статус"
+  "status": "Статус",
+  "hotel": "Отель",
+  "guestHouse": "Гостевой дом",
+  "pension": "Пансионат",
+  "Hostel": "Хостел",
+  "type": "Тип"
 }

@@ -248,6 +248,7 @@ const run = async () => {
         dollar: 15,
       },
       status: 'business',
+      type: 'pension',
     },
     {
       userId: hotel._id,
@@ -271,6 +272,7 @@ const run = async () => {
         dollar: 15,
       },
       status: 'business',
+      type: 'guestHouse',
     },
     {
       userId: hotel._id,

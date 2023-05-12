@@ -24,6 +24,7 @@ export interface HotelFact {
   petFriendly?: boolean;
   city?: string;
   star?: string;
+  type?: string;
 }
 
 export interface IHotel {
@@ -48,6 +49,7 @@ export interface IHotel {
     dollar: number;
   };
   status: string;
+  type: string;
 }
 
 export interface IApartment {

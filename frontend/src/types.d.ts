@@ -13,6 +13,7 @@ export interface HotelData {
   petFriendly: boolean;
   swimmingPool: boolean;
   nonSmokingRooms: boolean;
+  type: string;
 }
 
 export interface LowestPriceType {

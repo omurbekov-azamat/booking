@@ -26,6 +26,7 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       city: req.body.city,
       founding: parseFloat(req.body.founding),
       lowestPrice: JSON.parse(req.body.lowestPrice),
+      type: req.body.type,
     });
 
     await hotel.save();
@@ -62,6 +63,7 @@ hotelsRouter.get('/', async (req, res) => {
   const queryOwner = req.query.owner as string;
   const queryPage = req.query.page as string;
   const match = req.query.match as string;
+  const type = req.query.type as string;
 
   try {
     if (match) {
@@ -76,6 +78,12 @@ hotelsRouter.get('/', async (req, res) => {
 
       const findParams: HotelFact = {};
 
+      if (type) {
+        findParams.type = type;
+      }
+      if (city) {
+        findParams.city = city;
+      }
       if (nonSmokingRooms === 'true') {
         findParams.nonSmokingRooms = true;
       }
@@ -87,9 +95,6 @@ hotelsRouter.get('/', async (req, res) => {
       }
       if (petFriendly === 'true') {
         findParams.petFriendly = true;
-      }
-      if (city) {
-        findParams.city = city;
       }
       if (star !== 'null') {
         findParams.star = star;
@@ -166,6 +171,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         image: req.file && req.file.filename,
         founding: req.body.founding,
         lowestPrice: req.body.lowestPrice,
+        type: req.body.type,
       },
     });
     if (hotel.modifiedCount < 1) {
