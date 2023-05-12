@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
-import { Hotel, HotelMutation, SearchData, ValidationError } from '../../types';
+import { GlobalSuccess, Hotel, HotelMutation, SearchData, ValidationError } from '../../types';
 import { RootState } from '../../app/store';
 import { isAxiosError } from 'axios';
 
@@ -84,57 +84,65 @@ interface statusProps {
   status: string;
 }
 
-export const changeStatusHotels = createAsyncThunk<void, statusProps>('users/changeStatus', async ({ status, id }) => {
-  try {
-    await axiosApi.patch('/hotels/status/' + id, { status });
-  } catch {
-    throw new Error();
-  }
-});
-
-export const createHotel = createAsyncThunk<void, HotelMutation, { state: RootState; rejectValue: ValidationError }>(
-  'hotels/createHotel',
-  async (hotel, { getState, rejectWithValue }) => {
+export const changeStatusHotels = createAsyncThunk<GlobalSuccess, statusProps>(
+  'users/changeStatus',
+  async ({ status, id }) => {
     try {
-      const user = getState().users.user;
-
-      if (user) {
-        const formData = new FormData();
-        const keys = Object.keys(hotel) as (keyof HotelMutation)[];
-        keys.forEach((key) => {
-          const value = hotel[key];
-          if (value !== null) {
-            if (key === 'location') {
-              formData.append(key, JSON.stringify(value));
-            } else if (key === 'lowestPrice') {
-              formData.append(key, JSON.stringify(value));
-            } else {
-              formData.append(key, value as string | Blob);
-            }
-          }
-        });
-        await axiosApi.post('/hotels', formData);
-      }
-    } catch (e) {
-      if (isAxiosError(e) && e.response && e.response.status === 400) {
-        return rejectWithValue(e.response.data as ValidationError);
-      }
-      throw e;
+      const response = await axiosApi.patch<GlobalSuccess>('/hotels/status/' + id, { status });
+      return response.data;
+    } catch {
+      throw new Error();
     }
   },
 );
 
-export const removeHotel = createAsyncThunk<void, string>('hotels/removeOne', async (id) => {
+export const createHotel = createAsyncThunk<
+  GlobalSuccess,
+  HotelMutation,
+  { state: RootState; rejectValue: ValidationError }
+>('hotels/createHotel', async (hotel, { getState, rejectWithValue }) => {
   try {
-    await axiosApi.delete('/hotels/' + id);
+    const user = getState().users.user;
+
+    if (user) {
+      const formData = new FormData();
+      const keys = Object.keys(hotel) as (keyof HotelMutation)[];
+      keys.forEach((key) => {
+        const value = hotel[key];
+        if (value !== null) {
+          if (key === 'location') {
+            formData.append(key, JSON.stringify(value));
+          } else if (key === 'lowestPrice') {
+            formData.append(key, JSON.stringify(value));
+          } else {
+            formData.append(key, value as string | Blob);
+          }
+        }
+      });
+      const response = await axiosApi.post('/hotels', formData);
+      return response.data;
+    }
+  } catch (e) {
+    if (isAxiosError(e) && e.response && e.response.status === 400) {
+      return rejectWithValue(e.response.data as ValidationError);
+    }
+    throw e;
+  }
+});
+
+export const removeHotel = createAsyncThunk<GlobalSuccess, string>('hotels/removeOne', async (id) => {
+  try {
+    const response = await axiosApi.delete<GlobalSuccess>('/hotels/' + id);
+    return response.data;
   } catch {
     throw new Error();
   }
 });
 
-export const togglePublishedHotel = createAsyncThunk<void, string>('hotels/togglePublished', async (id) => {
+export const togglePublishedHotel = createAsyncThunk<GlobalSuccess, string>('hotels/togglePublished', async (id) => {
   try {
-    await axiosApi.patch('/hotels/' + id + '/togglePublished');
+    const response = await axiosApi.patch('/hotels/' + id + '/togglePublished');
+    return response.data;
   } catch {
     throw new Error();
   }
