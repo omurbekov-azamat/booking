@@ -16,8 +16,14 @@ import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { notistackShow, selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
-import { createApartment, fetchRoomType } from '../apartmentThunks';
+import {
+  notistackShow,
+  selectApartmentError,
+  selectLoadingCreateApartment,
+  selectOneApartment,
+  selectRoomType,
+} from '../apartmentSlice';
+import { createApartment, fetchOneApartment, fetchRoomType } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -63,12 +69,16 @@ const ApartmentForm = () => {
   const error = useAppSelector(selectApartmentError);
   const loading = useAppSelector(selectLoadingCreateApartment);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, idEditApartment } = useParams();
   const roomType = useAppSelector(selectRoomType);
+  const oneApartment = useAppSelector(selectOneApartment);
 
   useEffect(() => {
     dispatch(fetchRoomType());
-  }, [dispatch]);
+    if (idEditApartment) {
+      dispatch(fetchOneApartment(idEditApartment));
+    }
+  }, [dispatch, idEditApartment]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
