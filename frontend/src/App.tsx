@@ -27,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/hotels" element={<HotelsPage />} />
         <Route path="/hotels/:id" element={<HotelPage />} />
+        <Route path="/:hotelName/:hotelId/apartment/:apartmentId" element={<Apartment />} />
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />
         <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
         <Route path="/hotels/:id/comments" element={<Comments />} />

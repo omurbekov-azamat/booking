@@ -121,5 +121,7 @@
   "guestHouse": "Гостевой дом",
   "pension": "Пансионат",
   "Hostel": "Хостел",
-  "type": "Тип"
+  "type": "Тип",
+  "specialOffersForYou": "Специальные предложения для вас",
+  "readMore": "Подробнее"
 }

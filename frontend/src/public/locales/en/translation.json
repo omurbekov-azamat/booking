@@ -120,5 +120,7 @@
   "guestHouse": "Guest House",
   "pension": "Pension",
   "Hostel": "Hostel",
-  "type": "Type"
+  "type": "Type",
+  "specialOffersForYou": "Special offers for you",
+  "readMore": "Read more"
 }
