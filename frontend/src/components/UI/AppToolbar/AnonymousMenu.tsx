@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Link as NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -9,10 +9,10 @@ const AnonymousMenu = () => {
   return (
     <>
       <Button component={NavLink} to="/register" color="inherit">
-        {t('signUp')}
+        <Typography fontWeight="bold">{t('signUp')}</Typography>
       </Button>
       <Button component={NavLink} to="/login" color="inherit">
-        {t('signIn')}
+        <Typography fontWeight="bold">{t('signIn')}</Typography>
       </Button>
     </>
   );

@@ -19,6 +19,7 @@ const CurrencySwitcher = () => {
           sx={{
             marginLeft: '10px',
             color: 'white',
+            fontWeight: 'bold',
             '.MuiOutlinedInput-notchedOutline': {
               borderColor: 'rgba(228, 219, 233, 0.25)',
             },
