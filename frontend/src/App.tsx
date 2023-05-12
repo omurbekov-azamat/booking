@@ -20,15 +20,34 @@ import { selectOrderSuccess, setOrderSuccessNull } from './features/orders/order
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { selectHotelsSuccess, setHotelsSuccessNull } from './features/hotels/hotelsSlice';
+import { selectCommentsSuccess, setCommentsSuccessNull } from './features/comments/commentsSlice';
 
 function App() {
   const user = useAppSelector(selectUser);
   const orderSuccess = useAppSelector(selectOrderSuccess);
   const favoriteSuccess = useAppSelector(selectFavoriteSuccess);
   const hotelsSuccess = useAppSelector(selectHotelsSuccess);
+  const commentsSuccess = useAppSelector(selectCommentsSuccess);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (commentsSuccess) {
+      if (i18n.language === 'en') {
+        enqueueSnackbar(commentsSuccess.message.en, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      } else {
+        enqueueSnackbar(commentsSuccess.message.ru, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      }
+    }
+    dispatch(setCommentsSuccessNull());
+  }, [commentsSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   useEffect(() => {
     if (hotelsSuccess) {
