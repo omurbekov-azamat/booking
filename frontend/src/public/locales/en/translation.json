@@ -122,5 +122,6 @@
   "Hostel": "Hostel",
   "type": "Type",
   "descriptionInRu": "Description in russian",
-  "descriptionInEn": "Description in english"
+  "descriptionInEn": "Description in english",
+  "messAddApartment": "Apartment created successfully!"
 }

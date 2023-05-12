@@ -32,7 +32,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
 
   useEffect(() => {
     if (selectNotistack) {
-      enqueueSnackbar('Apartment created successfully!', { variant: 'success' });
+      enqueueSnackbar(t('messAddApartment'), { variant: 'success' });
     }
     if (location) {
       dispatch(notistackShow(false));
