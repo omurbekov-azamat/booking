@@ -215,24 +215,28 @@ const ApartmentForm = () => {
 
             <Grid item xs>
               <TextField
-                label={'Описание на русском'}
+                label={t('descriptionInRu')}
                 type="text"
                 name="ru"
                 autoComplete="current-description"
                 value={state.description.ru}
                 onChange={inputChangeHandler}
+                multiline
+                rows={4}
                 required
               />
             </Grid>
 
             <Grid item xs>
               <TextField
-                label={'Description in english'}
+                label={t('descriptionInEn')}
                 type="text"
                 name="en"
                 autoComplete="current-description"
                 value={state.description.en}
                 onChange={inputChangeHandler}
+                multiline
+                rows={4}
                 required
               />
             </Grid>

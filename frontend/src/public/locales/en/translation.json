@@ -120,5 +120,7 @@
   "guestHouse": "Guest House",
   "pension": "Pension",
   "Hostel": "Hostel",
-  "type": "Type"
+  "type": "Type",
+  "descriptionInRu": "Description in russian",
+  "descriptionInEn": "Description in english"
 }
