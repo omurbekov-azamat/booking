@@ -137,6 +137,13 @@ export interface GlobalError {
   error: string;
 }
 
+export interface GlobalSuccess {
+  message: {
+    ru: string;
+    en: string;
+  };
+}
+
 export interface SearchData {
   city: string;
   nonSmokingRooms: boolean;

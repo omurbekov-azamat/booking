@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import type { Comment, ValidationError } from '../../types';
+import type { Comment, GlobalSuccess, ValidationError } from '../../types';
 import { createComment, fetchComments, removeComment, updateComment } from './commentsThunks';
 
 interface CommentsState {
@@ -9,6 +9,7 @@ interface CommentsState {
   loadingCreateComment: boolean;
   loadingRemoveComment: false | string;
   loadingUpdateComment: boolean;
+  commentsSuccess: GlobalSuccess | null;
   error: boolean;
   createCommentError: ValidationError | null;
 }
@@ -19,6 +20,7 @@ const initialState: CommentsState = {
   loadingCreateComment: false,
   loadingRemoveComment: false,
   loadingUpdateComment: false,
+  commentsSuccess: null,
   error: false,
   createCommentError: null,
 };
@@ -26,7 +28,11 @@ const initialState: CommentsState = {
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
-  reducers: {},
+  reducers: {
+    setCommentsSuccessNull: (state) => {
+      state.commentsSuccess = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchComments.pending, (state) => {
       state.loading = true;
@@ -45,8 +51,9 @@ export const commentsSlice = createSlice({
       state.loadingCreateComment = true;
       state.createCommentError = null;
     });
-    builder.addCase(createComment.fulfilled, (state) => {
+    builder.addCase(createComment.fulfilled, (state, { payload: success }) => {
       state.loadingCreateComment = false;
+      state.commentsSuccess = success;
     });
     builder.addCase(createComment.rejected, (state, { payload: error }) => {
       state.loadingCreateComment = false;
@@ -56,8 +63,9 @@ export const commentsSlice = createSlice({
       state.loadingUpdateComment = true;
       state.error = false;
     });
-    builder.addCase(updateComment.fulfilled, (state) => {
+    builder.addCase(updateComment.fulfilled, (state, { payload: success }) => {
       state.loadingUpdateComment = false;
+      state.commentsSuccess = success;
       state.error = false;
     });
     builder.addCase(updateComment.rejected, (state) => {
@@ -68,8 +76,9 @@ export const commentsSlice = createSlice({
       state.loadingRemoveComment = meta.arg;
       state.error = false;
     });
-    builder.addCase(removeComment.fulfilled, (state) => {
+    builder.addCase(removeComment.fulfilled, (state, { payload: success }) => {
       state.loadingRemoveComment = false;
+      state.commentsSuccess = success;
       state.error = false;
     });
     builder.addCase(removeComment.rejected, (state) => {
@@ -86,3 +95,5 @@ export const selectLoadingCreateComment = (state: RootState) => state.comments.l
 export const selectLoadingUpdateComment = (state: RootState) => state.comments.loadingUpdateComment;
 export const selectLoadingRemoveComment = (state: RootState) => state.comments.loadingRemoveComment;
 export const selectCreateCommentError = (state: RootState) => state.comments.createCommentError;
+export const { setCommentsSuccessNull } = commentsSlice.actions;
+export const selectCommentsSuccess = (state: RootState) => state.comments.commentsSuccess;

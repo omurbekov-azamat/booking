@@ -31,7 +31,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
     });
 
     await apartment.save();
-    return res.send({ message: 'Created successfully' });
+    return res.send({ message: { en: 'Apartments created successfully', ru: 'Апартаменты успешно созданы' } });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);
@@ -106,7 +106,7 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
     }
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
-      res.send({ message: 'Changed successfully', apartment });
+      res.send({ message: { en: 'Apartments updated successfully', ru: 'Апартаменты успешно изменены' } });
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
     }
@@ -133,7 +133,7 @@ apartmentsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res,
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       await Apartment.deleteOne({ _id: req.params.id });
-      res.send({ message: 'Deleted successfully' });
+      res.send({ message: { en: 'Apartments deleted successfully', ru: 'Апартаменты успешно удалены' } });
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
     }

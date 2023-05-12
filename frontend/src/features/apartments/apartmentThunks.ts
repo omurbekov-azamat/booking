@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IApartment, ApartmentMutation, ValidationError, UpdateApartment, IRoomType } from '../../types';
+import { IApartment, ApartmentMutation, ValidationError, UpdateApartment, IRoomType, GlobalSuccess } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
 
 export const createApartment = createAsyncThunk<
-  void,
+  GlobalSuccess,
   ApartmentMutation,
   {
     state: RootState;
@@ -83,7 +83,7 @@ export const fetchOneApartment = createAsyncThunk<IApartment, string>('apartment
 });
 
 export const editApartment = createAsyncThunk<
-  void,
+  GlobalSuccess,
   UpdateApartment,
   {
     state: RootState;
@@ -107,7 +107,8 @@ export const editApartment = createAsyncThunk<
           }
         }
       });
-      await axiosApi.patch('/apartments/' + apartment.id, formData);
+      const response = await axiosApi.patch('/apartments/' + apartment.id, formData);
+      return response.data;
     }
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 400) {
@@ -117,9 +118,10 @@ export const editApartment = createAsyncThunk<
   }
 });
 
-export const removeApartment = createAsyncThunk<void, string>('apartments/removeOne', async (id) => {
+export const removeApartment = createAsyncThunk<GlobalSuccess, string>('apartments/removeOne', async (id) => {
   try {
-    await axiosApi.delete('/apartments/' + id);
+    const response = await axiosApi.delete('/apartments/' + id);
+    return response.data;
   } catch {
     throw new Error();
   }
