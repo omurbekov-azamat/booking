@@ -27,12 +27,12 @@ const AppToolbar = () => {
   });
 
   return (
-    <Box sx={{ flexGrow: 1 }} mb={1}>
+    <Box sx={{ flexGrow: 1 }} mb={3}>
       <AppBar position="sticky" sx={{ top: 0, background: '#77dd77', py: 2 }}>
         <Toolbar>
           <Container maxWidth="xl">
             <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <Grid item xs={12} sm={12} md={4} lg={6} xl={6}>
                 <Grid container>
                   <Typography variant="h6" component="div" fontWeight="bold" mr={3}>
                     <Link to="/">Booking</Link>
@@ -42,7 +42,7 @@ const AppToolbar = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item xs={6} sm={6} md={3} lg={3} xl={2}>
+              <Grid item xs={12} sm={12} md={2} lg={3} xl={3}>
                 <Grid container>
                   <CurrencySwitcher />
                   <Grid item>
@@ -55,7 +55,7 @@ const AppToolbar = () => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+              <Grid item xs={12} sm={12} md={6} lg={3} xl={3}>
                 <Grid container>
                   <Grid item ml="auto">
                     {user ? <UserMenu user={user} /> : <AnonymousMenu />}
