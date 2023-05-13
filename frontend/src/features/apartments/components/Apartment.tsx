@@ -117,7 +117,12 @@ const Apartment = () => {
       </Card>
 
       <Box textAlign="right">
-        <Button variant="outlined" sx={{ background: 'lightgreen' }} onClick={onClickResolveApartment}>
+        <Button
+          variant="outlined"
+          size={'large'}
+          sx={{ mx: 'auto', my: 3, display: 'block' }}
+          onClick={onClickResolveApartment}
+        >
           {t('reserve')}
         </Button>
       </Box>
