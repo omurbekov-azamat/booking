@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import { Box, Button, Grid } from '@mui/material';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import { Box, Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchOneApartment } from '../apartmentThunks';
@@ -33,7 +32,6 @@ const Apartment = () => {
     navigate(`/book-apartment/${hotelName}/${hotelId}/apartment/${apartmentId}`);
   };
 
-  const services = ['1', '2', '3'];
   return (
     <>
       <Card sx={{ mt: 5 }}>
@@ -49,23 +47,12 @@ const Apartment = () => {
           </Typography>
 
           <Typography gutterBottom component="p">
-            {'Описание: ' + apartment?.description}
+            {t('place') + ': ' + apartment?.place + ' M²'}
           </Typography>
 
-          <Grid container xl>
-            {services.map((service, index) => {
-              return (
-                <Grid container gap={1} item key={index} alignSelf={'center'}>
-                  <Grid item>
-                    <TaskAltIcon />
-                  </Grid>
-                  <Grid item sx={{ fontSize: 17 }}>
-                    {service}
-                  </Grid>
-                </Grid>
-              );
-            })}
-          </Grid>
+          <Typography gutterBottom component="p">
+            {'Описание: ' + apartment?.description}
+          </Typography>
         </CardContent>
       </Card>
       {apartment && <ApartmentsGallery apartmentData={apartment} />}
