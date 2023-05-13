@@ -8,6 +8,7 @@ import { IApartment, IHotel } from '../types';
 import { promises as fs } from 'fs';
 import Hotel from '../models/Hotel';
 import config from '../config';
+import path from 'path';
 
 const apartmentsRouter = express.Router();
 
@@ -134,6 +135,40 @@ apartmentsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res,
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       await Apartment.deleteOne({ _id: req.params.id });
       res.send({ message: 'Deleted successfully' });
+    } else {
+      return res.status(403).send({ message: 'You do not have permission!' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
+apartmentsRouter.delete('/:id/images/:index', auth, permit('admin', 'hotel'), async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const apartment = await Apartment.findById(req.params.id);
+
+    if (!apartment) {
+      return res.status(404).send({ message: 'Not found apartment!' });
+    }
+
+    const hotel: HydratedDocument<IHotel> | null = await Hotel.findById(apartment.hotelId);
+
+    if (!hotel) {
+      return res.status(404).send({ message: 'Not found hotel!' });
+    }
+
+    if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
+      const index = parseInt(req.params.index);
+
+      // Проверяем, что свойство images существует и не равно null
+      if (apartment.images && index >= 0 && index < apartment.images.length) {
+        apartment.images.splice(index, 1);
+        await apartment.save();
+        res.send({ message: 'Deleted successfully' });
+      } else {
+        return res.status(404).send({ message: 'Not found image!' });
+      }
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
     }

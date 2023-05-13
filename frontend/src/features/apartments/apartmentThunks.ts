@@ -125,6 +125,20 @@ export const removeApartment = createAsyncThunk<void, string>('apartments/remove
   }
 });
 
+export const removeApartmentImage = createAsyncThunk<
+  void,
+  {
+    apartmentId: string;
+    imageIndex: number;
+  }
+>('apartments/removeImage', async ({ apartmentId, imageIndex }) => {
+  try {
+    await axiosApi.delete(`/apartments/${apartmentId}/images/${imageIndex}`);
+  } catch {
+    throw new Error();
+  }
+});
+
 export const fetchRoomType = createAsyncThunk<IRoomType[]>('apartments/fetchRoomTypeAll', async () => {
   try {
     const response = await axiosApi.get<IRoomType[]>('/roomTypes');

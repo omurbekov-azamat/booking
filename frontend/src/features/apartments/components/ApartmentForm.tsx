@@ -23,7 +23,7 @@ import {
   selectOneApartment,
   selectRoomType,
 } from '../apartmentSlice';
-import { createApartment, fetchOneApartment, fetchRoomType } from '../apartmentThunks';
+import { createApartment, fetchOneApartment, fetchRoomType, removeApartmentImage } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -36,6 +36,7 @@ import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import WifiIcon from '@mui/icons-material/Wifi';
 import TvIcon from '@mui/icons-material/Tv';
 import { fetchOneHotel } from '../../hotels/hotelsThunks';
+import { apiURL } from '../../../constants';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -86,7 +87,8 @@ const ApartmentForm = () => {
   useEffect(() => {
     if (oneApartment) {
       if (id) {
-        setState({
+        setState((prevState) => ({
+          ...prevState,
           roomTypeId: oneApartment.roomTypeId._id,
           hotelId: id,
           description: oneApartment.description,
@@ -100,10 +102,14 @@ const ApartmentForm = () => {
           towel: oneApartment.towel,
           wifi: oneApartment.wifi,
           tv: oneApartment.tv,
-        });
+        }));
       }
     }
   }, [oneApartment, id, setState]);
+
+  console.log(state);
+  // console.log(oneApartment?.images);
+  console.log(stateImg);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -183,6 +189,11 @@ const ApartmentForm = () => {
     } else if (name.name === 'triple room') {
       return t('tripleRoom');
     }
+  };
+
+  const deleteOldImg = async (apartmentId: string, imageIndex: number) => {
+    await dispatch(removeApartmentImage({ apartmentId, imageIndex }));
+    await dispatch(fetchOneApartment(apartmentId));
   };
 
   return (
@@ -421,20 +432,35 @@ const ApartmentForm = () => {
                       <AddCircleOutlineIcon />
                     </IconButton>
                   </Grid>
-                  <Grid item xs>
-                    {state.images &&
-                      state.images.length > 0 &&
-                      state.images.map((image, index) => (
-                        <Grid container key={index} marginLeft={3} mb={2}>
-                          <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
-                          <Grid item>
-                            <Typography>{image.name}</Typography>
-                            <IconButton onClick={() => deleteImg(index)}>
-                              <DeleteIcon />
-                            </IconButton>
+                  <Grid container direction="column">
+                    <Grid item xs>
+                      {oneApartment?.images &&
+                        idEditApartment &&
+                        oneApartment.images.map((image, index) => (
+                          <Grid container key={index} marginLeft={3} mb={2}>
+                            <img src={apiURL + '/' + image} style={{ width: '100px' }} alt={image} />
+                            <Grid item>
+                              <IconButton onClick={() => deleteOldImg(idEditApartment, index)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                      ))}
+                        ))}
+                    </Grid>
+                    <Grid item xs>
+                      {state.images &&
+                        state.images.length > 0 &&
+                        state.images.map((image, index) => (
+                          <Grid container key={index} marginLeft={3} mb={2}>
+                            <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
+                            <Grid item>
+                              <IconButton onClick={() => deleteImg(index)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
+                        ))}
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
