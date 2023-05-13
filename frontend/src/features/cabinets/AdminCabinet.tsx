@@ -21,12 +21,9 @@ import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import HotelsStatus from './components/HotelsStatus';
 import OrderItems from '../orders/components/OrderItems';
+import { CabinetState } from '../../types';
 
-export interface AdminState {
-  [key: string]: boolean;
-}
-
-const initialState: AdminState = {
+const initialState: CabinetState = {
   myInfo: true,
   myOrders: false,
   myHotels: false,
@@ -36,7 +33,7 @@ const initialState: AdminState = {
 };
 
 interface Props {
-  exist?: AdminState;
+  exist?: CabinetState;
 }
 
 const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
@@ -48,7 +45,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const unacceptedOrders = useAppSelector(selectOrders);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
-  const [state, setState] = React.useState<AdminState>(exist);
+  const [state, setState] = React.useState<CabinetState>(exist);
 
   useEffect(() => {
     if (user) {
