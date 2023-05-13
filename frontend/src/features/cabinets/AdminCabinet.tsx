@@ -108,7 +108,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.myHotels && (
                 <Grid container spacing={2}>
                   {hotelsState.map((el) => (
-                    <Grid item key={el._id}>
+                    <Grid item xs={12} sm={12} md={6} lg={3} xl={3} key={el._id}>
                       <HotelsCard hotel={el} />
                     </Grid>
                   ))}
