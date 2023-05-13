@@ -10,12 +10,14 @@ import { fetchOneApartment } from '../apartmentThunks';
 import { selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
+import { selectCurrency } from '../../currency/currencySlice';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const apartment = useAppSelector(selectOneApartment);
   const navigate = useNavigate();
+  const apartment = useAppSelector(selectOneApartment);
+  const currency = useAppSelector(selectCurrency);
 
   const { hotelName, hotelId, apartmentId } = useParams() as {
     hotelName: string;
@@ -39,13 +41,15 @@ const Apartment = () => {
           <Typography variant="h4" component="p" textAlign={'center'}>
             {hotelName}
           </Typography>
-          <Typography>{'Количество комнат:'}</Typography>
+          <Typography variant="h5" component="p" textAlign={'center'}>
+            {apartment?.roomTypeId.name}
+          </Typography>
           <Typography gutterBottom component="p">
-            {'Стоимость:'}
+            {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
           </Typography>
 
           <Typography gutterBottom component="p">
-            {'Описание:'}
+            {'Описание: ' + apartment?.description}
           </Typography>
 
           <Grid container xl>
