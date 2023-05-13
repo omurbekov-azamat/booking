@@ -69,7 +69,7 @@ export const fetchApartments = createAsyncThunk<IApartment[], PropsFetchApartmen
         const response = await axiosApi.get<IApartment[]>('/apartments?owner=' + data.hotelId);
         return response.data;
       } else if (data?.userId) {
-        const response = await axiosApi.get<IApartment[]>('/apartments?getMyApartments=' + data.hotelId);
+        const response = await axiosApi.get<IApartment[]>('/apartments?getMyApartments=' + data.userId);
         return response.data;
       } else {
         const response = await axiosApi.get<IApartment[]>('/apartments');

@@ -17,7 +17,7 @@ const HotelsStatus = () => {
     if (name.length > 1) {
       dispatch(getCabinetHotels('nameMatch=' + name));
     }
-  }, [name]);
+  }, [name, dispatch]);
 
   const inputChangeNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);

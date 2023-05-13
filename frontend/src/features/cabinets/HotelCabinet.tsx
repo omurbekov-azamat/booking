@@ -4,7 +4,7 @@ import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { CabinetState, User } from '../../types';
 import { selectHotels } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
+import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PersonIcon from '@mui/icons-material/Person';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -15,11 +15,15 @@ import ListItemText from '@mui/material/ListItemText';
 import MyInformation from './components/MyInformation';
 import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
+import BedroomParentIcon from '@mui/icons-material/BedroomParent';
+import { fetchApartments } from '../apartments/apartmentThunks';
+import { selectApartments } from '../apartments/apartmentSlice';
 
 const initialState: CabinetState = {
   myInfo: true,
   myHotels: false,
   createHotel: false,
+  myApartments: false,
 };
 
 interface Props {
@@ -31,6 +35,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const { t } = useTranslation();
   const user = useAppSelector(selectUser) as User;
   const hotels = useAppSelector(selectHotels);
+  const apartments = useAppSelector(selectApartments);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
@@ -44,15 +49,18 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
+    { option: 'myApartments', icon: <BedroomParentIcon />, text: 'Апартаменты' },
   ];
 
   useEffect(() => {
     if (user) {
       if (state.myHotels) {
         dispatch(fetchHotels(user._id));
+      } else if (state.myApartments) {
+        dispatch(fetchApartments({ userId: user._id }));
       }
     }
-  }, [dispatch, user, state.myHotels]);
+  }, [dispatch, user, state.myHotels, state.myApartments]);
 
   return (
     <Box>
@@ -94,6 +102,13 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 </Grid>
               )}
               {state.createHotel && <HotelForm />}
+              {state.myApartments && (
+                <>
+                  {apartments.map((apartment) => (
+                    <Typography key={apartment._id}>{apartment.roomTypeId.name}</Typography>
+                  ))}
+                </>
+              )}
             </Grid>
           </Grid>
         </CardContent>
