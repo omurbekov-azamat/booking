@@ -21,7 +21,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const apartment = useAppSelector(selectOneApartment);
   const currency = useAppSelector(selectCurrency);
@@ -109,12 +109,13 @@ const Apartment = () => {
             )}
           </Grid>
 
-          <Typography gutterBottom component="p">
-            {'Описание: ' + apartment?.description}
+          <Typography gutterBottom component="p" sx={{ mt: 2 }}>
+            {i18n.language === 'en' ? apartment?.description.en : apartment?.description.ru}
           </Typography>
         </CardContent>
+        {apartment && <ApartmentsGallery apartmentData={apartment} />}
       </Card>
-      {apartment && <ApartmentsGallery apartmentData={apartment} />}
+
       <Box textAlign="right">
         <Button variant="outlined" sx={{ background: 'lightgreen' }} onClick={onClickResolveApartment}>
           {t('reserve')}
