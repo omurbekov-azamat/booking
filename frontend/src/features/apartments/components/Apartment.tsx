@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchOneApartment } from '../apartmentThunks';
@@ -10,6 +10,14 @@ import { selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
 import { selectCurrency } from '../../currency/currencySlice';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import BalconyIcon from '@mui/icons-material/Balcony';
+import BathtubIcon from '@mui/icons-material/Bathtub';
+import PetsIcon from '@mui/icons-material/Pets';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import TvIcon from '@mui/icons-material/Tv';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
+import WifiIcon from '@mui/icons-material/Wifi';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
@@ -49,6 +57,57 @@ const Apartment = () => {
           <Typography gutterBottom component="p">
             {t('place') + ': ' + apartment?.place + ' M²'}
           </Typography>
+
+          <Grid container alignItems="center" gap={2}>
+            {apartment?.AC && (
+              <Grid item>
+                <AcUnitIcon />
+                <span>{t('AC')}</span>
+              </Grid>
+            )}
+            {apartment?.balcony && (
+              <Grid item>
+                <BalconyIcon />
+                <span>{t('balcony')}</span>
+              </Grid>
+            )}
+            {apartment?.bath && (
+              <Grid item>
+                <BathtubIcon />
+                <span>{t('bath')}</span>
+              </Grid>
+            )}
+            {apartment?.petFriendly && (
+              <Grid item>
+                <PetsIcon />
+                <span>{t('petFriendly')}</span>
+              </Grid>
+            )}
+            {apartment?.food && (
+              <Grid item>
+                <RestaurantIcon />
+                <span>{t('food')}</span>
+              </Grid>
+            )}
+            {apartment?.tv && (
+              <Grid item>
+                <TvIcon />
+                <span>{t('tv')}</span>
+              </Grid>
+            )}
+            {apartment?.towel && (
+              <Grid item>
+                <DryCleaningIcon />
+                <span>{t('towel')}</span>
+              </Grid>
+            )}
+            {apartment?.wifi && (
+              <Grid item>
+                <WifiIcon />
+                <span>{t('wiFi')}</span>
+              </Grid>
+            )}
+          </Grid>
 
           <Typography gutterBottom component="p">
             {'Описание: ' + apartment?.description}
