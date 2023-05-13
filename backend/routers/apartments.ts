@@ -41,12 +41,23 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
 });
 
 apartmentsRouter.get('/', async (req, res, next) => {
+  const queryOwner = req.query.owner as string;
+  const userId = req.query.getMyApartments as string;
   try {
-    const queryOwner = req.query.owner as string;
     if (queryOwner) {
       const apartmentsRes = await Apartment.find({ hotelId: queryOwner }).populate('roomTypeId');
       return res.send(apartmentsRes);
     }
+
+    if (userId) {
+      const hotels = await Hotel.find({ userId });
+      const hotelsId = await hotels.map((hotel) => hotel._id);
+      const apartments = await Apartment.find({ hotelId: { $in: hotelsId } })
+        .populate('hotelId')
+        .populate('roomTypeId');
+      return res.send(apartments);
+    }
+
     const apartmentsRes = await Apartment.find().populate('roomTypeId');
     return res.send(apartmentsRes);
   } catch (e) {
