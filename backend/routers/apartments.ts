@@ -5,10 +5,7 @@ import auth, { RequestWithUser } from '../middleware/auth';
 import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
-import { promises as fs } from 'fs';
 import Hotel from '../models/Hotel';
-import config from '../config';
-import path from 'path';
 
 const apartmentsRouter = express.Router();
 
@@ -80,24 +77,11 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
       return res.status(404).send({ message: 'Not found apartment!' });
     }
 
-    if (apartment) {
-      if (apartment.images) {
-        if (apartment.images.length > 0) {
-          const oldImages = apartment.images;
-          if (req.files) {
-            const arrayFiles = req.files as [];
-            if (arrayFiles.length > 0) {
-              oldImages.forEach((imagePath) => {
-                fs.unlink(config.publicPath + '/' + imagePath);
-              });
-              apartment.images = (req.files as Express.Multer.File[]).map((file) => file.filename);
-              await apartment.save();
-            } else {
-              apartment.images = oldImages;
-            }
-          }
-        }
-      }
+    if (req.files) {
+      apartment.images = apartment.images
+        ? apartment.images.concat((req.files as Express.Multer.File[]).map((file) => file.filename))
+        : (req.files as Express.Multer.File[]).map((file) => file.filename);
+      await apartment.save();
     }
 
     const hotel: HydratedDocument<IHotel> | null = await Hotel.findById(apartment.hotelId);
@@ -161,7 +145,6 @@ apartmentsRouter.delete('/:id/images/:index', auth, permit('admin', 'hotel'), as
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       const index = parseInt(req.params.index);
 
-      // Проверяем, что свойство images существует и не равно null
       if (apartment.images && index >= 0 && index < apartment.images.length) {
         apartment.images.splice(index, 1);
         await apartment.save();
