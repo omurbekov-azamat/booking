@@ -18,12 +18,17 @@ import HotelForm from '../hotels/components/HotelForm';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import { fetchApartments } from '../apartments/apartmentThunks';
 import { selectApartments } from '../apartments/apartmentSlice';
+import WorkIcon from '@mui/icons-material/Work';
+import { getOrders } from '../orders/ordersThunks';
+import { selectOrders } from '../orders/ordersSlice';
+import OrderItems from '../orders/components/OrderItems';
 
 const initialState: CabinetState = {
   myInfo: true,
   myHotels: false,
   createHotel: false,
   myApartments: false,
+  myOrders: false,
 };
 
 interface Props {
@@ -36,6 +41,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const user = useAppSelector(selectUser) as User;
   const hotels = useAppSelector(selectHotels);
   const apartments = useAppSelector(selectApartments);
+  const reservedRooms = useAppSelector(selectOrders);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
@@ -50,6 +56,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
     { option: 'myApartments', icon: <BedroomParentIcon />, text: 'Апартаменты' },
+    { option: 'myOrders', icon: <WorkIcon />, text: t('myOrders') },
   ];
 
   useEffect(() => {
@@ -58,9 +65,11 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
         dispatch(fetchHotels(user._id));
       } else if (state.myApartments) {
         dispatch(fetchApartments({ userId: user._id }));
+      } else if (state.myOrders) {
+        dispatch(getOrders());
       }
     }
-  }, [dispatch, user, state.myHotels, state.myApartments]);
+  }, [dispatch, user, state.myHotels, state.myApartments, state.myOrders]);
 
   return (
     <Box>
@@ -109,6 +118,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   ))}
                 </>
               )}
+              {state.myOrders && <OrderItems ordersItems={reservedRooms} />}
             </Grid>
           </Grid>
         </CardContent>

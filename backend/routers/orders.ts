@@ -40,7 +40,7 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
   }
 });
 
-ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res, next) => {
+ordersRouter.get('/', auth, async (req, res, next) => {
   const user = (req as RequestWithUser).user;
   try {
     if (user.role === 'admin') {
