@@ -55,10 +55,10 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
 
   return (
     <>
-      <Box sx={{ width: '700px', height: '500px', p: 3, background: 'rgba(0, 0, 0, 0.2)' }}>
+      <Box sx={{ width: '700px', height: '500px', p: 3, mx: 'auto' }}>
         <CardMedia component="img" image={apiURL + '/' + selectedImage.img} height="450" alt={selectedImage.title} />
       </Box>
-      <MyGalleryContainer>
+      <MyGalleryContainer sx={{ mx: 'auto' }}>
         <MyGalleryLeftArrow onClick={handleScrollLeft} sx={arrowStyleGallery} />
         <MyGalleryRightArrow onClick={handleScrollRight} sx={arrowStyleGallery} />
         <Grid

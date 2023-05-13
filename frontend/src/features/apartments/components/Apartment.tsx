@@ -3,19 +3,28 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import { Box, Button, Grid } from '@mui/material';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchOneApartment } from '../apartmentThunks';
 import { selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
+import { selectCurrency } from '../../currency/currencySlice';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import BalconyIcon from '@mui/icons-material/Balcony';
+import BathtubIcon from '@mui/icons-material/Bathtub';
+import PetsIcon from '@mui/icons-material/Pets';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import TvIcon from '@mui/icons-material/Tv';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
+import WifiIcon from '@mui/icons-material/Wifi';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
-  const apartment = useAppSelector(selectOneApartment);
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const apartment = useAppSelector(selectOneApartment);
+  const currency = useAppSelector(selectCurrency);
 
   const { hotelName, hotelId, apartmentId } = useParams() as {
     hotelName: string;
@@ -31,7 +40,6 @@ const Apartment = () => {
     navigate(`/book-apartment/${hotelName}/${hotelId}/apartment/${apartmentId}`);
   };
 
-  const services = ['1', '2', '3'];
   return (
     <>
       <Card sx={{ mt: 5 }}>
@@ -39,34 +47,82 @@ const Apartment = () => {
           <Typography variant="h4" component="p" textAlign={'center'}>
             {hotelName}
           </Typography>
-          <Typography>{'Количество комнат:'}</Typography>
+          <Typography variant="h5" component="p" textAlign={'center'}>
+            {apartment?.roomTypeId.name}
+          </Typography>
           <Typography gutterBottom component="p">
-            {'Стоимость:'}
+            {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
           </Typography>
 
           <Typography gutterBottom component="p">
-            {'Описание:'}
+            {t('place') + ': ' + apartment?.place + ' M²'}
           </Typography>
 
-          <Grid container xl>
-            {services.map((service, index) => {
-              return (
-                <Grid container gap={1} item key={index} alignSelf={'center'}>
-                  <Grid item>
-                    <TaskAltIcon />
-                  </Grid>
-                  <Grid item sx={{ fontSize: 17 }}>
-                    {service}
-                  </Grid>
-                </Grid>
-              );
-            })}
+          <Grid container alignItems="center" gap={2}>
+            {apartment?.AC && (
+              <Grid item>
+                <AcUnitIcon />
+                <span>{t('AC')}</span>
+              </Grid>
+            )}
+            {apartment?.balcony && (
+              <Grid item>
+                <BalconyIcon />
+                <span>{t('balcony')}</span>
+              </Grid>
+            )}
+            {apartment?.bath && (
+              <Grid item>
+                <BathtubIcon />
+                <span>{t('bath')}</span>
+              </Grid>
+            )}
+            {apartment?.petFriendly && (
+              <Grid item>
+                <PetsIcon />
+                <span>{t('petFriendly')}</span>
+              </Grid>
+            )}
+            {apartment?.food && (
+              <Grid item>
+                <RestaurantIcon />
+                <span>{t('food')}</span>
+              </Grid>
+            )}
+            {apartment?.tv && (
+              <Grid item>
+                <TvIcon />
+                <span>{t('tv')}</span>
+              </Grid>
+            )}
+            {apartment?.towel && (
+              <Grid item>
+                <DryCleaningIcon />
+                <span>{t('towel')}</span>
+              </Grid>
+            )}
+            {apartment?.wifi && (
+              <Grid item>
+                <WifiIcon />
+                <span>{t('wiFi')}</span>
+              </Grid>
+            )}
           </Grid>
+
+          <Typography gutterBottom component="p" sx={{ mt: 2 }}>
+            {i18n.language === 'en' ? apartment?.description.en : apartment?.description.ru}
+          </Typography>
         </CardContent>
+        {apartment && <ApartmentsGallery apartmentData={apartment} />}
       </Card>
-      {apartment && <ApartmentsGallery apartmentData={apartment} />}
+
       <Box textAlign="right">
-        <Button variant="outlined" sx={{ background: 'lightgreen' }} onClick={onClickResolveApartment}>
+        <Button
+          variant="outlined"
+          size={'large'}
+          sx={{ mx: 'auto', my: 3, display: 'block' }}
+          onClick={onClickResolveApartment}
+        >
           {t('reserve')}
         </Button>
       </Box>
