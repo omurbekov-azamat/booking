@@ -205,3 +205,7 @@ export interface IRoomType {
   _id: string;
   name: string;
 }
+
+export interface CabinetState {
+  [key: string]: boolean;
+}

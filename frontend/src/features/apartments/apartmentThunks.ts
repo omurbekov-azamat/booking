@@ -56,12 +56,20 @@ export const createApartment = createAsyncThunk<
   }
 });
 
-export const fetchApartments = createAsyncThunk<IApartment[], string | undefined>(
+interface PropsFetchApartments {
+  hotelId?: string;
+  userId?: string;
+}
+
+export const fetchApartments = createAsyncThunk<IApartment[], PropsFetchApartments | undefined>(
   'apartments/fetchAll',
-  async (hotelId: string | undefined) => {
+  async (data) => {
     try {
-      if (hotelId) {
-        const response = await axiosApi.get<IApartment[]>('/apartments?owner=' + hotelId);
+      if (data?.hotelId) {
+        const response = await axiosApi.get<IApartment[]>('/apartments?owner=' + data.hotelId);
+        return response.data;
+      } else if (data?.userId) {
+        const response = await axiosApi.get<IApartment[]>('/apartments?getMyApartments=' + data.userId);
         return response.data;
       } else {
         const response = await axiosApi.get<IApartment[]>('/apartments');

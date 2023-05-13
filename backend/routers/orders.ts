@@ -4,6 +4,8 @@ import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
 import { IApartment } from '../types';
+import Hotel from '../models/Hotel';
+import Apartment from '../models/Apartment';
 
 const ordersRouter = express.Router();
 
@@ -38,7 +40,7 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
   }
 });
 
-ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res, next) => {
+ordersRouter.get('/', auth, async (req, res, next) => {
   const user = (req as RequestWithUser).user;
   try {
     if (user.role === 'admin') {
@@ -77,6 +79,17 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
         .populate('adminId', '-token')
         .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
       return res.send(yourOrders);
+    }
+    if (user.role === 'hotel') {
+      const hotels = await Hotel.find({ userId: user._id });
+      const hotelsId = await hotels.map((hotel) => hotel._id);
+      const apartments = await Apartment.find({ hotelId: { $in: hotelsId } });
+      const apartmentIds = apartments.map((apartment) => apartment._id);
+      const reservedRooms = await Order.find({ apartmentId: { $in: apartmentIds }, status: 'closed' })
+        .populate('userId', '-token')
+        .populate('adminId', '-token')
+        .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+      return res.send(reservedRooms);
     }
   } catch (e) {
     return next(e);
