@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Comment, CommentMutation, ValidationError } from '../../types';
+import { Comment, CommentMutation, GlobalSuccess, ValidationError } from '../../types';
 import axiosApi from '../../axiosApi';
 import { RootState } from '../../app/store';
 import { isAxiosError } from 'axios';
@@ -17,7 +17,7 @@ export const fetchComments = createAsyncThunk<Comment[], string>(
 );
 
 export const createComment = createAsyncThunk<
-  void,
+  GlobalSuccess,
   CommentMutation,
   { state: RootState; rejectValue: ValidationError }
 >('comments/createComment', async (comment, { getState, rejectWithValue }) => {
@@ -25,7 +25,8 @@ export const createComment = createAsyncThunk<
     const user = getState().users.user;
 
     if (user) {
-      await axiosApi.post('/comments', comment);
+      const response = await axiosApi.post('/comments', comment);
+      return response.data;
     }
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 400) {
@@ -40,27 +41,30 @@ interface updatedData {
   id: string;
 }
 
-export const updateComment = createAsyncThunk<void, updatedData, { state: RootState; rejectValue: ValidationError }>(
-  'comments/updateComment',
-  async (updatedData, { getState, rejectWithValue }) => {
-    try {
-      const user = getState().users.user;
-
-      if (user) {
-        await axiosApi.patch('/comments/' + updatedData.id, updatedData.comment);
-      }
-    } catch (e) {
-      if (isAxiosError(e) && e.response && e.response.status === 400) {
-        return rejectWithValue(e.response.data as ValidationError);
-      }
-      throw e;
-    }
-  },
-);
-
-export const removeComment = createAsyncThunk<void, string>('comments/removeOne', async (id) => {
+export const updateComment = createAsyncThunk<
+  GlobalSuccess,
+  updatedData,
+  { state: RootState; rejectValue: ValidationError }
+>('comments/updateComment', async (updatedData, { getState, rejectWithValue }) => {
   try {
-    await axiosApi.delete('/comments/' + id);
+    const user = getState().users.user;
+
+    if (user) {
+      const response = await axiosApi.patch('/comments/' + updatedData.id, updatedData.comment);
+      return response.data;
+    }
+  } catch (e) {
+    if (isAxiosError(e) && e.response && e.response.status === 400) {
+      return rejectWithValue(e.response.data as ValidationError);
+    }
+    throw e;
+  }
+});
+
+export const removeComment = createAsyncThunk<GlobalSuccess, string>('comments/removeOne', async (id) => {
+  try {
+    const response = await axiosApi.delete('/comments/' + id);
+    return response.data;
   } catch {
     throw new Error();
   }

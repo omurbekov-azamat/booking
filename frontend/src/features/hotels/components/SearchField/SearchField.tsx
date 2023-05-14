@@ -40,7 +40,7 @@ const SearchField = () => {
   }, [dispatch, match]);
 
   return (
-    <form onClick={onSubmit} style={{ marginTop: '10px' }}>
+    <form onClick={onSubmit}>
       <Grid container>
         <Grid item>
           <Autocomplete

@@ -28,7 +28,7 @@ commentsRouter.post('/', auth, async (req, res, next) => {
     });
 
     await newComment.save();
-    return res.send({ message: 'Created successfully' });
+    return res.send({ message: { en: 'Comment created successfully', ru: 'Комментарий успешно создан' } });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);
@@ -51,7 +51,7 @@ commentsRouter.patch('/:id', auth, async (req, res, next) => {
       return res.status(403).send({ message: 'Forbidden' });
     }
 
-    return res.status(200).send({ message: 'Comment updated successfully' });
+    return res.send({ message: { en: 'Comment updated successfully', ru: 'Комментарий успешно обновлен' } });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);
@@ -68,13 +68,13 @@ commentsRouter.delete('/:id', auth, async (req, res, next) => {
       const result = await Comment.deleteOne({ _id: req.params.id, author: user._id });
 
       if (result.deletedCount) {
-        return res.send({ message: 'Comment removed' });
+        return res.send({ message: { en: 'Comment deleted successfully', ru: 'Комментарий успешно удален' } });
       } else {
         res.status(403).send({ message: 'Forbidden' });
       }
     } else {
       await Comment.deleteOne({ _id: req.params.id });
-      return res.send({ message: 'Comment removed' });
+      return res.send({ message: { en: 'Comment deleted successfully', ru: 'Комментарий успешно удален' } });
     }
   } catch (e) {
     next(e);

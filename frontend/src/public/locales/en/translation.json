@@ -123,5 +123,8 @@
   "type": "Type",
   "descriptionInRu": "Description in russian",
   "descriptionInEn": "Description in english",
-  "messAddApartment": "Apartment created successfully!"
+  "messAddApartment": "Apartment created successfully!",
+  "specialOffersForYou": "Special offers for you",
+  "readMore": "Read more",
+  "place": "Place"
 }

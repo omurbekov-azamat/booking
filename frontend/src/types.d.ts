@@ -137,6 +137,13 @@ export interface GlobalError {
   error: string;
 }
 
+export interface GlobalSuccess {
+  message: {
+    ru: string;
+    en: string;
+  };
+}
+
 export interface SearchData {
   city: string;
   nonSmokingRooms: boolean;
@@ -197,4 +204,8 @@ export interface CommentMutation {
 export interface IRoomType {
   _id: string;
   name: string;
+}
+
+export interface CabinetState {
+  [key: string]: boolean;
 }

@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import type { IApartment, IRoomType, ValidationError } from '../../types';
+import type { GlobalSuccess, IApartment, IRoomType, ValidationError } from '../../types';
 import {
   createApartment,
   editApartment,
@@ -21,7 +21,7 @@ interface ApartmentsState {
   loadingApartmentEdit: boolean;
   roomType: IRoomType[];
   roomTypeLoading: boolean;
-  notistackShow: boolean;
+  apartmentsSuccess: GlobalSuccess | null;
 }
 
 const initialState: ApartmentsState = {
@@ -35,15 +35,15 @@ const initialState: ApartmentsState = {
   loadingApartmentEdit: false,
   roomType: [],
   roomTypeLoading: false,
-  notistackShow: false,
+  apartmentsSuccess: null,
 };
 
 export const apartmentsSlice = createSlice({
   name: 'apartments',
   initialState,
   reducers: {
-    notistackShow: (state, action: PayloadAction<boolean>) => {
-      state.notistackShow = action.payload;
+    setApartmentsSuccessNull: (state) => {
+      state.apartmentsSuccess = null;
     },
   },
   extraReducers: (builder) => {
@@ -77,8 +77,9 @@ export const apartmentsSlice = createSlice({
       state.loadingCreateApartment = true;
       state.apartmentError = null;
     });
-    builder.addCase(createApartment.fulfilled, (state) => {
+    builder.addCase(createApartment.fulfilled, (state, { payload: success }) => {
       state.loadingCreateApartment = false;
+      state.apartmentsSuccess = success;
     });
     builder.addCase(createApartment.rejected, (state, { payload: error }) => {
       state.loadingCreateApartment = false;
@@ -88,8 +89,9 @@ export const apartmentsSlice = createSlice({
       state.loadingRemoveApartment = meta.arg;
       state.error = false;
     });
-    builder.addCase(removeApartment.fulfilled, (state) => {
+    builder.addCase(removeApartment.fulfilled, (state, { payload: success }) => {
       state.loadingRemoveApartment = false;
+      state.apartmentsSuccess = success;
       state.error = false;
     });
     builder.addCase(removeApartment.rejected, (state) => {
@@ -100,8 +102,9 @@ export const apartmentsSlice = createSlice({
       state.loadingApartmentEdit = true;
       state.apartmentError = null;
     });
-    builder.addCase(editApartment.fulfilled, (state) => {
+    builder.addCase(editApartment.fulfilled, (state, { payload: success }) => {
       state.loadingApartmentEdit = false;
+      state.apartmentsSuccess = success;
     });
     builder.addCase(editApartment.rejected, (state, { payload: error }) => {
       state.loadingApartmentEdit = false;
@@ -133,5 +136,5 @@ export const selectApartmentError = (state: RootState) => state.apartments.apart
 export const selectLoadingEdit = (state: RootState) => state.apartments.loadingApartmentEdit;
 export const selectRoomType = (state: RootState) => state.apartments.roomType;
 export const selectLoadingRoomType = (state: RootState) => state.apartments.roomTypeLoading;
-export const selectNotistackShow = (state: RootState) => state.apartments.notistackShow;
-export const { notistackShow } = apartmentsSlice.actions;
+export const selectApartmentSuccess = (state: RootState) => state.apartments.apartmentsSuccess;
+export const { setApartmentsSuccessNull } = apartmentsSlice.actions;

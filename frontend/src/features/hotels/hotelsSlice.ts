@@ -9,10 +9,12 @@ import {
   fetchSearchedHotels,
   getCabinetHotels,
   getFavoriteHotels,
+  getRecommendedHotels,
   removeHotel,
   togglePublishedHotel,
+  changeStatusHotels,
 } from './hotelsThunks';
-import type { Hotel, ValidationError } from '../../types';
+import type { GlobalSuccess, Hotel, ValidationError } from '../../types';
 
 interface HotelsState {
   hotels: Hotel[];
@@ -25,12 +27,15 @@ interface HotelsState {
   loadingRemoveHotel: false | string;
   loadingTogglePublished: false | string;
   error: boolean;
+  hotelsSuccess: GlobalSuccess | null;
   createHotelError: ValidationError | null;
   fetchSearchedHotelsLoading: boolean;
   favoriteHotels: Hotel[];
   cabinetHotels: Hotel[];
   cabinetLoading: boolean;
   fetchFavoriteHotelsLoading: boolean;
+  recommendedHotels: Hotel[];
+  fetchRecommendedHotelsLoading: boolean;
 }
 
 const initialState: HotelsState = {
@@ -44,12 +49,15 @@ const initialState: HotelsState = {
   loadingRemoveHotel: false,
   loadingTogglePublished: false,
   error: false,
+  hotelsSuccess: null,
   createHotelError: null,
   fetchSearchedHotelsLoading: false,
   favoriteHotels: [],
   cabinetHotels: [],
   cabinetLoading: false,
   fetchFavoriteHotelsLoading: false,
+  recommendedHotels: [],
+  fetchRecommendedHotelsLoading: false,
 };
 
 export const hotelsSlice = createSlice({
@@ -58,6 +66,9 @@ export const hotelsSlice = createSlice({
   reducers: {
     unsetCabinetHotels: (state) => {
       state.cabinetHotels = [];
+    },
+    setHotelsSuccessNull: (state) => {
+      state.hotelsSuccess = null;
     },
   },
   extraReducers: (builder) => {
@@ -91,8 +102,9 @@ export const hotelsSlice = createSlice({
       state.loadingCreateHotel = true;
       state.createHotelError = null;
     });
-    builder.addCase(createHotel.fulfilled, (state) => {
+    builder.addCase(createHotel.fulfilled, (state, { payload: success }) => {
       state.loadingCreateHotel = false;
+      state.hotelsSuccess = success;
     });
     builder.addCase(createHotel.rejected, (state, { payload: error }) => {
       state.loadingCreateHotel = false;
@@ -102,8 +114,9 @@ export const hotelsSlice = createSlice({
       state.loadingRemoveHotel = meta.arg;
       state.error = false;
     });
-    builder.addCase(removeHotel.fulfilled, (state) => {
+    builder.addCase(removeHotel.fulfilled, (state, { payload: success }) => {
       state.loadingRemoveHotel = false;
+      state.hotelsSuccess = success;
       state.error = false;
     });
     builder.addCase(removeHotel.rejected, (state) => {
@@ -114,8 +127,9 @@ export const hotelsSlice = createSlice({
       state.loadingTogglePublished = meta.arg;
       state.error = false;
     });
-    builder.addCase(togglePublishedHotel.fulfilled, (state) => {
+    builder.addCase(togglePublishedHotel.fulfilled, (state, { payload: success }) => {
       state.loadingTogglePublished = false;
+      state.hotelsSuccess = success;
       state.error = false;
     });
     builder.addCase(togglePublishedHotel.rejected, (state) => {
@@ -179,9 +193,24 @@ export const hotelsSlice = createSlice({
     builder.addCase(getCabinetHotels.rejected, (state) => {
       state.cabinetLoading = false;
     });
+    builder.addCase(getRecommendedHotels.pending, (state) => {
+      state.fetchRecommendedHotelsLoading = true;
+    });
+    builder.addCase(getRecommendedHotels.fulfilled, (state, { payload: hotels }) => {
+      state.fetchRecommendedHotelsLoading = false;
+      state.recommendedHotels = hotels;
+    });
+    builder.addCase(getRecommendedHotels.rejected, (state) => {
+      state.fetchRecommendedHotelsLoading = false;
+    });
+    builder.addCase(changeStatusHotels.fulfilled, (state, { payload: success }) => {
+      state.hotelsSuccess = success;
+    });
   },
 });
 export const hotelsReducer = hotelsSlice.reducer;
+
+export const { unsetCabinetHotels, setHotelsSuccessNull } = hotelsSlice.actions;
 
 export const selectHotels = (state: RootState) => state.hotels.hotels;
 export const selectOneHotel = (state: RootState) => state.hotels.hotel;
@@ -197,4 +226,6 @@ export const selectFavoriteHotels = (state: RootState) => state.hotels.favoriteH
 export const selectFetchFavoriteHotelsLoading = (state: RootState) => state.hotels.fetchFavoriteHotelsLoading;
 export const selectCabinetHotels = (state: RootState) => state.hotels.cabinetHotels;
 export const selectCabinetLoading = (state: RootState) => state.hotels.cabinetLoading;
-export const { unsetCabinetHotels } = hotelsSlice.actions;
+export const selectRecommendedHotels = (state: RootState) => state.hotels.recommendedHotels;
+export const selectFetchRecommendedHotelsLoading = (state: RootState) => state.hotels.fetchRecommendedHotelsLoading;
+export const selectHotelsSuccess = (state: RootState) => state.hotels.hotelsSuccess;

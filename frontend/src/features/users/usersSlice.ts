@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GlobalError, User, ValidationError } from '../../types';
-import { getAdmins, getUsers, login, logout, reAuthorization, register } from './usersThunks';
+import { GlobalError, GlobalSuccess, User, ValidationError } from '../../types';
+import { changeFavorites, getAdmins, getUsers, login, logout, reAuthorization, register } from './usersThunks';
 import { RootState } from '../../app/store';
 
 interface UsersState {
@@ -10,6 +10,7 @@ interface UsersState {
   loginLoading: boolean;
   logoutLoading: boolean;
   loginError: GlobalError | null;
+  favoriteSuccess: GlobalSuccess | null;
   userLoading: boolean;
   modalCoverState: boolean;
   getAdminsLoading: boolean;
@@ -23,6 +24,7 @@ const initialState: UsersState = {
   registerError: null,
   loginLoading: false,
   logoutLoading: false,
+  favoriteSuccess: null,
   loginError: null,
   modalCoverState: false,
   getAdminsLoading: false,
@@ -46,6 +48,9 @@ export const usersSlice = createSlice({
     },
     unsetCabinetUsers: (state) => {
       state.users = [];
+    },
+    setFavoriteSuccessNull: (state) => {
+      state.favoriteSuccess = null;
     },
   },
   extraReducers: (builder) => {
@@ -105,12 +110,16 @@ export const usersSlice = createSlice({
     builder.addCase(reAuthorization.fulfilled, (state, { payload: user }) => {
       state.user = user;
     });
+    builder.addCase(changeFavorites.fulfilled, (state, { payload: success }) => {
+      state.favoriteSuccess = success;
+    });
   },
 });
 
 export const usersReducer = usersSlice.reducer;
 
-export const { unsetUser, openModalCover, closeModalCover, unsetCabinetUsers } = usersSlice.actions;
+export const { unsetUser, openModalCover, closeModalCover, unsetCabinetUsers, setFavoriteSuccessNull } =
+  usersSlice.actions;
 
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterLoading = (state: RootState) => state.users.registerLoading;
@@ -123,3 +132,4 @@ export const selectGetAdminsLoading = (state: RootState) => state.users.getAdmin
 export const selectAdmins = (state: RootState) => state.users.admins;
 export const selectUsers = (state: RootState) => state.users.users;
 export const selectUsersLoading = (state: RootState) => state.users.userLoading;
+export const selectFavoriteSuccess = (state: RootState) => state.users.favoriteSuccess;

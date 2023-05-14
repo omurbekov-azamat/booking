@@ -1,5 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GlobalError, LoginMutation, RegisterMutation, RegisterResponse, User, ValidationError } from '../../types';
+import {
+  GlobalError,
+  GlobalSuccess,
+  LoginMutation,
+  RegisterMutation,
+  RegisterResponse,
+  User,
+  ValidationError,
+} from '../../types';
 import { isAxiosError } from 'axios';
 import { unsetUser } from './usersSlice';
 import axiosApi from '../../axiosApi';
@@ -62,10 +70,11 @@ interface changeProps {
   deleteHotel?: string;
 }
 
-export const changeFavorites = createAsyncThunk<void, changeProps>('users/changeFavorites', async (data) => {
+export const changeFavorites = createAsyncThunk<GlobalSuccess, changeProps>('users/changeFavorites', async (data) => {
   try {
     const payload = data.addHotel ? { addHotel: data.addHotel } : { deleteHotel: data.deleteHotel };
-    await axiosApi.patch('/users/toggleAddHotelToFavorites', payload);
+    const response = await axiosApi.patch('/users/toggleAddHotelToFavorites', payload);
+    return response.data;
   } catch {
     throw new Error();
   }

@@ -124,5 +124,8 @@
   "type": "Тип",
   "descriptionInRu": "Описание на русском",
   "descriptionInEn": "Описание на английском",
-  "messAddApartment": "Апартаменты успешно созданы!"
+  "messAddApartment": "Апартаменты успешно созданы!",
+  "specialOffersForYou": "Специальные предложения для вас",
+  "readMore": "Подробнее",
+  "place": "Площадь"
 }

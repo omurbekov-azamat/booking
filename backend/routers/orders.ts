@@ -4,6 +4,8 @@ import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
 import { IApartment } from '../types';
+import Hotel from '../models/Hotel';
+import Apartment from '../models/Apartment';
 
 const ordersRouter = express.Router();
 
@@ -24,7 +26,12 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
     });
 
     await order.save();
-    return res.send({ message: 'Created successfully' });
+    return res.send({
+      message: {
+        en: 'Order created successfully',
+        ru: 'Заказ успешно создан',
+      },
+    });
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(e);
@@ -33,7 +40,7 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
   }
 });
 
-ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res, next) => {
+ordersRouter.get('/', auth, async (req, res, next) => {
   const user = (req as RequestWithUser).user;
   try {
     if (user.role === 'admin') {
@@ -73,6 +80,17 @@ ordersRouter.get('/', auth, permit('admin', 'director', 'user'), async (req, res
         .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
       return res.send(yourOrders);
     }
+    if (user.role === 'hotel') {
+      const hotels = await Hotel.find({ userId: user._id });
+      const hotelsId = await hotels.map((hotel) => hotel._id);
+      const apartments = await Apartment.find({ hotelId: { $in: hotelsId } });
+      const apartmentIds = apartments.map((apartment) => apartment._id);
+      const reservedRooms = await Order.find({ apartmentId: { $in: apartmentIds }, status: 'closed' })
+        .populate('userId', '-token')
+        .populate('adminId', '-token')
+        .populate({ path: 'apartmentId', populate: [{ path: 'hotelId' }, { path: 'roomTypeId' }] });
+      return res.send(reservedRooms);
+    }
   } catch (e) {
     return next(e);
   }
@@ -94,7 +112,12 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
       return res.status(404).send({ message: 'Cant find order' });
     }
 
-    return res.status(200).send({ message: 'Order updated successfully' });
+    return res.send({
+      message: {
+        en: 'Order updated successfully',
+        ru: 'Заказ успешно изменен',
+      },
+    });
   } catch (e) {
     return next(e);
   }
@@ -107,15 +130,30 @@ ordersRouter.delete('/:id', auth, permit('admin', 'director', 'user'), async (re
     if (order) {
       if (user.role === 'admin' || user.role === 'director') {
         await Order.deleteOne({ _id: req.params.id });
-        return res.send({ message: 'Deleted successfully' });
+        return res.send({
+          message: {
+            en: 'Order deleted successfully',
+            ru: 'Заказ успешно удалён',
+          },
+        });
       }
 
       if (user.role === 'user') {
         if (order.userId.toString() === user._id.toString()) {
           await Order.deleteOne({ _id: req.params.id, userId: user._id });
-          return res.send({ message: 'Deleted successfully' });
+          return res.send({
+            message: {
+              en: 'Order deleted successfully',
+              ru: 'Заказ успешно удалён',
+            },
+          });
         } else {
-          return res.send({ message: 'You cant delete' });
+          return res.send({
+            message: {
+              en: 'no permission for this action',
+              ru: 'нет прав для этого действия',
+            },
+          });
         }
       }
     } else {

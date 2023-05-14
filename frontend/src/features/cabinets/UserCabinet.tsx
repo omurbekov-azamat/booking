@@ -16,19 +16,26 @@ import HomeIcon from '@mui/icons-material/Home';
 import MyInformation from './components/MyInformation';
 import { getOrders } from '../orders/ordersThunks';
 import { selectOrders } from '../orders/ordersSlice';
+import { CabinetState } from '../../types';
 
-const UserCabinet = () => {
+const initialState: CabinetState = {
+  orders: false,
+  favorites: false,
+  myInfo: true,
+};
+
+interface Props {
+  exist?: CabinetState;
+}
+
+const UserCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const dispatch = useAppDispatch();
   const orders = useAppSelector(selectOrders);
   const loading = useAppSelector(selectFetchFavoriteHotelsLoading);
   const favoriteHotels = useAppSelector(selectFavoriteHotels);
   const { t } = useTranslation();
 
-  const [state, setState] = React.useState({
-    orders: false,
-    favorites: false,
-    myInfo: true,
-  });
+  const [state, setState] = React.useState<CabinetState>(exist);
 
   useEffect(() => {
     if (state.favorites) {

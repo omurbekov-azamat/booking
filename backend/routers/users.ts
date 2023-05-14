@@ -123,16 +123,30 @@ usersRouter.patch('/toggleAddHotelToFavorites', auth, permit('user'), async (req
       } else {
         user.favorites.push(addHotelId);
         user.save();
-        return res.send({ message: 'Hotel added to favorites successfully' });
+        return res.send({
+          message: {
+            en: foundHotel.name + ' added to favorites successfully',
+            ru: foundHotel.name + ' успешно добавлен в избраное',
+          },
+        });
       }
     }
     if (deleteHotelId) {
+      const foundHotel = await Hotel.findById(deleteHotelId);
+      if (!foundHotel) {
+        return res.send({ error: 'Hotel is not found' });
+      }
       if (!user.favorites.includes(deleteHotelId)) {
         return res.send({ message: 'You dont have this hotel in the favorites' });
       }
       user.favorites = user.favorites.filter((favHotel) => favHotel.toString() !== deleteHotelId);
       await user.save();
-      return res.send({ message: 'you have successfully removed the hotel from your favorites' });
+      return res.send({
+        message: {
+          en: foundHotel.name + ' removed from favorites successfully',
+          ru: foundHotel.name + ' успешно уделён из избраное',
+        },
+      });
     }
   } catch (e) {
     return next(e);

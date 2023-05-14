@@ -15,7 +15,7 @@ import ApartmentsTable from '../../apartments/components/ApartmentsTable';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { notistackShow, selectNotistackShow } from '../../apartments/apartmentSlice';
-import { enqueueSnackbar, SnackbarProvider } from 'notistack';
+import { enqueueSnackbar } from 'notistack';
 
 interface Props {
   hotel: Hotel;
@@ -44,7 +44,6 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
   return (
     <>
       <Card>
-        <SnackbarProvider />
         <CardContent>
           <Typography variant="h4" component="p" textAlign={'center'}>
             {hotel.name}

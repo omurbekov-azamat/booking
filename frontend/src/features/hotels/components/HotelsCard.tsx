@@ -7,7 +7,6 @@ import { getFavoriteHotels } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
-import { enqueueSnackbar, SnackbarProvider } from 'notistack';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -32,12 +31,10 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
     if (!favorite) {
       await dispatch(changeFavorites({ addHotel: id }));
       await dispatch(reAuthorization());
-      await enqueueSnackbar(`${hotel.name}, ${t('addToFavorite')}`, { variant: 'success' });
     } else {
       await dispatch(changeFavorites({ deleteHotel: id }));
       await dispatch(reAuthorization());
       await dispatch(getFavoriteHotels());
-      await enqueueSnackbar(`${hotel.name}, ${t('removeFavorite')}`, { variant: 'success' });
     }
   };
 
@@ -58,7 +55,6 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
           </Box>
         )
       )}
-      <SnackbarProvider />
       <CardActionArea onClick={() => onClickCard(hotel._id)}>
         <CardMedia component="img" height="140" image={cardImage} alt={hotel.name} />
         <CardContent>

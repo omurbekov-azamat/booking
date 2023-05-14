@@ -9,6 +9,7 @@ import './18n';
 import { BrowserRouter } from 'react-router-dom';
 import theme from './theme';
 import { addInterceptors } from './axiosApi';
+import { SnackbarProvider } from 'notistack';
 
 addInterceptors(store);
 
@@ -19,7 +20,9 @@ root.render(
       <PersistGate persistor={persistor}>
         <Suspense fallback={<CircularProgress />}>
           <ThemeProvider theme={theme}>
-            <App />
+            <SnackbarProvider>
+              <App />
+            </SnackbarProvider>
           </ThemeProvider>
         </Suspense>
       </PersistGate>

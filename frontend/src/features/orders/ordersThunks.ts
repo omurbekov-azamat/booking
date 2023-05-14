@@ -2,15 +2,16 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
 import { RootState } from '../../app/store';
-import { Order, OrderSend, ValidationError } from '../../types';
+import { GlobalSuccess, Order, OrderSend, ValidationError } from '../../types';
 
-export const sendOrder = createAsyncThunk<void, OrderSend, { state: RootState; rejectValue: ValidationError }>(
+export const sendOrder = createAsyncThunk<GlobalSuccess, OrderSend, { state: RootState; rejectValue: ValidationError }>(
   'orders/sendOrder',
   async (order, { getState, rejectWithValue }) => {
     const user = getState().users.user;
     try {
       if (user) {
-        await axiosApi.post('/orders', order);
+        const response = await axiosApi.post('/orders', order);
+        return response.data;
       }
     } catch (e) {
       if (isAxiosError(e) && e.response && e.response.status === 400) {
@@ -44,17 +45,22 @@ export interface ChangeStatusProps {
   status: string;
 }
 
-export const changeStatusOrder = createAsyncThunk<void, ChangeStatusProps>('orders/changeStatus', async (data) => {
-  try {
-    await axiosApi.patch('/orders/' + data.id, { status: data.status });
-  } catch {
-    throw new Error();
-  }
-});
+export const changeStatusOrder = createAsyncThunk<GlobalSuccess, ChangeStatusProps>(
+  'orders/changeStatus',
+  async (data) => {
+    try {
+      const response = await axiosApi.patch<GlobalSuccess>('/orders/' + data.id, { status: data.status });
+      return response.data;
+    } catch {
+      throw new Error();
+    }
+  },
+);
 
-export const deleteOrder = createAsyncThunk<void, string>('orders/deleteOrder', async (id) => {
+export const deleteOrder = createAsyncThunk<GlobalSuccess, string>('orders/deleteOrder', async (id) => {
   try {
-    await axiosApi.delete('/orders/' + id);
+    const response = await axiosApi.delete<GlobalSuccess>('/orders/' + id);
+    return response.data;
   } catch {
     throw new Error();
   }

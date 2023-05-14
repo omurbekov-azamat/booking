@@ -35,7 +35,7 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(fetchApartments(hotel._id));
+    dispatch(fetchApartments({ hotelId: hotel._id }));
   }, [dispatch, hotel._id]);
 
   return (

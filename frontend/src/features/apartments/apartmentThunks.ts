@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ApartmentMutation, IApartment, IRoomType, UpdateApartment, ValidationError } from '../../types';
+import { IApartment, ApartmentMutation, ValidationError, UpdateApartment, IRoomType, GlobalSuccess } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
 
 export const createApartment = createAsyncThunk<
-  void,
+  GlobalSuccess,
   ApartmentMutation,
   {
     state: RootState;
@@ -55,12 +55,20 @@ export const createApartment = createAsyncThunk<
   }
 });
 
-export const fetchApartments = createAsyncThunk<IApartment[], string | undefined>(
+interface PropsFetchApartments {
+  hotelId?: string;
+  userId?: string;
+}
+
+export const fetchApartments = createAsyncThunk<IApartment[], PropsFetchApartments | undefined>(
   'apartments/fetchAll',
-  async (hotelId: string | undefined) => {
+  async (data) => {
     try {
-      if (hotelId) {
-        const response = await axiosApi.get<IApartment[]>('/apartments?owner=' + hotelId);
+      if (data?.hotelId) {
+        const response = await axiosApi.get<IApartment[]>('/apartments?owner=' + data.hotelId);
+        return response.data;
+      } else if (data?.userId) {
+        const response = await axiosApi.get<IApartment[]>('/apartments?getMyApartments=' + data.userId);
         return response.data;
       } else {
         const response = await axiosApi.get<IApartment[]>('/apartments');
@@ -82,7 +90,7 @@ export const fetchOneApartment = createAsyncThunk<IApartment, string>('apartment
 });
 
 export const editApartment = createAsyncThunk<
-  void,
+  GlobalSuccess,
   UpdateApartment,
   {
     state: RootState;
@@ -132,9 +140,10 @@ export const editApartment = createAsyncThunk<
   }
 });
 
-export const removeApartment = createAsyncThunk<void, string>('apartments/removeOne', async (id) => {
+export const removeApartment = createAsyncThunk<GlobalSuccess, string>('apartments/removeOne', async (id) => {
   try {
-    await axiosApi.delete('/apartments/' + id);
+    const response = await axiosApi.delete('/apartments/' + id);
+    return response.data;
   } catch {
     throw new Error();
   }

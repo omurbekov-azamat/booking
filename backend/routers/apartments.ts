@@ -6,6 +6,7 @@ import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
 import Hotel from '../models/Hotel';
+import config from '../config';
 
 const apartmentsRouter = express.Router();
 
@@ -29,7 +30,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
     });
 
     await apartment.save();
-    return res.send({ message: 'Created successfully' });
+    return res.send({ message: { en: 'Apartments created successfully', ru: 'Апартаменты успешно созданы' } });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);
@@ -39,12 +40,23 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
 });
 
 apartmentsRouter.get('/', async (req, res, next) => {
+  const queryOwner = req.query.owner as string;
+  const userId = req.query.getMyApartments as string;
   try {
-    const queryOwner = req.query.owner as string;
     if (queryOwner) {
       const apartmentsRes = await Apartment.find({ hotelId: queryOwner }).populate('roomTypeId');
       return res.send(apartmentsRes);
     }
+
+    if (userId) {
+      const hotels = await Hotel.find({ userId });
+      const hotelsId = await hotels.map((hotel) => hotel._id);
+      const apartments = await Apartment.find({ hotelId: { $in: hotelsId } })
+        .populate('hotelId')
+        .populate('roomTypeId');
+      return res.send(apartments);
+    }
+
     const apartmentsRes = await Apartment.find().populate('roomTypeId');
     return res.send(apartmentsRes);
   } catch (e) {
@@ -119,7 +131,7 @@ apartmentsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res,
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       await Apartment.deleteOne({ _id: req.params.id });
-      res.send({ message: 'Deleted successfully' });
+      res.send({ message: { en: 'Apartments updated successfully', ru: 'Апартаменты успешно изменены' } });
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
     }

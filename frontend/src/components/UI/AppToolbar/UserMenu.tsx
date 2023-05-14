@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Grid, Menu, MenuItem } from '@mui/material';
+import { Button, Grid, Menu, MenuItem, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { logout } from '../../../features/users/usersThunks';
@@ -37,7 +37,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     <>
       <Grid container>
         <Button onClick={handleClick} color="inherit">
-          {`${t('hello')}, ${user.firstName} ${user.lastName}`}
+          <Typography fontWeight="bold">{`${t('hello')}, ${user.firstName} ${user.lastName}`}</Typography>
         </Button>
       </Grid>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
