@@ -15,9 +15,20 @@ import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useNavigate, useParams } from 'react-router-dom';
-import { selectApartmentError, selectLoadingCreateApartment, selectRoomType } from '../apartmentSlice';
-import { createApartment, fetchRoomType } from '../apartmentThunks';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  selectApartmentError,
+  selectLoadingCreateApartment,
+  selectOneApartment,
+  selectRoomType,
+} from '../apartmentSlice';
+import {
+  createApartment,
+  editApartment,
+  fetchOneApartment,
+  fetchRoomType,
+  removeApartmentImage,
+} from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -30,6 +41,7 @@ import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import WifiIcon from '@mui/icons-material/Wifi';
 import TvIcon from '@mui/icons-material/Tv';
 import { fetchOneHotel } from '../../hotels/hotelsThunks';
+import { apiURL } from '../../../constants';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -63,12 +75,49 @@ const ApartmentForm = () => {
   const error = useAppSelector(selectApartmentError);
   const loading = useAppSelector(selectLoadingCreateApartment);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, idEditApartment } = useParams();
   const roomType = useAppSelector(selectRoomType);
+  const oneApartment = useAppSelector(selectOneApartment);
+  const location = useLocation();
+
+  const pathLocation = location.pathname;
+  const parts = pathLocation.split('/');
+  const locationEdit = parts[parts.length - 2];
 
   useEffect(() => {
     dispatch(fetchRoomType());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (idEditApartment) {
+      dispatch(fetchOneApartment(idEditApartment));
+    }
+  }, [dispatch, idEditApartment]);
+
+  useEffect(() => {
+    if (locationEdit === 'editApartment') {
+      if (oneApartment) {
+        if (id) {
+          setState((prevState) => ({
+            ...prevState,
+            roomTypeId: oneApartment.roomTypeId._id,
+            hotelId: id,
+            description: oneApartment.description,
+            price: oneApartment.price,
+            place: oneApartment.place,
+            AC: oneApartment.AC,
+            bath: oneApartment.bath,
+            balcony: oneApartment.balcony,
+            food: oneApartment.food,
+            petFriendly: oneApartment.petFriendly,
+            towel: oneApartment.towel,
+            wifi: oneApartment.wifi,
+            tv: oneApartment.tv,
+          }));
+        }
+      }
+    }
+  }, [oneApartment, id, setState, locationEdit]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -121,15 +170,20 @@ const ApartmentForm = () => {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (id) {
-      await dispatch(
-        createApartment({
-          ...state,
-          hotelId: id,
-        }),
-      );
+    if (idEditApartment) {
+      await dispatch(editApartment({ apartment: state, id: idEditApartment }));
       await navigate('/hotels/' + id);
-      await dispatch(fetchOneHotel(id));
+    } else {
+      if (id) {
+        await dispatch(
+          createApartment({
+            ...state,
+            hotelId: id,
+          }),
+        );
+        await navigate('/hotels/' + id);
+        await dispatch(fetchOneHotel(id));
+      }
     }
   };
 
@@ -149,6 +203,11 @@ const ApartmentForm = () => {
     }
   };
 
+  const deleteOldImg = async (apartmentId: string, imageIndex: number) => {
+    await dispatch(removeApartmentImage({ apartmentId, imageIndex }));
+    await dispatch(fetchOneApartment(apartmentId));
+  };
+
   return (
     <>
       <Container component="main" maxWidth="sm">
@@ -164,6 +223,7 @@ const ApartmentForm = () => {
                 name="place"
                 autoComplete="current-place"
                 onChange={inputChangeHandler}
+                value={state.place}
                 required
               />
             </Grid>
@@ -195,6 +255,7 @@ const ApartmentForm = () => {
                     name="usd"
                     autoComplete="current-usd"
                     onChange={inputChangeHandler}
+                    value={state.price.usd}
                     required
                   />
                 </Grid>
@@ -206,6 +267,7 @@ const ApartmentForm = () => {
                     name="kgs"
                     autoComplete="current-kgs"
                     onChange={inputChangeHandler}
+                    value={state.price.kgs}
                     required
                   />
                 </Grid>
@@ -214,24 +276,28 @@ const ApartmentForm = () => {
 
             <Grid item xs>
               <TextField
-                label={'Описание на русском'}
+                label={t('descriptionInRu')}
                 type="text"
                 name="ru"
                 autoComplete="current-description"
                 value={state.description.ru}
                 onChange={inputChangeHandler}
+                multiline
+                rows={4}
                 required
               />
             </Grid>
 
             <Grid item xs>
               <TextField
-                label={'Description in english'}
+                label={t('descriptionInEn')}
                 type="text"
                 name="en"
                 autoComplete="current-description"
                 value={state.description.en}
                 onChange={inputChangeHandler}
+                multiline
+                rows={4}
                 required
               />
             </Grid>
@@ -378,27 +444,42 @@ const ApartmentForm = () => {
                       <AddCircleOutlineIcon />
                     </IconButton>
                   </Grid>
-                  <Grid item xs>
-                    {state.images &&
-                      state.images.length > 0 &&
-                      state.images.map((image, index) => (
-                        <Grid container key={index} marginLeft={3} mb={2}>
-                          <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
-                          <Grid item>
-                            <Typography>{image.name}</Typography>
-                            <IconButton onClick={() => deleteImg(index)}>
-                              <DeleteIcon />
-                            </IconButton>
+                  <Grid container direction="column">
+                    <Grid item xs>
+                      {oneApartment?.images &&
+                        idEditApartment &&
+                        oneApartment.images.map((image, index) => (
+                          <Grid container key={index} marginLeft={3} mb={2}>
+                            <img src={apiURL + '/' + image} style={{ width: '100px' }} alt={image} />
+                            <Grid item>
+                              <IconButton onClick={() => deleteOldImg(idEditApartment, index)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                      ))}
+                        ))}
+                    </Grid>
+                    <Grid item xs>
+                      {state.images &&
+                        state.images.length > 0 &&
+                        state.images.map((image, index) => (
+                          <Grid container key={index} marginLeft={3} mb={2}>
+                            <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
+                            <Grid item>
+                              <IconButton onClick={() => deleteImg(index)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
+                        ))}
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Card>
             <Grid item xs>
               <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
-                {t('create')}
+                {idEditApartment ? t('edit') : t('create')}
               </LoadingButton>
             </Grid>
           </Grid>

@@ -94,7 +94,7 @@
   "send": "Отправить",
   "roomArea": "Площадь комнаты",
   "singleRoom": "Одноместный номер",
-  "doubleRoom": "Двойная комната",
+  "doubleRoom": "Двухместный номер",
   "tripleRoom": "Трехместный номер,",
   "AC": "Кондиционер",
   "bestHotels": "Лучшие отели",
@@ -122,6 +122,9 @@
   "pension": "Пансионат",
   "Hostel": "Хостел",
   "type": "Тип",
+  "descriptionInRu": "Описание на русском",
+  "descriptionInEn": "Описание на английском",
+  "messAddApartment": "Апартаменты успешно созданы!",
   "specialOffersForYou": "Специальные предложения для вас",
   "readMore": "Подробнее",
   "place": "Площадь"

@@ -5,9 +5,7 @@ import auth, { RequestWithUser } from '../middleware/auth';
 import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
-import { promises as fs } from 'fs';
 import Hotel from '../models/Hotel';
-import config from '../config';
 
 const apartmentsRouter = express.Router();
 
@@ -17,7 +15,7 @@ apartmentsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.array('i
       hotelId: req.body.hotelId,
       roomTypeId: req.body.roomTypeId,
       price: JSON.parse(req.body.price),
-      images: req.files ? (req.files as Express.Multer.File[]).map((file) => file.path) : null,
+      images: req.files ? (req.files as Express.Multer.File[]).map((file) => file.filename) : null,
       description: JSON.parse(req.body.description),
       AC: req.body.AC,
       balcony: req.body.balcony,
@@ -76,53 +74,48 @@ apartmentsRouter.get('/:id', async (req, res, next) => {
 
 apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.array('images'), async (req, res, next) => {
   try {
-    const user = (req as RequestWithUser).user;
-
-    const updatedFields = { ...req.body };
-
-    const apartment: HydratedDocument<IApartment> | null = await Apartment.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: updatedFields },
-      { new: true },
-    );
-
+    const apartment: HydratedDocument<IApartment> | null = await Apartment.findById(req.params.id);
     if (!apartment) {
       return res.status(404).send({ message: 'Not found apartment!' });
     }
 
-    if (apartment) {
+    apartment.hotelId = req.body.hotelId;
+    apartment.roomTypeId = req.body.roomTypeId;
+    apartment.price = JSON.parse(req.body.price);
+    apartment.description = JSON.parse(req.body.description);
+    apartment.AC = req.body.AC;
+    apartment.balcony = req.body.balcony;
+    apartment.bath = req.body.bath;
+    apartment.petFriendly = req.body.petFriendly;
+    apartment.food = req.body.food;
+    apartment.towel = req.body.towel;
+    apartment.wifi = req.body.wifi;
+    apartment.place = parseFloat(req.body.place);
+    apartment.tv = req.body.tv;
+
+    if (req.files) {
       if (apartment.images) {
-        if (apartment.images.length > 0) {
-          const oldImages = apartment.images;
-          if (req.files) {
-            const arrayFiles = req.files as [];
-            if (arrayFiles.length > 0) {
-              oldImages.forEach((imagePath) => {
-                fs.unlink(config.publicPath + '/' + imagePath);
-              });
-              apartment.images = (req.files as Express.Multer.File[]).map((file) => file.filename);
-              await apartment.save();
-            } else {
-              apartment.images = oldImages;
-            }
-          }
-        }
+        const uploadedImages = (req.files as Express.Multer.File[]).map((file) => file.filename);
+        apartment.images.push(...uploadedImages);
+      } else {
+        apartment.images = (req.files as Express.Multer.File[]).map((file) => file.filename);
       }
     }
 
-    const hotel: HydratedDocument<IHotel> | null = await Hotel.findById(apartment.hotelId);
-
-    if (!hotel) {
-      return res.status(404).send({ message: 'Not found!' });
+    await Apartment.findByIdAndUpdate(req.params.id, apartment);
+    return res.send(
+      res.send({
+        message: {
+          en: 'Apartments updated successfully',
+          ru: 'Апартаменты успешно изменены',
+        },
+      }),
+    );
+  } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(error);
     }
-
-    if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
-      res.send({ message: { en: 'Apartments updated successfully', ru: 'Апартаменты успешно изменены' } });
-    } else {
-      return res.status(403).send({ message: 'You do not have permission!' });
-    }
-  } catch (e) {
-    return next(e);
+    return next(error);
   }
 });
 
@@ -144,7 +137,40 @@ apartmentsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res,
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       await Apartment.deleteOne({ _id: req.params.id });
-      res.send({ message: { en: 'Apartments deleted successfully', ru: 'Апартаменты успешно удалены' } });
+      res.send({ message: { en: 'Apartments updated successfully', ru: 'Апартаменты успешно изменены' } });
+    } else {
+      return res.status(403).send({ message: 'You do not have permission!' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
+apartmentsRouter.delete('/:id/images/:index', auth, permit('admin', 'hotel'), async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const apartment = await Apartment.findById(req.params.id);
+
+    if (!apartment) {
+      return res.status(404).send({ message: 'Not found apartment!' });
+    }
+
+    const hotel: HydratedDocument<IHotel> | null = await Hotel.findById(apartment.hotelId);
+
+    if (!hotel) {
+      return res.status(404).send({ message: 'Not found hotel!' });
+    }
+
+    if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
+      const index = parseInt(req.params.index);
+
+      if (apartment.images && index >= 0 && index < apartment.images.length) {
+        apartment.images.splice(index, 1);
+        await apartment.save();
+        res.send({ message: 'Deleted successfully' });
+      } else {
+        return res.status(404).send({ message: 'Not found image!' });
+      }
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
     }
