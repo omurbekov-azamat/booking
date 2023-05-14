@@ -6,7 +6,6 @@ import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
 import Hotel from '../models/Hotel';
-import path from 'path';
 
 const apartmentsRouter = express.Router();
 

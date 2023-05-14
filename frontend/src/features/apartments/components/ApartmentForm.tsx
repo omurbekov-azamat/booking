@@ -15,7 +15,7 @@ import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   notistackShow,
   selectApartmentError,
@@ -79,6 +79,11 @@ const ApartmentForm = () => {
   const { id, idEditApartment } = useParams();
   const roomType = useAppSelector(selectRoomType);
   const oneApartment = useAppSelector(selectOneApartment);
+  const location = useLocation();
+
+  const pathLocation = location.pathname;
+  const parts = pathLocation.split('/');
+  const locationEdit = parts[parts.length - 2];
 
   useEffect(() => {
     dispatch(fetchRoomType());
@@ -91,31 +96,29 @@ const ApartmentForm = () => {
   }, [dispatch, idEditApartment]);
 
   useEffect(() => {
-    if (oneApartment) {
-      if (id) {
-        setState((prevState) => ({
-          ...prevState,
-          roomTypeId: oneApartment.roomTypeId._id,
-          hotelId: id,
-          description: oneApartment.description,
-          price: oneApartment.price,
-          place: oneApartment.place,
-          AC: oneApartment.AC,
-          bath: oneApartment.bath,
-          balcony: oneApartment.balcony,
-          food: oneApartment.food,
-          petFriendly: oneApartment.petFriendly,
-          towel: oneApartment.towel,
-          wifi: oneApartment.wifi,
-          tv: oneApartment.tv,
-        }));
+    if (locationEdit === 'editApartment') {
+      if (oneApartment) {
+        if (id) {
+          setState((prevState) => ({
+            ...prevState,
+            roomTypeId: oneApartment.roomTypeId._id,
+            hotelId: id,
+            description: oneApartment.description,
+            price: oneApartment.price,
+            place: oneApartment.place,
+            AC: oneApartment.AC,
+            bath: oneApartment.bath,
+            balcony: oneApartment.balcony,
+            food: oneApartment.food,
+            petFriendly: oneApartment.petFriendly,
+            towel: oneApartment.towel,
+            wifi: oneApartment.wifi,
+            tv: oneApartment.tv,
+          }));
+        }
       }
     }
-  }, [oneApartment, id, setState]);
-
-  // console.log(state);
-  // console.log(oneApartment?.images);
-  console.log(oneApartment?.images);
+  }, [oneApartment, id, setState, locationEdit]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
