@@ -23,7 +23,13 @@ import {
   selectOneApartment,
   selectRoomType,
 } from '../apartmentSlice';
-import { createApartment, fetchOneApartment, fetchRoomType, removeApartmentImage } from '../apartmentThunks';
+import {
+  createApartment,
+  editApartment,
+  fetchOneApartment,
+  fetchRoomType,
+  removeApartmentImage,
+} from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -107,9 +113,9 @@ const ApartmentForm = () => {
     }
   }, [oneApartment, id, setState]);
 
-  console.log(state);
+  // console.log(state);
   // console.log(oneApartment?.images);
-  console.log(stateImg);
+  console.log(oneApartment?.images);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -162,16 +168,22 @@ const ApartmentForm = () => {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (id) {
-      await dispatch(
-        createApartment({
-          ...state,
-          hotelId: id,
-        }),
-      );
+    if (idEditApartment) {
+      await dispatch(editApartment({ apartment: state, id: idEditApartment }));
       await navigate('/hotels/' + id);
-      await dispatch(fetchOneHotel(id));
       await dispatch(notistackShow(true));
+    } else {
+      if (id) {
+        await dispatch(
+          createApartment({
+            ...state,
+            hotelId: id,
+          }),
+        );
+        await navigate('/hotels/' + id);
+        await dispatch(fetchOneHotel(id));
+        await dispatch(notistackShow(true));
+      }
     }
   };
 
@@ -467,7 +479,7 @@ const ApartmentForm = () => {
             </Card>
             <Grid item xs>
               <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
-                {t('create')}
+                {idEditApartment ? t('edit') : t('create')}
               </LoadingButton>
             </Grid>
           </Grid>
