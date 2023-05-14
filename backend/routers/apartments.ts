@@ -6,7 +6,6 @@ import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
 import Hotel from '../models/Hotel';
-import config from '../config';
 
 const apartmentsRouter = express.Router();
 
@@ -104,7 +103,14 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
     }
 
     await Apartment.findByIdAndUpdate(req.params.id, apartment);
-    return res.send({ message: 'Updated successfully' });
+    return res.send(
+      res.send({
+        message: {
+          en: 'Apartments updated successfully',
+          ru: 'Апартаменты успешно изменены',
+        },
+      }),
+    );
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);

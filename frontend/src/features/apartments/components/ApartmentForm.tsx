@@ -17,7 +17,6 @@ import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
-  notistackShow,
   selectApartmentError,
   selectLoadingCreateApartment,
   selectOneApartment,
@@ -174,7 +173,6 @@ const ApartmentForm = () => {
     if (idEditApartment) {
       await dispatch(editApartment({ apartment: state, id: idEditApartment }));
       await navigate('/hotels/' + id);
-      await dispatch(notistackShow(true));
     } else {
       if (id) {
         await dispatch(
@@ -185,7 +183,6 @@ const ApartmentForm = () => {
         );
         await navigate('/hotels/' + id);
         await dispatch(fetchOneHotel(id));
-        await dispatch(notistackShow(true));
       }
     }
   };
