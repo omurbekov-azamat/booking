@@ -35,7 +35,9 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
       enqueueSnackbar(t('messAddApartment'), { variant: 'success' });
     }
     if (location) {
-      dispatch(notistackShow(false));
+      setTimeout(() => {
+        dispatch(notistackShow(false));
+      }, 2000);
     }
   }, [dispatch, location, selectNotistack, t]);
 
