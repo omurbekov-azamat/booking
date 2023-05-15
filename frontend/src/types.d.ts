@@ -83,6 +83,10 @@ export interface IApartment extends ApartmentData {
     name: string;
     _id: string;
   };
+  hotelId: {
+    name: string;
+    _id: string;
+  };
   _id: string;
   images: string[];
 }
