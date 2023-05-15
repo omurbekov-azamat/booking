@@ -23,7 +23,7 @@ interface HotelsState {
   hotel: Hotel | null;
   fetchNewPageLoading: boolean;
   page: number;
-  loadingMatch: boolean;
+  loadingMatchHotel: boolean;
   search: Hotel[];
   loadingCreateHotel: boolean;
   loadingRemoveHotel: false | string;
@@ -48,7 +48,7 @@ const initialState: HotelsState = {
   fetchNewPageLoading: false,
   page: 1,
   search: [],
-  loadingMatch: false,
+  loadingMatchHotel: false,
   loadingCreateHotel: false,
   loadingRemoveHotel: false,
   loadingTogglePublished: false,
@@ -154,14 +154,14 @@ export const hotelsSlice = createSlice({
       state.fetchNewPageLoading = false;
     });
     builder.addCase(fetchMatches.pending, (state) => {
-      state.loadingMatch = true;
+      state.loadingMatchHotel = true;
     });
     builder.addCase(fetchMatches.fulfilled, (state, action) => {
-      state.loadingMatch = true;
+      state.loadingMatchHotel = false;
       state.search = action.payload;
     });
     builder.addCase(fetchMatches.rejected, (state) => {
-      state.loadingMatch = true;
+      state.loadingMatchHotel = false;
     });
     builder.addCase(fetchSearchedHotels.pending, (state) => {
       state.fetchSearchedHotelsLoading = true;
@@ -223,6 +223,8 @@ export const selectOneHotel = (state: RootState) => state.hotels.hotel;
 export const selectLoadingCreateHotel = (state: RootState) => state.hotels.loadingCreateHotel;
 export const selectLoadingRemoveHotel = (state: RootState) => state.hotels.loadingRemoveHotel;
 export const selectLoadingTogglePublished = (state: RootState) => state.hotels.loadingTogglePublished;
+export const selectLoadingFetchNewPage = (state: RootState) => state.hotels.fetchNewPageLoading;
+export const selectLoadingMatch = (state: RootState) => state.hotels.loadingMatchHotel;
 export const selectCreateHotelError = (state: RootState) => state.hotels.createHotelError;
 export const selectPageOfHotels = (state: RootState) => state.hotels.page;
 export const selectSearchHotels = (state: RootState) => state.hotels.search;

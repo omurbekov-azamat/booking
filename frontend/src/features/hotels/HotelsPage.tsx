@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchHotels, fetchNewPage, removeHotel, togglePublishedHotel } from './hotelsThunks';
-import { selectFetchAllHotelsLoading, selectHotels, selectPageOfHotels } from './hotelsSlice';
+import {
+  selectFetchAllHotelsLoading,
+  selectHotels,
+  selectLoadingFetchNewPage,
+  selectPageOfHotels,
+} from './hotelsSlice';
 import { Grid } from '@mui/material';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import HotelsCard from './components/HotelsCard';
@@ -13,6 +18,7 @@ import SearchField from './components/SearchField/SearchField';
 const HotelsPage = () => {
   const dispatch = useAppDispatch();
   const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
+  const fetchNewPageLoading = useAppSelector(selectLoadingFetchNewPage);
   const hotels = useAppSelector(selectHotels);
   const page = useAppSelector(selectPageOfHotels);
   const { t } = useTranslation();
@@ -40,6 +46,7 @@ const HotelsPage = () => {
       <SearchField />
       <SearchHotelForm />
       {fetchAllHotelsLoading && <Spinner />}
+      {fetchNewPageLoading && <Spinner />}
       <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
         {hotels &&
           hotels.map((el) => (
