@@ -46,7 +46,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
         </CardActionArea>
         <Box>
           <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
-            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId._id) && (
+            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
               <Button
                 variant="contained"
                 size="medium"
@@ -56,7 +56,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
               </Button>
             )}
 
-            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId._id) && (
+            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
               <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteApartment(apartment._id)}>
                 {t('delete')}
               </Button>

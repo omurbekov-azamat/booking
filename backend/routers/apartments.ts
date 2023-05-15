@@ -43,9 +43,7 @@ apartmentsRouter.get('/', async (req, res, next) => {
   const userId = req.query.getMyApartments as string;
   try {
     if (queryOwner) {
-      const apartmentsRes = await Apartment.find({ hotelId: queryOwner })
-        .populate('roomTypeId')
-        .populate('hotelId', 'name');
+      const apartmentsRes = await Apartment.find({ hotelId: queryOwner }).populate('roomTypeId').populate('hotelId');
       return res.send(apartmentsRes);
     }
 

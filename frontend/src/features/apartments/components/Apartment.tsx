@@ -6,7 +6,7 @@ import { Box, Button, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchApartments, fetchOneApartment } from '../apartmentThunks';
-import { selectApartments, selectOneApartment } from '../apartmentSlice';
+import { selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
 import { selectCurrency } from '../../currency/currencySlice';
@@ -18,7 +18,6 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import TvIcon from '@mui/icons-material/Tv';
 import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import WifiIcon from '@mui/icons-material/Wifi';
-import ApartmentsCard from './ApartmentsCard';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +25,6 @@ const Apartment = () => {
   const navigate = useNavigate();
   const apartment = useAppSelector(selectOneApartment);
   const currency = useAppSelector(selectCurrency);
-  const apartments = useAppSelector(selectApartments);
 
   const { hotelName, hotelId, apartmentId } = useParams() as {
     hotelName: string;
@@ -129,10 +127,6 @@ const Apartment = () => {
           {t('reserve')}
         </Button>
       </Box>
-
-      {apartments.map((apartment) => {
-        return <ApartmentsCard apartment={apartment} key={apartment._id} />;
-      })}
     </>
   );
 };
