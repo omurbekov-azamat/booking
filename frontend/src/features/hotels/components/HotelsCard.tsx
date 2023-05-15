@@ -1,6 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
+import { selectLoadingRemoveHotel, selectLoadingTogglePublished } from '../hotelsSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useTranslation } from 'react-i18next';
 import { getFavoriteHotels } from '../hotelsThunks';
@@ -11,7 +12,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
-import { selectLoadingRemoveHotel } from '../hotelsSlice';
 import { LoadingButton } from '@mui/lab';
 
 interface Props {
@@ -25,6 +25,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
   const loadingDeleteHotel = useAppSelector(selectLoadingRemoveHotel);
+  const loadingPublishHotel = useAppSelector(selectLoadingTogglePublished);
   const { t } = useTranslation();
   const cardImage = apiURL + '/' + hotel.image;
 
@@ -88,6 +89,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
 
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
             <LoadingButton
+              disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
               loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               variant="outlined"
               startIcon={<DeleteIcon />}
@@ -100,6 +102,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
           {(user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
             <LoadingButton
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+              loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
               variant="outlined"
               color="error"
               sx={{ fontSize: 11 }}
