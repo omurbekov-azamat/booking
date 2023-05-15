@@ -3,11 +3,12 @@ import { IApartment } from '../../../types';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../users/usersSlice';
+import { removeApartment } from '../apartmentThunks';
 
 interface Props {
   apartment: IApartment;
@@ -16,10 +17,15 @@ interface Props {
 const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const currency = useAppSelector(selectCurrency);
   const user = useAppSelector(selectUser);
 
   const cardImage = apiURL + '/' + apartment.images[0];
+
+  const deleteApartment = async (id: string) => {
+    await dispatch(removeApartment(id));
+  };
 
   return (
     <>
@@ -50,11 +56,11 @@ const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
               </Button>
             )}
 
-            {/*{(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (*/}
-            {/*  <Button variant="outlined" startIcon={<DeleteIcon/>} onClick={onDeleteBtnClick}>*/}
-            {/*    {t('delete')}*/}
-            {/*  </Button>*/}
-            {/*)}*/}
+            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId._id) && (
+              <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteApartment(apartment._id)}>
+                {t('delete')}
+              </Button>
+            )}
           </Stack>
         </Box>
       </Card>
