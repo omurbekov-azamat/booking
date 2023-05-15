@@ -6,7 +6,7 @@ import { Box, Button, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchOneApartment } from '../apartmentThunks';
-import { selectOneApartment } from '../apartmentSlice';
+import { selectLoadingFetchOneApartment, selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
 import { selectCurrency } from '../../currency/currencySlice';
@@ -18,6 +18,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import TvIcon from '@mui/icons-material/Tv';
 import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import WifiIcon from '@mui/icons-material/Wifi';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ const Apartment = () => {
   const navigate = useNavigate();
   const apartment = useAppSelector(selectOneApartment);
   const currency = useAppSelector(selectCurrency);
+  const loadingFetchOneApartment = useAppSelector(selectLoadingFetchOneApartment);
 
   const { hotelName, hotelId, apartmentId } = useParams() as {
     hotelName: string;
@@ -42,6 +44,7 @@ const Apartment = () => {
 
   return (
     <>
+      {loadingFetchOneApartment && <Spinner />}
       <Card sx={{ mt: 5 }}>
         <CardContent>
           <Typography variant="h4" component="p" textAlign={'center'}>

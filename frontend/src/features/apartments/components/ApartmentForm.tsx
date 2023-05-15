@@ -19,6 +19,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   selectApartmentError,
   selectLoadingCreateApartment,
+  selectLoadingEditApartment,
+  selectLoadingFetchOneApartment,
   selectOneApartment,
   selectRoomType,
 } from '../apartmentSlice';
@@ -42,6 +44,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import TvIcon from '@mui/icons-material/Tv';
 import { fetchOneHotel } from '../../hotels/hotelsThunks';
 import { apiURL } from '../../../constants';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -73,11 +76,13 @@ const ApartmentForm = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectApartmentError);
-  const loading = useAppSelector(selectLoadingCreateApartment);
+  const loadingCreateApartment = useAppSelector(selectLoadingCreateApartment);
+  const loadingFetchOneApartment = useAppSelector(selectLoadingFetchOneApartment);
   const navigate = useNavigate();
   const { id, idEditApartment } = useParams();
   const roomType = useAppSelector(selectRoomType);
   const oneApartment = useAppSelector(selectOneApartment);
+  const loadingEditApartment = useAppSelector(selectLoadingEditApartment);
   const location = useLocation();
 
   const pathLocation = location.pathname;
@@ -210,6 +215,7 @@ const ApartmentForm = () => {
 
   return (
     <>
+      {loadingFetchOneApartment && <Spinner />}
       <Container component="main" maxWidth="sm">
         <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
           {t('createApartment')}
@@ -478,7 +484,12 @@ const ApartmentForm = () => {
               </Grid>
             </Card>
             <Grid item xs>
-              <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
+              <LoadingButton
+                type="submit"
+                color="success"
+                variant="contained"
+                loading={loadingCreateApartment || loadingEditApartment}
+              >
                 {idEditApartment ? t('edit') : t('create')}
               </LoadingButton>
             </Grid>
