@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchHotels, fetchNewPage, removeHotel, togglePublishedHotel } from './hotelsThunks';
-import { selectHotels, selectLoading, selectPageOfHotels } from './hotelsSlice';
+import { selectFetchAllHotelsLoading, selectHotels, selectPageOfHotels } from './hotelsSlice';
 import { Grid } from '@mui/material';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import HotelsCard from './components/HotelsCard';
@@ -12,7 +12,7 @@ import SearchField from './components/SearchField/SearchField';
 
 const HotelsPage = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(selectLoading);
+  const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
   const hotels = useAppSelector(selectHotels);
   const page = useAppSelector(selectPageOfHotels);
   const { t } = useTranslation();
@@ -39,22 +39,20 @@ const HotelsPage = () => {
     <>
       <SearchField />
       <SearchHotelForm />
+      {fetchAllHotelsLoading && <Spinner />}
       <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
-        {hotels ? (
+        {hotels &&
           hotels.map((el) => (
-            <Grid item xs={12} sm={6} lg={4} key={Math.random()} alignItems="stretch">
+            <Grid item xs={12} sm={6} lg={4} key={el._id} alignItems="stretch">
               <HotelsCard
                 hotel={el}
                 onDeleteBtnClick={() => deleteButton(el._id)}
                 onPublishBtnClick={() => unPublishButton(el._id)}
               />
             </Grid>
-          ))
-        ) : (
-          <Spinner />
-        )}
+          ))}
         <Grid item container xs={12}>
-          <LoadingButton style={{ margin: 'auto' }} variant="outlined" loading={loading} onClick={() => addMore(page)}>
+          <LoadingButton style={{ margin: 'auto' }} variant="outlined" onClick={() => addMore(page)}>
             {t('more')}
           </LoadingButton>
         </Grid>
