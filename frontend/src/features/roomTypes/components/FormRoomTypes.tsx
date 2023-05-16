@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { createNewRoomType } from '../roomTypesThunks';
+import { useAppDispatch } from '../../../app/hooks';
 import { Box, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { RoomTypesMutation } from '../../../types';
 
 const FormRoomTypes = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
   const [state, setState] = useState<RoomTypesMutation>({
     name: '',
   });
@@ -17,6 +21,7 @@ const FormRoomTypes = () => {
 
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    await dispatch(createNewRoomType(state)).unwrap();
   };
 
   return (
