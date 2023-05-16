@@ -1856,6 +1856,13 @@ const run = async () => {
     },
   );
 
+  await Order.create({
+    author: user._id,
+    hotel: dragon._id,
+    text: 'Some good comment 1',
+    createdAt: new Date(),
+  });
+
   await db.close();
 };
 
