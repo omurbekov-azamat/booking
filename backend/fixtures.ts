@@ -1858,12 +1858,224 @@ const run = async () => {
     },
   );
 
-  await Comment.create({
-    author: user._id,
-    hotel: dragon._id,
-    text: 'Some good comment 1',
-    createdAt: new Date(),
-  });
+  await Comment.create(
+    {
+      author: user._id,
+      hotel: dragon._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: dragon._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: demar._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: demar._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: sara._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: sara._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: discovery._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: discovery._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: salut._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: salut._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: aurum._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: aurum._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: asia._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: asia._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: navat._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: navat._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: madison._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: madison._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: silkroad._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: silkroad._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: veve._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: veve._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: palace._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: palace._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: central._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: central._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: plaza._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: plaza._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: hyatt._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: hyatt._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: lulu._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: lulu._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: dostuk._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: dostuk._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: jannat._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: jannat._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+  );
 
   await db.close();
 };
