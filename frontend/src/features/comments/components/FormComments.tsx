@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Card, CardContent, TextField } from '@mui/material';
+import { selectCreateCommentError, selectLoadingCreateComment } from '../commentsSlice';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
-import { CommentMutation } from '../../../types';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { createComment } from '../commentsThunks';
+import { CommentMutation } from '../../../types';
 
 interface Props {
   hotelId: string;
@@ -13,6 +14,8 @@ interface Props {
 const FormComments: React.FC<Props> = ({ hotelId }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const ErrorCreateComment = useAppSelector(selectCreateCommentError);
+  const loadingCreateComment = useAppSelector(selectLoadingCreateComment);
 
   const [state, setState] = useState<CommentMutation>({
     hotel: hotelId,
@@ -29,6 +32,14 @@ const FormComments: React.FC<Props> = ({ hotelId }) => {
     await dispatch(createComment(state)).unwrap();
   };
 
+  const getFieldError = (fieldName: string) => {
+    try {
+      return ErrorCreateComment?.errors[fieldName].message;
+    } catch {
+      return undefined;
+    }
+  };
+
   return (
     <Box mt={10} component="form" onSubmit={submitFormHandler}>
       <Card>
@@ -42,9 +53,11 @@ const FormComments: React.FC<Props> = ({ hotelId }) => {
             fullWidth={true}
             label="Write comment..."
             id="fullWidth"
+            error={Boolean(getFieldError('text'))}
+            helperText={getFieldError('text')}
           />
           <Box textAlign="center" mt={3}>
-            <LoadingButton variant="contained" type="submit">
+            <LoadingButton loading={loadingCreateComment} variant="contained" type="submit">
               {t('send')}
             </LoadingButton>
           </Box>
