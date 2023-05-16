@@ -105,8 +105,8 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
             dollar: 0,
           },
         });
-        await navigate('/my-cabinet');
       }
+      await navigate('/my-cabinet');
     }
   };
 
