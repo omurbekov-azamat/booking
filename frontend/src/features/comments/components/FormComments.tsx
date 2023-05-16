@@ -4,7 +4,7 @@ import { selectCreateCommentError, selectLoadingCreateComment } from '../comment
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { createComment } from '../commentsThunks';
+import { createComment, fetchComments } from '../commentsThunks';
 import { CommentMutation } from '../../../types';
 
 interface Props {
@@ -30,6 +30,7 @@ const FormComments: React.FC<Props> = ({ hotelId }) => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     await dispatch(createComment(state)).unwrap();
+    await dispatch(fetchComments(hotelId));
   };
 
   const getFieldError = (fieldName: string) => {
