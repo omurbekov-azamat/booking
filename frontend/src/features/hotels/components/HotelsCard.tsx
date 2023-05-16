@@ -1,16 +1,18 @@
 import React, { MouseEventHandler } from 'react';
 import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
+import { selectLoadingRemoveHotel, selectLoadingTogglePublished } from '../hotelsSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useTranslation } from 'react-i18next';
 import { getFavoriteHotels } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
+import { Box, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
+import { LoadingButton } from '@mui/lab';
 
 interface Props {
   hotel: Hotel;
@@ -22,6 +24,8 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+  const loadingDeleteHotel = useAppSelector(selectLoadingRemoveHotel);
+  const loadingPublishHotel = useAppSelector(selectLoadingTogglePublished);
   const { t } = useTranslation();
   const cardImage = apiURL + '/' + hotel.image;
 
@@ -73,21 +77,39 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
-            <Button variant="contained" size="medium" onClick={() => navigate('/my-cabinet/edit/' + hotel._id)}>
+            <LoadingButton
+              disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+              variant="contained"
+              size="medium"
+              onClick={() => navigate('/my-cabinet/edit/' + hotel._id)}
+            >
               {t('edit')}
-            </Button>
+            </LoadingButton>
           )}
 
           {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
-            <Button variant="outlined" startIcon={<DeleteIcon />} onClick={onDeleteBtnClick}>
+            <LoadingButton
+              disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
+              loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              onClick={onDeleteBtnClick}
+            >
               {t('delete')}
-            </Button>
+            </LoadingButton>
           )}
 
           {(user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
-            <Button variant="outlined" color="error" sx={{ fontSize: 11 }} onClick={onPublishBtnClick}>
+            <LoadingButton
+              disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+              loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
+              variant="outlined"
+              color="error"
+              sx={{ fontSize: 11 }}
+              onClick={onPublishBtnClick}
+            >
               {t('publish')}
-            </Button>
+            </LoadingButton>
           )}
         </Stack>
       </Box>

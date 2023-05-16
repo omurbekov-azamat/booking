@@ -4,8 +4,8 @@ import type { Comment, GlobalSuccess, ValidationError } from '../../types';
 import { createComment, fetchComments, removeComment, updateComment } from './commentsThunks';
 
 interface CommentsState {
+  loadingFetchAllComments: boolean;
   comments: Comment[];
-  loading: boolean;
   loadingCreateComment: boolean;
   loadingRemoveComment: false | string;
   loadingUpdateComment: boolean;
@@ -16,7 +16,7 @@ interface CommentsState {
 
 const initialState: CommentsState = {
   comments: [],
-  loading: false,
+  loadingFetchAllComments: false,
   loadingCreateComment: false,
   loadingRemoveComment: false,
   loadingUpdateComment: false,
@@ -35,16 +35,16 @@ export const commentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchComments.pending, (state) => {
-      state.loading = true;
+      state.loadingFetchAllComments = true;
       state.error = false;
     });
     builder.addCase(fetchComments.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loadingFetchAllComments = false;
       state.comments = action.payload;
       state.error = false;
     });
     builder.addCase(fetchComments.rejected, (state) => {
-      state.loading = false;
+      state.loadingFetchAllComments = false;
       state.error = true;
     });
     builder.addCase(createComment.pending, (state) => {
@@ -89,11 +89,12 @@ export const commentsSlice = createSlice({
 });
 export const commentsReducer = commentsSlice.reducer;
 
+export const { setCommentsSuccessNull } = commentsSlice.actions;
+
+export const selectLoadingFetchAllComments = (state: RootState) => state.comments.loadingFetchAllComments;
 export const selectComments = (state: RootState) => state.comments.comments;
-export const selectLoading = (state: RootState) => state.comments.loading;
 export const selectLoadingCreateComment = (state: RootState) => state.comments.loadingCreateComment;
 export const selectLoadingUpdateComment = (state: RootState) => state.comments.loadingUpdateComment;
 export const selectLoadingRemoveComment = (state: RootState) => state.comments.loadingRemoveComment;
 export const selectCreateCommentError = (state: RootState) => state.comments.createCommentError;
-export const { setCommentsSuccessNull } = commentsSlice.actions;
 export const selectCommentsSuccess = (state: RootState) => state.comments.commentsSuccess;

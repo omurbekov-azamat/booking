@@ -5,7 +5,7 @@ import { getForAdminHisOrders, getOrders } from '../orders/ordersThunks';
 import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { selectAdminMyOrders, selectOrders } from '../orders/ordersSlice';
-import { selectHotels } from '../hotels/hotelsSlice';
+import { selectFetchAllHotelsLoading, selectHotels } from '../hotels/hotelsSlice';
 import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import WorkIcon from '@mui/icons-material/Work';
@@ -22,6 +22,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import HotelsStatus from './components/HotelsStatus';
 import OrderItems from '../orders/components/OrderItems';
 import { CabinetState } from '../../types';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -43,6 +44,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const hotelsState = useAppSelector(selectHotels);
   const orders = useAppSelector(selectAdminMyOrders);
   const unacceptedOrders = useAppSelector(selectOrders);
+  const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
@@ -114,6 +116,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   ))}
                 </Grid>
               )}
+              {fetchAllHotelsLoading && <Spinner />}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
               {state.unacceptedOrders && <OrderItems ordersItems={unacceptedOrders} />}

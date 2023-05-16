@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectHotels, selectLoading } from '../hotelsSlice';
+import { selectFetchAllHotelsLoading, selectHotels } from '../hotelsSlice';
 import { fetchHotels } from '../hotelsThunks';
 import { Hotel } from '../../../types';
 import HotelsCard from './HotelsCard';
@@ -14,7 +14,7 @@ const VipBlockHotels = () => {
 
   const hotels = useAppSelector(selectHotels);
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(selectLoading);
+  const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const VipBlockHotels = () => {
         <Box textAlign="center" fontWeight="bold" mt={2}>
           {t('bestHotels')}
         </Box>
-        {loading ? (
+        {fetchAllHotelsLoading ? (
           <Spinner />
         ) : (
           <>
@@ -71,7 +71,7 @@ const VipBlockHotels = () => {
         <Box textAlign="center" fontWeight="bold" mt={2}>
           {t('recommended')}
         </Box>
-        {loading ? (
+        {fetchAllHotelsLoading ? (
           <Spinner />
         ) : (
           <>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Autocomplete, Button, Grid, TextField } from '@mui/material';
+import { Autocomplete, Grid, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { selectSearchHotels } from '../../hotelsSlice';
+import { selectLoadingMatch, selectSearchHotels } from '../../hotelsSlice';
 import { useTranslation } from 'react-i18next';
 import { fetchMatches } from '../../hotelsThunks';
 import { HotelWithLabel } from '../../../../types';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
+import { LoadingButton } from '@mui/lab';
 
 const SearchField = () => {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ const SearchField = () => {
   const searchResult = useAppSelector(selectSearchHotels);
   const autocomplete: HotelWithLabel[] = [];
   const navigate = useNavigate();
+  const loadingSearchMatch = useAppSelector(selectLoadingMatch);
   searchResult.map((el) => autocomplete.push({ ...el, label: el.name }));
   const [match, setMatch] = useState('');
 
@@ -54,9 +56,9 @@ const SearchField = () => {
           />
         </Grid>
         <Grid xs={1} item container alignItems="center">
-          <Button type="submit">
+          <LoadingButton loading={loadingSearchMatch} type="submit">
             <SearchIcon />
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
     </form>

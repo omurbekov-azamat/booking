@@ -17,11 +17,13 @@ import {
 import type { GlobalSuccess, Hotel, ValidationError } from '../../types';
 
 interface HotelsState {
+  fetchAllHotelsLoading: boolean;
   hotels: Hotel[];
+  fetchOneHotelLoading: boolean;
   hotel: Hotel | null;
+  fetchNewPageLoading: boolean;
   page: number;
-  loading: boolean;
-  loadingMatch: boolean;
+  loadingMatchHotel: boolean;
   search: Hotel[];
   loadingCreateHotel: boolean;
   loadingRemoveHotel: false | string;
@@ -39,12 +41,14 @@ interface HotelsState {
 }
 
 const initialState: HotelsState = {
+  fetchAllHotelsLoading: false,
   hotels: [],
+  fetchOneHotelLoading: false,
   hotel: null,
+  fetchNewPageLoading: false,
   page: 1,
   search: [],
-  loading: false,
-  loadingMatch: false,
+  loadingMatchHotel: false,
   loadingCreateHotel: false,
   loadingRemoveHotel: false,
   loadingTogglePublished: false,
@@ -73,29 +77,29 @@ export const hotelsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchHotels.pending, (state) => {
-      state.loading = true;
+      state.fetchAllHotelsLoading = true;
       state.error = false;
     });
     builder.addCase(fetchHotels.fulfilled, (state, action) => {
-      state.loading = false;
+      state.fetchAllHotelsLoading = false;
       state.hotels = action.payload;
       state.error = false;
     });
     builder.addCase(fetchHotels.rejected, (state) => {
-      state.loading = false;
+      state.fetchAllHotelsLoading = false;
       state.error = true;
     });
     builder.addCase(fetchOneHotel.pending, (state) => {
-      state.loading = true;
+      state.fetchOneHotelLoading = true;
       state.error = false;
     });
     builder.addCase(fetchOneHotel.fulfilled, (state, action) => {
-      state.loading = false;
+      state.fetchOneHotelLoading = false;
       state.hotel = action.payload;
       state.error = false;
     });
     builder.addCase(fetchOneHotel.rejected, (state) => {
-      state.loading = false;
+      state.fetchOneHotelLoading = false;
       state.error = true;
     });
     builder.addCase(createHotel.pending, (state) => {
@@ -137,27 +141,27 @@ export const hotelsSlice = createSlice({
       state.error = true;
     });
     builder.addCase(fetchNewPage.pending, (state) => {
-      state.loading = true;
+      state.fetchNewPageLoading = true;
     });
     builder.addCase(fetchNewPage.fulfilled, (state, action) => {
-      state.loading = false;
+      state.fetchNewPageLoading = false;
       if (action.payload.length) {
         state.hotels = state.hotels.concat(action.payload);
         state.page++;
       }
     });
     builder.addCase(fetchNewPage.rejected, (state) => {
-      state.loading = false;
+      state.fetchNewPageLoading = false;
     });
     builder.addCase(fetchMatches.pending, (state) => {
-      state.loadingMatch = true;
+      state.loadingMatchHotel = true;
     });
     builder.addCase(fetchMatches.fulfilled, (state, action) => {
-      state.loadingMatch = true;
+      state.loadingMatchHotel = false;
       state.search = action.payload;
     });
     builder.addCase(fetchMatches.rejected, (state) => {
-      state.loadingMatch = true;
+      state.loadingMatchHotel = false;
     });
     builder.addCase(fetchSearchedHotels.pending, (state) => {
       state.fetchSearchedHotelsLoading = true;
@@ -212,12 +216,15 @@ export const hotelsReducer = hotelsSlice.reducer;
 
 export const { unsetCabinetHotels, setHotelsSuccessNull } = hotelsSlice.actions;
 
+export const selectFetchAllHotelsLoading = (state: RootState) => state.hotels.fetchAllHotelsLoading;
 export const selectHotels = (state: RootState) => state.hotels.hotels;
+export const selectFetchOneHotelLoading = (state: RootState) => state.hotels.fetchOneHotelLoading;
 export const selectOneHotel = (state: RootState) => state.hotels.hotel;
-export const selectLoading = (state: RootState) => state.hotels.loading;
 export const selectLoadingCreateHotel = (state: RootState) => state.hotels.loadingCreateHotel;
 export const selectLoadingRemoveHotel = (state: RootState) => state.hotels.loadingRemoveHotel;
 export const selectLoadingTogglePublished = (state: RootState) => state.hotels.loadingTogglePublished;
+export const selectLoadingFetchNewPage = (state: RootState) => state.hotels.fetchNewPageLoading;
+export const selectLoadingMatch = (state: RootState) => state.hotels.loadingMatchHotel;
 export const selectCreateHotelError = (state: RootState) => state.hotels.createHotelError;
 export const selectPageOfHotels = (state: RootState) => state.hotels.page;
 export const selectSearchHotels = (state: RootState) => state.hotels.search;

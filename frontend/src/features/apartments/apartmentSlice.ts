@@ -11,30 +11,30 @@ import {
 } from './apartmentThunks';
 
 interface ApartmentsState {
+  loadingFetchAllApartments: boolean;
   apartments: IApartment[];
+  loadingFetchOneApartment: boolean;
   apartment: IApartment | null;
-  loadingApartment: boolean;
   loadingCreateApartment: boolean;
   loadingRemoveApartment: false | string;
   error: boolean;
   apartmentError: ValidationError | null;
   loadingApartmentEdit: boolean;
   roomType: IRoomType[];
-  roomTypeLoading: boolean;
   apartmentsSuccess: GlobalSuccess | null;
 }
 
 const initialState: ApartmentsState = {
+  loadingFetchAllApartments: false,
   apartments: [],
+  loadingFetchOneApartment: false,
   apartment: null,
-  loadingApartment: false,
   loadingCreateApartment: false,
   loadingRemoveApartment: false,
   error: false,
   apartmentError: null,
   loadingApartmentEdit: false,
   roomType: [],
-  roomTypeLoading: false,
   apartmentsSuccess: null,
 };
 
@@ -48,29 +48,29 @@ export const apartmentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchApartments.pending, (state) => {
-      state.loadingApartment = true;
+      state.loadingFetchAllApartments = true;
       state.error = false;
     });
     builder.addCase(fetchApartments.fulfilled, (state, action) => {
-      state.loadingApartment = false;
+      state.loadingFetchAllApartments = false;
       state.apartments = action.payload;
       state.error = false;
     });
     builder.addCase(fetchApartments.rejected, (state) => {
-      state.loadingApartment = false;
+      state.loadingFetchOneApartment = false;
       state.error = true;
     });
     builder.addCase(fetchOneApartment.pending, (state) => {
-      state.loadingApartment = true;
+      state.loadingFetchOneApartment = true;
       state.error = false;
     });
     builder.addCase(fetchOneApartment.fulfilled, (state, action) => {
-      state.loadingApartment = false;
+      state.loadingFetchOneApartment = false;
       state.apartment = action.payload;
       state.error = false;
     });
     builder.addCase(fetchOneApartment.rejected, (state) => {
-      state.loadingApartment = false;
+      state.loadingFetchAllApartments = false;
       state.error = true;
     });
     builder.addCase(createApartment.pending, (state) => {
@@ -111,30 +111,28 @@ export const apartmentsSlice = createSlice({
       state.apartmentError = error || null;
     });
     builder.addCase(fetchRoomType.pending, (state) => {
-      state.roomTypeLoading = true;
       state.error = false;
     });
     builder.addCase(fetchRoomType.fulfilled, (state, action) => {
-      state.roomTypeLoading = false;
       state.roomType = action.payload;
       state.error = false;
     });
     builder.addCase(fetchRoomType.rejected, (state) => {
-      state.roomTypeLoading = false;
       state.error = true;
     });
   },
 });
 export const apartmentsReducer = apartmentsSlice.reducer;
 
+export const { setApartmentsSuccessNull } = apartmentsSlice.actions;
+
+export const selectLoadingFetchAllApartments = (state: RootState) => state.apartments.loadingFetchAllApartments;
 export const selectApartments = (state: RootState) => state.apartments.apartments;
+export const selectLoadingFetchOneApartment = (state: RootState) => state.apartments.loadingFetchOneApartment;
 export const selectOneApartment = (state: RootState) => state.apartments.apartment;
-export const selectLoadingApartment = (state: RootState) => state.apartments.loadingApartment;
 export const selectLoadingCreateApartment = (state: RootState) => state.apartments.loadingCreateApartment;
 export const selectLoadingRemoveApartment = (state: RootState) => state.apartments.loadingRemoveApartment;
+export const selectLoadingEditApartment = (state: RootState) => state.apartments.loadingApartmentEdit;
 export const selectApartmentError = (state: RootState) => state.apartments.apartmentError;
-export const selectLoadingEdit = (state: RootState) => state.apartments.loadingApartmentEdit;
 export const selectRoomType = (state: RootState) => state.apartments.roomType;
-export const selectLoadingRoomType = (state: RootState) => state.apartments.roomTypeLoading;
 export const selectApartmentSuccess = (state: RootState) => state.apartments.apartmentsSuccess;
-export const { setApartmentsSuccessNull } = apartmentsSlice.actions;

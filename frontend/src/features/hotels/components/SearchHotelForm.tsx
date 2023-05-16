@@ -107,7 +107,7 @@ const SearchHotelForm = () => {
             color="error"
             sx={{ p: 1.5 }}
             onClick={onClickClearButton}
-            disabled={loadingSearch}
+            loading={loadingSearch}
           >
             {t('clearFilter')}
           </LoadingButton>

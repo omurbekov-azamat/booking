@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { CabinetState, User } from '../../types';
-import { selectHotels } from '../hotels/hotelsSlice';
+import { selectFetchAllHotelsLoading, selectHotels } from '../hotels/hotelsSlice';
 import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PersonIcon from '@mui/icons-material/Person';
@@ -17,11 +17,12 @@ import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import { fetchApartments } from '../apartments/apartmentThunks';
-import { selectApartments } from '../apartments/apartmentSlice';
+import { selectApartments, selectLoadingFetchAllApartments } from '../apartments/apartmentSlice';
 import WorkIcon from '@mui/icons-material/Work';
 import { getOrders } from '../orders/ordersThunks';
 import { selectOrders } from '../orders/ordersSlice';
 import OrderItems from '../orders/components/OrderItems';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -42,6 +43,8 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const hotels = useAppSelector(selectHotels);
   const apartments = useAppSelector(selectApartments);
   const reservedRooms = useAppSelector(selectOrders);
+  const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
+  const loadingFetchAllApartments = useAppSelector(selectLoadingFetchAllApartments);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
@@ -119,6 +122,8 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 </>
               )}
               {state.myOrders && <OrderItems ordersItems={reservedRooms} />}
+              {fetchAllHotelsLoading && <Spinner />}
+              {loadingFetchAllApartments && <Spinner />}
             </Grid>
           </Grid>
         </CardContent>
