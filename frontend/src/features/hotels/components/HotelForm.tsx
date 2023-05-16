@@ -6,7 +6,7 @@ import FileInput from '../../../components/UI/FileInput/FileInput';
 import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
-import { createHotel } from '../hotelsThunks';
+import { createHotel, editHotel } from '../hotelsThunks';
 import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
@@ -15,9 +15,10 @@ import SelectType from '../../../components/UI/SelectType/SelectType';
 interface Props {
   editedHotel?: HotelMutation;
   isEdit?: boolean;
+  hotelId?: string;
 }
 
-const HotelForm: React.FC<Props> = ({ editedHotel, isEdit }) => {
+const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectCreateHotelError);
   const loading = useAppSelector(selectLoadingCreateHotel);
@@ -83,25 +84,29 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit }) => {
     if (!state.image) {
       setImageRequired(true);
     } else {
-      await dispatch(createHotel(state));
-      await setState({
-        name: '',
-        city: '',
-        address: '',
-        type: '',
-        star: '',
-        image: null,
-        parking: false,
-        petFriendly: false,
-        swimmingPool: false,
-        nonSmokingRooms: false,
-        founding: 0,
-        lowestPrice: {
-          som: 0,
-          dollar: 0,
-        },
-      });
-      await navigate('/my-cabinet');
+      if (isEdit) {
+        await dispatch(editHotel({ hotel: state, id: hotelId as string }));
+      } else {
+        await dispatch(createHotel(state));
+        await setState({
+          name: '',
+          city: '',
+          address: '',
+          type: '',
+          star: '',
+          image: null,
+          parking: false,
+          petFriendly: false,
+          swimmingPool: false,
+          nonSmokingRooms: false,
+          founding: 0,
+          lowestPrice: {
+            som: 0,
+            dollar: 0,
+          },
+        });
+        await navigate('/my-cabinet');
+      }
     }
   };
 

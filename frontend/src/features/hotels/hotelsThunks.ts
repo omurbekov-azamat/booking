@@ -130,6 +130,48 @@ export const createHotel = createAsyncThunk<
   }
 });
 
+interface updatedData {
+  hotel: HotelMutation;
+  id: string;
+}
+
+export const editHotel = createAsyncThunk<
+  GlobalSuccess,
+  updatedData,
+  {
+    state: RootState;
+    rejectValue: ValidationError;
+  }
+>('hotels/editHotel', async (updatedData, { getState, rejectWithValue }) => {
+  try {
+    const user = getState().users.user;
+
+    if (user) {
+      const formData = new FormData();
+      const keys = Object.keys(updatedData.hotel) as (keyof HotelMutation)[];
+      keys.forEach((key) => {
+        const value = updatedData.hotel[key];
+        if (value !== null) {
+          if (key === 'lowestPrice') {
+            formData.append(key, JSON.stringify(value));
+          } else {
+            formData.append(key, value as string | Blob);
+          }
+        }
+      });
+
+      const response = await axiosApi.patch('/hotels/' + updatedData.id, formData);
+
+      return response.data;
+    }
+  } catch (e) {
+    if (isAxiosError(e) && e.response && e.response.status === 400) {
+      return rejectWithValue(e.response.data as ValidationError);
+    }
+    throw e;
+  }
+});
+
 export const removeHotel = createAsyncThunk<GlobalSuccess, string>('hotels/removeOne', async (id) => {
   try {
     const response = await axiosApi.delete<GlobalSuccess>('/hotels/' + id);

@@ -172,7 +172,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         name: req.body.name,
         city: req.body.city,
         address: req.body.address,
-        star: req.body.star,
+        star: parseInt(req.body.star),
         image: req.file && req.file.filename,
         parking: req.body.parking,
         petFriendly: req.body.petFriendly,
@@ -180,9 +180,10 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         nonSmokingRooms: req.body.nonSmokingRooms,
         founding: req.body.founding,
         type: req.body.type,
-        lowestPrice: req.body.lowestPrice,
+        lowestPrice: JSON.parse(req.body.lowestPrice),
       },
     });
+
     if (hotel.modifiedCount < 1) {
       res.status(404).send({ message: 'Cant find hotel' });
     } else {

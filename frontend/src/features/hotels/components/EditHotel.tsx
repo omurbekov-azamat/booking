@@ -39,7 +39,7 @@ const EditHotel = () => {
     dispatch(fetchOneHotel(id));
   }, [id, dispatch]);
 
-  return <>{loading ? <CircularProgress /> : <HotelForm editedHotel={editedHotel} isEdit={true} />}</>;
+  return <>{loading ? <CircularProgress /> : <HotelForm editedHotel={editedHotel} isEdit={true} hotelId={id} />}</>;
 };
 
 export default EditHotel;
