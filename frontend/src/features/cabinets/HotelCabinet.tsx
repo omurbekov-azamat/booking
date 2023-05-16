@@ -4,7 +4,7 @@ import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { CabinetState, User } from '../../types';
 import { selectFetchAllHotelsLoading, selectHotels } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
+import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PersonIcon from '@mui/icons-material/Person';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -23,6 +23,7 @@ import { getOrders } from '../orders/ordersThunks';
 import { selectOrders } from '../orders/ordersSlice';
 import OrderItems from '../orders/components/OrderItems';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import ApartmentsCard from '../apartments/components/ApartmentsCard';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -115,11 +116,13 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
               )}
               {state.createHotel && <HotelForm />}
               {state.myApartments && (
-                <>
+                <Grid container spacing={2}>
                   {apartments.map((apartment) => (
-                    <Typography key={apartment._id}>{apartment.roomTypeId.name}</Typography>
+                    <Grid item xs={12} sm={12} md={6} lg={3} xl={3} key={apartment._id}>
+                      <ApartmentsCard key={apartment._id} apartment={apartment} />
+                    </Grid>
                   ))}
-                </>
+                </Grid>
               )}
               {state.myOrders && <OrderItems ordersItems={reservedRooms} />}
               {fetchAllHotelsLoading && <Spinner />}

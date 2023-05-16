@@ -8,6 +8,7 @@ import { apartmentsReducer } from '../features/apartments/apartmentSlice';
 import { ordersReducer } from '../features/orders/ordersSlice';
 import { commentsReducer } from '../features/comments/commentsSlice';
 import { currencyReducer } from '../features/currency/currencySlice';
+import { roomTypesReducer } from '../features/roomTypes/roomTypesSlice';
 
 const usersPersistConfig = {
   key: 'booking:users',
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer,
   comments: commentsReducer,
   currency: currencyReducer,
+  roomTypes: roomTypesReducer,
 });
 
 export const store = configureStore({

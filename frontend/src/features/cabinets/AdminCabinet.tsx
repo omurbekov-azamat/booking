@@ -6,7 +6,7 @@ import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { selectAdminMyOrders, selectOrders } from '../orders/ordersSlice';
 import { selectFetchAllHotelsLoading, selectHotels } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
+import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import WorkIcon from '@mui/icons-material/Work';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -23,6 +23,11 @@ import HotelsStatus from './components/HotelsStatus';
 import OrderItems from '../orders/components/OrderItems';
 import { CabinetState } from '../../types';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import LivingIcon from '@mui/icons-material/Living';
+import FormRoomTypes from '../roomTypes/components/FormRoomTypes';
+import RoomPreferencesIcon from '@mui/icons-material/RoomPreferences';
+import { fetchRoomTypes } from '../roomTypes/roomTypesThunks';
+import { selectLoadingFetchAllRoomTypes, selectRoomTypes } from '../roomTypes/roomTypesSlice';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -31,6 +36,8 @@ const initialState: CabinetState = {
   createHotel: false,
   unacceptedOrders: false,
   hotelStatus: false,
+  createRoomType: false,
+  roomTypes: false,
 };
 
 interface Props {
@@ -45,6 +52,8 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const orders = useAppSelector(selectAdminMyOrders);
   const unacceptedOrders = useAppSelector(selectOrders);
   const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
+  const roomTypes = useAppSelector(selectRoomTypes);
+  const loadingFetchAllRoomTypes = useAppSelector(selectLoadingFetchAllRoomTypes);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
@@ -60,8 +69,11 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
       if (state.unacceptedOrders) {
         dispatch(getOrders());
       }
+      if (state.roomTypes) {
+        dispatch(fetchRoomTypes());
+      }
     }
-  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders]);
+  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders, state.roomTypes]);
 
   const handleClickOption = (option: string, index: number) => {
     setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
@@ -75,6 +87,8 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
     { option: 'hotelStatus', icon: <LocationCityIcon />, text: 'Статус отелей' },
+    { option: 'createRoomType', icon: <LivingIcon />, text: 'Создать тип комнаты' },
+    { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: 'Типы комнат' },
   ];
 
   return (
@@ -121,6 +135,14 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.myInfo && <MyInformation />}
               {state.unacceptedOrders && <OrderItems ordersItems={unacceptedOrders} />}
               {state.hotelStatus && <HotelsStatus />}
+              {state.createRoomType && <FormRoomTypes />}
+              {loadingFetchAllRoomTypes && <Spinner />}
+              {state.roomTypes &&
+                roomTypes.map((item) => (
+                  <Typography key={item._id} textTransform="capitalize">
+                    {item.name}
+                  </Typography>
+                ))}
             </Grid>
           </Grid>
         </CardContent>
