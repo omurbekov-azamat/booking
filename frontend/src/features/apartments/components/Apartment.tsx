@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import { Box, Button, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { fetchOneApartment } from '../apartmentThunks';
+import { fetchApartments, fetchOneApartment } from '../apartmentThunks';
 import { selectOneApartment } from '../apartmentSlice';
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
@@ -34,7 +34,8 @@ const Apartment = () => {
 
   useEffect(() => {
     dispatch(fetchOneApartment(apartmentId));
-  }, [dispatch, apartmentId]);
+    dispatch(fetchApartments({ hotelId: hotelId }));
+  }, [dispatch, apartmentId, hotelId]);
 
   const onClickResolveApartment = () => {
     navigate(`/book-apartment/${hotelName}/${hotelId}/apartment/${apartmentId}`);
