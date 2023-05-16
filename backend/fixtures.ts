@@ -6,6 +6,7 @@ import RoomType from './models/RoomType';
 import Hotel from './models/Hotel';
 import Apartment from './models/Apartment';
 import Order from './models/Order';
+import Comment from './models/Comments';
 
 const run = async () => {
   mongoose.set('strictQuery', false);
@@ -18,6 +19,7 @@ const run = async () => {
     await db.dropCollection('hotels');
     await db.dropCollection('apartments');
     await db.dropCollection('orders');
+    await db.dropCollection('comments');
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
   }
@@ -1856,7 +1858,7 @@ const run = async () => {
     },
   );
 
-  await Order.create({
+  await Comment.create({
     author: user._id,
     hotel: dragon._id,
     text: 'Some good comment 1',
