@@ -5,8 +5,13 @@ import Card from '@mui/material/Card';
 import { Box, Button, Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+<<<<<<< frontend/src/features/apartments/components/Apartment.tsx
 import { fetchOneApartment } from '../apartmentThunks';
 import { selectLoadingFetchOneApartment, selectOneApartment } from '../apartmentSlice';
+=======
+import { fetchApartments, fetchOneApartment } from '../apartmentThunks';
+import { selectLoadingFetchOneApartment, selectOneApartment } from '../apartmentSlice';
+>>>>>>> frontend/src/features/apartments/components/Apartment.tsx
 import ApartmentsGallery from './ApartmentsGallery';
 import { useTranslation } from 'react-i18next';
 import { selectCurrency } from '../../currency/currencySlice';
@@ -36,7 +41,8 @@ const Apartment = () => {
 
   useEffect(() => {
     dispatch(fetchOneApartment(apartmentId));
-  }, [dispatch, apartmentId]);
+    dispatch(fetchApartments({ hotelId: hotelId }));
+  }, [dispatch, apartmentId, hotelId]);
 
   const onClickResolveApartment = () => {
     navigate(`/book-apartment/${hotelName}/${hotelId}/apartment/${apartmentId}`);
