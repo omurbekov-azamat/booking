@@ -217,7 +217,7 @@ const HotelForm = () => {
           </Grid>
           <Grid item xs>
             <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
-              {t('create')}
+              {id ? t('edit') : t('create')}
             </LoadingButton>
           </Grid>
         </Grid>
