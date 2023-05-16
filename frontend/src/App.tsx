@@ -128,6 +128,14 @@ function App() {
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />
         <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
         <Route path="/hotels/:id/editApartment/:idEditApartment" element={<ApartmentForm />} />
+        <Route
+          path="/my-cabinet/edit-hotel/:id"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <HotelForm />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/hotels/:id/comments" element={<Comments />} />
         <Route
           path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
