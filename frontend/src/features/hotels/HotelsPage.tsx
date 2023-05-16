@@ -59,7 +59,12 @@ const HotelsPage = () => {
             </Grid>
           ))}
         <Grid item container xs={12}>
-          <LoadingButton style={{ margin: 'auto' }} variant="outlined" onClick={() => addMore(page)}>
+          <LoadingButton
+            loading={fetchNewPageLoading}
+            style={{ margin: 'auto' }}
+            variant="outlined"
+            onClick={() => addMore(page)}
+          >
             {t('more')}
           </LoadingButton>
         </Grid>

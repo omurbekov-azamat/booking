@@ -23,6 +23,8 @@ import HotelsStatus from './components/HotelsStatus';
 import OrderItems from '../orders/components/OrderItems';
 import { CabinetState } from '../../types';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import LivingIcon from '@mui/icons-material/Living';
+import FormRoomTypes from '../roomTypes/components/FormRoomTypes';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -31,6 +33,7 @@ const initialState: CabinetState = {
   createHotel: false,
   unacceptedOrders: false,
   hotelStatus: false,
+  createRoomType: false,
 };
 
 interface Props {
@@ -75,6 +78,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
     { option: 'hotelStatus', icon: <LocationCityIcon />, text: 'Статус отелей' },
+    { option: 'createRoomType', icon: <LivingIcon />, text: 'Создать тип комнат' },
   ];
 
   return (
@@ -121,6 +125,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.myInfo && <MyInformation />}
               {state.unacceptedOrders && <OrderItems ordersItems={unacceptedOrders} />}
               {state.hotelStatus && <HotelsStatus />}
+              {state.createRoomType && <FormRoomTypes />}
             </Grid>
           </Grid>
         </CardContent>
