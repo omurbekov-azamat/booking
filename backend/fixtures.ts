@@ -6,6 +6,7 @@ import RoomType from './models/RoomType';
 import Hotel from './models/Hotel';
 import Apartment from './models/Apartment';
 import Order from './models/Order';
+import Comment from './models/Comments';
 
 const run = async () => {
   mongoose.set('strictQuery', false);
@@ -18,6 +19,7 @@ const run = async () => {
     await db.dropCollection('hotels');
     await db.dropCollection('apartments');
     await db.dropCollection('orders');
+    await db.dropCollection('comments');
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
   }
@@ -1853,6 +1855,225 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '01.05.2023',
       dateDeparture: '04.05.2023',
+    },
+  );
+
+  await Comment.create(
+    {
+      author: user._id,
+      hotel: dragon._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: dragon._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: demar._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: demar._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: sara._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: sara._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: discovery._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: discovery._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: salut._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: salut._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: aurum._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: aurum._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: asia._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: asia._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: navat._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: navat._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: madison._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: madison._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: silkroad._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: silkroad._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: veve._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: veve._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: palace._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: palace._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: central._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: central._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: plaza._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: plaza._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: hyatt._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: hyatt._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: lulu._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: lulu._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: dostuk._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: dostuk._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
+    },
+    {
+      author: user._id,
+      hotel: jannat._id,
+      text: 'Some good comment 1',
+      createdAt: new Date(),
+    },
+    {
+      author: user2._id,
+      hotel: jannat._id,
+      text: 'Some good comment 2',
+      createdAt: new Date(),
     },
   );
 
