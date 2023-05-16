@@ -7,36 +7,46 @@ import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { createHotel } from '../hotelsThunks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 import SelectType from '../../../components/UI/SelectType/SelectType';
 
-const HotelForm = () => {
+interface Props {
+  editedHotel?: HotelMutation;
+  isEdit?: boolean;
+}
+
+const HotelForm: React.FC<Props> = ({ editedHotel, isEdit }) => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectCreateHotelError);
   const loading = useAppSelector(selectLoadingCreateHotel);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { id } = useParams() as { id: string };
 
-  const [state, setState] = useState<HotelMutation>({
-    name: '',
-    city: '',
-    address: '',
-    star: '',
-    image: null,
-    parking: false,
-    petFriendly: false,
-    swimmingPool: false,
-    nonSmokingRooms: false,
-    founding: 0,
-    type: '',
-    lowestPrice: {
-      som: 0,
-      dollar: 0,
-    },
-  });
+  const initialState = editedHotel
+    ? {
+        ...editedHotel,
+      }
+    : {
+        name: '',
+        city: '',
+        address: '',
+        star: '',
+        image: null,
+        parking: false,
+        petFriendly: false,
+        swimmingPool: false,
+        nonSmokingRooms: false,
+        founding: 0,
+        type: '',
+        lowestPrice: {
+          som: 0,
+          dollar: 0,
+        },
+      };
+
+  const [state, setState] = useState<HotelMutation>(initialState);
 
   const [imageRequired, setImageRequired] = useState(false);
 
@@ -106,7 +116,7 @@ const HotelForm = () => {
   return (
     <Container component="main" maxWidth="xs">
       <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
-        {id ? t('editHotel') : t('createHotel')}
+        {isEdit ? t('editHotel') : t('createHotel')}
       </Typography>
       <Box component="form" sx={{ mt: 2 }} onSubmit={submitFormHandler}>
         <Grid container spacing={2} textAlign="center" direction="column">
@@ -217,7 +227,7 @@ const HotelForm = () => {
           </Grid>
           <Grid item xs>
             <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
-              {id ? t('edit') : t('create')}
+              {isEdit ? t('edit') : t('create')}
             </LoadingButton>
           </Grid>
         </Grid>
