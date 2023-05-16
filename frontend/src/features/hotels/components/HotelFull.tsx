@@ -13,7 +13,6 @@ import Pool from '../../../components/Icons/HotelIcons/Pool';
 import Smoking from '../../../components/Icons/HotelIcons/Smoking';
 import ApartmentsTable from '../../apartments/components/ApartmentsTable';
 import { useNavigate, useParams } from 'react-router-dom';
-import FormComments from '../../comments/components/FormComments';
 
 interface Props {
   hotel: Hotel;
@@ -70,7 +69,6 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
         {t('createRoom')}
       </Button>
       <ApartmentsTable hotel={hotel} />
-      <FormComments />
     </>
   );
 };
