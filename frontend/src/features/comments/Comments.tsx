@@ -5,6 +5,7 @@ import { fetchComments, removeComment } from './commentsThunks';
 import { useNavigate, useParams } from 'react-router-dom';
 import CommentMessage from './components/CommentMessage';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import FormComments from './components/FormComments';
 
 const Comments = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ const Comments = () => {
           />
         );
       })}
+      <FormComments hotelId={id} />
     </>
   );
 };
