@@ -7,7 +7,7 @@ import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { createHotel } from '../hotelsThunks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 import SelectType from '../../../components/UI/SelectType/SelectType';
@@ -18,6 +18,7 @@ const HotelForm = () => {
   const loading = useAppSelector(selectLoadingCreateHotel);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { id } = useParams() as { id: string };
 
   const [state, setState] = useState<HotelMutation>({
     name: '',
@@ -105,7 +106,7 @@ const HotelForm = () => {
   return (
     <Container component="main" maxWidth="xs">
       <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
-        {t('createHotel')}
+        {id ? t('editHotel') : t('createHotel')}
       </Typography>
       <Box component="form" sx={{ mt: 2 }} onSubmit={submitFormHandler}>
         <Grid container spacing={2} textAlign="center" direction="column">
