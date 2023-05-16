@@ -214,3 +214,7 @@ export interface IRoomType {
 export interface CabinetState {
   [key: string]: boolean;
 }
+
+export interface RoomTypesMutation {
+  name: string;
+}
