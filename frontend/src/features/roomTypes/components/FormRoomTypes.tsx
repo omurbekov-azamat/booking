@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createNewRoomType } from '../roomTypesThunks';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectErrorCreateRoomType, selectLoadingCreateRoomType } from '../roomTypesSlice';
 import { Box, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
@@ -9,6 +10,8 @@ import { RoomTypesMutation } from '../../../types';
 const FormRoomTypes = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const loadingCreateRoomType = useAppSelector(selectLoadingCreateRoomType);
+  const errorCreateRoomType = useAppSelector(selectErrorCreateRoomType);
 
   const [state, setState] = useState<RoomTypesMutation>({
     name: '',
@@ -22,6 +25,14 @@ const FormRoomTypes = () => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     await dispatch(createNewRoomType(state)).unwrap();
+  };
+
+  const getFieldError = (fieldName: string) => {
+    try {
+      return errorCreateRoomType?.errors[fieldName].message;
+    } catch {
+      return undefined;
+    }
   };
 
   return (
@@ -39,10 +50,13 @@ const FormRoomTypes = () => {
             value={state.name}
             onChange={inputChangeHandler}
             sx={{ width: '300px' }}
+            error={Boolean(getFieldError('name'))}
+            helperText={getFieldError('name')}
+            required
           />
         </Grid>
         <Grid item>
-          <LoadingButton type="submit" variant="contained">
+          <LoadingButton loading={loadingCreateRoomType} type="submit" variant="contained">
             {t('create')}
           </LoadingButton>
         </Grid>
