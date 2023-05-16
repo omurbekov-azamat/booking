@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IApartment, ApartmentMutation, ValidationError, UpdateApartment, IRoomType, GlobalSuccess } from '../../types';
+import { IApartment, ApartmentMutation, ValidationError, UpdateApartment, GlobalSuccess } from '../../types';
 import { RootState } from '../../app/store';
 import axiosApi from '../../axiosApi';
 import { isAxiosError } from 'axios';
@@ -158,15 +158,6 @@ export const removeApartmentImage = createAsyncThunk<
 >('apartments/removeImage', async ({ apartmentId, imageIndex }) => {
   try {
     await axiosApi.delete(`/apartments/${apartmentId}/images/${imageIndex}`);
-  } catch {
-    throw new Error();
-  }
-});
-
-export const fetchRoomType = createAsyncThunk<IRoomType[]>('apartments/fetchRoomTypeAll', async () => {
-  try {
-    const response = await axiosApi.get<IRoomType[]>('/roomTypes');
-    return response.data;
   } catch {
     throw new Error();
   }

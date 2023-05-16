@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { isAxiosError } from 'axios';
 import axiosApi from '../../axiosApi';
-import { RoomTypesMutation, ValidationError } from '../../types';
+import { IRoomType, RoomTypesMutation, ValidationError } from '../../types';
 
 export const createNewRoomType = createAsyncThunk<void, RoomTypesMutation, { rejectValue: ValidationError }>(
   'roomTypes/createNewRoomType',
@@ -17,3 +17,12 @@ export const createNewRoomType = createAsyncThunk<void, RoomTypesMutation, { rej
     }
   },
 );
+
+export const fetchRoomTypes = createAsyncThunk<IRoomType[]>('roomTypes/fetchRoomTypeAll', async () => {
+  try {
+    const response = await axiosApi.get<IRoomType[]>('/roomTypes');
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});

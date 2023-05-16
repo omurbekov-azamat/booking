@@ -1,14 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import type { GlobalSuccess, IApartment, IRoomType, ValidationError } from '../../types';
-import {
-  createApartment,
-  editApartment,
-  fetchApartments,
-  fetchOneApartment,
-  fetchRoomType,
-  removeApartment,
-} from './apartmentThunks';
+import { createApartment, editApartment, fetchApartments, fetchOneApartment, removeApartment } from './apartmentThunks';
+import type { GlobalSuccess, IApartment, ValidationError } from '../../types';
 
 interface ApartmentsState {
   loadingFetchAllApartments: boolean;
@@ -20,7 +13,6 @@ interface ApartmentsState {
   error: boolean;
   apartmentError: ValidationError | null;
   loadingApartmentEdit: boolean;
-  roomType: IRoomType[];
   apartmentsSuccess: GlobalSuccess | null;
 }
 
@@ -34,7 +26,6 @@ const initialState: ApartmentsState = {
   error: false,
   apartmentError: null,
   loadingApartmentEdit: false,
-  roomType: [],
   apartmentsSuccess: null,
 };
 
@@ -110,16 +101,6 @@ export const apartmentsSlice = createSlice({
       state.loadingApartmentEdit = false;
       state.apartmentError = error || null;
     });
-    builder.addCase(fetchRoomType.pending, (state) => {
-      state.error = false;
-    });
-    builder.addCase(fetchRoomType.fulfilled, (state, action) => {
-      state.roomType = action.payload;
-      state.error = false;
-    });
-    builder.addCase(fetchRoomType.rejected, (state) => {
-      state.error = true;
-    });
   },
 });
 export const apartmentsReducer = apartmentsSlice.reducer;
@@ -134,5 +115,4 @@ export const selectLoadingCreateApartment = (state: RootState) => state.apartmen
 export const selectLoadingRemoveApartment = (state: RootState) => state.apartments.loadingRemoveApartment;
 export const selectLoadingEditApartment = (state: RootState) => state.apartments.loadingApartmentEdit;
 export const selectApartmentError = (state: RootState) => state.apartments.apartmentError;
-export const selectRoomType = (state: RootState) => state.apartments.roomType;
 export const selectApartmentSuccess = (state: RootState) => state.apartments.apartmentsSuccess;

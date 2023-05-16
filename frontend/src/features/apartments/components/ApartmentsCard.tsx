@@ -9,6 +9,8 @@ import { apiURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../users/usersSlice';
 import { removeApartment } from '../apartmentThunks';
+import { selectLoadingRemoveApartment } from '../apartmentSlice';
+import { LoadingButton } from '@mui/lab';
 
 interface Props {
   apartment: IApartment;
@@ -20,6 +22,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
   const dispatch = useAppDispatch();
   const currency = useAppSelector(selectCurrency);
   const user = useAppSelector(selectUser);
+  const loadingDeleteApartment = useAppSelector(selectLoadingRemoveApartment);
 
   const cardImage = apiURL + '/' + apartment.images[0];
 
@@ -57,9 +60,14 @@ const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
             )}
 
             {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-              <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteApartment(apartment._id)}>
+              <LoadingButton
+                loading={loadingDeleteApartment === apartment._id}
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={() => deleteApartment(apartment._id)}
+              >
                 {t('delete')}
-              </Button>
+              </LoadingButton>
             )}
           </Stack>
         </Box>

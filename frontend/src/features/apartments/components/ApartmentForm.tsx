@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
-import { ApartmentMutation, ImgType, IRoomType } from '../../../types';
+import { ApartmentMutation, ImgType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
@@ -22,15 +22,8 @@ import {
   selectLoadingEditApartment,
   selectLoadingFetchOneApartment,
   selectOneApartment,
-  selectRoomType,
 } from '../apartmentSlice';
-import {
-  createApartment,
-  editApartment,
-  fetchOneApartment,
-  fetchRoomType,
-  removeApartmentImage,
-} from '../apartmentThunks';
+import { createApartment, editApartment, fetchOneApartment, removeApartmentImage } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -45,6 +38,8 @@ import TvIcon from '@mui/icons-material/Tv';
 import { fetchOneHotel } from '../../hotels/hotelsThunks';
 import { apiURL } from '../../../constants';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import { selectRoomTypes } from '../../roomTypes/roomTypesSlice';
+import { fetchRoomTypes } from '../../roomTypes/roomTypesThunks';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -80,7 +75,7 @@ const ApartmentForm = () => {
   const loadingFetchOneApartment = useAppSelector(selectLoadingFetchOneApartment);
   const navigate = useNavigate();
   const { id, idEditApartment } = useParams();
-  const roomType = useAppSelector(selectRoomType);
+  const roomType = useAppSelector(selectRoomTypes);
   const oneApartment = useAppSelector(selectOneApartment);
   const loadingEditApartment = useAppSelector(selectLoadingEditApartment);
   const location = useLocation();
@@ -90,7 +85,7 @@ const ApartmentForm = () => {
   const locationEdit = parts[parts.length - 2];
 
   useEffect(() => {
-    dispatch(fetchRoomType());
+    dispatch(fetchRoomTypes());
   }, [dispatch]);
 
   useEffect(() => {
@@ -198,16 +193,6 @@ const ApartmentForm = () => {
     setState({ ...state, [checkboxName]: isChecked });
   };
 
-  const name = (name: IRoomType) => {
-    if (name.name === 'single room') {
-      return t('singleRoom');
-    } else if (name.name === 'double room') {
-      return t('doubleRoom');
-    } else if (name.name === 'triple room') {
-      return t('tripleRoom');
-    }
-  };
-
   const deleteOldImg = async (apartmentId: string, imageIndex: number) => {
     await dispatch(removeApartmentImage({ apartmentId, imageIndex }));
     await dispatch(fetchOneApartment(apartmentId));
@@ -245,7 +230,7 @@ const ApartmentForm = () => {
                 {roomType.map((option) => {
                   return (
                     <MenuItem key={option._id} value={option._id}>
-                      {name(option)}
+                      {option.name}
                     </MenuItem>
                   );
                 })}
