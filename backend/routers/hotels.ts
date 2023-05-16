@@ -170,15 +170,20 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
     const hotel = await Hotel.updateOne(findParams, {
       $set: {
         name: req.body.name,
+        city: req.body.city,
         address: req.body.address,
-        location: req.body.location ? req.body.location : null,
-        star: req.body.star,
+        star: parseInt(req.body.star),
         image: req.file && req.file.filename,
+        parking: req.body.parking,
+        petFriendly: req.body.petFriendly,
+        swimmingPool: req.body.swimmingPool,
+        nonSmokingRooms: req.body.nonSmokingRooms,
         founding: req.body.founding,
-        lowestPrice: req.body.lowestPrice,
         type: req.body.type,
+        lowestPrice: JSON.parse(req.body.lowestPrice),
       },
     });
+
     if (hotel.modifiedCount < 1) {
       res.status(404).send({ message: 'Cant find hotel' });
     } else {

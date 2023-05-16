@@ -23,7 +23,7 @@ export interface LowestPriceType {
 
 export interface HotelMutation extends HotelData {
   star: string;
-  image: File | null;
+  image: File | null | string;
 }
 
 export interface Hotel extends HotelData {

@@ -81,7 +81,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               variant="contained"
               size="medium"
-              onClick={() => navigate('/my-cabinet/edit/' + hotel._id)}
+              onClick={() => navigate('/my-cabinet/edit-hotel/' + hotel._id)}
             >
               {t('edit')}
             </LoadingButton>

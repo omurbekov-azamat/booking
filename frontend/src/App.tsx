@@ -22,6 +22,7 @@ import { useTranslation } from 'react-i18next';
 import { selectHotelsSuccess, setHotelsSuccessNull } from './features/hotels/hotelsSlice';
 import { selectCommentsSuccess, setCommentsSuccessNull } from './features/comments/commentsSlice';
 import { selectApartmentSuccess, setApartmentsSuccessNull } from './features/apartments/apartmentSlice';
+import EditHotel from './features/hotels/components/EditHotel';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -128,6 +129,14 @@ function App() {
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />
         <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
         <Route path="/hotels/:id/editApartment/:idEditApartment" element={<ApartmentForm />} />
+        <Route
+          path="/my-cabinet/edit-hotel/:id"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <EditHotel />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/hotels/:id/comments" element={<Comments />} />
         <Route
           path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
