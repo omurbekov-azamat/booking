@@ -14,20 +14,34 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
   const cardImage = apiURL + '/' + hotel.image;
   const { t } = useTranslation();
 
-  let status = {
+  let statusStyle = {
     border: '2px solid silver',
     borderRadius: '6px',
     padding: '7px',
   };
 
+  let status = '';
+
+  switch (hotel.status) {
+    case 'premium':
+      status = t('premium');
+      break;
+    case 'business':
+      status = t('business');
+      break;
+    case 'standard':
+      status = t('standard');
+      break;
+  }
+
   if (hotel.status === 'premium') {
-    status = {
-      ...status,
+    statusStyle = {
+      ...statusStyle,
       border: '2px solid gold',
     };
   } else if (hotel.status === 'business') {
-    status = {
-      ...status,
+    statusStyle = {
+      ...statusStyle,
       border: '2px solid blue',
     };
   }
@@ -43,13 +57,11 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
           <CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />
         </Grid>
 
-        <Grid item>
+        <Grid item flex={1}>
           <Grid container flexDirection="row" justifyContent="space-between">
             <Grid container gap={1} alignItems="center">
               <Grid item>
-                <Typography variant="h5" align="center">
-                  {hotel.name}
-                </Typography>
+                <Typography variant="h5">{hotel.name}</Typography>
               </Grid>
               <Grid item>
                 <Rating name="read-only" value={hotel.star} precision={0.5} readOnly size="small" />
@@ -60,9 +72,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
           <Grid item>
             <Grid container gap={1} alignItems="center">
               <Grid item>
-                <Typography variant="h6" align="center">
-                  {hotel.city}
-                </Typography>
+                <Typography variant="h6">{hotel.city}</Typography>
               </Grid>
 
               <Grid item>
@@ -76,14 +86,20 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
           </Grid>
         </Grid>
 
-        <Grid item style={{ position: 'absolute', top: '10px', right: '10px' }}>
-          <Box style={status}>{hotel.status}</Box>
-        </Grid>
+        <Grid item>
+          <Grid container flexDirection="column">
+            <Grid item>
+              <Box style={statusStyle} textAlign={'center'}>
+                {status}
+              </Box>
+            </Grid>
 
-        <Grid item style={{ position: 'absolute', top: '55px', right: '10px' }}>
-          <Link style={{ textDecoration: 'none' }} component={RouterLink} to="/login" variant="body2">
-            {commentAmount + ' ' + t('comments')}
-          </Link>
+            <Grid item>
+              <Link style={{ textDecoration: 'none' }} component={RouterLink} to="/login" variant="body2">
+                {t('comments') + ': ' + commentAmount}
+              </Link>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </>

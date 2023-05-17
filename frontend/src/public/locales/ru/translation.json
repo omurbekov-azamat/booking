@@ -115,7 +115,8 @@
   "customerName": "Имя заказчика",
   "telephoneNumber": "Номер телефона",
   "thereAreNoOrders": "Нет никаких заказов",
-  "commentary": "Коментарий",
+  "commentary": "Комментарий",
+  "comments": "Комментарии",
   "status": "Статус",
   "hotel": "Отель",
   "guestHouse": "Гостевой дом",
@@ -128,5 +129,8 @@
   "specialOffersForYou": "Специальные предложения для вас",
   "readMore": "Подробнее",
   "place": "Площадь",
-  "editHotel": "Редактировать отель"
+  "editHotel": "Редактировать отель",
+  "premium": "Премиум",
+  "business": "Бизнес",
+  "standard": "Стандарт"
 }
