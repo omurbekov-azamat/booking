@@ -110,8 +110,8 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.myApartments && (
                 <Grid container spacing={2}>
                   {apartments.map((apartment) => (
-                    <Grid item xs={12} sm={12} md={6} lg={3} xl={3} key={apartment._id}>
-                      <ApartmentsCard key={apartment._id} apartment={apartment} />
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4} key={apartment._id}>
+                      <ApartmentsCard key={apartment._id} apartment={apartment} isNeedButtons={true} />
                     </Grid>
                   ))}
                 </Grid>
