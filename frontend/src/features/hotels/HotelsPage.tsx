@@ -49,9 +49,9 @@ const HotelsPage = () => {
       {fetchAllHotelsLoading && <Spinner />}
       {fetchNewPageLoading && <Spinner />}
       {hotels &&
-        hotels.map((el) => (
+        hotels.map((el, index) => (
           <Grid item xs={12} sm={6} lg={4} key={el._id} alignItems="stretch">
-            <HotelCardLarge hotel={el} />
+            <HotelCardLarge hotel={el} commentAmount={index} />
           </Grid>
         ))}
       <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>

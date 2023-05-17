@@ -1,14 +1,16 @@
 import React from 'react';
-import { Box, CardMedia, Grid, Rating, Typography } from '@mui/material';
+import { Box, CardMedia, Grid, Link, Rating, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface Props {
   hotel: Hotel;
+  commentAmount?: number;
 }
 
-const HotelCardLarge: React.FC<Props> = ({ hotel }) => {
+const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
   const cardImage = apiURL + '/' + hotel.image;
   const { t } = useTranslation();
 
@@ -76,6 +78,12 @@ const HotelCardLarge: React.FC<Props> = ({ hotel }) => {
 
         <Grid item style={{ position: 'absolute', top: '10px', right: '10px' }}>
           <Box style={status}>{hotel.status}</Box>
+        </Grid>
+
+        <Grid item style={{ position: 'absolute', top: '55px', right: '10px' }}>
+          <Link style={{ textDecoration: 'none' }} component={RouterLink} to="/login" variant="body2">
+            {commentAmount + ' ' + t('comments')}
+          </Link>
         </Grid>
       </Grid>
     </>
