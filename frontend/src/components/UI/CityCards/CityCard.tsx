@@ -10,10 +10,10 @@ interface Props {
 
 const CityCard: React.FC<Props> = ({ item }) => {
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card style={{ maxWidth: '345px', maxHeight: '300px' }}>
+    <Grid item xs={12} sm={6} md={3}>
+      <Card style={{ maxWidth: '350px', maxHeight: 'auto' }}>
         <CardActionArea>
-          <CardMedia component="img" width="100%" height="auto" image={item.link} alt={item.link} />
+          <CardMedia component="img" width="100%" height="200px" image={item.link} alt={item.link} />
           <Typography
             variant="h5"
             component="div"
