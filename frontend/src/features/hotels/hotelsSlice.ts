@@ -77,6 +77,7 @@ export const hotelsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchHotels.pending, (state) => {
+      state.hotels = [];
       state.fetchAllHotelsLoading = true;
       state.error = false;
     });

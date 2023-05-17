@@ -101,7 +101,7 @@ const UserCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.favorites && (
                 <Grid container spacing={3}>
                   {favoriteHotels.map((hotel) => (
-                    <Grid item key={hotel._id}>
+                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={hotel._id}>
                       <HotelsCard hotel={hotel} />
                     </Grid>
                   ))}

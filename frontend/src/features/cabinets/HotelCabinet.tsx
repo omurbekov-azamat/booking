@@ -13,7 +13,6 @@ import CardContent from '@mui/material/CardContent';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MyInformation from './components/MyInformation';
-import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import { fetchApartments } from '../apartments/apartmentThunks';
@@ -24,6 +23,7 @@ import { selectOrders } from '../orders/ordersSlice';
 import OrderItems from '../orders/components/OrderItems';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ApartmentsCard from '../apartments/components/ApartmentsCard';
+import MyHotels from './components/MyHotels';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -105,21 +105,13 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
             </Grid>
             <Grid item xs>
               {state.myInfo && <MyInformation />}
-              {state.myHotels && (
-                <Grid container spacing={2}>
-                  {hotels.map((hotel) => (
-                    <Grid item xs={12} sm={12} md={6} lg={3} xl={3} key={hotel._id}>
-                      <HotelsCard hotel={hotel} />
-                    </Grid>
-                  ))}
-                </Grid>
-              )}
+              {state.myHotels && <MyHotels hotels={hotels} />}
               {state.createHotel && <HotelForm />}
               {state.myApartments && (
                 <Grid container spacing={2}>
                   {apartments.map((apartment) => (
-                    <Grid item xs={12} sm={12} md={6} lg={3} xl={3} key={apartment._id}>
-                      <ApartmentsCard key={apartment._id} apartment={apartment} />
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4} key={apartment._id}>
+                      <ApartmentsCard key={apartment._id} apartment={apartment} isNeedButtons={true} />
                     </Grid>
                   ))}
                 </Grid>

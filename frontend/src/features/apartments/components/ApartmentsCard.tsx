@@ -14,9 +14,10 @@ import { LoadingButton } from '@mui/lab';
 
 interface Props {
   apartment: IApartment;
+  isNeedButtons?: true;
 }
 
-const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
+const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -49,26 +50,27 @@ const ApartmentsCard: React.FC<Props> = ({ apartment }) => {
         </CardActionArea>
         <Box>
           <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
-            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-              <Button
-                variant="contained"
-                size="medium"
-                onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}
-              >
-                {t('edit')}
-              </Button>
-            )}
-
-            {(user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-              <LoadingButton
-                loading={loadingDeleteApartment === apartment._id}
-                variant="outlined"
-                startIcon={<DeleteIcon />}
-                onClick={() => deleteApartment(apartment._id)}
-              >
-                {t('delete')}
-              </LoadingButton>
-            )}
+            {isNeedButtons &&
+              (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
+                <Button
+                  variant="contained"
+                  size="medium"
+                  onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}
+                >
+                  {t('edit')}
+                </Button>
+              )}
+            {isNeedButtons &&
+              (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
+                <LoadingButton
+                  loading={loadingDeleteApartment === apartment._id}
+                  variant="outlined"
+                  startIcon={<DeleteIcon />}
+                  onClick={() => deleteApartment(apartment._id)}
+                >
+                  {t('delete')}
+                </LoadingButton>
+              )}
           </Stack>
         </Box>
       </Card>

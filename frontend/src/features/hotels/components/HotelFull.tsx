@@ -13,16 +13,19 @@ import Pool from '../../../components/Icons/HotelIcons/Pool';
 import Smoking from '../../../components/Icons/HotelIcons/Smoking';
 import ApartmentsTable from '../../apartments/components/ApartmentsTable';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from '../../../app/hooks';
+import { selectUser } from '../../users/usersSlice';
 
 interface Props {
   hotel: Hotel;
 }
 
 const HotelFull: React.FC<Props> = ({ hotel }) => {
-  const cardImage = apiURL + '/' + hotel.image;
-  const { id } = useParams() as { id: string };
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { id } = useParams() as { id: string };
+  const user = useAppSelector(selectUser);
+  const cardImage = apiURL + '/' + hotel.image;
 
   return (
     <>
@@ -60,14 +63,16 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
           </Grid>
         </CardContent>
       </Card>
-      <Button
-        variant={'outlined'}
-        color={'success'}
-        style={{ margin: '10px auto', display: 'block' }}
-        onClick={() => navigate('/hotels/' + id + '/createApartment')}
-      >
-        {t('createRoom')}
-      </Button>
+      {(user?.role === 'admin' || user?._id === hotel.userId) && (
+        <Button
+          variant={'outlined'}
+          color={'success'}
+          style={{ margin: '10px auto', display: 'block' }}
+          onClick={() => navigate('/hotels/' + id + '/createApartment')}
+        >
+          {t('createRoom')}
+        </Button>
+      )}
       <ApartmentsTable hotel={hotel} />
     </>
   );

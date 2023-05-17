@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchHotels, fetchNewPage, removeHotel, togglePublishedHotel } from './hotelsThunks';
+import { fetchHotels, fetchNewPage } from './hotelsThunks';
 import {
   selectFetchAllHotelsLoading,
   selectHotels,
@@ -31,16 +31,6 @@ const HotelsPage = () => {
     dispatch(fetchNewPage(pageNum));
   };
 
-  const unPublishButton = async (id: string) => {
-    await dispatch(togglePublishedHotel(id));
-    await dispatch(fetchHotels());
-  };
-
-  const deleteButton = async (id: string) => {
-    await dispatch(removeHotel(id));
-    await dispatch(fetchHotels());
-  };
-
   return (
     <>
       <SearchField />
@@ -51,11 +41,7 @@ const HotelsPage = () => {
         {hotels &&
           hotels.map((el) => (
             <Grid item xs={12} sm={6} lg={4} key={el._id} alignItems="stretch">
-              <HotelsCard
-                hotel={el}
-                onDeleteBtnClick={() => deleteButton(el._id)}
-                onPublishBtnClick={() => unPublishButton(el._id)}
-              />
+              <HotelsCard hotel={el} />
             </Grid>
           ))}
         <Grid item container xs={12}>
