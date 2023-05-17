@@ -17,7 +17,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
   const { t } = useTranslation();
 
   let statusStyle = {
-    border: '4px solid silver',
+    border: '2px solid silver',
     borderRadius: '6px',
     padding: '7px',
     fontWeight: 'bold',
