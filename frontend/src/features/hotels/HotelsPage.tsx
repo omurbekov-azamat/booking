@@ -14,7 +14,6 @@ import SearchHotelForm from './components/SearchHotelForm';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import SearchField from './components/SearchField/SearchField';
-import HotelCardLarge from './components/HotelCardLarge';
 
 const HotelsPage = () => {
   const dispatch = useAppDispatch();
@@ -48,12 +47,6 @@ const HotelsPage = () => {
       <SearchHotelForm />
       {fetchAllHotelsLoading && <Spinner />}
       {fetchNewPageLoading && <Spinner />}
-      {hotels &&
-        hotels.map((el, index) => (
-          <Grid item xs={12} sm={6} lg={4} key={el._id} alignItems="stretch">
-            <HotelCardLarge hotel={el} commentAmount={index} />
-          </Grid>
-        ))}
       <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
         {hotels &&
           hotels.map((el) => (

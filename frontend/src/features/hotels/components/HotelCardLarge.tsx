@@ -164,7 +164,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
               <Link
                 style={{ textDecoration: 'none', color: '#6b6b6b' }}
                 component={RouterLink}
-                to="/login"
+                to={'/hotel/' + hotel._id + '/comments'}
                 variant="body2"
               >
                 {t('comments') + ': ' + commentAmount}
