@@ -18,9 +18,10 @@ interface Props {
   hotel: Hotel;
   onDeleteBtnClick?: MouseEventHandler;
   onPublishBtnClick?: MouseEventHandler;
+  isNeedButtons?: true;
 }
 
-const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick }) => {
+const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick, isNeedButtons }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
@@ -76,7 +77,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
       </CardActionArea>
       <Box>
         <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
-          {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+          {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
             <LoadingButton
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               variant="contained"
@@ -86,8 +87,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
               {t('edit')}
             </LoadingButton>
           )}
-
-          {(user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+          {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
             <LoadingButton
               disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
               loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
@@ -98,8 +98,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
               {t('delete')}
             </LoadingButton>
           )}
-
-          {(user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
+          {isNeedButtons && (user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
             <LoadingButton
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
@@ -114,7 +113,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
         </Stack>
       </Box>
       <Box textAlign="center">
-        <Typography color="red">{!hotel.isPublished && 'Un publish'}</Typography>
+        {isNeedButtons && <Typography color="red">{!hotel.isPublished && 'Un publish'}</Typography>}
       </Box>
     </Card>
   );
