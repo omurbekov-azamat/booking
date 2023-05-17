@@ -13,7 +13,6 @@ import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HotelsCard from '../hotels/components/HotelsCard';
 import HotelForm from '../hotels/components/HotelForm';
 import MyInformation from './components/MyInformation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -28,6 +27,7 @@ import FormRoomTypes from '../roomTypes/components/FormRoomTypes';
 import RoomPreferencesIcon from '@mui/icons-material/RoomPreferences';
 import { fetchRoomTypes } from '../roomTypes/roomTypesThunks';
 import { selectLoadingFetchAllRoomTypes, selectRoomTypes } from '../roomTypes/roomTypesSlice';
+import MyHotels from './components/MyHotels';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -121,15 +121,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
             </Grid>
             <Grid item xs>
               {state.myOrders && <OrderItems ordersItems={orders} />}
-              {state.myHotels && (
-                <Grid container spacing={2}>
-                  {hotelsState.map((el) => (
-                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={el._id}>
-                      <HotelsCard hotel={el} isNeedButtons={true} />
-                    </Grid>
-                  ))}
-                </Grid>
-              )}
+              {state.myHotels && <MyHotels hotels={hotelsState} />}
               {fetchAllHotelsLoading && <Spinner />}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
