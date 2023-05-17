@@ -218,3 +218,8 @@ export interface CabinetState {
 export interface RoomTypesMutation {
   name: string;
 }
+
+export interface CityOnMainPage {
+  name: string;
+  link: string;
+}
