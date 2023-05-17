@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardMedia, Grid, Rating, Typography } from '@mui/material';
+import { Box, CardMedia, Grid, Rating, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,24 @@ interface Props {
 const HotelCardLarge: React.FC<Props> = ({ hotel }) => {
   const cardImage = apiURL + '/' + hotel.image;
   const { t } = useTranslation();
+
+  let status = {
+    border: '2px solid silver',
+    borderRadius: '6px',
+    padding: '7px',
+  };
+
+  if (hotel.status === 'premium') {
+    status = {
+      ...status,
+      border: '2px solid gold',
+    };
+  } else if (hotel.status === 'business') {
+    status = {
+      ...status,
+      border: '2px solid blue',
+    };
+  }
 
   return (
     <>
@@ -57,7 +75,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel }) => {
         </Grid>
 
         <Grid item style={{ position: 'absolute', top: '10px', right: '10px' }}>
-          test
+          <Box style={status}>{hotel.status}</Box>
         </Grid>
       </Grid>
     </>
