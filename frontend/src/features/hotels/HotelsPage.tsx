@@ -51,7 +51,7 @@ const HotelsPage = () => {
       {hotels &&
         hotels.map((el) => (
           <Grid item xs={12} sm={6} lg={4} key={el._id} alignItems="stretch">
-            <HotelCardLarge hotel={el} onCardClick={() => null} />
+            <HotelCardLarge hotel={el} />
           </Grid>
         ))}
       <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
