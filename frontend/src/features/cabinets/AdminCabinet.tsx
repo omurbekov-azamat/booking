@@ -34,6 +34,7 @@ import RoomPreferencesIcon from '@mui/icons-material/RoomPreferences';
 import { fetchRoomTypes } from '../roomTypes/roomTypesThunks';
 import { selectLoadingFetchAllRoomTypes, selectRoomTypes } from '../roomTypes/roomTypesSlice';
 import MyHotels from './components/MyHotels';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -44,6 +45,8 @@ const initialState: CabinetState = {
   hotelStatus: false,
   createRoomType: false,
   roomTypes: false,
+  unPublished: false,
+  deleteHotel: false,
 };
 
 interface Props {
@@ -101,6 +104,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'createRoomType', icon: <LivingIcon />, text: 'Создать тип комнаты' },
     { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: 'Типы комнат' },
     { option: 'unPublished', icon: <UnpublishedIcon />, text: 'не опубликованные' },
+    { option: 'deleteHotel', icon: <DeleteIcon />, text: 'удалить Отель' },
   ];
 
   return (
@@ -140,8 +144,9 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
               {state.unacceptedOrders && <OrderItems ordersItems={unacceptedOrders} />}
-              {state.hotelStatus && <HotelsStatus />}
+              {state.hotelStatus && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.createRoomType && <FormRoomTypes />}
+              {state.deleteHotel && <HotelsStatus DeleteAction={true} StatusAction={false} />}
               {loadingFetchAllRoomTypes && <Spinner />}
               {state.roomTypes &&
                 roomTypes.map((item) => (

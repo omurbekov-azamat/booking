@@ -273,7 +273,12 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
     if (hotel) {
       if (user && user.role === 'admin') {
         await Hotel.deleteOne({ _id: req.params.id });
-        return res.send({ message: 'Deleted successfully' });
+        return res.send({
+          message: {
+            en: 'Hotel deleted successfully',
+            ru: 'Отель успешно удалён',
+          },
+        });
       }
       if (user && user.role === 'hotel') {
         await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
