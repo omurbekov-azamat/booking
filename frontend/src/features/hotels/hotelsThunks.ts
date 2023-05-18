@@ -35,7 +35,9 @@ export const fetchSearchedHotels = createAsyncThunk<Hotel[], SearchData>('hotels
         '&star=' +
         data.star +
         '&petFriendly=' +
-        data.petFriendly,
+        data.petFriendly +
+        '&type=' +
+        data.propertyType,
     );
     return response.data;
   } catch {

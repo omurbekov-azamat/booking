@@ -17,7 +17,7 @@ const MainPageCard: React.FC<Props> = ({ item, city, type }) => {
     if (city) {
       navigate(`/dashboard/${item.toLowerCase()}/${false}`);
     } else if (type) {
-      navigate(`/dashboard/${false}/${item}`);
+      navigate(`/dashboard/${false}/${item.toLowerCase()}`);
     }
   };
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -8,7 +7,7 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useParams } from 'react-router-dom';
-import { Grid, MenuItem, TextField } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Grid, MenuItem, TextField } from '@mui/material';
 import { cities } from '../../constants';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -39,9 +38,15 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   const catchParams = useParams() as { city: string; propertyType: string };
   const hotels = useAppSelector(selectHotels);
 
+  let catchPropertyType = catchParams.propertyType;
+
+  if (catchPropertyType === 'guest house') {
+    catchPropertyType = 'guestHouse';
+  }
+
   const [state, setState] = useState({
     city: catchParams?.city !== 'false' ? (catchParams.city === 'issyk-kul' ? 'issykKul' : catchParams.city) : '',
-    propertyType: catchParams && catchParams.propertyType !== 'false' ? catchParams.propertyType : '',
+    propertyType: '',
     nonSmokingRooms: false,
     parking: false,
     swimmingPool: false,
@@ -59,13 +64,54 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [checkPropertyType, setCheckPropertyType] = useState([
+    { value: false, id: 'guestHouse', title: t('guestHouse') },
+    { value: false, id: 'hostel', title: t('Hostel') },
+    { value: false, id: 'hotel', title: t('hotel') },
+    { value: false, id: 'pension', title: t('pension') },
+  ]);
+
+  const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setCheckPropertyType((prev) => {
+      const updatedCheckPropertyType = prev.map((item) => {
+        if (item.id === name) {
+          return { ...item, value: checked };
+        }
+        return { ...item, value: false };
+      });
+
+      const result = updatedCheckPropertyType.find((item) => item.value);
+      setState((prev) => ({ ...prev, propertyType: result ? result.id : '' }));
+
+      return updatedCheckPropertyType;
+    });
+  };
+
   useEffect(() => {
     dispatch(fetchSearchedHotels(state));
   }, [dispatch, state]);
 
+  useEffect(() => {
+    if (catchPropertyType !== 'false') {
+      const result = checkPropertyType.find((item) => item.id === catchPropertyType)!;
+      setCheckPropertyType((prev) => {
+        return prev.map((item) => {
+          if (item.title === result.title) {
+            return { ...item, value: true };
+          }
+          return { ...item, value: false };
+        });
+      });
+      setState((prev) => ({ ...prev, propertyType: catchPropertyType }));
+    }
+  }, [catchPropertyType]);
+
   const drawer = (
     <>
-      <Toolbar />
+      <Typography p={2} variant="h5">
+        Filter by:
+      </Typography>
       <Divider />
       <Box p={2}>
         <TextField
@@ -83,6 +129,19 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
             </MenuItem>
           ))}
         </TextField>
+        <Box textAlign="center" mt={2}>
+          <Typography fontWeight="bold">Property Type</Typography>
+          <FormGroup sx={{ p: 1 }}>
+            {Object.entries(checkPropertyType).map(([key, value]) => (
+              <FormControlLabel
+                key={key}
+                control={<Checkbox onChange={handleChangeCheckBox} checked={value.value} name={value.id} />}
+                label={value.title}
+              />
+            ))}
+          </FormGroup>
+          <Divider />
+        </Box>
       </Box>
     </>
   );
@@ -143,7 +202,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
               </Grid>
             ))
           ) : (
-            <Typography>There are no hotels</Typography>
+            <Typography>Empty</Typography>
           )}
           <Grid item container xs={12}>
             <LoadingButton

@@ -156,6 +156,7 @@ export interface SearchData {
   swimmingPool: boolean;
   petFriendly: boolean;
   star: number | null;
+  propertyType: string;
 }
 
 export interface OrderData {
