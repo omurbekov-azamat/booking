@@ -486,11 +486,11 @@ const ApartmentForm = () => {
                       {state.images &&
                         state.images.length > 0 &&
                         state.images.map((image, index) => (
-                          <Grid container key={index} marginLeft={3} mb={2}>
+                          <Grid container key={index} marginLeft={3} mb={2} alignItems={'center'}>
                             <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
-                            <Grid item>
+                            <Grid item ml={3}>
                               <IconButton onClick={() => deleteImg(index)}>
-                                <DeleteForeverSharpIcon />
+                                <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
                               </IconButton>
                             </Grid>
                           </Grid>
