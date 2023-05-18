@@ -115,6 +115,7 @@
   "telephoneNumber": "Telephone number",
   "thereAreNoOrders": "There are no orders",
   "commentary": "Commentary",
+  "comments": "Commentary",
   "status": "Status",
   "hotel": "Hotel",
   "guestHouse": "Guest House",
@@ -127,5 +128,8 @@
   "specialOffersForYou": "Special offers for you",
   "readMore": "Read more",
   "place": "Place",
-  "editHotel": "Edit hotel"
+  "editHotel": "Edit hotel",
+  "premium": "Premium",
+  "business": "Business",
+  "standard": "Standard"
 }
