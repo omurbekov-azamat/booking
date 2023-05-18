@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -7,6 +7,21 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useParams } from 'react-router-dom';
+import { Grid, MenuItem, TextField } from '@mui/material';
+import { cities } from '../../constants';
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchNewPage, fetchSearchedHotels } from './hotelsThunks';
+import {
+  selectFetchSearchedHotelsLoading,
+  selectHotels,
+  selectLoadingFetchNewPage,
+  selectPageOfHotels,
+} from './hotelsSlice';
+import HotelsCard from './components/HotelsCard';
+import { LoadingButton } from '@mui/lab';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const drawerWidth = 240;
 
@@ -15,19 +30,66 @@ interface Props {
 }
 
 const HotelsPage: React.FC<Props> = ({ window }) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const page = useAppSelector(selectPageOfHotels);
+  const fetchSearchHotelsLoading = useAppSelector(selectFetchSearchedHotelsLoading);
+  const fetchNewPageLoading = useAppSelector(selectLoadingFetchNewPage);
 
+  const catchParams = useParams() as { city: string; propertyType: string };
+  const hotels = useAppSelector(selectHotels);
+
+  const [state, setState] = useState({
+    city: catchParams?.city !== 'false' ? (catchParams.city === 'issyk-kul' ? 'issykKul' : catchParams.city) : '',
+    propertyType: catchParams && catchParams.propertyType !== 'false' ? catchParams.propertyType : '',
+    nonSmokingRooms: false,
+    parking: false,
+    swimmingPool: false,
+    petFriendly: false,
+    star: null,
+  });
+
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setState((prev) => ({ ...prev, [name]: value }));
+  };
+
+  useEffect(() => {
+    dispatch(fetchSearchedHotels(state));
+  }, [dispatch, state]);
 
   const drawer = (
     <>
       <Toolbar />
       <Divider />
-      <Typography>here will be filters</Typography>
+      <Box p={2}>
+        <TextField
+          id="standard-select-currency-native"
+          select
+          value={state.city}
+          name="city"
+          onChange={inputChangeHandler}
+          variant="standard"
+          sx={{ mt: 2 }}
+        >
+          {cities.map((city) => (
+            <MenuItem key={city} value={city} sx={{ height: '50px' }}>
+              {t(city)}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Box>
     </>
   );
+
+  const addMore = (pageNum: number) => {
+    dispatch(fetchNewPage(pageNum));
+  };
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -71,7 +133,29 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography paragraph>here will be hotels cards</Typography>
+        {fetchSearchHotelsLoading && <Spinner />}
+        {fetchNewPageLoading && <Spinner />}
+        <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
+          {hotels && hotels.length > 0 ? (
+            hotels.map((el) => (
+              <Grid item xs={12} sm={12} md={6} lg={4} key={el._id} alignItems="stretch">
+                <HotelsCard hotel={el} />
+              </Grid>
+            ))
+          ) : (
+            <Typography>There are no hotels</Typography>
+          )}
+          <Grid item container xs={12}>
+            <LoadingButton
+              loading={fetchNewPageLoading}
+              style={{ margin: 'auto' }}
+              variant="outlined"
+              onClick={() => addMore(page)}
+            >
+              {t('more')}
+            </LoadingButton>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );

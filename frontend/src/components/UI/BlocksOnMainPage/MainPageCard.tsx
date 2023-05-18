@@ -15,7 +15,7 @@ const MainPageCard: React.FC<Props> = ({ item, city, type }) => {
   const navigate = useNavigate();
   const onClickCard = (item: string) => {
     if (city) {
-      navigate(`/dashboard/${item}/${false}`);
+      navigate(`/dashboard/${item.toLowerCase()}/${false}`);
     } else if (type) {
       navigate(`/dashboard/${false}/${item}`);
     }
