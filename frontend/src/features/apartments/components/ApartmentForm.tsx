@@ -40,6 +40,7 @@ import { apiURL } from '../../../constants';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import { selectRoomTypes } from '../../roomTypes/roomTypesSlice';
 import { fetchRoomTypes } from '../../roomTypes/roomTypesThunks';
+import Resizer from 'react-image-file-resizer';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -143,12 +144,33 @@ const ApartmentForm = () => {
     }
   };
 
-  const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const resizeFile = (file: File) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        1920,
+        1080,
+        'jpg',
+        80,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'file',
+      );
+    });
+
+  const fileInputChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
-    setStateImg((prev) => ({
-      ...prev,
-      [name]: files && files[0] ? files[0] : null,
-    }));
+
+    if (files) {
+      const image = await resizeFile(files[0]);
+
+      setStateImg((prev) => ({
+        ...prev,
+        [name]: image,
+      }));
+    }
   };
 
   const onClickAdd = async () => {

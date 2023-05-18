@@ -96,8 +96,6 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     }
   };
 
-  console.log(state);
-
   const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setState((prev) => ({ ...prev, [name]: checked }));
