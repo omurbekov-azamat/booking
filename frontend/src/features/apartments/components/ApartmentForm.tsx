@@ -224,96 +224,105 @@ const ApartmentForm = () => {
     <>
       {loadingFetchOneApartment && <Spinner />}
       <Container component="main" maxWidth="sm">
-        <Typography component="div" variant="h5" textTransform="capitalize" color="salmon" sx={{ mt: 2 }}>
+        <Typography
+          component="div"
+          variant="h5"
+          textTransform="capitalize"
+          color="salmon"
+          sx={{ mt: 2 }}
+          textAlign={'center'}
+        >
           {t('editApartment')}
         </Typography>
         <Box component="form" sx={{ mt: 2 }} onSubmit={onSubmit}>
           <Grid container spacing={2} textAlign="center" direction="column">
-            <Grid item xs>
-              <TextField
-                label={t('roomArea')}
-                type={'number'}
-                name="place"
-                autoComplete="current-place"
-                onChange={inputChangeHandler}
-                value={state.place}
-                required
-              />
-            </Grid>
-            <Grid item xs>
-              <TextField
-                select
-                label={t('roomType')}
-                name="roomTypeId"
-                value={state.roomTypeId}
-                onChange={inputChangeHandler}
-                required
-              >
-                {roomType.map((option) => {
-                  return (
-                    <MenuItem key={option._id} value={option._id}>
-                      {option.name}
-                    </MenuItem>
-                  );
-                })}
-              </TextField>
-            </Grid>
-            <Grid item xs>
-              <Grid container justifyContent={'space-around'}>
-                <h3>{t('price')}</h3>
-                <Grid item xs={3}>
-                  <TextField
-                    type={'number'}
-                    label={'Usd'}
-                    name="usd"
-                    autoComplete="current-usd"
-                    onChange={inputChangeHandler}
-                    value={state.price.usd}
-                    required
-                  />
-                </Grid>
+            <Card sx={{ mt: 5, p: 3 }}>
+              <Grid item xs>
+                <TextField
+                  label={t('roomArea')}
+                  type={'number'}
+                  name="place"
+                  autoComplete="current-place"
+                  onChange={inputChangeHandler}
+                  value={state.place}
+                  required
+                />
+              </Grid>
+              <Grid item xs mt={3}>
+                <TextField
+                  select
+                  label={t('roomType')}
+                  name="roomTypeId"
+                  value={state.roomTypeId}
+                  onChange={inputChangeHandler}
+                  required
+                >
+                  {roomType.map((option) => {
+                    return (
+                      <MenuItem key={option._id} value={option._id}>
+                        {option.name}
+                      </MenuItem>
+                    );
+                  })}
+                </TextField>
+              </Grid>
+              <Grid item xs mt={3}>
+                <Grid container justifyContent={'space-around'}>
+                  <h3>{t('price')}</h3>
+                  <Grid item xs={3}>
+                    <TextField
+                      type={'number'}
+                      label={'Usd'}
+                      name="usd"
+                      autoComplete="current-usd"
+                      onChange={inputChangeHandler}
+                      value={state.price.usd}
+                      required
+                    />
+                  </Grid>
 
-                <Grid item xs={3}>
-                  <TextField
-                    type={'number'}
-                    label={'Kgs'}
-                    name="kgs"
-                    autoComplete="current-kgs"
-                    onChange={inputChangeHandler}
-                    value={state.price.kgs}
-                    required
-                  />
+                  <Grid item xs={3}>
+                    <TextField
+                      type={'number'}
+                      label={'Kgs'}
+                      name="kgs"
+                      autoComplete="current-kgs"
+                      onChange={inputChangeHandler}
+                      value={state.price.kgs}
+                      required
+                    />
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs>
-              <TextField
-                label={t('descriptionInRu')}
-                type="text"
-                name="ru"
-                autoComplete="current-description"
-                value={state.description.ru}
-                onChange={inputChangeHandler}
-                multiline
-                rows={4}
-                required
-              />
-            </Grid>
+              <Grid item xs mt={3}>
+                <TextField
+                  label={t('descriptionInRu')}
+                  type="text"
+                  name="ru"
+                  autoComplete="current-description"
+                  value={state.description.ru}
+                  onChange={inputChangeHandler}
+                  multiline
+                  rows={4}
+                  required
+                />
+              </Grid>
 
-            <Grid item xs>
-              <TextField
-                label={t('descriptionInEn')}
-                type="text"
-                name="en"
-                autoComplete="current-description"
-                value={state.description.en}
-                onChange={inputChangeHandler}
-                multiline
-                rows={4}
-                required
-              />
-            </Grid>
+              <Grid item xs mt={3}>
+                <TextField
+                  label={t('descriptionInEn')}
+                  type="text"
+                  name="en"
+                  autoComplete="current-description"
+                  value={state.description.en}
+                  onChange={inputChangeHandler}
+                  multiline
+                  rows={4}
+                  required
+                />
+              </Grid>
+            </Card>
 
             <Grid container spacing={3}>
               <Grid item xs>
