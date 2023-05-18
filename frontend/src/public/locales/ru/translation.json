@@ -134,5 +134,6 @@
   "business": "Бизнес",
   "standard": "Стандарт",
   "mainPageOfTitleCity": "Киргизия — откройте для себя эту страну",
-  "mainPageOfSubtitle": "В этих популярных местах вы точно найдете что-то для себя."
+  "mainPageOfSubtitleCity": "В этих популярных местах вы точно найдете что-то для себя.",
+  "mainPageOfPropertyType": "Поиск по типу размещения"
 }

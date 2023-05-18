@@ -99,7 +99,7 @@ const SwipeCityCards = () => {
     <>
       <Typography variant="h2">{t('mainPageOfTitleCity')}</Typography>
       <Typography variant="subtitle1" color="grey" mb={2} fontSize="25px">
-        {t('mainPageOfSubtitle')}
+        {t('mainPageOfSubtitleCity')}
       </Typography>
       <SwipeCards items={cities} />;
     </>

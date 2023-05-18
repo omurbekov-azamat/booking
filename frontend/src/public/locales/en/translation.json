@@ -133,5 +133,6 @@
   "business": "Business",
   "standard": "Standard",
   "mainPageOfTitleCity": "Explore Kyrgyzstan",
-  "mainPageOfSubtitle": "These popular destinations have a lot to offer."
+  "mainPageOfSubtitleCity": "These popular destinations have a lot to offer.",
+  "mainPageOfPropertyType": "Browse by property type"
 }
