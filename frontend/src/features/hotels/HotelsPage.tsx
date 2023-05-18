@@ -1,63 +1,79 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchHotels, fetchNewPage } from './hotelsThunks';
-import {
-  selectFetchAllHotelsLoading,
-  selectHotels,
-  selectLoadingFetchNewPage,
-  selectPageOfHotels,
-} from './hotelsSlice';
-import { Grid } from '@mui/material';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import HotelsCard from './components/HotelsCard';
-import SearchHotelForm from './components/SearchHotelForm';
-import { LoadingButton } from '@mui/lab';
-import { useTranslation } from 'react-i18next';
-import SearchField from './components/SearchField/SearchField';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import Toolbar from '@mui/material/Toolbar';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const HotelsPage = () => {
-  const dispatch = useAppDispatch();
-  const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
-  const fetchNewPageLoading = useAppSelector(selectLoadingFetchNewPage);
-  const hotels = useAppSelector(selectHotels);
-  const page = useAppSelector(selectPageOfHotels);
-  const { t } = useTranslation();
-  const catchParams = useParams() as { city: string; propertyType: string };
+const drawerWidth = 240;
 
-  useEffect(() => {
-    dispatch(fetchHotels());
-  }, [dispatch]);
+interface Props {
+  window?: () => Window;
+}
 
-  const addMore = (pageNum: number) => {
-    dispatch(fetchNewPage(pageNum));
+const HotelsPage: React.FC<Props> = ({ window }) => {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  return (
+  const drawer = (
     <>
-      <SearchField />
-      <SearchHotelForm />
-      {fetchAllHotelsLoading && <Spinner />}
-      {fetchNewPageLoading && <Spinner />}
-      <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
-        {hotels &&
-          hotels.map((el) => (
-            <Grid item xs={12} sm={6} lg={4} key={el._id} alignItems="stretch">
-              <HotelsCard hotel={el} />
-            </Grid>
-          ))}
-        <Grid item container xs={12}>
-          <LoadingButton
-            loading={fetchNewPageLoading}
-            style={{ margin: 'auto' }}
-            variant="outlined"
-            onClick={() => addMore(page)}
-          >
-            {t('more')}
-          </LoadingButton>
-        </Grid>
-      </Grid>
+      <Toolbar />
+      <Divider />
+      <Typography>here will be filters</Typography>
     </>
+  );
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, position: 'unset' },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Box component="main" sx={{ flexGrow: 1, pl: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2, display: { sm: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography paragraph>here will be hotels cards</Typography>
+      </Box>
+    </Box>
   );
 };
 
