@@ -22,6 +22,7 @@ const SearchHotelForm = () => {
     swimmingPool: false,
     petFriendly: false,
     star: null,
+    propertyType: '',
   });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -52,6 +53,7 @@ const SearchHotelForm = () => {
       swimmingPool: false,
       petFriendly: false,
       star: null,
+      propertyType: '',
     });
     await dispatch(fetchHotels());
   };

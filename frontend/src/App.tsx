@@ -123,7 +123,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/hotels" element={<HotelsPage />} />
+        <Route path="/dashboard/:city/:propertyType" element={<HotelsPage />} />
         <Route path="/hotels/:id" element={<HotelPage />} />
         <Route path="/:hotelName/:hotelId/apartment/:apartmentId" element={<Apartment />} />
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />

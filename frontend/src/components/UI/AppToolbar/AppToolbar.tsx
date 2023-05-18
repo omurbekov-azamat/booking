@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import RUIcon from '../../../assets/images/russiaIcon.png';
 import USAIcon from '../../../assets/images/usaIcon.png';
 import CurrencySwitcher from '../../../features/currency/CurrencySwitcher';
+import SearchField from '../../../features/hotels/components/SearchField/SearchField';
 
 const AppToolbar = () => {
   const user = useAppSelector(selectUser);
@@ -33,13 +34,13 @@ const AppToolbar = () => {
           <Container maxWidth="xl">
             <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
               <Grid item xs={12} sm={12} md={4} lg={6} xl={6}>
-                <Grid container>
+                <Grid container alignItems="center">
                   <Typography variant="h6" component="div" fontWeight="bold" mr={3}>
                     <Link to="/">Booking</Link>
                   </Typography>
-                  <Typography variant="h6" component="div" mr={1} fontWeight="bold">
-                    <Link to="/hotels">Hotels</Link>
-                  </Typography>
+                  <Box mr={1}>
+                    <SearchField />
+                  </Box>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={12} md={2} lg={3} xl={3}>

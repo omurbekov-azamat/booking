@@ -156,6 +156,7 @@ export interface SearchData {
   swimmingPool: boolean;
   petFriendly: boolean;
   star: number | null;
+  propertyType: string;
 }
 
 export interface OrderData {
@@ -217,4 +218,10 @@ export interface CabinetState {
 
 export interface RoomTypesMutation {
   name: string;
+}
+
+export interface BlockOnMainPage {
+  name: string;
+  link: string;
+  lang: string;
 }

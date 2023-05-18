@@ -170,6 +170,7 @@ export const hotelsSlice = createSlice({
       state.loadingMatchHotel = false;
     });
     builder.addCase(fetchSearchedHotels.pending, (state) => {
+      state.hotels = [];
       state.fetchSearchedHotelsLoading = true;
       state.error = false;
     });

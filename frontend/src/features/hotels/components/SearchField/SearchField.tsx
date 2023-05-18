@@ -51,7 +51,7 @@ const SearchField = () => {
             isOptionEqualToValue={(option, value) => option._id === value._id}
             onChange={onAutocompleteChange}
             value={selectedHotel}
-            sx={{ width: 300 }}
+            sx={{ width: 200 }}
             renderInput={(params) => <TextField {...params} onChange={inputChangeHandler} label={t('search')} />}
           />
         </Grid>
