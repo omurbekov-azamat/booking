@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { ValidationError } from '../../../types';
-import SearchIcon from '@mui/icons-material/Search';
 import { Button, Grid, TextField } from '@mui/material';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -55,8 +55,8 @@ const FileInput: React.FC<Props> = ({ onChange, name, label, type, error }) => {
           />
         </Grid>
         <Grid item>
-          <Button type="button" variant="contained" onClick={activateInput}>
-            <SearchIcon />
+          <Button type="button" onClick={activateInput}>
+            <ZoomInIcon fontSize={'large'} sx={{ color: 'rgba(17,92,23,0.87)' }} />
           </Button>
         </Grid>
       </Grid>

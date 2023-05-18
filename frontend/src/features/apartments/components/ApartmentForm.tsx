@@ -25,8 +25,6 @@ import {
 } from '../apartmentSlice';
 import { createApartment, editApartment, fetchOneApartment, removeApartmentImage } from '../apartmentThunks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import BalconyIcon from '@mui/icons-material/Balcony';
@@ -41,6 +39,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import { selectRoomTypes } from '../../roomTypes/roomTypesSlice';
 import { fetchRoomTypes } from '../../roomTypes/roomTypesThunks';
 import Resizer from 'react-image-file-resizer';
+import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
+import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 
 const ApartmentForm = () => {
   const [state, setState] = useState<ApartmentMutation>({
@@ -463,7 +463,8 @@ const ApartmentForm = () => {
                 <Grid container justifyContent={'end'} mt={3}>
                   <Grid item>
                     <IconButton onClick={onClickAdd}>
-                      <AddCircleOutlineIcon />
+                      <DownloadSharpIcon fontSize="large" sx={{ color: 'rgba(17,92,23,0.87)' }} />
+                      <Typography color={'rgba(17,92,23,0.87)'}>{t('download')}</Typography>
                     </IconButton>
                   </Grid>
                   <Grid container direction="column">
@@ -471,11 +472,11 @@ const ApartmentForm = () => {
                       {oneApartment?.images &&
                         idEditApartment &&
                         oneApartment.images.map((image, index) => (
-                          <Grid container key={index} marginLeft={3} mb={2}>
+                          <Grid container key={index} marginLeft={3} mb={2} alignItems={'center'}>
                             <img src={apiURL + '/' + image} style={{ width: '100px' }} alt={image} />
-                            <Grid item>
+                            <Grid item ml={3}>
                               <IconButton onClick={() => deleteOldImg(idEditApartment, index)}>
-                                <DeleteIcon />
+                                <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
                               </IconButton>
                             </Grid>
                           </Grid>
@@ -489,7 +490,7 @@ const ApartmentForm = () => {
                             <img src={URL.createObjectURL(image)} style={{ width: '100px' }} alt={image.name} />
                             <Grid item>
                               <IconButton onClick={() => deleteImg(index)}>
-                                <DeleteIcon />
+                                <DeleteForeverSharpIcon />
                               </IconButton>
                             </Grid>
                           </Grid>

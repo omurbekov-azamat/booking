@@ -140,5 +140,6 @@
   "propertyType": "Тип размещения",
   "filterBy": "Все фильтры:",
   "empty": "Пусто",
-  "editApartment": "Изменить апартамент"
+  "editApartment": "Изменить апартамент",
+  "download": "Загрузить"
 }

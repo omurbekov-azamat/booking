@@ -139,5 +139,6 @@
   "propertyType": "Property type",
   "filterBy": "Filter by:",
   "empty": "Empty",
-  "editApartment": "Edit apartment"
+  "editApartment": "Edit apartment",
+  "download": "Download"
 }
