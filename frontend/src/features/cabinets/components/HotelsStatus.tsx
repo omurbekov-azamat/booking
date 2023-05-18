@@ -7,7 +7,12 @@ import { getCabinetHotels } from '../../hotels/hotelsThunks';
 import { selectCabinetHotels, selectCabinetLoading } from '../../hotels/hotelsSlice';
 import HotelsStatusChanger from './HotelsStatusChanger';
 
-const HotelsStatus = () => {
+interface props {
+  DeleteAction: boolean;
+  StatusAction: boolean;
+}
+
+const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
   const [name, setName] = useState('');
   const dispatch = useAppDispatch();
   const hotels = useAppSelector(selectCabinetHotels);
@@ -42,7 +47,15 @@ const HotelsStatus = () => {
       ) : hotels.length < 1 ? (
         'нету отелей'
       ) : (
-        hotels.map((el) => <HotelsStatusChanger hotel={el} key={el._id} />)
+        hotels.map((el) => (
+          <HotelsStatusChanger
+            match={name}
+            DeleteAction={DeleteAction}
+            StatusAction={StatusAction}
+            hotel={el}
+            key={el._id}
+          />
+        ))
       )}
     </div>
   );
