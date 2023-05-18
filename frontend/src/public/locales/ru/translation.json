@@ -16,7 +16,7 @@
   "createApartment": "Создать апартаменты",
   "hotelName": "Название отеля",
   "address": "Адрес",
-  "stars": "Звёзды 0-5",
+  "stars": "звезды",
   "image": "Картинка",
   "create": "Создать",
   "bishkek": "Бишкек",
@@ -135,5 +135,9 @@
   "standard": "Стандарт",
   "mainPageOfTitleCity": "Киргизия — откройте для себя эту страну",
   "mainPageOfSubtitleCity": "В этих популярных местах вы точно найдете что-то для себя.",
-  "mainPageOfPropertyType": "Поиск по типу размещения"
+  "mainPageOfPropertyType": "Поиск по типу размещения",
+  "star": "звезда",
+  "propertyType": "Тип размещения",
+  "filterBy": "Все фильтры:",
+  "empty": "Пусто"
 }

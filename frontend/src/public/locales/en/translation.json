@@ -16,7 +16,7 @@
   "createApartment": "Create apartment",
   "hotelName": "Hotel name",
   "address": "Address",
-  "stars": "Stars 0-5",
+  "stars": "stars",
   "image": "Image",
   "create": "Create",
   "bishkek": "Bishkek",
@@ -134,5 +134,9 @@
   "standard": "Standard",
   "mainPageOfTitleCity": "Explore Kyrgyzstan",
   "mainPageOfSubtitleCity": "These popular destinations have a lot to offer.",
-  "mainPageOfPropertyType": "Browse by property type"
+  "mainPageOfPropertyType": "Browse by property type",
+  "star": "star",
+  "propertyType": "Property type",
+  "filterBy": "Filter by:",
+  "empty": "Empty"
 }

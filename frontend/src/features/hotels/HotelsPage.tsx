@@ -21,6 +21,7 @@ import {
 import HotelsCard from './components/HotelsCard';
 import { LoadingButton } from '@mui/lab';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { SearchData } from '../../types';
 
 const drawerWidth = 240;
 
@@ -44,7 +45,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
     catchPropertyType = 'guestHouse';
   }
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<SearchData>({
     city: catchParams?.city !== 'false' ? (catchParams.city === 'issyk-kul' ? 'issykKul' : catchParams.city) : '',
     propertyType: '',
     nonSmokingRooms: false,
@@ -70,6 +71,14 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
     { id: 'swimmingPool', title: t('pool') },
     { id: 'petFriendly', title: t('petFriendly') },
   ];
+
+  const [stars, setStars] = useState([
+    { number: '1', title: `1 ${t('star')}`, value: false },
+    { number: '2', title: `2 ${t('stars')}`, value: false },
+    { number: '3', title: `3 ${t('stars')}`, value: false },
+    { number: '4', title: `4 ${t('stars')}`, value: false },
+    { number: '5', title: `5 ${t('stars')}`, value: false },
+  ]);
 
   const [checkPropertyType, setCheckPropertyType] = useState([
     { value: false, id: 'guestHouse', title: t('guestHouse') },
@@ -100,6 +109,19 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
     setState((prev) => ({ ...prev, [name]: checked }));
   };
 
+  const handleChooseStars = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setStars((prev) => {
+      return prev.map((item) => {
+        if (item.number === name) {
+          return { ...item, value: checked };
+        }
+        return { ...item, value: false };
+      });
+    });
+    setState((prev) => ({ ...prev, star: checked ? parseFloat(name) : null }));
+  };
+
   useEffect(() => {
     dispatch(fetchSearchedHotels(state));
   }, [dispatch, state]);
@@ -122,7 +144,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   const drawer = (
     <>
       <Typography p={2} variant="h5">
-        Filter by:
+        {t('filterBy')}
       </Typography>
       <Divider />
       <Box p={2}>
@@ -134,6 +156,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           onChange={inputChangeHandler}
           variant="standard"
           sx={{ mt: 2 }}
+          label={t('city')}
         >
           {cities.map((city) => (
             <MenuItem key={city} value={city} sx={{ height: '50px' }}>
@@ -142,7 +165,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           ))}
         </TextField>
         <Box textAlign="center" mt={2}>
-          <Typography fontWeight="bold">Property Type</Typography>
+          <Typography fontWeight="bold">{t('propertyType')}</Typography>
           <FormGroup sx={{ p: 1 }}>
             {Object.entries(checkPropertyType).map(([key, value]) => (
               <FormControlLabel
@@ -162,6 +185,19 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
                 key={facility.id}
                 control={<Checkbox onChange={handleChooseFacilities} name={facility.id} />}
                 label={facility.title}
+              />
+            ))}
+          </FormGroup>
+          <Divider />
+        </Box>
+        <Box textAlign="center" mt={2}>
+          <Typography fontWeight="bold">{t('propertyRating')}</Typography>
+          <FormGroup sx={{ p: 1 }}>
+            {stars.map((star) => (
+              <FormControlLabel
+                key={star.title}
+                control={<Checkbox onChange={handleChooseStars} name={star.number} checked={star.value} />}
+                label={star.title}
               />
             ))}
           </FormGroup>
@@ -227,7 +263,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
               </Grid>
             ))
           ) : (
-            <Typography>Empty</Typography>
+            <Typography>{t('empty')}</Typography>
           )}
           <Grid item container xs={12}>
             <LoadingButton

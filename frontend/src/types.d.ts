@@ -223,4 +223,5 @@ export interface RoomTypesMutation {
 export interface BlockOnMainPage {
   name: string;
   link: string;
+  lang: string;
 }
