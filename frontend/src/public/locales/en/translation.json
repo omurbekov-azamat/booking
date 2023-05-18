@@ -1,8 +1,8 @@
 {
   "profile": "Profile",
   "logout": "Logout",
-  "signIn": "Sign in",
-  "signUp": "Sign up",
+  "signIn": "Enter",
+  "signUp": "Register",
   "hello": "hello",
   "password": "Password",
   "email": "Email",
@@ -138,5 +138,7 @@
   "star": "star",
   "propertyType": "Property type",
   "filterBy": "Filter by:",
-  "empty": "Empty"
+  "empty": "Empty",
+  "editApartment": "Edit apartment",
+  "download": "Download"
 }
