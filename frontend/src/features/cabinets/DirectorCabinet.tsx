@@ -20,6 +20,13 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import HotelsStatus from './components/HotelsStatus';
 import { unsetCabinetHotels } from '../hotels/hotelsSlice';
 import OrderItems from '../orders/components/OrderItems';
+import { CabinetState } from '../../types';
+
+const initialState: CabinetState = {
+  openAdmins: false,
+  openUsers: false,
+  openHotels: false,
+};
 
 const DirectorCabinet = () => {
   const dispatch = useAppDispatch();
@@ -27,9 +34,8 @@ const DirectorCabinet = () => {
   const admins = useAppSelector(selectAdmins);
   const adminOrders = useAppSelector(selectAdminMyOrders);
   const { t } = useTranslation();
-  const [openAdmins, setOpenAdmins] = React.useState(false);
-  const [openUsers, setOpenUsers] = React.useState(false);
-  const [openHotels, setOpenHotels] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
+  const [state, setState] = React.useState<CabinetState>(initialState);
 
   useEffect(() => {
     dispatch(getAdmins());
@@ -39,28 +45,16 @@ const DirectorCabinet = () => {
     dispatch(getForAdminHisOrders(id));
   };
 
-  const handleClickShowUsers = () => {
-    dispatch(unsetCabinetUsers());
-    dispatch(unsetCabinetHotels());
-    setOpenAdmins(false);
-    setOpenUsers(true);
-    setOpenHotels(false);
-  };
+  const options = [
+    { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
+    { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
+  ];
 
-  const handleClickShowHotels = () => {
+  const handleClickOption = (option: string, index: number) => {
+    setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
+    setSelectedIndex(index);
     dispatch(unsetCabinetUsers());
     dispatch(unsetCabinetHotels());
-    setOpenAdmins(false);
-    setOpenUsers(false);
-    setOpenHotels(true);
-  };
-
-  const handleClickShowAdmins = () => {
-    dispatch(unsetCabinetUsers());
-    dispatch(unsetCabinetHotels());
-    setOpenAdmins(!openAdmins);
-    setOpenUsers(false);
-    setOpenHotels(false);
   };
 
   return (
@@ -83,26 +77,28 @@ const DirectorCabinet = () => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                <ListItemButton onClick={handleClickShowUsers}>
-                  <ListItemIcon>
-                    <AssignmentIndIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Статус пользователей" />
-                </ListItemButton>
-                <ListItemButton onClick={handleClickShowHotels}>
-                  <ListItemIcon>
-                    <LocationCityIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Статус отелей" />
-                </ListItemButton>
-                <ListItemButton onClick={handleClickShowAdmins}>
+                {options.map((option, index) => (
+                  <ListItemButton
+                    key={index}
+                    selected={selectedIndex === index}
+                    onClick={() => handleClickOption(option.option, index)}
+                  >
+                    <ListItemIcon>{option.icon}</ListItemIcon>
+                    <ListItemText primary={option.text} />
+                  </ListItemButton>
+                ))}
+                <ListItemButton
+                  key={options.length}
+                  selected={selectedIndex === options.length}
+                  onClick={() => handleClickOption('openAdmins', options.length)}
+                >
                   <ListItemIcon>
                     <PeopleAltIcon />
                   </ListItemIcon>
                   <ListItemText primary="Admins" />
-                  {openAdmins ? <ExpandLess /> : <ExpandMore />}
+                  {state.openAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={openAdmins} timeout="auto" unmountOnExit>
+                <Collapse in={state.openAdmins} timeout="auto" unmountOnExit>
                   {admins.map((admin) => (
                     <List key={admin._id} component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(admin._id)}>
@@ -117,13 +113,9 @@ const DirectorCabinet = () => {
               </List>
             </Grid>
             <Grid item xs>
-              {openAdmins ? (
-                <OrderItems ordersItems={adminOrders} />
-              ) : openUsers ? (
-                <UsersStatus />
-              ) : (
-                openHotels && <HotelsStatus />
-              )}
+              {state.openAdmins && <OrderItems ordersItems={adminOrders} />}
+              {state.openUsers && <UsersStatus />}
+              {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
             </Grid>
           </Grid>
         </CardContent>
