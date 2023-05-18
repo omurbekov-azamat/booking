@@ -64,6 +64,13 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
+  const facilities = [
+    { id: 'nonSmokingRooms', title: t('noneSmokingRoom') },
+    { id: 'parking', title: t('parking') },
+    { id: 'swimmingPool', title: t('pool') },
+    { id: 'petFriendly', title: t('petFriendly') },
+  ];
+
   const [checkPropertyType, setCheckPropertyType] = useState([
     { value: false, id: 'guestHouse', title: t('guestHouse') },
     { value: false, id: 'hostel', title: t('Hostel') },
@@ -86,6 +93,11 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
 
       return updatedCheckPropertyType;
     });
+  };
+
+  const handleChooseFacilities = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setState((prev) => ({ ...prev, [name]: checked }));
   };
 
   useEffect(() => {
@@ -137,6 +149,19 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
                 key={key}
                 control={<Checkbox onChange={handleChangeCheckBox} checked={value.value} name={value.id} />}
                 label={value.title}
+              />
+            ))}
+          </FormGroup>
+          <Divider />
+        </Box>
+        <Box textAlign="center" mt={2}>
+          <Typography fontWeight="bold">{t('facilities')}</Typography>
+          <FormGroup sx={{ p: 1 }}>
+            {facilities.map((facility) => (
+              <FormControlLabel
+                key={facility.id}
+                control={<Checkbox onChange={handleChooseFacilities} name={facility.id} />}
+                label={facility.title}
               />
             ))}
           </FormGroup>

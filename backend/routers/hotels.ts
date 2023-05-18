@@ -75,7 +75,7 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelsRes = await Hotel.find({ name: { $regex: new RegExp(match, 'i') } }).limit(10);
       return res.send(hotelsRes);
     }
-    if (queryOwner || city || type) {
+    if (req.query) {
       if (queryOwner) {
         const hotelsRes = await Hotel.find({ userId: queryOwner });
         return res.send(hotelsRes);
