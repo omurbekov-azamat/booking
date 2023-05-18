@@ -7,14 +7,16 @@ interface Props {
   props: {
     [key: string]: BlockOnMainPage[];
   };
+  city?: boolean;
+  type?: boolean;
 }
 
-const MainPageCards: React.FC<Props> = ({ props }) => {
+const MainPageCards: React.FC<Props> = ({ props, city, type }) => {
   const cities = Object.values(props).flat();
   return (
     <Grid container spacing={2}>
       {cities.map((item) => (
-        <MainPageCard key={item.name} item={item} />
+        <MainPageCard key={item.name} item={item} city={city} type={type} />
       ))}
     </Grid>
   );

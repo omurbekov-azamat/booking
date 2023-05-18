@@ -10,9 +10,11 @@ import MainPageCards from './MainPageCards';
 
 interface Props {
   items: any;
+  city?: boolean;
+  type?: boolean;
 }
 
-const SwipeCards: React.FC<Props> = ({ items }) => {
+const SwipeCards: React.FC<Props> = ({ items, city, type }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = items.length;
@@ -37,7 +39,7 @@ const SwipeCards: React.FC<Props> = ({ items }) => {
           bgcolor: 'background.default',
         }}
       ></Paper>
-      <MainPageCards props={items[activeStep]} />
+      <MainPageCards props={items[activeStep]} city={city} type={type} />
       <MobileStepper
         variant="text"
         steps={maxSteps}

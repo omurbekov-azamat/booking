@@ -32,7 +32,7 @@ const SwipePropertyTypeCards = () => {
       <Typography variant="h2" mb={2}>
         {t('mainPageOfPropertyType')}
       </Typography>
-      <SwipeCards items={propertyTypes} />
+      <SwipeCards items={propertyTypes} type={true} />
     </>
   );
 };

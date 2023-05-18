@@ -14,6 +14,7 @@ import SearchHotelForm from './components/SearchHotelForm';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import SearchField from './components/SearchField/SearchField';
+import { useParams } from 'react-router-dom';
 
 const HotelsPage = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ const HotelsPage = () => {
   const hotels = useAppSelector(selectHotels);
   const page = useAppSelector(selectPageOfHotels);
   const { t } = useTranslation();
+  const catchParams = useParams() as { city: string; propertyType: string };
 
   useEffect(() => {
     dispatch(fetchHotels());
