@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchHotels, removeHotel, togglePublishedHotel } from '../../hotels/hotelsThunks';
+import { fetchHotels, fetchUnPublishedHotels, removeHotel, togglePublishedHotel } from '../../hotels/hotelsThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import { Grid } from '@mui/material';
@@ -16,6 +16,7 @@ const MyHotels: React.FC<Props> = ({ hotels }) => {
 
   const unPublishButton = async (id: string) => {
     await dispatch(togglePublishedHotel(id));
+    await dispatch(fetchUnPublishedHotels());
     await dispatch(fetchHotels(user?._id));
   };
 
@@ -36,7 +37,6 @@ const MyHotels: React.FC<Props> = ({ hotels }) => {
               onPublishBtnClick={() => unPublishButton(hotel._id)}
               onDeleteBtnClick={() => deleteButton(hotel._id)}
             />
-            ;
           </Grid>
         );
       })}
