@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 import SelectType from '../../../components/UI/SelectType/SelectType';
-// import { Resizer, FileInput, BlobResult } from 'react-image-file-resizer';
 import Resizer from 'react-image-file-resizer';
 
 interface Props {
@@ -72,15 +71,15 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
-        300,
-        300,
-        'JPEG',
-        10,
+        1920,
+        1080,
+        'jpg',
+        80,
         0,
         (uri) => {
           resolve(uri);
         },
-        'blob',
+        'file',
       );
     });
 
@@ -88,9 +87,7 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     const { name, files } = e.target;
 
     if (files) {
-      const file = files[0];
-      const image = await resizeFile(file);
-      console.log(image);
+      const image = await resizeFile(files[0]);
 
       setState((prev) => ({
         ...prev,
@@ -98,6 +95,8 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
       }));
     }
   };
+
+  console.log(state);
 
   const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
