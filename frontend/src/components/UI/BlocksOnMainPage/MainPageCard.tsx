@@ -2,13 +2,13 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, Grid, Typography } from '@mui/material';
-import { CityOnMainPage } from '../../../types';
+import { BlockOnMainPage } from '../../../types';
 
 interface Props {
-  item: CityOnMainPage;
+  item: BlockOnMainPage;
 }
 
-const CityCard: React.FC<Props> = ({ item }) => {
+const MainPageCard: React.FC<Props> = ({ item }) => {
   return (
     <Grid item xs={12} sm={6} md={3}>
       <Card style={{ maxWidth: '350px', maxHeight: 'auto' }}>
@@ -35,4 +35,4 @@ const CityCard: React.FC<Props> = ({ item }) => {
   );
 };
 
-export default CityCard;
+export default MainPageCard;

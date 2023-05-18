@@ -219,7 +219,7 @@ export interface RoomTypesMutation {
   name: string;
 }
 
-export interface CityOnMainPage {
+export interface BlockOnMainPage {
   name: string;
   link: string;
 }
