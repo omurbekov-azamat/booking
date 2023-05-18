@@ -13,6 +13,7 @@ import {
   removeHotel,
   togglePublishedHotel,
   changeStatusHotels,
+  fetchUnPublishedHotels,
 } from './hotelsThunks';
 import type { GlobalSuccess, Hotel, ValidationError } from '../../types';
 
@@ -21,6 +22,8 @@ interface HotelsState {
   hotels: Hotel[];
   fetchOneHotelLoading: boolean;
   hotel: Hotel | null;
+  unpublished: Hotel[];
+  fetchUnpublishedLoading: boolean;
   fetchNewPageLoading: boolean;
   page: number;
   loadingMatchHotel: boolean;
@@ -44,6 +47,8 @@ const initialState: HotelsState = {
   fetchAllHotelsLoading: false,
   hotels: [],
   fetchOneHotelLoading: false,
+  unpublished: [],
+  fetchUnpublishedLoading: false,
   hotel: null,
   fetchNewPageLoading: false,
   page: 1,
@@ -199,6 +204,16 @@ export const hotelsSlice = createSlice({
     builder.addCase(getCabinetHotels.rejected, (state) => {
       state.cabinetLoading = false;
     });
+    builder.addCase(fetchUnPublishedHotels.pending, (state) => {
+      state.fetchUnpublishedLoading = true;
+    });
+    builder.addCase(fetchUnPublishedHotels.fulfilled, (state, { payload: hotels }) => {
+      state.fetchUnpublishedLoading = false;
+      state.unpublished = hotels;
+    });
+    builder.addCase(fetchUnPublishedHotels.rejected, (state) => {
+      state.fetchUnpublishedLoading = false;
+    });
     builder.addCase(getRecommendedHotels.pending, (state) => {
       state.fetchRecommendedHotelsLoading = true;
     });
@@ -238,3 +253,5 @@ export const selectCabinetLoading = (state: RootState) => state.hotels.cabinetLo
 export const selectRecommendedHotels = (state: RootState) => state.hotels.recommendedHotels;
 export const selectFetchRecommendedHotelsLoading = (state: RootState) => state.hotels.fetchRecommendedHotelsLoading;
 export const selectHotelsSuccess = (state: RootState) => state.hotels.hotelsSuccess;
+export const selectUnpublishedHotels = (state: RootState) => state.hotels.unpublished;
+export const selectUnpublishedLoading = (state: RootState) => state.hotels.fetchUnpublishedLoading;

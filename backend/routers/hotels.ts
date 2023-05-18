@@ -258,6 +258,15 @@ hotelsRouter.get('/get/favorites', auth, permit('user'), async (req, res, next) 
   }
 });
 
+hotelsRouter.get('/get/unPublished', auth, permit('admin'), async (req, res, next) => {
+  try {
+    const hotels = await Hotel.find({ isPublished: false });
+    return res.send(hotels);
+  } catch (e) {
+    next(e);
+  }
+});
+
 hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;

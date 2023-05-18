@@ -2,15 +2,21 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getForAdminHisOrders, getOrders } from '../orders/ordersThunks';
-import { fetchHotels } from '../hotels/hotelsThunks';
+import { fetchHotels, fetchUnPublishedHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { selectAdminMyOrders, selectOrders } from '../orders/ordersSlice';
-import { selectFetchAllHotelsLoading, selectHotels } from '../hotels/hotelsSlice';
+import {
+  selectFetchAllHotelsLoading,
+  selectHotels,
+  selectUnpublishedHotels,
+  selectUnpublishedLoading,
+} from '../hotels/hotelsSlice';
 import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import WorkIcon from '@mui/icons-material/Work';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
+import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HotelForm from '../hotels/components/HotelForm';
@@ -54,12 +60,17 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
   const roomTypes = useAppSelector(selectRoomTypes);
   const loadingFetchAllRoomTypes = useAppSelector(selectLoadingFetchAllRoomTypes);
+  const loadingFetchUnpublished = useAppSelector(selectUnpublishedLoading);
+  const unpublished = useAppSelector(selectUnpublishedHotels);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
 
   useEffect(() => {
     if (user) {
+      if (state.unPublished) {
+        dispatch(fetchUnPublishedHotels());
+      }
       if (state.myHotels) {
         dispatch(fetchHotels(user._id));
       }
@@ -73,7 +84,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
         dispatch(fetchRoomTypes());
       }
     }
-  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders, state.roomTypes]);
+  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders, state.roomTypes, state.unPublished]);
 
   const handleClickOption = (option: string, index: number) => {
     setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
@@ -81,14 +92,15 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   };
 
   const options = [
-    { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
-    { option: 'myOrders', icon: <WorkIcon />, text: t('myOrders') },
-    { option: 'unacceptedOrders', icon: <WorkspacesIcon />, text: t('unacceptedOrders') },
-    { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
-    { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
+    { option: 'myInfo', icon: <PersonIcon />, text: t('моя информация') },
+    { option: 'myOrders', icon: <WorkIcon />, text: t('мои заказы') },
+    { option: 'unacceptedOrders', icon: <WorkspacesIcon />, text: 'не принятые заказы' },
+    { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('мои отели') },
+    { option: 'createHotel', icon: <AddCircleIcon />, text: t('создать отель') },
     { option: 'hotelStatus', icon: <LocationCityIcon />, text: 'Статус отелей' },
     { option: 'createRoomType', icon: <LivingIcon />, text: 'Создать тип комнаты' },
     { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: 'Типы комнат' },
+    { option: 'unPublished', icon: <UnpublishedIcon />, text: 'не опубликованные' },
   ];
 
   return (
@@ -123,6 +135,8 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.myOrders && <OrderItems ordersItems={orders} />}
               {state.myHotels && <MyHotels hotels={hotelsState} />}
               {fetchAllHotelsLoading && <Spinner />}
+              {loadingFetchUnpublished && <Spinner />}
+              {state.unPublished && <MyHotels hotels={unpublished} />}
               {state.createHotel && <HotelForm />}
               {state.myInfo && <MyInformation />}
               {state.unacceptedOrders && <OrderItems ordersItems={unacceptedOrders} />}
