@@ -24,8 +24,19 @@ const FormRoomTypes = () => {
   };
 
   const submitFormHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await dispatch(createNewRoomType(state)).unwrap();
+    try {
+      e.preventDefault();
+      await dispatch(createNewRoomType(state)).unwrap();
+      setState((prev) => {
+        return {
+          ...prev,
+          ru: '',
+          en: '',
+        };
+      });
+    } catch {
+      throw new Error();
+    }
   };
 
   const getFieldError = (fieldName: string) => {
@@ -41,7 +52,7 @@ const FormRoomTypes = () => {
       <Grid container spacing={5} flexDirection="column" textAlign="center">
         <Grid item>
           <Typography variant="h5" textTransform="uppercase">
-            Создать тип компнаты
+            {t('createRoomType')}
           </Typography>
         </Grid>
         <Grid item>
