@@ -69,7 +69,7 @@ const ApartmentForm = () => {
   const [stateImg, setStateImg] = useState<ImgType>({
     image: null,
   });
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectApartmentError);
   const loadingCreateApartment = useAppSelector(selectLoadingCreateApartment);
@@ -260,7 +260,7 @@ const ApartmentForm = () => {
                   {roomType.map((option) => {
                     return (
                       <MenuItem key={option._id} value={option._id}>
-                        {option.name}
+                        {i18n.language === 'en' ? option.name.en : option.name.ru}
                       </MenuItem>
                     );
                   })}

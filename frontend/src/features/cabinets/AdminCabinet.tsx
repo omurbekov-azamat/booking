@@ -55,7 +55,7 @@ interface Props {
 
 const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const user = useAppSelector(selectUser);
   const hotelsState = useAppSelector(selectHotels);
   const orders = useAppSelector(selectAdminMyOrders);
@@ -151,7 +151,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.roomTypes &&
                 roomTypes.map((item) => (
                   <Typography key={item._id} textTransform="capitalize">
-                    {item.name}
+                    {i18n.language === 'en' ? item.name.en : item.name.ru}
                   </Typography>
                 ))}
             </Grid>

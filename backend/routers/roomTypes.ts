@@ -10,7 +10,10 @@ const roomTypesRouter = express.Router();
 roomTypesRouter.post('/', auth, permit('admin'), async (req, res, next) => {
   try {
     const room = await RoomType.create({
-      name: req.body.name,
+      name: {
+        ru: req.body.ru,
+        en: req.body.en,
+      },
     });
     return res.send(room);
   } catch (e) {

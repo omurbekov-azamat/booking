@@ -212,7 +212,10 @@ export interface CommentMutation {
 
 export interface IRoomType {
   _id: string;
-  name: string;
+  name: {
+    en: string;
+    ru: string;
+  };
 }
 
 export interface CabinetState {
