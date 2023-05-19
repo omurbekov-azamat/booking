@@ -14,7 +14,10 @@ export interface IUser {
 }
 
 export interface IRoomType {
-  name: string;
+  name: {
+    ru: string;
+    en: string;
+  };
 }
 
 export interface HotelFact {
