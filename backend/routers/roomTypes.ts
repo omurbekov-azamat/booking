@@ -45,7 +45,12 @@ roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
     room.name = req.body.name;
 
     await room.save();
-    return res.send(room);
+    return res.send({
+      message: {
+        en: 'Room type updated successfully',
+        ru: 'тип комнаты успешно обновлен',
+      },
+    });
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(e);
@@ -61,7 +66,12 @@ roomTypesRouter.delete('/:id', auth, permit('admin'), async (req, res, next) => 
 
     if (room) {
       await RoomType.deleteOne({ _id: req.params.id });
-      return res.send({ message: 'Deleted successfully' });
+      return res.send({
+        message: {
+          en: 'Room type deleted successfully',
+          ru: 'тип комнаты успешно удален',
+        },
+      });
     }
   } catch (e) {
     return next(e);

@@ -167,7 +167,12 @@ apartmentsRouter.delete('/:id/images/:index', auth, permit('admin', 'hotel'), as
       if (apartment.images && index >= 0 && index < apartment.images.length) {
         apartment.images.splice(index, 1);
         await apartment.save();
-        res.send({ message: 'Deleted successfully' });
+        res.send({
+          message: {
+            en: 'Image deleted successfully',
+            ru: 'картинка успешно удалена',
+          },
+        });
       } else {
         return res.status(404).send({ message: 'Not found image!' });
       }

@@ -29,11 +29,13 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       type: req.body.type,
     });
 
+    const hotelName = req.body.name;
+
     await hotel.save();
     return res.send({
       message: {
-        en: 'Hotel created successfully',
-        ru: 'Отель успешно создан',
+        en: hotelName + 'Hotel created successfully',
+        ru: hotelName + 'Отель успешно создан',
       },
     });
   } catch (error) {
@@ -207,8 +209,8 @@ hotelsRouter.patch('/status/:id', auth, permit('director', 'admin'), async (req,
       await Hotel.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
       res.send({
         message: {
-          en: 'Hotel status successfully',
-          ru: 'статус отеля успешно изменен',
+          en: currentHotel.name +  ' status changed successfully',
+          ru:  'статус ' + currentHotel.name +  ' успешно изменен',
         },
       });
     } else {
@@ -234,8 +236,8 @@ hotelsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, re
     } else {
       res.send({
         message: {
-          en: 'Hotel status successfully changed',
-          ru: 'статус отеля успешно изменен',
+          en: 'Published',
+          ru: 'Опубликован',
         },
       });
     }
@@ -276,8 +278,8 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
         await Hotel.deleteOne({ _id: req.params.id });
         return res.send({
           message: {
-            en: 'Hotel deleted successfully',
-            ru: 'Отель успешно удалён',
+            en: hotel.name + ' deleted successfully',
+            ru: hotel.name + ' успешно удалён',
           },
         });
       }
@@ -285,8 +287,8 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
         await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
         return res.send({
           message: {
-            en: 'Hotel deleted successfully',
-            ru: 'Отель успешно удалён',
+            en: hotel.name + ' deleted successfully',
+            ru: hotel.name + ' успешно удалён',
           },
         });
       }
