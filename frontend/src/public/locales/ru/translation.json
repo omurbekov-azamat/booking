@@ -141,5 +141,6 @@
   "filterBy": "Все фильтры:",
   "empty": "Пусто",
   "editApartment": "Изменить апартамент",
-  "download": "Загрузить"
+  "download": "Загрузить",
+  "createRoomType": "Создать тип комнаты"
 }

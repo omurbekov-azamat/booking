@@ -80,7 +80,10 @@ export interface ApartmentPopulated extends IApartment {
 
 export interface IApartment extends ApartmentData {
   roomTypeId: {
-    name: string;
+    name: {
+      ru: string;
+      en: string;
+    };
     _id: string;
   };
   hotelId: {
@@ -209,7 +212,10 @@ export interface CommentMutation {
 
 export interface IRoomType {
   _id: string;
-  name: string;
+  name: {
+    en: string;
+    ru: string;
+  };
 }
 
 export interface CabinetState {
@@ -217,7 +223,8 @@ export interface CabinetState {
 }
 
 export interface RoomTypesMutation {
-  name: string;
+  ru: string;
+  en: string;
 }
 
 export interface BlockOnMainPage {
