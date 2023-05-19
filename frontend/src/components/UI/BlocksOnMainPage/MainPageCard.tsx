@@ -15,15 +15,15 @@ const MainPageCard: React.FC<Props> = ({ item, city, type }) => {
   const navigate = useNavigate();
   const onClickCard = (item: string) => {
     if (city) {
-      navigate(`/dashboard/${item.toLowerCase()}/${false}`);
+      navigate(`/dashboard/${item}/${false}`);
     } else if (type) {
-      navigate(`/dashboard/${false}/${item.toLowerCase()}`);
+      navigate(`/dashboard/${false}/${item}`);
     }
   };
 
   return (
     <Grid item xs={12} sm={6} md={3}>
-      <Card style={{ maxWidth: '350px', maxHeight: 'auto' }} onClick={() => onClickCard(item.name)}>
+      <Card style={{ maxWidth: '350px', maxHeight: 'auto' }} onClick={() => onClickCard(item.lang)}>
         <CardActionArea>
           <CardMedia component="img" width="100%" height="200px" image={item.link} alt={item.link} />
           <Typography

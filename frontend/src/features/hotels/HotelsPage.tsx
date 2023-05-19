@@ -39,14 +39,8 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   const catchParams = useParams() as { city: string; propertyType: string };
   const hotels = useAppSelector(selectHotels);
 
-  let catchPropertyType = catchParams.propertyType;
-
-  if (catchPropertyType === 'guest house') {
-    catchPropertyType = 'guestHouse';
-  }
-
   const [state, setState] = useState<SearchData>({
-    city: catchParams?.city !== 'false' ? (catchParams.city === 'issyk-kul' ? 'issykKul' : catchParams.city) : '',
+    city: catchParams.city !== 'false' ? catchParams.city : '',
     propertyType: '',
     nonSmokingRooms: false,
     parking: false,
@@ -73,16 +67,16 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   ];
 
   const [stars, setStars] = useState([
-    { number: '1', title: `1 ${t('star')}`, value: false },
-    { number: '2', title: `2 ${t('stars')}`, value: false },
-    { number: '3', title: `3 ${t('stars')}`, value: false },
-    { number: '4', title: `4 ${t('stars')}`, value: false },
-    { number: '5', title: `5 ${t('stars')}`, value: false },
+    { number: '1', title: 'star', value: false },
+    { number: '2', title: 'stars', value: false },
+    { number: '3', title: 'stars', value: false },
+    { number: '4', title: 'stars', value: false },
+    { number: '5', title: 'stars', value: false },
   ]);
 
   const [checkPropertyType, setCheckPropertyType] = useState([
     { value: false, id: 'guestHouse', title: t('guestHouse') },
-    { value: false, id: 'hostel', title: t('Hostel') },
+    { value: false, id: 'Hostel', title: t('Hostel') },
     { value: false, id: 'hotel', title: t('hotel') },
     { value: false, id: 'pension', title: t('pension') },
   ]);
@@ -127,8 +121,8 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   }, [dispatch, state]);
 
   useEffect(() => {
-    if (catchPropertyType !== 'false') {
-      const result = checkPropertyType.find((item) => item.id === catchPropertyType)!;
+    if (catchParams.propertyType !== 'false') {
+      const result = checkPropertyType.find((item) => item.id === catchParams.propertyType)!;
       setCheckPropertyType((prev) => {
         return prev.map((item) => {
           if (item.title === result.title) {
@@ -137,9 +131,9 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           return { ...item, value: false };
         });
       });
-      setState((prev) => ({ ...prev, propertyType: catchPropertyType }));
+      setState((prev) => ({ ...prev, propertyType: catchParams.propertyType }));
     }
-  }, [catchPropertyType]);
+  }, [catchParams.propertyType]);
 
   const drawer = (
     <>
@@ -171,7 +165,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
               <FormControlLabel
                 key={key}
                 control={<Checkbox onChange={handleChangeCheckBox} checked={value.value} name={value.id} />}
-                label={value.title}
+                label={t(`${value.id}`)}
               />
             ))}
           </FormGroup>
@@ -195,9 +189,9 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           <FormGroup sx={{ p: 1 }}>
             {stars.map((star) => (
               <FormControlLabel
-                key={star.title}
+                key={star.number}
                 control={<Checkbox onChange={handleChooseStars} name={star.number} checked={star.value} />}
-                label={star.title}
+                label={`${star.number} ${t(`${star.title}`)}`}
               />
             ))}
           </FormGroup>
