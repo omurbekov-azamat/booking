@@ -14,7 +14,8 @@ const FormRoomTypes = () => {
   const errorCreateRoomType = useAppSelector(selectErrorCreateRoomType);
 
   const [state, setState] = useState<RoomTypesMutation>({
-    name: '',
+    ru: '',
+    en: '',
   });
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,8 +24,19 @@ const FormRoomTypes = () => {
   };
 
   const submitFormHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await dispatch(createNewRoomType(state)).unwrap();
+    try {
+      e.preventDefault();
+      await dispatch(createNewRoomType(state)).unwrap();
+      setState((prev) => {
+        return {
+          ...prev,
+          ru: '',
+          en: '',
+        };
+      });
+    } catch {
+      throw new Error();
+    }
   };
 
   const getFieldError = (fieldName: string) => {
@@ -40,18 +52,30 @@ const FormRoomTypes = () => {
       <Grid container spacing={5} flexDirection="column" textAlign="center">
         <Grid item>
           <Typography variant="h5" textTransform="uppercase">
-            Создать тип компнаты
+            {t('createRoomType')}
           </Typography>
         </Grid>
         <Grid item>
           <TextField
-            label={t('roomType')}
-            name="name"
-            value={state.name}
+            label={'Тип номера'}
+            name="ru"
+            value={state.ru}
             onChange={inputChangeHandler}
             sx={{ width: '300px' }}
-            error={Boolean(getFieldError('name'))}
-            helperText={getFieldError('name')}
+            error={Boolean(getFieldError('ru'))}
+            helperText={getFieldError('ru')}
+            required
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            label={'Room type'}
+            name="en"
+            value={state.en}
+            onChange={inputChangeHandler}
+            sx={{ width: '300px' }}
+            error={Boolean(getFieldError('en'))}
+            helperText={getFieldError('en')}
             required
           />
         </Grid>

@@ -140,5 +140,6 @@
   "filterBy": "Filter by:",
   "empty": "Empty",
   "editApartment": "Edit apartment",
-  "download": "Download"
+  "download": "Download",
+  "createRoomType": "Create room type"
 }

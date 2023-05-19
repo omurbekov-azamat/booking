@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currency = useAppSelector(selectCurrency);
@@ -35,13 +35,18 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
     <>
       <Card sx={{ maxWidth: '100%', height: '100%' }}>
         <CardActionArea>
-          <CardMedia component="img" height="140" image={cardImage} alt={apartment.roomTypeId.name} />
+          <CardMedia
+            component="img"
+            height="140"
+            image={cardImage}
+            alt={i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
+          />
           <CardContent>
             <Typography gutterBottom variant="h5" align="center" color={'grey'}>
               {apartment.hotelId.name}
             </Typography>
             <Typography gutterBottom variant="h5" align="center">
-              {apartment.roomTypeId.name}
+              {i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
             </Typography>
             <Typography color={'grey'}>
               {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}

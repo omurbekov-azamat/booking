@@ -1,11 +1,19 @@
 import mongoose from 'mongoose';
+import { IRoomType } from '../types';
 
 const Schema = mongoose.Schema;
-const RoomTypeSchema = new Schema({
+const RoomTypeSchema = new Schema<IRoomType>({
   name: {
-    type: String,
-    required: true,
-    unique: true,
+    ru: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    en: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
 });
 

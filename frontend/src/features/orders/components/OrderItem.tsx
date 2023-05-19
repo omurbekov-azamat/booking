@@ -21,7 +21,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
   const handleClickOnCheckout = async (id: string) => {
@@ -99,7 +99,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           {t('hotelName')}: {prop.apartmentId.hotelId.name}
         </Typography>
         <Typography textTransform="capitalize">
-          {t('roomType')}: {prop.apartmentId.roomTypeId.name}
+          {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
         </Typography>
         <Typography>
           {t('commentary')}: {prop.comment}
