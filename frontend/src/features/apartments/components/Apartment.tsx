@@ -52,7 +52,7 @@ const Apartment = () => {
             {hotelName}
           </Typography>
           <Typography variant="h5" component="p" textAlign={'center'}>
-            {apartment?.roomTypeId.name}
+            {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
           </Typography>
           <Typography gutterBottom component="p">
             {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
