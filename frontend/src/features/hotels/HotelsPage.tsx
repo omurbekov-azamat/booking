@@ -122,16 +122,18 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
 
   useEffect(() => {
     if (catchParams.propertyType !== 'false') {
-      const result = checkPropertyType.find((item) => item.id === catchParams.propertyType)!;
-      setCheckPropertyType((prev) => {
-        return prev.map((item) => {
-          if (item.title === result.title) {
-            return { ...item, value: true };
-          }
-          return { ...item, value: false };
+      const result = checkPropertyType.find((item) => item.id === catchParams.propertyType);
+      if (result) {
+        setCheckPropertyType((prev) => {
+          return prev.map((item) => {
+            if (item.title === result.title) {
+              return { ...item, value: true };
+            }
+            return { ...item, value: false };
+          });
         });
-      });
-      setState((prev) => ({ ...prev, propertyType: catchParams.propertyType }));
+        setState((prev) => ({ ...prev, propertyType: catchParams.propertyType }));
+      }
     }
   }, [catchParams.propertyType]);
 
