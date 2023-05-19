@@ -64,7 +64,7 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
               <TableCell component="th" scope="row" sx={{ textTransform: 'capitalize' }}>
                 <Link to={'/' + hotel.name + '/' + hotel._id + '/apartment/' + data._id}>
                   {' '}
-                  {i18n.language === 'en' ? data?.roomTypeId.name.en : data?.roomTypeId.name.ru}
+                  {i18n.language === 'en' ? data.roomTypeId.name.en : data.roomTypeId.name.ru}
                 </Link>
                 {(user?.role === 'admin' || user?._id === hotel.userId) && (
                   <IconButton
