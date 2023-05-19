@@ -14,7 +14,8 @@ const FormRoomTypes = () => {
   const errorCreateRoomType = useAppSelector(selectErrorCreateRoomType);
 
   const [state, setState] = useState<RoomTypesMutation>({
-    name: '',
+    ru: '',
+    en: '',
   });
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,13 +46,25 @@ const FormRoomTypes = () => {
         </Grid>
         <Grid item>
           <TextField
-            label={t('roomType')}
-            name="name"
-            value={state.name}
+            label={'Тип номера'}
+            name="ru"
+            value={state.ru}
             onChange={inputChangeHandler}
             sx={{ width: '300px' }}
-            error={Boolean(getFieldError('name'))}
-            helperText={getFieldError('name')}
+            error={Boolean(getFieldError('ru'))}
+            helperText={getFieldError('ru')}
+            required
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            label={'Room type'}
+            name="en"
+            value={state.en}
+            onChange={inputChangeHandler}
+            sx={{ width: '300px' }}
+            error={Boolean(getFieldError('en'))}
+            helperText={getFieldError('en')}
             required
           />
         </Grid>

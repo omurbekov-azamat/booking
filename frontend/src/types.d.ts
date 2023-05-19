@@ -220,7 +220,8 @@ export interface CabinetState {
 }
 
 export interface RoomTypesMutation {
-  name: string;
+  ru: string;
+  en: string;
 }
 
 export interface BlockOnMainPage {
