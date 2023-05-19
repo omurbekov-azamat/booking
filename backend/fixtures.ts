@@ -106,13 +106,22 @@ const run = async () => {
 
   const [singleRoom, doubleRoom, tripleRoom] = await RoomType.create(
     {
-      name: 'single room',
+      name: {
+        ru: 'однокомнатный',
+        en: 'single room',
+      },
     },
     {
-      name: 'double room',
+      name: {
+        ru: 'двухкомнатный',
+        en: 'double room',
+      },
     },
     {
-      name: 'triple room',
+      name: {
+        ru: 'трехкомнатный',
+        en: 'triple room',
+      },
     },
   );
 
