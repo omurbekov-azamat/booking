@@ -4,6 +4,7 @@ import { apiURL, arrowStyleGallery } from '../../../constants';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { IApartment } from '../../../types';
+import { useTranslation } from 'react-i18next';
 
 const MyGalleryContainer = styled('div')({
   width: '700px',
@@ -26,11 +27,15 @@ interface Props {
 
 interface ImagesApartments {
   img: string;
-  title: string;
+  title: {
+    ru: string;
+    en: string;
+  };
 }
 
 const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
   const data = apartmentData.images!;
+  const { i18n } = useTranslation();
 
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -39,7 +44,13 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
     title: apartmentData.roomTypeId.name,
   });
 
-  const handleImageClick = (img: string, title: string) => {
+  const handleImageClick = (
+    img: string,
+    title: {
+      ru: string;
+      en: string;
+    },
+  ) => {
     setSelectedImage({ img: img, title: title });
   };
 
@@ -56,7 +67,12 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
   return (
     <>
       <Box sx={{ width: '700px', height: '500px', p: 3, mx: 'auto' }}>
-        <CardMedia component="img" image={apiURL + '/' + selectedImage.img} height="450" alt={selectedImage.title} />
+        <CardMedia
+          component="img"
+          image={apiURL + '/' + selectedImage.img}
+          height="450"
+          alt={i18n.language === 'en' ? selectedImage.title.en : selectedImage.title.ru}
+        />
       </Box>
       <MyGalleryContainer sx={{ mx: 'auto' }}>
         <MyGalleryLeftArrow onClick={handleScrollLeft} sx={arrowStyleGallery} />
@@ -82,7 +98,7 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
                 component="img"
                 height="140"
                 image={apiURL + '/' + item}
-                alt={apartmentData.roomTypeId.name}
+                alt={i18n.language === 'en' ? apartmentData.roomTypeId.name.en : apartmentData.roomTypeId.name.ru}
                 sx={{ width: '200px' }}
                 onClick={() => handleImageClick(item, apartmentData.roomTypeId.name)}
               />
