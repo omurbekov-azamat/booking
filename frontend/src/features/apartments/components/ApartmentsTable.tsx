@@ -31,7 +31,7 @@ interface Props {
 const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const user = useAppSelector(selectUser);
   const apartments = useAppSelector(selectApartments);
@@ -62,7 +62,10 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
           {apartments.map((data) => (
             <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row" sx={{ textTransform: 'capitalize' }}>
-                <Link to={'/' + hotel.name + '/' + hotel._id + '/apartment/' + data._id}>{data.roomTypeId.name}</Link>
+                <Link to={'/' + hotel.name + '/' + hotel._id + '/apartment/' + data._id}>
+                  {' '}
+                  {i18n.language === 'en' ? data?.roomTypeId.name.en : data?.roomTypeId.name.ru}
+                </Link>
                 {(user?.role === 'admin' || user?._id === hotel.userId) && (
                   <IconButton
                     sx={{ color: 'grey', '&:hover': { color: 'blue' }, ml: 2 }}

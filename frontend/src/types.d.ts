@@ -80,7 +80,10 @@ export interface ApartmentPopulated extends IApartment {
 
 export interface IApartment extends ApartmentData {
   roomTypeId: {
-    name: string;
+    name: {
+      ru: string;
+      en: string;
+    };
     _id: string;
   };
   hotelId: {
