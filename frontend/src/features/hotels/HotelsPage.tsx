@@ -139,7 +139,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
       });
       setState((prev) => ({ ...prev, propertyType: catchPropertyType }));
     }
-  }, [catchPropertyType]);
+  }, [catchPropertyType, checkPropertyType]);
 
   const drawer = (
     <>

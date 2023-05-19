@@ -18,13 +18,13 @@ const UsersStatus = () => {
     if (lastName.length > 1) {
       dispatch(getUsers('nameMatch=' + lastName));
     }
-  }, [lastName]);
+  }, [lastName, dispatch]);
 
   useEffect(() => {
     if (email.length > 1) {
       dispatch(getUsers('emailMatch=' + email));
     }
-  }, [email]);
+  }, [email, dispatch]);
 
   const inputChangeNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(event.target.value);
