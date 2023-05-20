@@ -118,7 +118,7 @@ const SwipeCityCards = () => {
       <Typography variant="subtitle1" color="grey" mb={2} fontSize="25px">
         {t('mainPageOfSubtitleCity')}
       </Typography>
-      <SwipeCards items={cities} city={true} />;
+      <SwipeCards items={cities} city={true} />
     </>
   );
 };

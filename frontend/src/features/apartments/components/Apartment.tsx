@@ -48,88 +48,94 @@ const Apartment = () => {
       {loadingFetchOneApartment && <Spinner />}
       <Card sx={{ mt: 5 }}>
         <CardContent>
-          <Typography variant="h4" component="p" textAlign={'center'}>
-            {hotelName}
-          </Typography>
-          <Typography variant="h5" component="p" textAlign={'center'}>
-            {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
-          </Typography>
-          <Typography gutterBottom component="p">
-            {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
-          </Typography>
-
-          <Typography gutterBottom component="p">
-            {t('place') + ': ' + apartment?.place + ' M²'}
-          </Typography>
-
-          <Grid container alignItems="center" gap={2}>
-            {apartment?.AC && (
-              <Grid item>
-                <AcUnitIcon />
-                <span>{t('AC')}</span>
+          <Grid container alignItems="start">
+            <Grid item xs={12} sm={12} md={12} lg={6}>
+              <Grid container gap={2} flexDirection="column">
+                <Typography variant="h4" component="p">
+                  {hotelName}
+                </Typography>
+                <Typography variant="h5" component="p">
+                  {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
+                </Typography>
+                <Typography gutterBottom component="p">
+                  {t('price') +
+                    ': ' +
+                    (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
+                </Typography>
+                <Typography gutterBottom component="p">
+                  {t('place') + ': ' + apartment?.place + ' M²'}
+                </Typography>
+                <Typography gutterBottom component="p">
+                  {i18n.language === 'en' ? apartment?.description.en : apartment?.description.ru}
+                </Typography>
               </Grid>
-            )}
-            {apartment?.balcony && (
-              <Grid item>
-                <BalconyIcon />
-                <span>{t('balcony')}</span>
+              <Grid item gap={2} flexDirection="column">
+                {apartment?.AC && (
+                  <Grid item>
+                    <AcUnitIcon />
+                    <span>{t('AC')}</span>
+                  </Grid>
+                )}
+                {apartment?.balcony && (
+                  <Grid item>
+                    <BalconyIcon />
+                    <span>{t('balcony')}</span>
+                  </Grid>
+                )}
+                {apartment?.bath && (
+                  <Grid item>
+                    <BathtubIcon />
+                    <span>{t('bath')}</span>
+                  </Grid>
+                )}
+                {apartment?.petFriendly && (
+                  <Grid item>
+                    <PetsIcon />
+                    <span>{t('petFriendly')}</span>
+                  </Grid>
+                )}
+                {apartment?.food && (
+                  <Grid item>
+                    <RestaurantIcon />
+                    <span>{t('food')}</span>
+                  </Grid>
+                )}
+                {apartment?.tv && (
+                  <Grid item>
+                    <TvIcon />
+                    <span>{t('tv')}</span>
+                  </Grid>
+                )}
+                {apartment?.towel && (
+                  <Grid item>
+                    <DryCleaningIcon />
+                    <span>{t('towel')}</span>
+                  </Grid>
+                )}
+                {apartment?.wifi && (
+                  <Grid item>
+                    <WifiIcon />
+                    <span>{t('wiFi')}</span>
+                  </Grid>
+                )}
               </Grid>
-            )}
-            {apartment?.bath && (
-              <Grid item>
-                <BathtubIcon />
-                <span>{t('bath')}</span>
-              </Grid>
-            )}
-            {apartment?.petFriendly && (
-              <Grid item>
-                <PetsIcon />
-                <span>{t('petFriendly')}</span>
-              </Grid>
-            )}
-            {apartment?.food && (
-              <Grid item>
-                <RestaurantIcon />
-                <span>{t('food')}</span>
-              </Grid>
-            )}
-            {apartment?.tv && (
-              <Grid item>
-                <TvIcon />
-                <span>{t('tv')}</span>
-              </Grid>
-            )}
-            {apartment?.towel && (
-              <Grid item>
-                <DryCleaningIcon />
-                <span>{t('towel')}</span>
-              </Grid>
-            )}
-            {apartment?.wifi && (
-              <Grid item>
-                <WifiIcon />
-                <span>{t('wiFi')}</span>
-              </Grid>
-            )}
+              <Box textAlign="right">
+                <Button
+                  variant="outlined"
+                  size={'large'}
+                  sx={{ mx: 'auto', my: 3, display: 'block' }}
+                  onClick={onClickResolveApartment}
+                >
+                  {t('reserve')}
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={6} alignSelf="center">
+              {apartment && <ApartmentsGallery apartmentData={apartment} />}
+            </Grid>
           </Grid>
-
-          <Typography gutterBottom component="p" sx={{ mt: 2 }}>
-            {i18n.language === 'en' ? apartment?.description.en : apartment?.description.ru}
-          </Typography>
         </CardContent>
-        {apartment && <ApartmentsGallery apartmentData={apartment} />}
       </Card>
-
-      <Box textAlign="right">
-        <Button
-          variant="outlined"
-          size={'large'}
-          sx={{ mx: 'auto', my: 3, display: 'block' }}
-          onClick={onClickResolveApartment}
-        >
-          {t('reserve')}
-        </Button>
-      </Box>
     </>
   );
 };

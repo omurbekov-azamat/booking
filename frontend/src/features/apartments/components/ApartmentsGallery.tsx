@@ -65,16 +65,21 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
   };
 
   return (
-    <>
-      <Box sx={{ width: '700px', height: '500px', p: 3, mx: 'auto' }}>
+    <Box sx={{ background: 'rgba(0, 0, 0, 0.1)', p: 1 }}>
+      <Box sx={{ maxWidth: 'auto', height: 'auto', alignItem: 'center', pb: 1 }}>
         <CardMedia
           component="img"
           image={apiURL + '/' + selectedImage.img}
           height="450"
+          sx={{
+            width: '100%',
+            objectFit: 'cover',
+            maxHeight: '100%',
+          }}
           alt={i18n.language === 'en' ? selectedImage.title.en : selectedImage.title.ru}
         />
       </Box>
-      <MyGalleryContainer sx={{ mx: 'auto' }}>
+      <MyGalleryContainer sx={{ width: 'auto' }}>
         <MyGalleryLeftArrow onClick={handleScrollLeft} sx={arrowStyleGallery} />
         <MyGalleryRightArrow onClick={handleScrollRight} sx={arrowStyleGallery} />
         <Grid
@@ -99,14 +104,18 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
                 height="140"
                 image={apiURL + '/' + item}
                 alt={i18n.language === 'en' ? apartmentData.roomTypeId.name.en : apartmentData.roomTypeId.name.ru}
-                sx={{ width: '200px' }}
+                sx={{
+                  width: '100%',
+                  objectFit: 'cover',
+                  maxHeight: '100%',
+                }}
                 onClick={() => handleImageClick(item, apartmentData.roomTypeId.name)}
               />
             </Grid>
           ))}
         </Grid>
       </MyGalleryContainer>
-    </>
+    </Box>
   );
 };
 
