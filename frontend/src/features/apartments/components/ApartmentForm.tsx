@@ -15,7 +15,7 @@ import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   selectApartmentError,
   selectLoadingCreateApartment,
@@ -75,50 +75,41 @@ const ApartmentForm = () => {
   const loadingCreateApartment = useAppSelector(selectLoadingCreateApartment);
   const loadingFetchOneApartment = useAppSelector(selectLoadingFetchOneApartment);
   const navigate = useNavigate();
-  const { id, idEditApartment } = useParams();
+  const { id } = useParams();
   const roomType = useAppSelector(selectRoomTypes);
   const oneApartment = useAppSelector(selectOneApartment);
   const loadingEditApartment = useAppSelector(selectLoadingEditApartment);
-  const location = useLocation();
-
-  const pathLocation = location.pathname;
-  const parts = pathLocation.split('/');
-  const locationEdit = parts[parts.length - 2];
 
   useEffect(() => {
     dispatch(fetchRoomTypes());
   }, [dispatch]);
 
   useEffect(() => {
-    if (idEditApartment) {
-      dispatch(fetchOneApartment(idEditApartment));
+    if (id) {
+      dispatch(fetchOneApartment(id));
     }
-  }, [dispatch, idEditApartment]);
+  }, [dispatch, id]);
 
   useEffect(() => {
-    if (locationEdit === 'editApartment') {
-      if (oneApartment) {
-        if (id) {
-          setState((prevState) => ({
-            ...prevState,
-            roomTypeId: oneApartment.roomTypeId._id,
-            hotelId: id,
-            description: oneApartment.description,
-            price: oneApartment.price,
-            place: oneApartment.place,
-            AC: oneApartment.AC,
-            bath: oneApartment.bath,
-            balcony: oneApartment.balcony,
-            food: oneApartment.food,
-            petFriendly: oneApartment.petFriendly,
-            towel: oneApartment.towel,
-            wifi: oneApartment.wifi,
-            tv: oneApartment.tv,
-          }));
-        }
-      }
+    if (id && oneApartment) {
+      setState((prevState) => ({
+        ...prevState,
+        roomTypeId: oneApartment.roomTypeId._id,
+        hotelId: id,
+        description: oneApartment.description,
+        price: oneApartment.price,
+        place: oneApartment.place,
+        AC: oneApartment.AC,
+        bath: oneApartment.bath,
+        balcony: oneApartment.balcony,
+        food: oneApartment.food,
+        petFriendly: oneApartment.petFriendly,
+        towel: oneApartment.towel,
+        wifi: oneApartment.wifi,
+        tv: oneApartment.tv,
+      }));
     }
-  }, [oneApartment, id, setState, locationEdit]);
+  }, [oneApartment, id, setState]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -192,8 +183,8 @@ const ApartmentForm = () => {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (idEditApartment) {
-      await dispatch(editApartment({ apartment: state, id: idEditApartment }));
+    if (id) {
+      await dispatch(editApartment({ apartment: state, id: id }));
       await navigate('/hotels/' + id);
     } else {
       if (id) {
@@ -470,12 +461,12 @@ const ApartmentForm = () => {
                   <Grid container direction="column">
                     <Grid item xs>
                       {oneApartment?.images &&
-                        idEditApartment &&
+                        id &&
                         oneApartment.images.map((image, index) => (
                           <Grid container key={index} marginLeft={3} mb={2} alignItems={'center'}>
                             <img src={apiURL + '/' + image} style={{ width: '100px' }} alt={image} />
                             <Grid item ml={3}>
-                              <IconButton onClick={() => deleteOldImg(idEditApartment, index)}>
+                              <IconButton onClick={() => deleteOldImg(id, index)}>
                                 <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
                               </IconButton>
                             </Grid>
@@ -507,7 +498,7 @@ const ApartmentForm = () => {
                 variant="contained"
                 loading={loadingCreateApartment || loadingEditApartment}
               >
-                {idEditApartment ? t('edit') : t('create')}
+                {id ? t('edit') : t('create')}
               </LoadingButton>
             </Grid>
           </Grid>
