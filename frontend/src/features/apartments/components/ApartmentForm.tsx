@@ -15,7 +15,7 @@ import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { ApartmentMutation, ImgType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   selectApartmentError,
   selectLoadingCreateApartment,
@@ -42,7 +42,11 @@ import Resizer from 'react-image-file-resizer';
 import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 
-const ApartmentForm = () => {
+interface Props {
+  isEdit?: boolean;
+}
+
+const ApartmentForm: React.FC<Props> = ({ isEdit }) => {
   const [state, setState] = useState<ApartmentMutation>({
     roomTypeId: '',
     hotelId: '',
@@ -75,50 +79,41 @@ const ApartmentForm = () => {
   const loadingCreateApartment = useAppSelector(selectLoadingCreateApartment);
   const loadingFetchOneApartment = useAppSelector(selectLoadingFetchOneApartment);
   const navigate = useNavigate();
-  const { id, idEditApartment } = useParams();
+  const { id } = useParams() as { id: string };
   const roomType = useAppSelector(selectRoomTypes);
   const oneApartment = useAppSelector(selectOneApartment);
   const loadingEditApartment = useAppSelector(selectLoadingEditApartment);
-  const location = useLocation();
-
-  const pathLocation = location.pathname;
-  const parts = pathLocation.split('/');
-  const locationEdit = parts[parts.length - 2];
 
   useEffect(() => {
     dispatch(fetchRoomTypes());
   }, [dispatch]);
 
   useEffect(() => {
-    if (idEditApartment) {
-      dispatch(fetchOneApartment(idEditApartment));
+    if (isEdit) {
+      dispatch(fetchOneApartment(id));
     }
-  }, [dispatch, idEditApartment]);
+  }, [dispatch, id, isEdit]);
 
   useEffect(() => {
-    if (locationEdit === 'editApartment') {
-      if (oneApartment) {
-        if (id) {
-          setState((prevState) => ({
-            ...prevState,
-            roomTypeId: oneApartment.roomTypeId._id,
-            hotelId: id,
-            description: oneApartment.description,
-            price: oneApartment.price,
-            place: oneApartment.place,
-            AC: oneApartment.AC,
-            bath: oneApartment.bath,
-            balcony: oneApartment.balcony,
-            food: oneApartment.food,
-            petFriendly: oneApartment.petFriendly,
-            towel: oneApartment.towel,
-            wifi: oneApartment.wifi,
-            tv: oneApartment.tv,
-          }));
-        }
-      }
+    if (isEdit && oneApartment) {
+      setState((prevState) => ({
+        ...prevState,
+        roomTypeId: oneApartment.roomTypeId._id,
+        hotelId: id,
+        description: oneApartment.description,
+        price: oneApartment.price,
+        place: oneApartment.place,
+        AC: oneApartment.AC,
+        bath: oneApartment.bath,
+        balcony: oneApartment.balcony,
+        food: oneApartment.food,
+        petFriendly: oneApartment.petFriendly,
+        towel: oneApartment.towel,
+        wifi: oneApartment.wifi,
+        tv: oneApartment.tv,
+      }));
     }
-  }, [oneApartment, id, setState, locationEdit]);
+  }, [oneApartment, setState, isEdit, id]);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -192,20 +187,13 @@ const ApartmentForm = () => {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (idEditApartment) {
-      await dispatch(editApartment({ apartment: state, id: idEditApartment }));
-      await navigate('/hotels/' + id);
+    if (isEdit) {
+      await dispatch(editApartment({ apartment: state, id: id }));
+      await navigate('/my-cabinet');
     } else {
-      if (id) {
-        await dispatch(
-          createApartment({
-            ...state,
-            hotelId: id,
-          }),
-        );
-        await navigate('/hotels/' + id);
-        await dispatch(fetchOneHotel(id));
-      }
+      await dispatch(createApartment({ ...state, hotelId: id }));
+      await navigate('/hotels/' + id);
+      await dispatch(fetchOneHotel(id));
     }
   };
 
@@ -232,7 +220,7 @@ const ApartmentForm = () => {
           sx={{ mt: 2 }}
           textAlign={'center'}
         >
-          {t('editApartment')}
+          {isEdit ? t('editApartment') : t('createApartment')}
         </Typography>
         <Box component="form" sx={{ mt: 2 }} onSubmit={onSubmit}>
           <Grid container spacing={2} textAlign="center" direction="column">
@@ -470,12 +458,12 @@ const ApartmentForm = () => {
                   <Grid container direction="column">
                     <Grid item xs>
                       {oneApartment?.images &&
-                        idEditApartment &&
+                        isEdit &&
                         oneApartment.images.map((image, index) => (
                           <Grid container key={index} marginLeft={3} mb={2} alignItems={'center'}>
                             <img src={apiURL + '/' + image} style={{ width: '100px' }} alt={image} />
                             <Grid item ml={3}>
-                              <IconButton onClick={() => deleteOldImg(idEditApartment, index)}>
+                              <IconButton onClick={() => deleteOldImg(id, index)}>
                                 <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
                               </IconButton>
                             </Grid>
@@ -507,7 +495,7 @@ const ApartmentForm = () => {
                 variant="contained"
                 loading={loadingCreateApartment || loadingEditApartment}
               >
-                {idEditApartment ? t('edit') : t('create')}
+                {isEdit ? t('edit') : t('create')}
               </LoadingButton>
             </Grid>
           </Grid>
