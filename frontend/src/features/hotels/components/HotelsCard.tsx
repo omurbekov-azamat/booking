@@ -13,6 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
 import { LoadingButton } from '@mui/lab';
+import { selectCurrency } from '../../currency/currencySlice';
 
 interface Props {
   hotel: Hotel;
@@ -27,6 +28,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
   const user = useAppSelector(selectUser);
   const loadingDeleteHotel = useAppSelector(selectLoadingRemoveHotel);
   const loadingPublishHotel = useAppSelector(selectLoadingTogglePublished);
+  const currency = useAppSelector(selectCurrency);
   const { t } = useTranslation();
   const cardImage = apiURL + '/' + hotel.image;
 
@@ -71,7 +73,11 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
           </Box>
           <Box textAlign="center">
             <Typography color={'grey'}>{t('founding') + ' ' + hotel.founding}</Typography>
-            <Typography color={'grey'}>{t('lowestPrice') + ' ' + hotel.lowestPrice.dollar + ' USD'}</Typography>
+            <Typography color={'grey'}>
+              {t('lowestPrice') +
+                ' ' +
+                (currency === 'kgs' ? hotel.lowestPrice.som + ' KGS' : hotel.lowestPrice.dollar + ' USD')}
+            </Typography>
           </Box>
         </CardContent>
       </CardActionArea>
