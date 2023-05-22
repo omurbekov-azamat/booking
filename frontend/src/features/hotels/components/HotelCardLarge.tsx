@@ -5,6 +5,8 @@ import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
+import { useAppSelector } from '../../../app/hooks';
+import { selectCurrency } from '../../currency/currencySlice';
 
 interface Props {
   hotel: Hotel;
@@ -14,6 +16,7 @@ interface Props {
 
 const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconClick }) => {
   const cardImage = apiURL + '/' + hotel.image;
+  const currency = useAppSelector(selectCurrency);
   const { t } = useTranslation();
 
   let statusStyle = {
@@ -146,7 +149,9 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
             </Grid>
             <Grid item>
               <Typography color={'grey'} fontSize={18}>
-                {t('lowestPrice') + ' ' + hotel.lowestPrice.dollar + ' USD'}
+                {t('lowestPrice') +
+                  ' ' +
+                  (currency === 'kgs' ? hotel.lowestPrice.som + ' KGS' : hotel.lowestPrice.dollar + ' USD')}
               </Typography>
             </Grid>
           </Grid>
