@@ -130,7 +130,6 @@ const Register = () => {
                 onChange={phoneChangeHandler}
                 defaultCountry={'KG'}
                 international
-                inputStyle={{ padding: '10px' }}
                 countryCallingCodeEditable={false}
                 name="phoneNumber"
                 value={state.phoneNumber}

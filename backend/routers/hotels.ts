@@ -209,8 +209,8 @@ hotelsRouter.patch('/status/:id', auth, permit('director', 'admin'), async (req,
       await Hotel.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
       res.send({
         message: {
-          en: currentHotel.name +  ' status changed successfully',
-          ru:  'статус ' + currentHotel.name +  ' успешно изменен',
+          en: currentHotel.name + ' status changed successfully',
+          ru: 'статус ' + currentHotel.name + ' успешно изменен',
         },
       });
     } else {
