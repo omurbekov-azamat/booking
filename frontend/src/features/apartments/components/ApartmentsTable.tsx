@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { IconButton, styled } from '@mui/material';
 import { Hotel } from '../../../types';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,6 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { id } = useParams();
   const user = useAppSelector(selectUser);
   const apartments = useAppSelector(selectApartments);
 
@@ -69,7 +68,7 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
                 {(user?.role === 'admin' || user?._id === hotel.userId) && (
                   <IconButton
                     sx={{ color: 'grey', '&:hover': { color: 'blue' }, ml: 2 }}
-                    onClick={() => navigate('/hotels/' + id + '/editApartment/' + data._id)}
+                    onClick={() => navigate('/my-cabinet/edit-apartment/' + data._id)}
                   >
                     <EditIcon />
                   </IconButton>
