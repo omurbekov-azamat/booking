@@ -102,15 +102,28 @@ apartmentsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.arra
       }
     }
 
-    await Apartment.findByIdAndUpdate(req.params.id, apartment);
-    return res.send(
-      res.send({
-        message: {
-          en: 'Apartments updated successfully',
-          ru: 'Апартаменты успешно изменены',
-        },
-      }),
-    );
+    await Apartment.findByIdAndUpdate(req.params.id, {
+      roomTypeId: apartment.roomTypeId,
+      price: apartment.price,
+      description: apartment.description,
+      AC: apartment.AC,
+      balcony: apartment.balcony,
+      bath: apartment.bath,
+      petFriendly: apartment.petFriendly,
+      food: apartment.food,
+      towel: apartment.towel,
+      wifi: apartment.wifi,
+      place: apartment.place,
+      tv: apartment.tv,
+      images: apartment.images,
+    });
+
+    return res.send({
+      message: {
+        en: 'Apartments updated successfully',
+        ru: 'Апартаменты успешно изменены',
+      },
+    });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);

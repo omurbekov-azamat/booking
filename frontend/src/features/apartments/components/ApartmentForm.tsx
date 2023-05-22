@@ -189,7 +189,7 @@ const ApartmentForm: React.FC<Props> = ({ isEdit }) => {
     event.preventDefault();
     if (isEdit) {
       await dispatch(editApartment({ apartment: state, id: id }));
-      await navigate('/hotels/' + id);
+      await navigate('/my-cabinet');
     } else {
       await dispatch(createApartment({ ...state, hotelId: id }));
       await navigate('/hotels/' + id);
