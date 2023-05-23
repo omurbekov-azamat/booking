@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SwipeCards from './SwipeCards';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { HeaderStyles, mainBlocksBorderStyles } from '../../../styles';
 
 const SwipePropertyTypeCards = () => {
   const { t } = useTranslation();
@@ -32,12 +34,12 @@ const SwipePropertyTypeCards = () => {
     },
   ];
   return (
-    <>
-      <Typography variant="h2" mb={2}>
+    <Box style={mainBlocksBorderStyles}>
+      <Typography variant="h4" mb={2} sx={HeaderStyles}>
         {t('mainPageOfPropertyType')}
       </Typography>
       <SwipeCards items={propertyTypes} type={true} />
-    </>
+    </Box>
   );
 };
 export default SwipePropertyTypeCards;
