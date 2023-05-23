@@ -5,13 +5,14 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { FooterStyle } from '../../../styles';
 
 const Footer = () => {
   const { t } = useTranslation();
 
   return (
     <Box sx={{ flexGrow: 1, mt: 1 }}>
-      <AppBar position="static" sx={{ background: '#77dd77' }}>
+      <AppBar position="static" sx={FooterStyle}>
         <Toolbar sx={{ paddingY: '10px' }}>
           <Container maxWidth="xl">
             <Grid container justifyContent="space-between" alignItems="center">
