@@ -15,6 +15,7 @@ import { selectApartments } from '../apartmentSlice';
 import { fetchApartments } from '../apartmentThunks';
 import EditIcon from '@mui/icons-material/Edit';
 import { selectUser } from '../../users/usersSlice';
+import { selectCurrency } from '../../currency/currencySlice';
 
 const Link = styled(NavLink)({
   color: 'inherit',
@@ -31,6 +32,7 @@ interface Props {
 const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const currency = useAppSelector(selectCurrency);
   const { t, i18n } = useTranslation();
   const user = useAppSelector(selectUser);
   const apartments = useAppSelector(selectApartments);
@@ -74,7 +76,9 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
                   </IconButton>
                 )}
               </TableCell>
-              <TableCell align="right">{data.price.usd + ' - ' + data.price.kgs}</TableCell>
+              <TableCell align="right">
+                {currency === 'kgs' ? data.price.kgs + ' KGS' : data.price.usd + ' USD'}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
