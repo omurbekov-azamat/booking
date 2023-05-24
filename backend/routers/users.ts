@@ -4,8 +4,12 @@ import User from '../models/User';
 import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
 import Hotel from '../models/Hotel';
+import config from '../config';
+import { OAuth2Client } from 'google-auth-library';
 
 const usersRouter = express.Router();
+
+const client = new OAuth2Client(config.google.clientId);
 
 usersRouter.post('/', async (req, res, next) => {
   try {
@@ -171,6 +175,48 @@ usersRouter.delete('/sessions', async (req, res, next) => {
     user.generateToken();
     await user.save();
     return res.send(success);
+  } catch (e) {
+    return next(e);
+  }
+});
+
+usersRouter.post('/google', async (req, res, next) => {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: req.body.credential,
+      audience: config.google.clientId,
+    });
+
+    const payload = ticket.getPayload();
+    if (!payload) {
+      return res.status(400).send({ error: 'Google login error!' });
+    }
+
+    const email = payload['email'];
+    const id = payload['sub'];
+    const firstName = payload['given_name'];
+    const lastName = payload['family_name'];
+    if (!email) {
+      return res.status(400).send({ error: 'Not enough user data to continue' });
+    }
+
+    let user = await User.findOne({ googleId: id });
+
+    if (!user) {
+      user = new User({
+        email: email,
+        lastName: lastName,
+        firstName: firstName,
+        password: crypto.randomUUID(),
+      });
+    }
+
+    user.generateToken();
+    await user.save();
+    return res.send({
+      message: 'Login with Google successful!',
+      user,
+    });
   } catch (e) {
     return next(e);
   }
