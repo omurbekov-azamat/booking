@@ -14,7 +14,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
-import DialogTextField from '@mui/material/TextField';
+import ReactPhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -43,17 +44,13 @@ const Login = () => {
   };
 
   const googleLoginHandler = async (credentials: string) => {
-    setPhoneNumber('');
-    setIsDialogOpen(true);
-    setCredentials(credentials);
+    await setPhoneNumber('');
+    await setIsDialogOpen(true);
+    await setCredentials(credentials);
   };
 
   const closeDialogHandler = () => {
     setIsDialogOpen(false);
-  };
-
-  const phoneNumberChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(event.target.value);
   };
 
   const submitDialogHandler = async (phone: string, cred: string) => {
@@ -64,7 +61,7 @@ const Login = () => {
   return (
     <Container component="main" maxWidth="xs">
       <Box
-        style={{
+        sx={{
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
@@ -104,6 +101,7 @@ const Login = () => {
                 autoComplete="current-email"
                 value={state.email}
                 onChange={inputChangeHandler}
+                fullWidth
               />
             </Grid>
             <Grid item xs={12}>
@@ -114,6 +112,7 @@ const Login = () => {
                 autoComplete="current-password"
                 value={state.password}
                 onChange={inputChangeHandler}
+                fullWidth
               />
             </Grid>
           </Grid>
@@ -131,19 +130,26 @@ const Login = () => {
 
         <Dialog open={isDialogOpen} onClose={closeDialogHandler}>
           <DialogTitle>{t('enterPhoneNumber')}</DialogTitle>
-          <DialogContent>
-            <DialogTextField
-              label={t('phoneNumber')}
-              name="phoneNumber"
-              type="tel"
+          <DialogContent sx={{ p: 8 }}>
+            <ReactPhoneInput
+              inputProps={{
+                name: 'phoneNumber',
+                required: true,
+                autoFocus: true,
+              }}
+              country={'kg'}
               value={phoneNumber}
-              onChange={phoneNumberChangeHandler}
-              fullWidth
+              onChange={setPhoneNumber}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={closeDialogHandler}>{t('cancel')}</Button>
-            <Button onClick={() => submitDialogHandler(phoneNumber, credentials)} color="primary" variant="contained">
+            <Button
+              disabled={phoneNumber.length < 8}
+              onClick={() => submitDialogHandler(phoneNumber, credentials)}
+              color="primary"
+              variant="contained"
+            >
               {t('submit')}
             </Button>
           </DialogActions>

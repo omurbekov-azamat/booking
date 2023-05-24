@@ -202,7 +202,7 @@ usersRouter.post('/google', async (req, res, next) => {
       return res.status(400).send({ error: 'Not enough user data to continue' });
     }
 
-    let user = await User.findOne({ googleId: id });
+    let user = await User.findOneAndUpdate({ googleId: id }, { phoneNumber: phoneNumber }, { new: true });
 
     if (!user) {
       user = new User({
@@ -213,9 +213,7 @@ usersRouter.post('/google', async (req, res, next) => {
         phoneNumber: phoneNumber,
         googleId: id,
       });
-      console.log(user);
     }
-
     user.generateToken();
     await user.save();
     return res.send({

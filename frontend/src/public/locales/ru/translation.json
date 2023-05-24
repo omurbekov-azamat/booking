@@ -142,5 +142,7 @@
   "empty": "Пусто",
   "editApartment": "Изменить апартамент",
   "download": "Загрузить",
-  "createRoomType": "Создать тип комнаты"
+  "createRoomType": "Создать тип комнаты",
+  "enterPhoneNumber": "Введите номер телефона",
+  "submit": "Подтвердить"
 }
