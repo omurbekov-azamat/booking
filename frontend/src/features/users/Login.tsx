@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectLoginError, selectLoginLoading } from './usersSlice';
-import { login } from './usersThunks';
+import { googleLogin, login } from './usersThunks';
 import { Alert, Avatar, Box, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
@@ -33,6 +33,11 @@ const Login = () => {
     navigate('/');
   };
 
+  const googleLoginHandler = async (credentials: string) => {
+    await dispatch(googleLogin(credentials)).unwrap();
+    await navigate('/');
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -52,7 +57,9 @@ const Login = () => {
         <Box sx={{ pt: 2 }}>
           <GoogleLogin
             onSuccess={(credentialResponse) => {
-              console.log(credentialResponse);
+              if (credentialResponse.credential) {
+                void googleLoginHandler(credentialResponse.credential);
+              }
             }}
             onError={() => {
               console.log('Login failed');
