@@ -8,6 +8,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import type { LoginMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +49,16 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           {t('signIn')}
         </Typography>
+        <Box sx={{ pt: 2 }}>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log('Login failed');
+            }}
+          />
+        </Box>
         {error && (
           <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
             {error.error}
