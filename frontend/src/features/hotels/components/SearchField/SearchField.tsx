@@ -30,10 +30,11 @@ const SearchField = () => {
     setMatch('');
   };
 
-  const onSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const onSubmit = async () => {
     if (selectedHotel) {
       navigate('/hotels/' + selectedHotel._id);
+      setMatch('');
+      setSelectedHotel(null);
     }
   };
 
@@ -42,26 +43,24 @@ const SearchField = () => {
   }, [dispatch, match]);
 
   return (
-    <form onClick={onSubmit}>
-      <Grid container>
-        <Grid item>
-          <Autocomplete
-            disablePortal
-            options={autocomplete}
-            isOptionEqualToValue={(option, value) => option._id === value._id}
-            onChange={onAutocompleteChange}
-            value={selectedHotel}
-            sx={{ width: 200 }}
-            renderInput={(params) => <TextField {...params} onChange={inputChangeHandler} label={t('search')} />}
-          />
-        </Grid>
-        <Grid xs={1} item container alignItems="center">
-          <LoadingButton loading={loadingSearchMatch} type="submit">
-            <SearchIcon />
-          </LoadingButton>
-        </Grid>
+    <Grid container>
+      <Grid item>
+        <Autocomplete
+          disablePortal
+          options={autocomplete}
+          isOptionEqualToValue={(option, value) => option._id === value._id}
+          onChange={onAutocompleteChange}
+          value={selectedHotel}
+          sx={{ width: 200 }}
+          renderInput={(params) => <TextField {...params} onChange={inputChangeHandler} label={t('search')} />}
+        />
       </Grid>
-    </form>
+      <Grid xs={1} item container alignItems="center">
+        <LoadingButton loading={loadingSearchMatch} type="button" onClick={onSubmit}>
+          <SearchIcon />
+        </LoadingButton>
+      </Grid>
+    </Grid>
   );
 };
 
