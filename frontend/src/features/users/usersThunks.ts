@@ -102,7 +102,7 @@ export const reAuthorization = createAsyncThunk<User>('user/reAuthorization', as
   }
 });
 
-export const googleLogin = createAsyncThunk<User, string, { rejectValue: GlobalError }>(
+export const googleLogin = createAsyncThunk<User, { phone: string; cred: string }, { rejectValue: GlobalError }>(
   'users/googleLogin',
   async (credential, { rejectWithValue }) => {
     try {

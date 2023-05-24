@@ -71,7 +71,6 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
   favorites: {
     type: [{ type: Schema.Types.ObjectId, ref: 'Hotel' }],
   },
-  displayName: String,
   googleId: String,
 });
 

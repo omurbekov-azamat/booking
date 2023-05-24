@@ -11,7 +11,6 @@ export interface IUser {
   cashback: number;
   token: string;
   favorites: ObjectId[];
-  displayName?: string;
   googleId?: string;
 }
 

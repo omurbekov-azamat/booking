@@ -6,6 +6,7 @@ import permit from '../middleware/permit';
 import Hotel from '../models/Hotel';
 import config from '../config';
 import { OAuth2Client } from 'google-auth-library';
+import crypto from 'crypto';
 
 const usersRouter = express.Router();
 
@@ -183,7 +184,7 @@ usersRouter.delete('/sessions', async (req, res, next) => {
 usersRouter.post('/google', async (req, res, next) => {
   try {
     const ticket = await client.verifyIdToken({
-      idToken: req.body.credential,
+      idToken: req.body.credential.cred,
       audience: config.google.clientId,
     });
 
@@ -196,6 +197,7 @@ usersRouter.post('/google', async (req, res, next) => {
     const id = payload['sub'];
     const firstName = payload['given_name'];
     const lastName = payload['family_name'];
+    const phoneNumber = req.body.credential.phone;
     if (!email) {
       return res.status(400).send({ error: 'Not enough user data to continue' });
     }
@@ -208,7 +210,10 @@ usersRouter.post('/google', async (req, res, next) => {
         lastName: lastName,
         firstName: firstName,
         password: crypto.randomUUID(),
+        phoneNumber: phoneNumber,
+        googleId: id,
       });
+      console.log(user);
     }
 
     user.generateToken();

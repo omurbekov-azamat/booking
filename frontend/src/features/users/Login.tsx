@@ -9,6 +9,12 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import type { LoginMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
 import { GoogleLogin } from '@react-oauth/google';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import DialogTextField from '@mui/material/TextField';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +27,9 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [credentials, setCredentials] = useState('');
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -34,10 +43,24 @@ const Login = () => {
   };
 
   const googleLoginHandler = async (credentials: string) => {
-    await dispatch(googleLogin(credentials)).unwrap();
-    await navigate('/');
+    setPhoneNumber('');
+    setIsDialogOpen(true);
+    setCredentials(credentials);
   };
 
+  const closeDialogHandler = () => {
+    setIsDialogOpen(false);
+  };
+
+  const phoneNumberChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  const submitDialogHandler = async (phone: string, cred: string) => {
+    await dispatch(googleLogin({ phone, cred })).unwrap();
+    setIsDialogOpen(false);
+    await navigate('/');
+  };
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -105,6 +128,26 @@ const Login = () => {
             </Grid>
           </Grid>
         </Box>
+
+        <Dialog open={isDialogOpen} onClose={closeDialogHandler}>
+          <DialogTitle>{t('enterPhoneNumber')}</DialogTitle>
+          <DialogContent>
+            <DialogTextField
+              label={t('phoneNumber')}
+              name="phoneNumber"
+              type="tel"
+              value={phoneNumber}
+              onChange={phoneNumberChangeHandler}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeDialogHandler}>{t('cancel')}</Button>
+            <Button onClick={() => submitDialogHandler(phoneNumber, credentials)} color="primary" variant="contained">
+              {t('submit')}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Container>
   );
