@@ -71,13 +71,22 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
   favorites: {
     type: [{ type: Schema.Types.ObjectId, ref: 'Hotel' }],
   },
+  isVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    default: null,
+  },
 });
 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
-
+  this.verificationToken = randomUUID();
   const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
   this.password = await bcrypt.hash(this.password, salt);
 
