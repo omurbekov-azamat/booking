@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import { Box, CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
+import { CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
+import premium from '../../../assets/images/premium.png';
+import business from '../../../assets/images/business.png';
+import standard from '../../../assets/images/standard.png';
 
 interface Props {
   hotel: Hotel;
@@ -18,43 +21,26 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
   const cardImage = apiURL + '/' + hotel.image;
   const currency = useAppSelector(selectCurrency);
   const { t } = useTranslation();
-
-  let statusStyle = {
-    border: '2px solid silver',
-    borderRadius: '6px',
-    padding: '7px',
-    fontWeight: 'bold',
-  };
-
-  if (hotel.status === 'premium') {
-    statusStyle = {
-      ...statusStyle,
-      border: '2px solid gold',
-    };
-  } else if (hotel.status === 'business') {
-    statusStyle = {
-      ...statusStyle,
-      border: '2px solid blue',
-    };
-  }
-
-  let status = '';
+  let status;
+  let statusIcon;
+  let city;
 
   switch (hotel.status) {
     case 'premium':
       status = t('premium');
+      statusIcon = premium;
       break;
     case 'business':
       status = t('business');
+      statusIcon = business;
       break;
     case 'standard':
       status = t('standard');
+      statusIcon = standard;
       break;
     default:
       break;
   }
-
-  let city = '';
 
   switch (hotel.city) {
     case 'bishkek':
@@ -64,52 +50,52 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
       city = t('issykKul');
       break;
     case 'osh':
-      status = t('osh');
+      city = t('osh');
       break;
     case 'kara-balta':
-      status = t('kara-balta');
+      city = t('kara-balta');
       break;
     case 'tokmok':
-      status = t('tokmok');
+      city = t('tokmok');
       break;
     case 'kant':
-      status = t('kant');
+      city = t('kant');
       break;
     case 'talas':
-      status = t('talas');
+      city = t('talas');
       break;
     case 'kara-suu':
-      status = t('kara-suu');
+      city = t('kara-suu');
       break;
     case 'nookat':
-      status = t('nookat');
+      city = t('nookat');
       break;
     case 'uzgen':
-      status = t('uzgen');
+      city = t('uzgen');
       break;
     case 'suzak':
-      status = t('suzak');
+      city = t('suzak');
       break;
     case 'kara-kulja':
-      status = t('kara-kulja');
+      city = t('kara-kulja');
       break;
     case 'naryn':
-      status = t('naryn');
+      city = t('naryn');
       break;
     case 'atbashi':
-      status = t('atbashi');
+      city = t('atbashi');
       break;
     case 'kochkor':
-      status = t('kochkor');
+      city = t('kochkor');
       break;
     case 'isfana':
-      status = t('isfana');
+      city = t('isfana');
       break;
     case 'kyzyl-kiya':
-      status = t('kyzyl-kiya');
+      city = t('kyzyl-kiya');
       break;
     case 'leylek':
-      status = t('leylek');
+      city = t('leylek');
       break;
   }
 
@@ -137,7 +123,6 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
               </Grid>
             </Grid>
           </Grid>
-
           <Grid item>
             <Grid item>
               <Typography variant="h6">{city}</Typography>
@@ -156,15 +141,14 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
             </Grid>
           </Grid>
         </Grid>
-
         <Grid item>
           <Grid container flexDirection="column" alignItems="center">
-            <Grid item>
-              <Box style={statusStyle} textAlign={'center'}>
-                {status}
-              </Box>
+            <Grid item style={{ width: 35, height: 35, padding: 0 }}>
+              <img src={statusIcon} alt={status} style={{ width: '100%', height: 'auto' }} />
             </Grid>
-
+            <Grid item>
+              <Typography sx={{ fontSize: 16 }}>{status}</Typography>
+            </Grid>
             <Grid item>
               <Link
                 style={{ textDecoration: 'none', color: '#6b6b6b' }}
