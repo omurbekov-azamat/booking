@@ -7,6 +7,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
+import premium from '../../../assets/images/premium.png';
+import business from '../../../assets/images/business.png';
+import standard from '../../../assets/images/standard.png';
 
 interface Props {
   hotel: Hotel;
@@ -38,17 +41,21 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
     };
   }
 
-  let status = '';
+  let status;
+  let statusIcon;
 
   switch (hotel.status) {
     case 'premium':
       status = t('premium');
+      statusIcon = premium;
       break;
     case 'business':
       status = t('business');
+      statusIcon = business;
       break;
     case 'standard':
       status = t('standard');
+      statusIcon = standard;
       break;
     default:
       break;
@@ -159,12 +166,12 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
 
         <Grid item>
           <Grid container flexDirection="column" alignItems="center">
-            <Grid item>
-              <Box style={statusStyle} textAlign={'center'}>
-                {status}
-              </Box>
+            <Grid item style={{ width: 35, height: 35, padding: 0 }}>
+              <img src={statusIcon} alt={status} style={{ width: '100%', height: 'auto' }} />
             </Grid>
-
+            <Grid item>
+              <Typography sx={{ fontSize: 16 }}>{status}</Typography>
+            </Grid>
             <Grid item>
               <Link
                 style={{ textDecoration: 'none', color: '#6b6b6b' }}
