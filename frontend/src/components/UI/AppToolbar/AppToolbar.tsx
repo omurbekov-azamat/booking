@@ -10,6 +10,7 @@ import RUIcon from '../../../assets/images/russiaIcon.png';
 import USAIcon from '../../../assets/images/usaIcon.png';
 import CurrencySwitcher from '../../../features/currency/CurrencySwitcher';
 import SearchField from '../../../features/hotels/components/SearchField/SearchField';
+import { ToolBarStyles } from '../../../styles';
 
 const AppToolbar = () => {
   const user = useAppSelector(selectUser);
@@ -28,8 +29,8 @@ const AppToolbar = () => {
   });
 
   return (
-    <Box sx={{ flexGrow: 1 }} mb={3}>
-      <AppBar position="sticky" sx={{ top: 0, background: '#77dd77', py: 2 }}>
+    <Box mb={3} sx={{ flexGrow: 1 }}>
+      <AppBar position="sticky" sx={ToolBarStyles}>
         <Toolbar>
           <Container maxWidth="xl">
             <Grid container justifyContent="space-between" alignItems="center" spacing={2}>

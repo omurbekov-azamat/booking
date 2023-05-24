@@ -5,8 +5,13 @@ import { selectFetchRecommendedHotelsLoading, selectRecommendedHotels } from '..
 import { Grid } from '@mui/material';
 import HotelsCard from './HotelsCard';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Box from '@mui/material/Box';
+import { HeaderStyles, mainBlocksBorderStyles } from '../../../styles';
+import Typography from '@mui/material/Typography';
+import { useTranslation } from 'react-i18next';
 
 const RecommendedHotels = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const recommendedHotels = useAppSelector(selectRecommendedHotels);
   const fetchRecommendedHotelsLoading = useAppSelector(selectFetchRecommendedHotelsLoading);
@@ -15,7 +20,10 @@ const RecommendedHotels = () => {
     dispatch(getRecommendedHotels());
   }, [dispatch]);
   return (
-    <>
+    <Box style={mainBlocksBorderStyles}>
+      <Typography mb={2} style={HeaderStyles} variant="h4">
+        {t('bestHotels')}
+      </Typography>
       {fetchRecommendedHotelsLoading && <Spinner />}
       <Grid container spacing={2} alignItems="stretch">
         {recommendedHotels &&
@@ -25,7 +33,7 @@ const RecommendedHotels = () => {
             </Grid>
           ))}
       </Grid>
-    </>
+    </Box>
   );
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SwipeCards from './SwipeCards';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { HeaderStyles, mainBlocksBorderStyles } from '../../../styles';
 
 const SwipeCityCards = () => {
   const { t } = useTranslation();
@@ -113,13 +115,15 @@ const SwipeCityCards = () => {
     },
   ];
   return (
-    <>
-      <Typography variant="h2">{t('mainPageOfTitleCity')}</Typography>
+    <Box style={mainBlocksBorderStyles}>
+      <Typography style={HeaderStyles} variant="h4">
+        {t('mainPageOfTitleCity')}
+      </Typography>
       <Typography variant="subtitle1" color="grey" mb={2} fontSize="25px">
         {t('mainPageOfSubtitleCity')}
       </Typography>
       <SwipeCards items={cities} city={true} />
-    </>
+    </Box>
   );
 };
 
