@@ -71,52 +71,52 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
       city = t('issykKul');
       break;
     case 'osh':
-      status = t('osh');
+      city = t('osh');
       break;
     case 'kara-balta':
-      status = t('kara-balta');
+      city = t('kara-balta');
       break;
     case 'tokmok':
-      status = t('tokmok');
+      city = t('tokmok');
       break;
     case 'kant':
-      status = t('kant');
+      city = t('kant');
       break;
     case 'talas':
-      status = t('talas');
+      city = t('talas');
       break;
     case 'kara-suu':
-      status = t('kara-suu');
+      city = t('kara-suu');
       break;
     case 'nookat':
-      status = t('nookat');
+      city = t('nookat');
       break;
     case 'uzgen':
-      status = t('uzgen');
+      city = t('uzgen');
       break;
     case 'suzak':
-      status = t('suzak');
+      city = t('suzak');
       break;
     case 'kara-kulja':
-      status = t('kara-kulja');
+      city = t('kara-kulja');
       break;
     case 'naryn':
-      status = t('naryn');
+      city = t('naryn');
       break;
     case 'atbashi':
-      status = t('atbashi');
+      city = t('atbashi');
       break;
     case 'kochkor':
-      status = t('kochkor');
+      city = t('kochkor');
       break;
     case 'isfana':
-      status = t('isfana');
+      city = t('isfana');
       break;
     case 'kyzyl-kiya':
-      status = t('kyzyl-kiya');
+      city = t('kyzyl-kiya');
       break;
     case 'leylek':
-      status = t('leylek');
+      city = t('leylek');
       break;
   }
 
