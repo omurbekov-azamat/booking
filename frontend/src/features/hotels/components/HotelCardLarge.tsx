@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import { Box, CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
+import { CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
@@ -21,28 +21,9 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
   const cardImage = apiURL + '/' + hotel.image;
   const currency = useAppSelector(selectCurrency);
   const { t } = useTranslation();
-
-  let statusStyle = {
-    border: '2px solid silver',
-    borderRadius: '6px',
-    padding: '7px',
-    fontWeight: 'bold',
-  };
-
-  if (hotel.status === 'premium') {
-    statusStyle = {
-      ...statusStyle,
-      border: '2px solid gold',
-    };
-  } else if (hotel.status === 'business') {
-    statusStyle = {
-      ...statusStyle,
-      border: '2px solid blue',
-    };
-  }
-
   let status;
   let statusIcon;
+  let city;
 
   switch (hotel.status) {
     case 'premium':
@@ -60,8 +41,6 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
     default:
       break;
   }
-
-  let city = '';
 
   switch (hotel.city) {
     case 'bishkek':
@@ -144,7 +123,6 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
               </Grid>
             </Grid>
           </Grid>
-
           <Grid item>
             <Grid item>
               <Typography variant="h6">{city}</Typography>
@@ -163,7 +141,6 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
             </Grid>
           </Grid>
         </Grid>
-
         <Grid item>
           <Grid container flexDirection="column" alignItems="center">
             <Grid item style={{ width: 35, height: 35, padding: 0 }}>
