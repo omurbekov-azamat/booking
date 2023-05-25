@@ -12,26 +12,35 @@ const ordersRouter = express.Router();
 ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, res, next) => {
   const user = (req as RequestWithUser).user;
   try {
-    const order = new Order({
-      userId: user._id,
-      apartmentId: req.body.apartmentId,
-      createdAt: new Date().toISOString(),
-      comment: req.body.comment,
-      dateArrival: req.body.dateArrival,
-      dateDeparture: req.body.dateDeparture,
-      personalTranslator: req.body.personalTranslator,
-      meetingAirport: req.body.meetingAirport,
-      tourManagement: req.body.tourManagement,
-      eventManagement: req.body.eventManagement,
-    });
+    if (user.isVerified) {
+      const order = new Order({
+        userId: user._id,
+        apartmentId: req.body.apartmentId,
+        createdAt: new Date().toISOString(),
+        comment: req.body.comment,
+        dateArrival: req.body.dateArrival,
+        dateDeparture: req.body.dateDeparture,
+        personalTranslator: req.body.personalTranslator,
+        meetingAirport: req.body.meetingAirport,
+        tourManagement: req.body.tourManagement,
+        eventManagement: req.body.eventManagement,
+      });
 
-    await order.save();
-    return res.send({
-      message: {
-        en: 'Order created successfully',
-        ru: 'Заказ успешно создан',
-      },
-    });
+      await order.save();
+      return res.send({
+        message: {
+          en: 'Order created successfully',
+          ru: 'Заказ успешно создан',
+        },
+      });
+    } else {
+      res.status(401).send({
+        message: {
+          en: 'for order you must verify your account',
+          ru: 'для создания заказа вы должны подтвердить свой аккаунт',
+        },
+      });
+    }
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(e);
