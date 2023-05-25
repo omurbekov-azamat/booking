@@ -5,7 +5,7 @@ import { selectUser } from '../../users/usersSlice';
 import Royal from '../../../components/UI/Status/Royal';
 import Vip from '../../../components/UI/Status/vip';
 import { useTranslation } from 'react-i18next';
-import ChangePassword from './ChengePassword/ChangePassword';
+import ChangePassword from './ChangePassword';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);

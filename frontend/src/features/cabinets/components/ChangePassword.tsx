@@ -7,8 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from '../../../../app/hooks';
-import { changePass, logout } from '../../../users/usersThunks';
+import { useAppDispatch } from '../../../app/hooks';
+import { changePass, logout } from '../../users/usersThunks';
 
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <Box>
+    <Box textAlign={'center'}>
       <Button variant="outlined" onClick={handleClickOpen}>
         {t('changePassword')}
       </Button>
