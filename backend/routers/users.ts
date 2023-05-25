@@ -288,7 +288,12 @@ usersRouter.patch('/password', auth, permit('user'), async (req, res, next) => {
     const user = (req as RequestWithUser).user;
     user.password = newPassword;
     await user.save();
-    return res.send({ message: 'Password updated successfully' });
+    return res.send({
+      message: {
+        en: 'Password changed successfully',
+        ru: 'Пароль успешно изменен ',
+      },
+    });
   } catch (e) {
     return next(e);
   }
