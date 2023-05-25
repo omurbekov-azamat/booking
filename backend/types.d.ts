@@ -11,6 +11,8 @@ export interface IUser {
   cashback: number;
   token: string;
   favorites: ObjectId[];
+  isVerified: boolean;
+  verificationToken: string | null;
 }
 
 export interface IRoomType {
