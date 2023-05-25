@@ -1,29 +1,64 @@
 import React, { MouseEventHandler } from 'react';
-import { CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
+import { Box, CardMedia, Checkbox, Grid, Link, Rating, Stack, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
 import premium from '../../../assets/images/premium.png';
 import business from '../../../assets/images/business.png';
 import standard from '../../../assets/images/standard.png';
+import { changeFavorites, reAuthorization } from '../../users/usersThunks';
+import { getFavoriteHotels } from '../hotelsThunks';
+import { selectUser } from '../../users/usersSlice';
+import { LoadingButton } from '@mui/lab';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { selectLoadingRemoveHotel, selectLoadingTogglePublished } from '../hotelsSlice';
 
 interface Props {
   hotel: Hotel;
   commentAmount?: number;
-  onFavoriteIconClick?: MouseEventHandler;
+  onDeleteBtnClick?: MouseEventHandler;
+  onPublishBtnClick?: MouseEventHandler;
+  isNeedButtons?: true;
 }
 
-const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconClick }) => {
-  const cardImage = apiURL + '/' + hotel.image;
-  const currency = useAppSelector(selectCurrency);
+const HotelCardLarge: React.FC<Props> = ({
+  hotel,
+  commentAmount,
+  onDeleteBtnClick,
+  onPublishBtnClick,
+  isNeedButtons,
+}) => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const currency = useAppSelector(selectCurrency);
+  const user = useAppSelector(selectUser);
+  const loadingDeleteHotel = useAppSelector(selectLoadingRemoveHotel);
+  const loadingPublishHotel = useAppSelector(selectLoadingTogglePublished);
+  const cardImage = apiURL + '/' + hotel.image;
+  const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
   let status;
   let statusIcon;
   let city;
+
+  const onClickFavorite = async (id: string) => {
+    if (!favorite) {
+      await dispatch(changeFavorites({ addHotel: id }));
+      await dispatch(reAuthorization());
+    } else {
+      await dispatch(changeFavorites({ deleteHotel: id }));
+      await dispatch(reAuthorization());
+      await dispatch(getFavoriteHotels());
+    }
+  };
+
+  const onClickCard = async (id: string) => {
+    await navigate('/hotels/' + id);
+  };
 
   switch (hotel.status) {
     case 'premium':
@@ -101,75 +136,112 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
 
   return (
     <>
-      <Grid
-        container
-        style={{ border: '1px solid grey', padding: '15px', marginBottom: '10px', position: 'relative' }}
-        gap={2}
-      >
-        <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
-          <CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />
-        </Grid>
+      <Box sx={{ border: 1, p: 1 }}>
+        <Grid container gap={2} onClick={() => onClickCard(hotel._id)}>
+          <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
+            <CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />
+          </Grid>
 
-        <Grid item flex={1}>
-          <Grid container flexDirection="row" justifyContent="space-between">
-            <Grid container gap={1} alignItems="center">
+          <Grid item flex={1}>
+            <Grid container flexDirection="row" justifyContent="space-between">
+              <Grid container gap={1} alignItems="center">
+                <Grid item>
+                  <Typography variant="h5" fontWeight="bolder">
+                    {hotel.name}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Rating name="read-only" value={hotel.star} precision={0.5} readOnly size="small" />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
               <Grid item>
-                <Typography variant="h5" fontWeight="bolder">
-                  {hotel.name}
+                <Typography variant="h6">{city}</Typography>
+              </Grid>
+              <Grid item>
+                <Typography color={'grey'} fontSize={18}>
+                  {t('founding') + ' ' + hotel.founding}
                 </Typography>
               </Grid>
               <Grid item>
-                <Rating name="read-only" value={hotel.star} precision={0.5} readOnly size="small" />
+                <Typography color={'grey'} fontSize={18}>
+                  {t('lowestPrice') +
+                    ' ' +
+                    (currency === 'kgs' ? hotel.lowestPrice.som + ' KGS' : hotel.lowestPrice.dollar + ' USD')}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid item>
-            <Grid item>
-              <Typography variant="h6">{city}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography color={'grey'} fontSize={18}>
-                {t('founding') + ' ' + hotel.founding}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography color={'grey'} fontSize={18}>
-                {t('lowestPrice') +
-                  ' ' +
-                  (currency === 'kgs' ? hotel.lowestPrice.som + ' KGS' : hotel.lowestPrice.dollar + ' USD')}
-              </Typography>
+            <Grid container flexDirection="column" alignItems="center">
+              <Grid item style={{ width: 35, height: 35, padding: 0 }}>
+                <img src={statusIcon} alt={status} style={{ width: '100%', height: 'auto' }} />
+              </Grid>
+              <Grid item>
+                <Typography sx={{ fontSize: 16 }}>{status}</Typography>
+              </Grid>
+              <Grid item>
+                <Link
+                  style={{ textDecoration: 'none', color: '#6b6b6b' }}
+                  component={RouterLink}
+                  to={'/hotel/' + hotel._id + '/comments'}
+                  variant="body2"
+                >
+                  {t('comments') + ': ' + commentAmount}
+                </Link>
+              </Grid>
+              {user && user.role === 'user' && (
+                <Grid item>
+                  <Checkbox
+                    onClick={() => onClickFavorite(hotel._id)}
+                    icon={<FavoriteBorder />}
+                    checkedIcon={<Favorite />}
+                    color="error"
+                  />
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
-          <Grid container flexDirection="column" alignItems="center">
-            <Grid item style={{ width: 35, height: 35, padding: 0 }}>
-              <img src={statusIcon} alt={status} style={{ width: '100%', height: 'auto' }} />
-            </Grid>
-            <Grid item>
-              <Typography sx={{ fontSize: 16 }}>{status}</Typography>
-            </Grid>
-            <Grid item>
-              <Link
-                style={{ textDecoration: 'none', color: '#6b6b6b' }}
-                component={RouterLink}
-                to={'/hotel/' + hotel._id + '/comments'}
-                variant="body2"
+        <Box>
+          <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
+            {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+              <LoadingButton
+                disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+                variant="contained"
+                size="medium"
+                onClick={() => navigate('/my-cabinet/edit-hotel/' + hotel._id)}
               >
-                {t('comments') + ': ' + commentAmount}
-              </Link>
-            </Grid>
-            <Grid item>
-              <Checkbox
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
-                onClick={onFavoriteIconClick}
+                {t('edit')}
+              </LoadingButton>
+            )}
+            {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+              <LoadingButton
+                disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
+                loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={onDeleteBtnClick}
+              >
+                {t('delete')}
+              </LoadingButton>
+            )}
+            {isNeedButtons && (user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
+              <LoadingButton
+                disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+                loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
+                variant="outlined"
                 color="error"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+                sx={{ fontSize: 11 }}
+                onClick={onPublishBtnClick}
+              >
+                {t('publish')}
+              </LoadingButton>
+            )}
+          </Stack>
+        </Box>
+      </Box>
     </>
   );
 };

@@ -18,10 +18,10 @@ import {
   selectLoadingFetchNewPage,
   selectPageOfHotels,
 } from './hotelsSlice';
-import HotelsCard from './components/HotelsCard';
 import { LoadingButton } from '@mui/lab';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { SearchData } from '../../types';
+import HotelCardLarge from './components/HotelCardLarge';
 
 const drawerWidth = 240;
 
@@ -254,8 +254,8 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
         <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
           {hotels && hotels.length > 0 ? (
             hotels.map((el) => (
-              <Grid item xs={12} sm={12} md={6} lg={4} key={el._id} alignItems="stretch">
-                <HotelsCard hotel={el} />
+              <Grid item xs={12} sm={12} md={12} lg={12} key={el._id} alignItems="stretch">
+                <HotelCardLarge hotel={el} />
               </Grid>
             ))
           ) : (
