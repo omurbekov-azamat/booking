@@ -5,11 +5,14 @@ import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
 import premium from '../../../assets/images/premium.png';
 import business from '../../../assets/images/business.png';
 import standard from '../../../assets/images/standard.png';
+import { changeFavorites, reAuthorization } from '../../users/usersThunks';
+import { getFavoriteHotels } from '../hotelsThunks';
+import { selectUser } from '../../users/usersSlice';
 
 interface Props {
   hotel: Hotel;
@@ -17,12 +20,27 @@ interface Props {
 }
 
 const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
-  const cardImage = apiURL + '/' + hotel.image;
-  const currency = useAppSelector(selectCurrency);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const currency = useAppSelector(selectCurrency);
+  const user = useAppSelector(selectUser);
+  const cardImage = apiURL + '/' + hotel.image;
+  const favorite = user?.role === 'user' && user.favorites.includes(hotel._id);
   let status;
   let statusIcon;
+
   let city;
+
+  const onClickFavorite = async (id: string) => {
+    if (!favorite) {
+      await dispatch(changeFavorites({ addHotel: id }));
+      await dispatch(reAuthorization());
+    } else {
+      await dispatch(changeFavorites({ deleteHotel: id }));
+      await dispatch(reAuthorization());
+      await dispatch(getFavoriteHotels());
+    }
+  };
 
   switch (hotel.status) {
     case 'premium':
