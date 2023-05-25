@@ -136,6 +136,7 @@ const HotelCardLarge: React.FC<Props> = ({
         container
         style={{ border: '1px solid grey', padding: '15px', marginBottom: '10px', position: 'relative' }}
         gap={2}
+        onClick={() => onClickCard(hotel._id)}
       >
         <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
           <CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />
@@ -190,9 +191,16 @@ const HotelCardLarge: React.FC<Props> = ({
                 {t('comments') + ': ' + commentAmount}
               </Link>
             </Grid>
-            <Grid item>
-              <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} color="error" />
-            </Grid>
+            {user && user.role === 'user' && (
+              <Grid item>
+                <Checkbox
+                  onClick={() => onClickFavorite(hotel._id)}
+                  icon={<FavoriteBorder />}
+                  checkedIcon={<Favorite />}
+                  color="error"
+                />
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Grid>
