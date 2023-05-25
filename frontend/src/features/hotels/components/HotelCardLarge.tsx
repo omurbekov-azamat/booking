@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
@@ -17,9 +17,18 @@ import { selectUser } from '../../users/usersSlice';
 interface Props {
   hotel: Hotel;
   commentAmount?: number;
+  onDeleteBtnClick?: MouseEventHandler;
+  onPublishBtnClick?: MouseEventHandler;
+  isNeedButtons?: true;
 }
 
-const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
+const HotelCardLarge: React.FC<Props> = ({
+  hotel,
+  commentAmount,
+  onDeleteBtnClick,
+  onPublishBtnClick,
+  isNeedButtons,
+}) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
