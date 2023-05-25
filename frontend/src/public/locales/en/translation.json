@@ -149,5 +149,7 @@
   "sendMail": "Send mail",
   "sendSuccess": "Mail successfully sent. Check Inbox and spam",
   "navigateText": "You will automatically follow to your cabinet after 5sec. . .  or you can follow by click :",
-  "navigateButton": "follow"
+  "navigateButton": "follow",
+  "changePassword" : "Change password",
+  "sure" : "Are you sure?"
 }

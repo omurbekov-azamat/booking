@@ -134,3 +134,11 @@ export const verify = createAsyncThunk<GlobalSuccess, string>('users/verify', as
     throw new Error();
   }
 });
+
+export const changePass = createAsyncThunk<void, string>('users/changeStatus', async (pass) => {
+  try {
+    await axiosApi.patch('/users/password', { newPassword: pass });
+  } catch {
+    throw new Error();
+  }
+});

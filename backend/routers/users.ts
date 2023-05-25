@@ -282,4 +282,21 @@ usersRouter.get('/verify/:token', auth, async (req, res) => {
   });
 });
 
+usersRouter.patch('/password', auth, permit('user'), async (req, res, next) => {
+  try {
+    const { newPassword } = req.body;
+    const user = (req as RequestWithUser).user;
+    user.password = newPassword;
+    await user.save();
+    return res.send({
+      message: {
+        en: 'Password changed successfully',
+        ru: 'Пароль успешно изменен ',
+      },
+    });
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export default usersRouter;
