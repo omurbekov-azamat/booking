@@ -143,5 +143,7 @@
   "download": "Download",
   "createRoomType": "Create room type",
   "enterPhoneNumber": "Enter phone number",
-  "submit": "Submit"
+  "submit": "Submit",
+  "changePassword" : "Change password",
+  "sure" : "Are you sure?"
 }
