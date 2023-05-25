@@ -116,3 +116,21 @@ export const googleLogin = createAsyncThunk<User, { phone: string; cred: string 
     }
   },
 );
+
+export const sendMail = createAsyncThunk<GlobalSuccess>('users/getVerify', async () => {
+  try {
+    const response = await axiosApi.post('/users/getVerify');
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
+
+export const verify = createAsyncThunk<GlobalSuccess, string>('users/verify', async (token) => {
+  try {
+    const response = await axiosApi.get('/users/verify/' + token);
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
