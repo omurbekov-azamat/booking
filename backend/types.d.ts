@@ -12,6 +12,8 @@ export interface IUser {
   token: string;
   favorites: ObjectId[];
   googleId?: string;
+  isVerified: boolean;
+  verificationToken: string | null;
 }
 
 export interface IRoomType {

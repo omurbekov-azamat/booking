@@ -12,6 +12,8 @@ const config = {
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID,
   },
+  mail: 'esdpjs17@gmail.com',
+  site: 'http://localhost:8000',
 };
 
 export default config;

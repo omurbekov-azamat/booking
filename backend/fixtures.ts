@@ -35,6 +35,7 @@ const run = async () => {
       phoneNumber: '0555 777777',
       status: 'royal',
       cashback: '10',
+      isVerified: true,
     },
     {
       email: 'admin2@gmail.com',
@@ -46,6 +47,7 @@ const run = async () => {
       phoneNumber: '0555 777777',
       status: 'vip',
       cashback: '20',
+      isVerified: true,
     },
     {
       email: 'user@gmail.com',
@@ -57,6 +59,7 @@ const run = async () => {
       phoneNumber: '0555 9999999',
       status: 'vip',
       cashback: '30',
+      isVerified: true,
     },
     {
       email: 'hotel@gmail.com',
@@ -68,6 +71,7 @@ const run = async () => {
       phoneNumber: '0555 444444',
       status: 'royal',
       cashback: '40',
+      isVerified: true,
     },
     {
       email: 'director@gmail.com',
@@ -79,6 +83,7 @@ const run = async () => {
       phoneNumber: '0555 888888',
       status: 'vip',
       cashback: '0',
+      isVerified: true,
     },
     {
       email: 'user2@gmail.com',
@@ -90,6 +95,7 @@ const run = async () => {
       phoneNumber: '0555 9999998',
       status: 'royal',
       cashback: '220',
+      isVerified: true,
     },
     {
       email: 'hotel2@gmail.com',
@@ -101,6 +107,7 @@ const run = async () => {
       phoneNumber: '0555 888888',
       status: 'vip',
       cashback: '370',
+      isVerified: true,
     },
   );
 

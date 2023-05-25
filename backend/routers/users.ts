@@ -4,9 +4,10 @@ import User from '../models/User';
 import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
 import Hotel from '../models/Hotel';
-import config from '../config';
 import { OAuth2Client } from 'google-auth-library';
 import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+import config from '../config';
 
 const usersRouter = express.Router();
 
@@ -127,7 +128,7 @@ usersRouter.patch('/toggleAddHotelToFavorites', auth, permit('user'), async (req
         return res.send({ message: 'The hotel is already in the favorites' });
       } else {
         user.favorites.push(addHotelId);
-        user.save();
+        await user.save();
         return res.send({
           message: {
             en: foundHotel.name + ' added to favorites successfully',
@@ -223,6 +224,62 @@ usersRouter.post('/google', async (req, res, next) => {
   } catch (e) {
     return next(e);
   }
+});
+
+usersRouter.post('/getVerify', auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: config.mail,
+        pass: 'qlfhiaqbgitxqlaw',
+      },
+    });
+    const mailOptions = {
+      from: config.mail,
+      to: user.email,
+      subject: 'Email Verification',
+      text: `Please click the following link to verify your email: ${config.site}/verify/${user.verificationToken}`,
+    };
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.error('Error sending email:', error);
+      } else {
+        return res.send({
+          message: {
+            en: 'Mail sent. check ' + user.email,
+            ru: 'письмо отправлено. проверьте ' + user.email,
+          },
+        });
+      }
+    });
+  } catch (e) {
+    return next(e);
+  }
+});
+
+usersRouter.get('/verify/:token', auth, async (req, res) => {
+  const token = req.params.token;
+  const reqUser = (req as RequestWithUser).user;
+  const user = await User.findOne({ verificationToken: token, _id: reqUser.id });
+
+  if (!user) {
+    return res.status(404).json({ message: 'Invalid verification token' });
+  }
+
+  user.isVerified = true;
+  user.verificationToken = null;
+  await user.save();
+
+  return res.send({
+    message: {
+      en: 'successfully verified',
+      ru: 'успешно верифицированно ',
+    },
+  });
 });
 
 export default usersRouter;
