@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectLoginError, selectLoginLoading } from './usersSlice';
-import { login } from './usersThunks';
+import { googleLogin, login } from './usersThunks';
 import { Alert, Avatar, Box, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import type { LoginMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
+import { GoogleLogin } from '@react-oauth/google';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import ReactPhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +28,9 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [credentials, setCredentials] = useState('');
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -32,10 +43,25 @@ const Login = () => {
     navigate('/');
   };
 
+  const googleLoginHandler = async (credentials: string) => {
+    await setPhoneNumber('');
+    await setIsDialogOpen(true);
+    await setCredentials(credentials);
+  };
+
+  const closeDialogHandler = () => {
+    setIsDialogOpen(false);
+  };
+
+  const submitDialogHandler = async (phone: string, cred: string) => {
+    await dispatch(googleLogin({ phone, cred })).unwrap();
+    setIsDialogOpen(false);
+    await navigate('/');
+  };
   return (
     <Container component="main" maxWidth="xs">
       <Box
-        style={{
+        sx={{
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
@@ -48,6 +74,18 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           {t('signIn')}
         </Typography>
+        <Box sx={{ pt: 2 }}>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              if (credentialResponse.credential) {
+                void googleLoginHandler(credentialResponse.credential);
+              }
+            }}
+            onError={() => {
+              console.log('Login failed');
+            }}
+          />
+        </Box>
         {error && (
           <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
             {error.error}
@@ -63,6 +101,7 @@ const Login = () => {
                 autoComplete="current-email"
                 value={state.email}
                 onChange={inputChangeHandler}
+                fullWidth
               />
             </Grid>
             <Grid item xs={12}>
@@ -73,6 +112,7 @@ const Login = () => {
                 autoComplete="current-password"
                 value={state.password}
                 onChange={inputChangeHandler}
+                fullWidth
               />
             </Grid>
           </Grid>
@@ -87,6 +127,33 @@ const Login = () => {
             </Grid>
           </Grid>
         </Box>
+
+        <Dialog open={isDialogOpen} onClose={closeDialogHandler}>
+          <DialogTitle>{t('enterPhoneNumber')}</DialogTitle>
+          <DialogContent sx={{ p: 8 }}>
+            <ReactPhoneInput
+              inputProps={{
+                name: 'phoneNumber',
+                required: true,
+                autoFocus: true,
+              }}
+              country={'kg'}
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeDialogHandler}>{t('cancel')}</Button>
+            <Button
+              disabled={phoneNumber.length < 8}
+              onClick={() => submitDialogHandler(phoneNumber, credentials)}
+              color="primary"
+              variant="contained"
+            >
+              {t('submit')}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Container>
   );

@@ -141,5 +141,7 @@
   "empty": "Empty",
   "editApartment": "Edit apartment",
   "download": "Download",
-  "createRoomType": "Create room type"
+  "createRoomType": "Create room type",
+  "enterPhoneNumber": "Enter phone number",
+  "submit": "Submit"
 }

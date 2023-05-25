@@ -1,4 +1,5 @@
 export const apiURL = 'http://localhost:8000';
+export const GOOGLE_CLIENT_ID = '349332092478-a9b2nse4rg5rt9s4buau9m23tinr36lm.apps.googleusercontent.com';
 
 export const styleModalCover = {
   position: 'absolute',

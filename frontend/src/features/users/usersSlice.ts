@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GlobalError, GlobalSuccess, User, ValidationError } from '../../types';
-import { changeFavorites, getAdmins, getUsers, login, logout, reAuthorization, register } from './usersThunks';
+import {
+  changeFavorites,
+  getAdmins,
+  getUsers,
+  googleLogin,
+  login,
+  logout,
+  reAuthorization,
+  register,
+} from './usersThunks';
 import { RootState } from '../../app/store';
 
 interface UsersState {
@@ -112,6 +121,18 @@ export const usersSlice = createSlice({
     });
     builder.addCase(changeFavorites.fulfilled, (state, { payload: success }) => {
       state.favoriteSuccess = success;
+    });
+    builder.addCase(googleLogin.pending, (state) => {
+      state.loginLoading = true;
+      state.loginError = null;
+    });
+    builder.addCase(googleLogin.fulfilled, (state, { payload: user }) => {
+      state.loginLoading = false;
+      state.user = user;
+    });
+    builder.addCase(googleLogin.rejected, (state, { payload: error }) => {
+      state.loginLoading = false;
+      state.loginError = error || null;
     });
   },
 });

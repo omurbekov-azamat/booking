@@ -10,6 +10,8 @@ import { BrowserRouter } from 'react-router-dom';
 import theme from './theme';
 import { addInterceptors } from './axiosApi';
 import { SnackbarProvider } from 'notistack';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GOOGLE_CLIENT_ID } from './constants';
 
 addInterceptors(store);
 
@@ -21,7 +23,10 @@ root.render(
         <Suspense fallback={<CircularProgress />}>
           <ThemeProvider theme={theme}>
             <SnackbarProvider>
-              <App />
+              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                <App />
+              </GoogleOAuthProvider>
+              ,
             </SnackbarProvider>
           </ThemeProvider>
         </Suspense>

@@ -71,6 +71,7 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
   favorites: {
     type: [{ type: Schema.Types.ObjectId, ref: 'Hotel' }],
   },
+  googleId: String,
   isVerified: {
     type: Boolean,
     required: true,

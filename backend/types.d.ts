@@ -11,6 +11,7 @@ export interface IUser {
   cashback: number;
   token: string;
   favorites: ObjectId[];
+  googleId?: string;
   isVerified: boolean;
   verificationToken: string | null;
 }
