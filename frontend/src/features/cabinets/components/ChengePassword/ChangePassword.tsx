@@ -13,6 +13,7 @@ const ChangePassword = () => {
   const [password, setPassword] = useState('');
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { t } = useTranslation();
+  // const dispatch = useAppDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,9 +35,11 @@ const ChangePassword = () => {
     setConfirmOpen(false);
   };
 
-  const handleSubscribe = () => {
-    handleClose();
-    handleConfirmClose();
+  const handleSubscribe = async () => {
+    // await dispatch(changePass(password));
+    // await dispatch(logout());
+    await handleClose();
+    await handleConfirmClose();
   };
 
   return (
@@ -61,7 +64,7 @@ const ChangePassword = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('cancel')}</Button>
-          <Button onClick={handleConfirmOpen} color="error">
+          <Button disabled={password.length < 3} onClick={handleConfirmOpen} color="error">
             {t('changePassword')}
           </Button>
         </DialogActions>
