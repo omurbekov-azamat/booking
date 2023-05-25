@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import { CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
@@ -14,10 +14,9 @@ import standard from '../../../assets/images/standard.png';
 interface Props {
   hotel: Hotel;
   commentAmount?: number;
-  onFavoriteIconClick?: MouseEventHandler;
 }
 
-const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconClick }) => {
+const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
   const cardImage = apiURL + '/' + hotel.image;
   const currency = useAppSelector(selectCurrency);
   const { t } = useTranslation();
@@ -160,12 +159,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount, onFavoriteIconC
               </Link>
             </Grid>
             <Grid item>
-              <Checkbox
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
-                onClick={onFavoriteIconClick}
-                color="error"
-              />
+              <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} color="error" />
             </Grid>
           </Grid>
         </Grid>
