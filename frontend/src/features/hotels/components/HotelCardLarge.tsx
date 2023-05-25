@@ -3,7 +3,7 @@ import { CardMedia, Checkbox, Grid, Link, Rating, Typography } from '@mui/materi
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
@@ -22,6 +22,7 @@ interface Props {
 const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const currency = useAppSelector(selectCurrency);
   const user = useAppSelector(selectUser);
   const cardImage = apiURL + '/' + hotel.image;
@@ -40,6 +41,10 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, commentAmount }) => {
       await dispatch(reAuthorization());
       await dispatch(getFavoriteHotels());
     }
+  };
+
+  const onClickCard = async (id: string) => {
+    await navigate('/hotels/' + id);
   };
 
   switch (hotel.status) {
