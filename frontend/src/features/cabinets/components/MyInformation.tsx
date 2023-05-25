@@ -31,7 +31,7 @@ const MyInformation = () => {
           <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
             {t('email')} : {user.email}
           </Typography>
-          <ChangePassword />
+          {user.role === 'user' && <ChangePassword />}
         </>
       )}
     </Paper>
