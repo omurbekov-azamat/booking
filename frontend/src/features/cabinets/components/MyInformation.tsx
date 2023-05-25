@@ -5,6 +5,7 @@ import { selectUser } from '../../users/usersSlice';
 import Royal from '../../../components/UI/Status/Royal';
 import Vip from '../../../components/UI/Status/vip';
 import { useTranslation } from 'react-i18next';
+import ChangePassword from './ChengePassword/ChangePassword';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
@@ -30,6 +31,7 @@ const MyInformation = () => {
           <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
             {t('email')} : {user.email}
           </Typography>
+          <ChangePassword />
         </>
       )}
     </Paper>
