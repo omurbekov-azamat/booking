@@ -7,13 +7,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from '../../../../app/hooks';
+import { changePass, logout } from '../../../users/usersThunks';
 
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { t } = useTranslation();
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,8 +38,8 @@ const ChangePassword = () => {
   };
 
   const handleSubscribe = async () => {
-    // await dispatch(changePass(password));
-    // await dispatch(logout());
+    await dispatch(changePass(password));
+    await dispatch(logout());
     await handleClose();
     await handleConfirmClose();
   };

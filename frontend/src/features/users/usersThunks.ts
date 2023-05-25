@@ -116,3 +116,11 @@ export const googleLogin = createAsyncThunk<User, { phone: string; cred: string 
     }
   },
 );
+
+export const changePass = createAsyncThunk<void, string>('users/changeStatus', async (pass) => {
+  try {
+    await axiosApi.patch('/users/password', { newPassword: pass });
+  } catch {
+    throw new Error();
+  }
+});
