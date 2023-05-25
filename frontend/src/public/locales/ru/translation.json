@@ -144,5 +144,7 @@
   "download": "Загрузить",
   "createRoomType": "Создать тип комнаты",
   "enterPhoneNumber": "Введите номер телефона",
-  "submit": "Подтвердить"
+  "submit": "Подтвердить",
+  "changePassword" : "Изменить пароль",
+  "sure" : "Вы верены?"
 }

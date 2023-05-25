@@ -4,13 +4,15 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,24 +26,32 @@ const ChangePassword = () => {
     setPassword(e.target.value);
   };
 
+  const handleConfirmOpen = () => {
+    setConfirmOpen(true);
+  };
+
+  const handleConfirmClose = () => {
+    setConfirmOpen(false);
+  };
+
   const handleSubscribe = () => {
     handleClose();
+    handleConfirmClose();
   };
 
   return (
     <Box>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        {t('changePassword')}
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Change Password</DialogTitle>
+        <DialogTitle>{t('changePassword')}</DialogTitle>
         <DialogContent>
-          <DialogContentText>To change your password, please enter your current password below.</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="password"
-            label="Current Password"
+            label={t('password')}
             type="password"
             fullWidth
             variant="standard"
@@ -50,8 +60,19 @@ const ChangePassword = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubscribe}>Change Password</Button>
+          <Button onClick={handleClose}>{t('cancel')}</Button>
+          <Button onClick={handleConfirmOpen} color="error">
+            {t('changePassword')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={confirmOpen} onClose={handleConfirmClose}>
+        <DialogTitle>{t('sure')}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleConfirmClose}>{t('cancel')}</Button>
+          <Button onClick={handleSubscribe} color="error">
+            {t('edit')}
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>
