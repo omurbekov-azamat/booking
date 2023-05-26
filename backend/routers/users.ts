@@ -299,4 +299,59 @@ usersRouter.patch('/password', auth, permit('user'), async (req, res, next) => {
   }
 });
 
+usersRouter.post('/restorePassword', async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const newPassword = () => {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let password = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters.charAt(randomIndex);
+      }
+      return password;
+    };
+
+    const password = newPassword();
+
+    const user = await User.find({ email: email });
+
+    if (!user) {
+      return res.status(400).send({ error: 'Email incorrect' });
+    }
+
+    await User.findOneAndUpdate({ email: email }, { password: password }, { new: true });
+
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: config.mail,
+        pass: 'qlfhiaqbgitxqlaw',
+      },
+    });
+    const mailOptions = {
+      from: config.mail,
+      to: email,
+      subject: 'Restore password',
+      text: `New password: ${password}, for: ${email}`,
+    };
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.error('Error sending email:', error);
+      } else {
+        return res.send({
+          message: {
+            en: 'Mail sent. check ' + email,
+            ru: 'письмо отправлено. проверьте ' + email,
+          },
+        });
+      }
+    });
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export default usersRouter;
