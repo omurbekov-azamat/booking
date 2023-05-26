@@ -28,6 +28,18 @@ const RestorePassword = () => {
     setEmail(e.target.value);
   };
 
+  const handleSubmit = () => {
+    if (email === '' || !validateEmail(email)) {
+      return;
+    }
+    handleClose();
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -46,11 +58,15 @@ const RestorePassword = () => {
             fullWidth
             variant="standard"
             onChange={handleEmail}
+            required
+            error={email !== '' && !validateEmail(email)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('cancel')}</Button>
-          <Button onClick={handleClose}>{t('send')}</Button>
+          <Button onClick={handleSubmit} disabled={email === '' || !validateEmail(email)}>
+            {t('send')}
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

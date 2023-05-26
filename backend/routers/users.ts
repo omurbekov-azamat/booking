@@ -291,7 +291,7 @@ usersRouter.patch('/password', auth, permit('user'), async (req, res, next) => {
     return res.send({
       message: {
         en: 'Password changed successfully',
-        ru: 'Пароль успешно изменен ',
+        ru: 'Пароль успешно изменен',
       },
     });
   } catch (e) {
