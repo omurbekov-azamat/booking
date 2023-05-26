@@ -314,13 +314,13 @@ usersRouter.post('/restorePassword', async (req, res, next) => {
 
     const password = newPassword();
 
-    const user = await User.find({ email: email });
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       return res.status(400).send({ error: 'Email incorrect' });
     }
-
-    await User.findOneAndUpdate({ email: email }, { password: password }, { new: true });
+    user.password = password;
+    await user.save();
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',

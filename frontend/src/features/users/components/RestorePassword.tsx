@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../../app/hooks';
+import { restorePassword } from '../usersThunks';
 
 const RestorePassword = () => {
   const [email, setEmail] = useState('');
@@ -28,11 +29,11 @@ const RestorePassword = () => {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (email === '' || !validateEmail(email)) {
       return;
     }
-    handleClose();
+    await handleClose();
   };
 
   const validateEmail = (email: string) => {
