@@ -111,6 +111,7 @@ export interface User {
   status?: string;
   cashback?: string;
   favorites: string[];
+  isVerified: boolean;
 }
 
 export interface LoginMutation {

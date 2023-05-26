@@ -9,6 +9,8 @@ import {
   logout,
   reAuthorization,
   register,
+  sendMail,
+  verify,
 } from './usersThunks';
 import { RootState } from '../../app/store';
 
@@ -19,7 +21,7 @@ interface UsersState {
   loginLoading: boolean;
   logoutLoading: boolean;
   loginError: GlobalError | null;
-  favoriteSuccess: GlobalSuccess | null;
+  Success: GlobalSuccess | null;
   userLoading: boolean;
   modalCoverState: boolean;
   getAdminsLoading: boolean;
@@ -33,7 +35,7 @@ const initialState: UsersState = {
   registerError: null,
   loginLoading: false,
   logoutLoading: false,
-  favoriteSuccess: null,
+  Success: null,
   loginError: null,
   modalCoverState: false,
   getAdminsLoading: false,
@@ -58,8 +60,8 @@ export const usersSlice = createSlice({
     unsetCabinetUsers: (state) => {
       state.users = [];
     },
-    setFavoriteSuccessNull: (state) => {
-      state.favoriteSuccess = null;
+    setUserSuccessNull: (state) => {
+      state.Success = null;
     },
   },
   extraReducers: (builder) => {
@@ -120,7 +122,13 @@ export const usersSlice = createSlice({
       state.user = user;
     });
     builder.addCase(changeFavorites.fulfilled, (state, { payload: success }) => {
-      state.favoriteSuccess = success;
+      state.Success = success;
+    });
+    builder.addCase(sendMail.fulfilled, (state, { payload: success }) => {
+      state.Success = success;
+    });
+    builder.addCase(verify.fulfilled, (state, { payload: success }) => {
+      state.Success = success;
     });
     builder.addCase(googleLogin.pending, (state) => {
       state.loginLoading = true;
@@ -139,8 +147,7 @@ export const usersSlice = createSlice({
 
 export const usersReducer = usersSlice.reducer;
 
-export const { unsetUser, openModalCover, closeModalCover, unsetCabinetUsers, setFavoriteSuccessNull } =
-  usersSlice.actions;
+export const { unsetUser, openModalCover, closeModalCover, unsetCabinetUsers, setUserSuccessNull } = usersSlice.actions;
 
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterLoading = (state: RootState) => state.users.registerLoading;
@@ -153,4 +160,4 @@ export const selectGetAdminsLoading = (state: RootState) => state.users.getAdmin
 export const selectAdmins = (state: RootState) => state.users.admins;
 export const selectUsers = (state: RootState) => state.users.users;
 export const selectUsersLoading = (state: RootState) => state.users.userLoading;
-export const selectFavoriteSuccess = (state: RootState) => state.users.favoriteSuccess;
+export const selectUserSuccess = (state: RootState) => state.users.Success;

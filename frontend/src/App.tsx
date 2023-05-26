@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { selectFavoriteSuccess, selectUser, setFavoriteSuccessNull } from './features/users/usersSlice';
+import { selectUserSuccess, selectUser, setUserSuccessNull } from './features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import Home from './containers/Home';
 import MainPage from './containers/MainPage';
@@ -23,11 +23,14 @@ import { selectHotelsSuccess, setHotelsSuccessNull } from './features/hotels/hot
 import { selectCommentsSuccess, setCommentsSuccessNull } from './features/comments/commentsSlice';
 import { selectApartmentSuccess, setApartmentsSuccessNull } from './features/apartments/apartmentSlice';
 import EditHotel from './features/hotels/components/EditHotel';
+import VerifyProtectedRoute from './components/UI/ProtectedRoute/VerifyProtectedRoute';
+import VerifyPage from './components/UI/VerifyPage/VerifyPage';
+import ConfirmPage from './components/UI/VerifyPage/ConfirmPage';
 
 function App() {
   const user = useAppSelector(selectUser);
   const orderSuccess = useAppSelector(selectOrderSuccess);
-  const favoriteSuccess = useAppSelector(selectFavoriteSuccess);
+  const userSuccess = useAppSelector(selectUserSuccess);
   const hotelsSuccess = useAppSelector(selectHotelsSuccess);
   const commentsSuccess = useAppSelector(selectCommentsSuccess);
   const apartmentsSuccess = useAppSelector(selectApartmentSuccess);
@@ -87,21 +90,21 @@ function App() {
   }, [hotelsSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   useEffect(() => {
-    if (favoriteSuccess) {
+    if (userSuccess) {
       if (i18n.language === 'en') {
-        enqueueSnackbar(favoriteSuccess.message.en, {
+        enqueueSnackbar(userSuccess.message.en, {
           variant: 'success',
           preventDuplicate: true,
         });
       } else {
-        enqueueSnackbar(favoriteSuccess.message.ru, {
+        enqueueSnackbar(userSuccess.message.ru, {
           variant: 'success',
           preventDuplicate: true,
         });
       }
     }
-    dispatch(setFavoriteSuccessNull());
-  }, [favoriteSuccess, i18n.language, dispatch, enqueueSnackbar]);
+    dispatch(setUserSuccessNull());
+  }, [userSuccess, i18n.language, dispatch, enqueueSnackbar]);
 
   useEffect(() => {
     if (orderSuccess) {
@@ -148,9 +151,9 @@ function App() {
         <Route
           path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
           element={
-            <ProtectedRoute isAllowed={user && Boolean(user)}>
+            <VerifyProtectedRoute isVerify={user && user.isVerified}>
               <ReservationForm />
-            </ProtectedRoute>
+            </VerifyProtectedRoute>
           }
         />
         <Route
@@ -164,8 +167,24 @@ function App() {
         <Route
           path="/my-cabinet"
           element={
-            <ProtectedRoute isAllowed={user && Boolean(user)}>
+            <VerifyProtectedRoute isVerify={user && user.isVerified}>
               <Cabinet />
+            </VerifyProtectedRoute>
+          }
+        />
+        <Route
+          path="/verifyPage"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <VerifyPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/verify/:token"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <ConfirmPage />
             </ProtectedRoute>
           }
         />
