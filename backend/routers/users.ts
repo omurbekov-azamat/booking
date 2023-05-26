@@ -218,7 +218,10 @@ usersRouter.post('/google', async (req, res, next) => {
     user.generateToken();
     await user.save();
     return res.send({
-      message: 'Login with Google successful!',
+      message: {
+        en: 'You have successfully logged in with Google. ' + user.email,
+        ru: 'Вы вошли через гугл успешно. ' + user.email,
+      },
       user,
     });
   } catch (e) {
@@ -344,7 +347,7 @@ usersRouter.post('/restorePassword', async (req, res, next) => {
         return res.send({
           message: {
             en: 'Mail sent. check ' + email,
-            ru: 'письмо отправлено. проверьте ' + email,
+            ru: 'Письмо отправлено. проверьте ' + email,
           },
         });
       }

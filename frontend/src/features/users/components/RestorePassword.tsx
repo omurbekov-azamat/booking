@@ -12,10 +12,9 @@ import { restorePassword } from '../usersThunks';
 
 const RestorePassword = () => {
   const [email, setEmail] = useState('');
-  const [confirmOpen, setConfirmOpen] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,6 +33,7 @@ const RestorePassword = () => {
       return;
     }
     await handleClose();
+    await dispatch(restorePassword(email));
   };
 
   const validateEmail = (email: string) => {
