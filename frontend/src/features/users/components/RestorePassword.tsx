@@ -43,7 +43,7 @@ const RestorePassword = () => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button size="small" variant="text" color={'warning'} onClick={handleClickOpen}>
         {t('restorePassword')}
       </Button>
       <Dialog open={open} onClose={handleClose}>
