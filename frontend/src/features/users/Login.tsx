@@ -16,6 +16,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import RestorePassword from './components/RestorePassword';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -114,6 +115,9 @@ const Login = () => {
                 onChange={inputChangeHandler}
                 fullWidth
               />
+            </Grid>
+            <Grid item xs={12}>
+              <RestorePassword />
             </Grid>
           </Grid>
           <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

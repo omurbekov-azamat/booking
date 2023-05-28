@@ -135,9 +135,19 @@ export const verify = createAsyncThunk<GlobalSuccess, string>('users/verify', as
   }
 });
 
-export const changePass = createAsyncThunk<void, string>('users/changeStatus', async (pass) => {
+export const changePass = createAsyncThunk<GlobalSuccess, string>('users/changePassword', async (pass) => {
   try {
-    await axiosApi.patch('/users/password', { newPassword: pass });
+    const response = await axiosApi.patch('/users/password', { newPassword: pass });
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
+
+export const restorePassword = createAsyncThunk<GlobalSuccess, string>('users/restorePassword', async (email) => {
+  try {
+    const response = await axiosApi.post('/users/restorePassword', { email: email });
+    return response.data;
   } catch {
     throw new Error();
   }

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { GlobalError, GlobalSuccess, User, ValidationError } from '../../types';
 import {
   changeFavorites,
+  changePass,
   getAdmins,
   getUsers,
   googleLogin,
@@ -9,6 +10,7 @@ import {
   logout,
   reAuthorization,
   register,
+  restorePassword,
   sendMail,
   verify,
 } from './usersThunks';
@@ -141,6 +143,12 @@ export const usersSlice = createSlice({
     builder.addCase(googleLogin.rejected, (state, { payload: error }) => {
       state.loginLoading = false;
       state.loginError = error || null;
+    });
+    builder.addCase(restorePassword.fulfilled, (state, { payload: success }) => {
+      state.Success = success;
+    });
+    builder.addCase(changePass.fulfilled, (state, { payload: success }) => {
+      state.Success = success;
     });
   },
 });

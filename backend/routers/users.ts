@@ -218,7 +218,10 @@ usersRouter.post('/google', async (req, res, next) => {
     user.generateToken();
     await user.save();
     return res.send({
-      message: 'Login with Google successful!',
+      message: {
+        en: 'You have successfully logged in with Google. ' + user.email,
+        ru: 'Вы вошли через гугл успешно. ' + user.email,
+      },
       user,
     });
   } catch (e) {
@@ -291,8 +294,63 @@ usersRouter.patch('/password', auth, permit('user'), async (req, res, next) => {
     return res.send({
       message: {
         en: 'Password changed successfully',
-        ru: 'Пароль успешно изменен ',
+        ru: 'Пароль успешно изменен',
       },
+    });
+  } catch (e) {
+    return next(e);
+  }
+});
+
+usersRouter.post('/restorePassword', async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const newPassword = () => {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let password = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters.charAt(randomIndex);
+      }
+      return password;
+    };
+
+    const password = newPassword();
+
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return res.status(400).send({ error: 'Email incorrect' });
+    }
+    user.password = password;
+    await user.save();
+
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: config.mail,
+        pass: 'qlfhiaqbgitxqlaw',
+      },
+    });
+    const mailOptions = {
+      from: config.mail,
+      to: email,
+      subject: 'Restore password',
+      text: `New password: ${password}, for: ${email}`,
+    };
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.error('Error sending email:', error);
+      } else {
+        return res.send({
+          message: {
+            en: 'Mail sent. check ' + email,
+            ru: 'Письмо отправлено. проверьте ' + email,
+          },
+        });
+      }
     });
   } catch (e) {
     return next(e);
