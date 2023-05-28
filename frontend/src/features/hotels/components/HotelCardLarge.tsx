@@ -137,12 +137,12 @@ const HotelCardLarge: React.FC<Props> = ({
   return (
     <>
       <Box sx={{ border: 2, borderRadius: 5, borderColor: 'rgba(3, 201, 136, 0.7)', p: 1, overflow: 'hidden' }}>
-        <Grid container gap={2} onClick={() => onClickCard(hotel._id)}>
+        <Grid container gap={2}>
           <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
             <CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />
           </Grid>
 
-          <Grid item flex={1}>
+          <Grid item flex={1} onClick={() => onClickCard(hotel._id)}>
             <Grid container flexDirection="row" justifyContent="space-between">
               <Grid container gap={1} alignItems="center">
                 <Grid item>
