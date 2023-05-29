@@ -28,19 +28,17 @@ const Apartment = () => {
   const currency = useAppSelector(selectCurrency);
   const loadingFetchOneApartment = useAppSelector(selectLoadingFetchOneApartment);
 
-  const { hotelName, hotelId, apartmentId } = useParams() as {
-    hotelName: string;
-    hotelId: string;
-    apartmentId: string;
+  const { id } = useParams() as {
+    id: string;
   };
 
   useEffect(() => {
-    dispatch(fetchOneApartment(apartmentId));
-    dispatch(fetchApartments({ hotelId: hotelId }));
-  }, [dispatch, apartmentId, hotelId]);
+    dispatch(fetchOneApartment(id));
+    dispatch(fetchApartments({ hotelId: apartment?.hotelId._id }));
+  }, [dispatch, id, apartment?.hotelId._id]);
 
   const onClickResolveApartment = () => {
-    navigate(`/book-apartment/${hotelName}/${hotelId}/apartment/${apartmentId}`);
+    navigate(`/book-apartment/${apartment?.hotelId.name}/${apartment?.hotelId._id}/apartment/${id}`);
   };
 
   return (
@@ -52,7 +50,7 @@ const Apartment = () => {
             <Grid item xs={12} sm={12} md={12} lg={6}>
               <Grid container gap={2} flexDirection="column">
                 <Typography variant="h4" component="p">
-                  {hotelName}
+                  {apartment?.hotelId.name}
                 </Typography>
                 <Typography variant="h5" component="p">
                   {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}

@@ -130,6 +130,7 @@ function App() {
         <Route path="/hotels/:id" element={<HotelPage />} />
         <Route path="/:hotelName/:hotelId/apartment/:apartmentId" element={<Apartment />} />
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />
+        <Route path="/my-cabinet/apartments/:id" element={<Apartment />} />
         <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
         <Route
           path="/my-cabinet/edit-apartment/:id"
