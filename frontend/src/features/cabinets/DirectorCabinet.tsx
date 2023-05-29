@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { getAdmins } from '../users/usersThunks';
-import { selectAdmins, selectGetAdminsLoading, unsetCabinetUsers } from '../users/usersSlice';
+import { getByRole } from '../users/usersThunks';
+import { selectGetUsersByRoleLoading, selectUsersByRole, unsetCabinetUsers } from '../users/usersSlice';
 import { Box, Card, CardContent, Grid, List, Typography } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -30,15 +30,15 @@ const initialState: CabinetState = {
 
 const DirectorCabinet = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(selectGetAdminsLoading);
-  const admins = useAppSelector(selectAdmins);
+  const loading = useAppSelector(selectGetUsersByRoleLoading);
+  const usersByRole = useAppSelector(selectUsersByRole);
   const adminOrders = useAppSelector(selectAdminMyOrders);
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(initialState);
 
   useEffect(() => {
-    dispatch(getAdmins());
+    dispatch(getByRole('admin'));
   }, [dispatch]);
 
   const handleClickAdminName = (id: string) => {
@@ -99,13 +99,13 @@ const DirectorCabinet = () => {
                   {state.openAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={state.openAdmins} timeout="auto" unmountOnExit>
-                  {admins.map((admin) => (
-                    <List key={admin._id} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(admin._id)}>
+                  {usersByRole.map((user) => (
+                    <List key={user._id} component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(user._id)}>
                         <ListItemIcon>
                           <PersonIcon />
                         </ListItemIcon>
-                        <ListItemText primary={admin.firstName + ' ' + admin.lastName} />
+                        <ListItemText primary={user.firstName + ' ' + user.lastName} />
                       </ListItemButton>
                     </List>
                   ))}

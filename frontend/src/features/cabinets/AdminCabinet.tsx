@@ -36,6 +36,7 @@ import { selectLoadingFetchAllRoomTypes, selectRoomTypes } from '../roomTypes/ro
 import MyHotels from './components/MyHotels';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupIcon from '@mui/icons-material/Group';
+import { getByRole } from '../users/usersThunks';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -87,6 +88,9 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
       }
       if (state.roomTypes) {
         dispatch(fetchRoomTypes());
+      }
+      if (state.users) {
+        dispatch(getByRole('user'));
       }
     }
   }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders, state.roomTypes, state.unPublished]);

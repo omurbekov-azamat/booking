@@ -47,9 +47,9 @@ export const logout = createAsyncThunk('users/logout', async (_, { dispatch }) =
   dispatch(unsetUser());
 });
 
-export const getAdmins = createAsyncThunk<User[]>('users/getAdmins', async () => {
+export const getByRole = createAsyncThunk<User[], string>('users/getByRole', async (role) => {
   try {
-    const responseAdmins = await axiosApi.get<User[]>('/users/admins');
+    const responseAdmins = await axiosApi.get<User[]>('/users/getByRole?roleUsers=' + role);
     return responseAdmins.data;
   } catch {
     throw new Error();
