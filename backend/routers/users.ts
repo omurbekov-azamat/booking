@@ -70,12 +70,12 @@ usersRouter.post('/session/token', auth, async (req, res, next) => {
 usersRouter.get('/getByRole', auth, async (req, res, next) => {
   try {
     const roleUsers = req.query.roleUsers as string;
-    if (roleUsers === 'admin'){
-      const admins = await User.find({ role: 'admin' }).select('-token');
+    if (roleUsers === 'admin') {
+      const admins = await User.find({ role: 'admin' }).select(['-token', '-verificationToken', '-favorites']);
       return res.send(admins);
     }
     if (roleUsers === 'user') {
-      const users = await User.find({role: 'user'}).select('-token');
+      const users = await User.find({ role: 'user' }).select(['-token', '-verificationToken', '-favorites']);
       return res.send(users);
     }
   } catch (e) {
@@ -87,7 +87,7 @@ usersRouter.get('/getMatched', auth, permit('director'), async (req, res, next) 
   try {
     const lastNameMatch = req.query.nameMatch as string;
     const emailMatch = req.query.emailMatch as string;
-    console.log(req.query)
+    console.log(req.query);
     if (lastNameMatch) {
       const matchedUsers = await User.find({
         lastName: { $regex: new RegExp(lastNameMatch, 'i') },

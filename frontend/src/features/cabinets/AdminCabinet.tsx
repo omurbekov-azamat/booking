@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getForAdminHisOrders, getOrders } from '../orders/ordersThunks';
 import { fetchHotels, fetchUnPublishedHotels } from '../hotels/hotelsThunks';
-import { selectUser } from '../users/usersSlice';
+import { selectUser, selectUsersByRole } from '../users/usersSlice';
 import { selectAdminMyOrders, selectOrders } from '../orders/ordersSlice';
 import {
   selectFetchAllHotelsLoading,
@@ -37,6 +37,7 @@ import MyHotels from './components/MyHotels';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupIcon from '@mui/icons-material/Group';
 import { getByRole } from '../users/usersThunks';
+import UserItems from '../users/components/UserItems';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -68,6 +69,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const loadingFetchAllRoomTypes = useAppSelector(selectLoadingFetchAllRoomTypes);
   const loadingFetchUnpublished = useAppSelector(selectUnpublishedLoading);
   const unpublished = useAppSelector(selectUnpublishedHotels);
+  const gotUsers = useAppSelector(selectUsersByRole);
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
@@ -93,7 +95,16 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
         dispatch(getByRole('user'));
       }
     }
-  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders, state.roomTypes, state.unPublished]);
+  }, [
+    dispatch,
+    user,
+    state.myHotels,
+    state.myOrders,
+    state.unacceptedOrders,
+    state.roomTypes,
+    state.unPublished,
+    state.users,
+  ]);
 
   const handleClickOption = (option: string, index: number) => {
     setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
@@ -161,7 +172,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     {i18n.language === 'en' ? item.name.en : item.name.ru}
                   </Typography>
                 ))}
-              {state.users && <Typography>here will be users</Typography>}
+              {state.users && <UserItems prop={gotUsers} />}
             </Grid>
           </Grid>
         </CardContent>
