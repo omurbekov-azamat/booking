@@ -67,7 +67,7 @@ usersRouter.post('/session/token', auth, async (req, res, next) => {
   }
 });
 
-usersRouter.get('/getByRole', auth, async (req, res, next) => {
+usersRouter.get('/getByRole', auth, permit('admin', 'director'), async (req, res, next) => {
   try {
     const roleUsers = req.query.roleUsers as string;
     if (roleUsers === 'admin') {
@@ -87,7 +87,6 @@ usersRouter.get('/getMatched', auth, permit('director'), async (req, res, next) 
   try {
     const lastNameMatch = req.query.nameMatch as string;
     const emailMatch = req.query.emailMatch as string;
-    console.log(req.query);
     if (lastNameMatch) {
       const matchedUsers = await User.find({
         lastName: { $regex: new RegExp(lastNameMatch, 'i') },
@@ -107,14 +106,28 @@ usersRouter.get('/getMatched', auth, permit('director'), async (req, res, next) 
   }
 });
 
-usersRouter.patch('/status/:id', auth, permit('director'), async (req, res, next) => {
+usersRouter.patch('/status/:id', auth, permit('director', 'admin'), async (req, res, next) => {
   try {
     const currentUser = await User.findById(req.params.id);
     if (currentUser) {
       await User.updateOne({ _id: req.params.id }, { $set: { status: req.body.status } });
-      res.send({ message: 'status changed' });
+      res.send({ message: 'Status changed' });
     } else {
       res.status(400).send({ message: 'User is not found' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
+usersRouter.patch('/role/:id', auth, permit('director', 'admin'), async (req, res, next) => {
+  try {
+    const currentUser = await User.findById(req.params.id);
+    if (currentUser) {
+      await User.updateOne({_id: req.params.id}, { $set: {role: req.body.role}});
+      res.send({message: 'Role changed'});
+    } else {
+      res.send(400).send({message: 'User is not found'});
     }
   } catch (e) {
     return next(e);

@@ -4,9 +4,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../usersSlice';
 import { LoadingButton } from '@mui/lab';
+import { changeRole } from '../usersThunks';
 import { User } from '../../../types';
 
 interface Props {
@@ -14,10 +15,11 @@ interface Props {
 }
 
 const UserItem: React.FC<Props> = ({ prop }) => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
   const onClickChangeRole = (id: string) => {
-    console.log(id);
+    dispatch(changeRole({ id: id, role: 'admin' }));
   };
 
   return (
