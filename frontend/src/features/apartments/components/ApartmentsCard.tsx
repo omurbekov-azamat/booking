@@ -34,7 +34,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
   return (
     <>
       <Card sx={{ maxWidth: '100%', height: '100%' }}>
-        <CardActionArea>
+        <CardActionArea onClick={() => navigate('/my-cabinet/apartments/' + apartment._id)}>
           <CardMedia
             component="img"
             height="140"
