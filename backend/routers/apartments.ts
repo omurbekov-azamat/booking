@@ -65,7 +65,7 @@ apartmentsRouter.get('/', async (req, res, next) => {
 
 apartmentsRouter.get('/:id', async (req, res, next) => {
   try {
-    const apartmentRes = await Apartment.findById(req.params.id).populate('roomTypeId');
+    const apartmentRes = await Apartment.findById(req.params.id).populate('roomTypeId').populate('hotelId');
     return res.send(apartmentRes);
   } catch (e) {
     return next(e);
