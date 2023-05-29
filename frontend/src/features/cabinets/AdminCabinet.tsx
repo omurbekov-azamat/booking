@@ -35,6 +35,7 @@ import { fetchRoomTypes } from '../roomTypes/roomTypesThunks';
 import { selectLoadingFetchAllRoomTypes, selectRoomTypes } from '../roomTypes/roomTypesSlice';
 import MyHotels from './components/MyHotels';
 import DeleteIcon from '@mui/icons-material/Delete';
+import GroupIcon from '@mui/icons-material/Group';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -47,6 +48,7 @@ const initialState: CabinetState = {
   roomTypes: false,
   unPublished: false,
   deleteHotel: false,
+  users: false,
 };
 
 interface Props {
@@ -105,6 +107,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: 'Типы комнат' },
     { option: 'unPublished', icon: <UnpublishedIcon />, text: 'не опубликованные' },
     { option: 'deleteHotel', icon: <DeleteIcon />, text: 'удалить Отель' },
+    { option: 'users', icon: <GroupIcon />, text: 'Пользователи' },
   ];
 
   return (
@@ -154,6 +157,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     {i18n.language === 'en' ? item.name.en : item.name.ru}
                   </Typography>
                 ))}
+              {state.users && <Typography>here will be users</Typography>}
             </Grid>
           </Grid>
         </CardContent>
