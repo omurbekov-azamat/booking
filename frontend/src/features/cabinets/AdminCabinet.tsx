@@ -172,7 +172,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     {i18n.language === 'en' ? item.name.en : item.name.ru}
                   </Typography>
                 ))}
-              {state.users && <UserItems prop={gotUsers} />}
+              {state.users && <UserItems prop={gotUsers} role="user" />}
             </Grid>
           </Grid>
         </CardContent>
