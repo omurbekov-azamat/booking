@@ -91,18 +91,31 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
-        {/*<Typography textTransform="capitalize">*/}
-        {/*  {t('city')}: {prop.apartmentId.hotelId.city}*/}
-        {/*</Typography>*/}
-        {/*<Typography textTransform="capitalize">*/}
-        {/*  {t('address')}: {prop.apartmentId.hotelId.address}*/}
-        {/*</Typography>*/}
-        {/*<Typography textTransform="capitalize">*/}
-        {/*  {t('hotelName')}: {prop.apartmentId.hotelId.name}*/}
-        {/*</Typography>*/}
-        {/*<Typography textTransform="capitalize">*/}
-        {/*  {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}*/}
-        {/*</Typography>*/}
+
+        {prop.apartmentId.hotelId ? (
+          <>
+            <Typography textTransform="capitalize">
+              {t('city')}: {prop.apartmentId.hotelId.city}
+            </Typography>
+            <Typography textTransform="capitalize">
+              {t('address')}: {prop.apartmentId.hotelId.address}
+            </Typography>
+            <Typography textTransform="capitalize">
+              {t('hotelName')}: {prop.apartmentId.hotelId.name}
+            </Typography>
+          </>
+        ) : (
+          <Typography color={'error'}>Отель был удален</Typography>
+        )}
+
+        {prop.apartmentId ? (
+          <Typography textTransform="capitalize">
+            {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
+          </Typography>
+        ) : (
+          <Typography color={'error'}>Апартамент был удален</Typography>
+        )}
+
         <Typography>
           {t('commentary')}: {prop.comment}
         </Typography>
