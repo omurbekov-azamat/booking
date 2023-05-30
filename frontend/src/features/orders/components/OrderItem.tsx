@@ -36,6 +36,8 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
     }
   };
 
+  console.log(prop);
+
   return (
     <Accordion sx={{ background }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
@@ -64,10 +66,10 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
       </AccordionSummary>
       <AccordionDetails sx={{ background: 'WhiteSmoke' }}>
         <Typography>
-          {t('dateArrival')}: {dayjs(prop.dateArrival).format('DD-MM-YYYY')}
+          {t('dateArrival')}: {prop.dateArrival}
         </Typography>
         <Typography>
-          {t('dateDeparture')}: {dayjs(prop.dateDeparture).format('DD-MM-YYYY')}
+          {t('dateDeparture')}: {prop.dateDeparture}
         </Typography>
         {prop.eventManagement && (
           <Typography color="red" fontWeight="bold">
@@ -89,18 +91,18 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
-        <Typography textTransform="capitalize">
-          {t('city')}: {prop.apartmentId.hotelId.city}
-        </Typography>
-        <Typography textTransform="capitalize">
-          {t('address')}: {prop.apartmentId.hotelId.address}
-        </Typography>
-        <Typography textTransform="capitalize">
-          {t('hotelName')}: {prop.apartmentId.hotelId.name}
-        </Typography>
-        <Typography textTransform="capitalize">
-          {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
-        </Typography>
+        {/*<Typography textTransform="capitalize">*/}
+        {/*  {t('city')}: {prop.apartmentId.hotelId.city}*/}
+        {/*</Typography>*/}
+        {/*<Typography textTransform="capitalize">*/}
+        {/*  {t('address')}: {prop.apartmentId.hotelId.address}*/}
+        {/*</Typography>*/}
+        {/*<Typography textTransform="capitalize">*/}
+        {/*  {t('hotelName')}: {prop.apartmentId.hotelId.name}*/}
+        {/*</Typography>*/}
+        {/*<Typography textTransform="capitalize">*/}
+        {/*  {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}*/}
+        {/*</Typography>*/}
         <Typography>
           {t('commentary')}: {prop.comment}
         </Typography>
