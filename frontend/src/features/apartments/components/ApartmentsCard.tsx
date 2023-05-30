@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
 import { apiURL } from '../../../constants';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { selectUser } from '../../users/usersSlice';
-import { removeApartment } from '../apartmentThunks';
+import { fetchApartments, removeApartment } from '../apartmentThunks';
 import { selectLoadingRemoveApartment } from '../apartmentSlice';
 import { LoadingButton } from '@mui/lab';
 
@@ -24,17 +24,22 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
   const currency = useAppSelector(selectCurrency);
   const user = useAppSelector(selectUser);
   const loadingDeleteApartment = useAppSelector(selectLoadingRemoveApartment);
+  const location = useLocation();
 
   const cardImage = apiURL + '/' + apartment.images[0];
 
   const deleteApartment = async (id: string) => {
     await dispatch(removeApartment(id));
+
+    if (location.pathname === '/my-cabinet') {
+      await dispatch(fetchApartments({ userId: user?._id }));
+    }
   };
 
   return (
     <>
       <Card sx={{ maxWidth: '100%', height: '100%' }}>
-        <CardActionArea>
+        <CardActionArea onClick={() => navigate('/my-cabinet/apartments/' + apartment._id)}>
           <CardMedia
             component="img"
             height="140"
