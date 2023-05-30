@@ -128,7 +128,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard/:city/:propertyType" element={<HotelsPage />} />
         <Route path="/hotels/:id" element={<HotelPage />} />
-        <Route path="/:hotelName/:hotelId/apartment/:apartmentId" element={<Apartment />} />
+        <Route path="/:hotelName/:hotelId/apartment/:id" element={<Apartment />} />
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />
         <Route path="/my-cabinet/apartments/:id" element={<Apartment />} />
         <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
