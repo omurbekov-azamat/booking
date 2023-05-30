@@ -108,6 +108,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     state.roomTypes,
     state.unPublished,
     state.users,
+    state.serviceProviders,
   ]);
 
   const handleClickOption = (option: string, index: number) => {
@@ -178,6 +179,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   </Typography>
                 ))}
               {state.users && <UserItems prop={gotUsers} role="user" />}
+              {state.serviceProviders && <UserItems prop={gotUsers} role="hotel" />}
             </Grid>
           </Grid>
         </CardContent>

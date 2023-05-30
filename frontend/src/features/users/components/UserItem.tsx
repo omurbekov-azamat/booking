@@ -22,7 +22,7 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
 
   const [state] = useState({
     id: prop._id,
-    role: 'admin',
+    role: role === 'hotel' ? 'user' : role === 'user' ? 'hotel' : 'hotel',
   });
 
   const [open, setOpen] = useState(false);
@@ -69,8 +69,10 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
           <>
             <DialogContent>
               <Typography variant="body1">
-                Вы уверены, что хотите {prop.firstName.toUpperCase()} {prop.lastName.toUpperCase()} дать возможность
-                публиковать свой услуги?
+                {role === 'user' &&
+                  `Вы уверены, что хотите ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} дать возможность публиковать свой услуги?`}
+                {role === 'hotel' &&
+                  `Все его услуги удалятся и не будут доступны пользователям, Вы уверены, что хотите забрать у ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} возможность публиковать свой услуги?`}
               </Typography>
             </DialogContent>
             <DialogActions>
