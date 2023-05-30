@@ -36,8 +36,6 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
     }
   };
 
-  console.log(prop);
-
   return (
     <Accordion sx={{ background }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
@@ -72,22 +70,22 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           {t('dateDeparture')}: {prop.dateDeparture}
         </Typography>
         {prop.eventManagement && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('meetingAirport')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.personalTranslator && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('personalTranslator')}: {prop.personalTranslator && <>&#9745;</>}
           </Typography>
         )}
         {prop.tourManagement && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('tourOrganization')}: {prop.tourManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.eventManagement && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
@@ -105,7 +103,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             </Typography>
           </>
         ) : (
-          <Typography color={'error'}>Отель был удален</Typography>
+          <Typography color={'error'}>{t('hotelWasDeleted')}</Typography>
         )}
 
         {prop.apartmentId ? (
@@ -113,7 +111,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
           </Typography>
         ) : (
-          <Typography color={'error'}>Апартамент был удален</Typography>
+          <Typography color={'error'}>{t('apartmentWasDeleted')}</Typography>
         )}
 
         <Typography>

@@ -153,5 +153,7 @@
   "changePassword" : "Change password",
   "sure" : "Are you sure?",
   "restorePassword" : "Restore Password",
-  "restorePasswordDesc": "Enter your email address. A new password will be sent to your email address."
+  "restorePasswordDesc": "Enter your email address. A new password will be sent to your email address.",
+  "hotelWasDeleted": "Hotel was deleted",
+  "apartmentWasDeleted": "Apartment was deleted"
 }
