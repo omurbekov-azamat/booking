@@ -38,6 +38,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import GroupIcon from '@mui/icons-material/Group';
 import { getByRole } from '../users/usersThunks';
 import UserItems from '../users/components/UserItems';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -51,6 +52,7 @@ const initialState: CabinetState = {
   unPublished: false,
   deleteHotel: false,
   users: false,
+  serviceProviders: false,
 };
 
 interface Props {
@@ -70,7 +72,6 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const loadingFetchUnpublished = useAppSelector(selectUnpublishedLoading);
   const unpublished = useAppSelector(selectUnpublishedHotels);
   const gotUsers = useAppSelector(selectUsersByRole);
-
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
 
@@ -93,6 +94,9 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
       }
       if (state.users) {
         dispatch(getByRole('user'));
+      }
+      if (state.serviceProviders) {
+        dispatch(getByRole('hotel'));
       }
     }
   }, [
@@ -123,6 +127,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'unPublished', icon: <UnpublishedIcon />, text: 'не опубликованные' },
     { option: 'deleteHotel', icon: <DeleteIcon />, text: 'удалить Отель' },
     { option: 'users', icon: <GroupIcon />, text: 'Пользователи' },
+    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: 'Поставщики услуг' },
   ];
 
   return (

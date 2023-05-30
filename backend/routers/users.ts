@@ -78,6 +78,10 @@ usersRouter.get('/getByRole', auth, permit('admin', 'director'), async (req, res
       const users = await User.find({ role: 'user' }).select(['-token', '-verificationToken', '-favorites']);
       return res.send(users);
     }
+    if (roleUsers === 'hotel') {
+      const users = await User.find({ role: 'hotel' }).select(['-token', '-verificationToken', '-favorites']);
+      return res.send(users);
+    }
   } catch (e) {
     return next(e);
   }
