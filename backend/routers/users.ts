@@ -8,6 +8,7 @@ import { OAuth2Client } from 'google-auth-library';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import config from '../config';
+import Apartment from '../models/Apartment';
 
 const usersRouter = express.Router();
 
@@ -128,8 +129,21 @@ usersRouter.patch('/role/:id', auth, permit('director', 'admin'), async (req, re
   try {
     const currentUser = await User.findById(req.params.id);
     if (currentUser) {
-      await User.updateOne({_id: req.params.id}, { $set: {role: req.body.role}});
-      res.send({message: 'Role changed'});
+      if (currentUser.role === 'hotel') {
+        const hotels = await Hotel.find({ userId: currentUser._id });
+        await Hotel.deleteMany({ userId: currentUser._id });
+
+        const hotelIds = hotels.map((hotel) => hotel._id);
+        await Apartment.deleteMany({ hotelId: { $in: hotelIds } });
+
+        currentUser.role = 'user';
+        await currentUser.save();
+
+        res.send({ message: 'Role changed, and all hotels and apartments deleted' });
+      } else {
+        await User.updateOne({_id: req.params.id}, { $set: {role: req.body.role}});
+        res.send({message: 'Role changed'});
+      }
     } else {
       res.send(400).send({message: 'User is not found'});
     }

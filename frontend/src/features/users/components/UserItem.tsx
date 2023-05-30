@@ -31,10 +31,10 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
     setOpen(true);
   };
 
-  const handleYes = () => {
-    dispatch(changeRole(state));
-    dispatch(getByRole(role));
-    setOpen(false);
+  const handleYes = async () => {
+    await dispatch(changeRole(state));
+    await dispatch(getByRole(role));
+    await setOpen(false);
   };
 
   return (
