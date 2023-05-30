@@ -64,43 +64,56 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
       </AccordionSummary>
       <AccordionDetails sx={{ background: 'WhiteSmoke' }}>
         <Typography>
-          {t('dateArrival')}: {dayjs(prop.dateArrival).format('DD-MM-YYYY')}
+          {t('dateArrival')}: {prop.dateArrival}
         </Typography>
         <Typography>
-          {t('dateDeparture')}: {dayjs(prop.dateDeparture).format('DD-MM-YYYY')}
+          {t('dateDeparture')}: {prop.dateDeparture}
         </Typography>
         {prop.eventManagement && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('meetingAirport')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.personalTranslator && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('personalTranslator')}: {prop.personalTranslator && <>&#9745;</>}
           </Typography>
         )}
         {prop.tourManagement && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('tourOrganization')}: {prop.tourManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.eventManagement && (
-          <Typography color="red" fontWeight="bold">
+          <Typography color="blue" fontWeight="bold">
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
-        <Typography textTransform="capitalize">
-          {t('city')}: {prop.apartmentId.hotelId.city}
-        </Typography>
-        <Typography textTransform="capitalize">
-          {t('address')}: {prop.apartmentId.hotelId.address}
-        </Typography>
-        <Typography textTransform="capitalize">
-          {t('hotelName')}: {prop.apartmentId.hotelId.name}
-        </Typography>
-        <Typography textTransform="capitalize">
-          {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
-        </Typography>
+
+        {prop.apartmentId.hotelId ? (
+          <>
+            <Typography textTransform="capitalize">
+              {t('city')}: {prop.apartmentId.hotelId.city}
+            </Typography>
+            <Typography textTransform="capitalize">
+              {t('address')}: {prop.apartmentId.hotelId.address}
+            </Typography>
+            <Typography textTransform="capitalize">
+              {t('hotelName')}: {prop.apartmentId.hotelId.name}
+            </Typography>
+          </>
+        ) : (
+          <Typography color={'error'}>{t('hotelWasDeleted')}</Typography>
+        )}
+
+        {prop.apartmentId ? (
+          <Typography textTransform="capitalize">
+            {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
+          </Typography>
+        ) : (
+          <Typography color={'error'}>{t('apartmentWasDeleted')}</Typography>
+        )}
+
         <Typography>
           {t('commentary')}: {prop.comment}
         </Typography>

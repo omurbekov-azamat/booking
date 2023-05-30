@@ -1825,6 +1825,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '28.04.2023',
       dateDeparture: '29.04.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
     {
       userId: user._id,
@@ -1834,6 +1838,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '28.04.2023',
       dateDeparture: '29.04.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
     {
       userId: user._id,
@@ -1843,6 +1851,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '28.04.2023',
       dateDeparture: '30.04.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
     {
       userId: user._id,
@@ -1850,6 +1862,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '30.04.2023',
       dateDeparture: '02.05.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
     {
       userId: user2._id,
@@ -1857,6 +1873,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '30.04.2023',
       dateDeparture: '01.05.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
     {
       userId: user2._id,
@@ -1864,6 +1884,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '01.05.2023',
       dateDeparture: '02.05.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
     {
       userId: user2._id,
@@ -1871,6 +1895,10 @@ const run = async () => {
       createdAt: Date.now(),
       dateArrival: '01.05.2023',
       dateDeparture: '04.05.2023',
+      personalTranslator: true,
+      meetingAirport: false,
+      tourManagement: true,
+      eventManagement: true,
     },
   );
 
