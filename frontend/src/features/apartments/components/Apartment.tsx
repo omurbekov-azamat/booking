@@ -47,7 +47,7 @@ const Apartment = () => {
       <Card sx={{ mt: 5 }}>
         <CardContent>
           <Grid container alignItems="start">
-            <Grid item xs={12} sm={12} md={12} lg={6}>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
               <Grid container gap={2} flexDirection="column">
                 <Typography variant="h4" component="p">
                   {apartment?.hotelId.name}
@@ -128,7 +128,7 @@ const Apartment = () => {
                 </Button>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={6} alignSelf="center">
+            <Grid item xs={12} sm={12} md={6} lg={6} alignSelf="center">
               {apartment && <ApartmentsGallery apartmentData={apartment} />}
             </Grid>
           </Grid>

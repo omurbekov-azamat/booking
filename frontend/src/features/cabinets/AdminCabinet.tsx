@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getForAdminHisOrders, getOrders } from '../orders/ordersThunks';
 import { fetchHotels, fetchUnPublishedHotels } from '../hotels/hotelsThunks';
-import { selectUser } from '../users/usersSlice';
+import { selectUser, selectUsersByRole } from '../users/usersSlice';
 import { selectAdminMyOrders, selectOrders } from '../orders/ordersSlice';
 import {
   selectFetchAllHotelsLoading,
@@ -35,6 +35,10 @@ import { fetchRoomTypes } from '../roomTypes/roomTypesThunks';
 import { selectLoadingFetchAllRoomTypes, selectRoomTypes } from '../roomTypes/roomTypesSlice';
 import MyHotels from './components/MyHotels';
 import DeleteIcon from '@mui/icons-material/Delete';
+import GroupIcon from '@mui/icons-material/Group';
+import { getByRole } from '../users/usersThunks';
+import UserItems from '../users/components/UserItems';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -47,6 +51,8 @@ const initialState: CabinetState = {
   roomTypes: false,
   unPublished: false,
   deleteHotel: false,
+  users: false,
+  serviceProviders: false,
 };
 
 interface Props {
@@ -65,7 +71,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const loadingFetchAllRoomTypes = useAppSelector(selectLoadingFetchAllRoomTypes);
   const loadingFetchUnpublished = useAppSelector(selectUnpublishedLoading);
   const unpublished = useAppSelector(selectUnpublishedHotels);
-
+  const gotUsers = useAppSelector(selectUsersByRole);
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
 
@@ -86,8 +92,24 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
       if (state.roomTypes) {
         dispatch(fetchRoomTypes());
       }
+      if (state.users) {
+        dispatch(getByRole('user'));
+      }
+      if (state.serviceProviders) {
+        dispatch(getByRole('hotel'));
+      }
     }
-  }, [dispatch, user, state.myHotels, state.myOrders, state.unacceptedOrders, state.roomTypes, state.unPublished]);
+  }, [
+    dispatch,
+    user,
+    state.myHotels,
+    state.myOrders,
+    state.unacceptedOrders,
+    state.roomTypes,
+    state.unPublished,
+    state.users,
+    state.serviceProviders,
+  ]);
 
   const handleClickOption = (option: string, index: number) => {
     setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
@@ -105,6 +127,8 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: 'Типы комнат' },
     { option: 'unPublished', icon: <UnpublishedIcon />, text: 'не опубликованные' },
     { option: 'deleteHotel', icon: <DeleteIcon />, text: 'удалить Отель' },
+    { option: 'users', icon: <GroupIcon />, text: 'Пользователи' },
+    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: 'Поставщики услуг' },
   ];
 
   return (
@@ -154,6 +178,8 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     {i18n.language === 'en' ? item.name.en : item.name.ru}
                   </Typography>
                 ))}
+              {state.users && <UserItems prop={gotUsers} role="user" />}
+              {state.serviceProviders && <UserItems prop={gotUsers} role="hotel" />}
             </Grid>
           </Grid>
         </CardContent>

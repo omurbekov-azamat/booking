@@ -44,4 +44,4 @@ export const cities = [
   'leylek',
 ];
 
-export const typeOfHotel = ['hostel', 'pension', 'hotel', 'guestHouse'];
+export const typeOfHotel = ['Hostel', 'pension', 'hotel', 'guestHouse'];

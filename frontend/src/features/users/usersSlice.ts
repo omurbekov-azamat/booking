@@ -3,7 +3,7 @@ import { GlobalError, GlobalSuccess, User, ValidationError } from '../../types';
 import {
   changeFavorites,
   changePass,
-  getAdmins,
+  getByRole,
   getUsers,
   googleLogin,
   login,
@@ -26,8 +26,8 @@ interface UsersState {
   Success: GlobalSuccess | null;
   userLoading: boolean;
   modalCoverState: boolean;
-  getAdminsLoading: boolean;
-  admins: User[];
+  getUsersByRoleLoading: boolean;
+  usersByRole: User[];
   users: User[];
 }
 
@@ -40,9 +40,9 @@ const initialState: UsersState = {
   Success: null,
   loginError: null,
   modalCoverState: false,
-  getAdminsLoading: false,
+  getUsersByRoleLoading: false,
   userLoading: false,
-  admins: [],
+  usersByRole: [],
   users: [],
 };
 
@@ -100,15 +100,16 @@ export const usersSlice = createSlice({
     builder.addCase(logout.rejected, (state) => {
       state.logoutLoading = false;
     });
-    builder.addCase(getAdmins.pending, (state) => {
-      state.getAdminsLoading = true;
+    builder.addCase(getByRole.pending, (state) => {
+      state.usersByRole = [];
+      state.getUsersByRoleLoading = true;
     });
-    builder.addCase(getAdmins.fulfilled, (state, { payload: admins }) => {
-      state.getAdminsLoading = false;
-      state.admins = admins;
+    builder.addCase(getByRole.fulfilled, (state, { payload: admins }) => {
+      state.getUsersByRoleLoading = false;
+      state.usersByRole = admins;
     });
-    builder.addCase(getAdmins.rejected, (state) => {
-      state.getAdminsLoading = false;
+    builder.addCase(getByRole.rejected, (state) => {
+      state.getUsersByRoleLoading = false;
     });
     builder.addCase(getUsers.pending, (state) => {
       state.userLoading = true;
@@ -164,8 +165,8 @@ export const selectLoginLoading = (state: RootState) => state.users.loginLoading
 export const selectLoginError = (state: RootState) => state.users.loginError;
 export const selectLogoutLoading = (state: RootState) => state.users.logoutLoading;
 export const selectModalCoverState = (state: RootState) => state.users.modalCoverState;
-export const selectGetAdminsLoading = (state: RootState) => state.users.getAdminsLoading;
-export const selectAdmins = (state: RootState) => state.users.admins;
+export const selectGetUsersByRoleLoading = (state: RootState) => state.users.getUsersByRoleLoading;
+export const selectUsersByRole = (state: RootState) => state.users.usersByRole;
 export const selectUsers = (state: RootState) => state.users.users;
 export const selectUsersLoading = (state: RootState) => state.users.userLoading;
 export const selectUserSuccess = (state: RootState) => state.users.Success;

@@ -47,9 +47,9 @@ export const logout = createAsyncThunk('users/logout', async (_, { dispatch }) =
   dispatch(unsetUser());
 });
 
-export const getAdmins = createAsyncThunk<User[]>('users/getAdmins', async () => {
+export const getByRole = createAsyncThunk<User[], string>('users/getByRole', async (role) => {
   try {
-    const responseAdmins = await axiosApi.get<User[]>('/users/admins');
+    const responseAdmins = await axiosApi.get<User[]>('/users/getByRole?roleUsers=' + role);
     return responseAdmins.data;
   } catch {
     throw new Error();
@@ -93,7 +93,20 @@ export const changeStatus = createAsyncThunk<void, statusProps>('users/changeSta
   }
 });
 
-export const reAuthorization = createAsyncThunk<User>('user/reAuthorization', async () => {
+interface roleProps {
+  id: string;
+  role: string;
+}
+
+export const changeRole = createAsyncThunk<void, roleProps>('users/roleChange', async ({ role, id }) => {
+  try {
+    await axiosApi.patch('/users/role/' + id, { role });
+  } catch {
+    throw new Error();
+  }
+});
+
+export const reAuthorization = createAsyncThunk<User>('users/reAuthorization', async () => {
   try {
     const response = await axiosApi.post<RegisterResponse>('/users/session/token');
     return response.data.user;
