@@ -20,26 +20,39 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import HotelsStatus from './components/HotelsStatus';
 import { unsetCabinetHotels } from '../hotels/hotelsSlice';
 import OrderItems from '../orders/components/OrderItems';
+import GroupIcon from '@mui/icons-material/Group';
 import { CabinetState } from '../../types';
+import UserItems from '../users/components/UserItems';
 
 const initialState: CabinetState = {
   openAdmins: false,
   openUsers: false,
   openHotels: false,
+  simpleUsers: false,
 };
 
-const DirectorCabinet = () => {
+interface Props {
+  exist?: CabinetState;
+}
+
+const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectGetUsersByRoleLoading);
   const usersByRole = useAppSelector(selectUsersByRole);
   const adminOrders = useAppSelector(selectAdminMyOrders);
+  const gotUsers = useAppSelector(selectUsersByRole);
   const { t } = useTranslation();
+
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
-  const [state, setState] = React.useState<CabinetState>(initialState);
+  const [state, setState] = React.useState<CabinetState>(exist);
 
   useEffect(() => {
-    dispatch(getByRole('admin'));
-  }, [dispatch]);
+    if (state.openAdmins) {
+      dispatch(getByRole('admin'));
+    } else if (state.simpleUsers) {
+      dispatch(getByRole('user'));
+    }
+  }, [dispatch, state.openAdmins, state.simpleUsers]);
 
   const handleClickAdminName = (id: string) => {
     dispatch(getForAdminHisOrders(id));
@@ -48,6 +61,7 @@ const DirectorCabinet = () => {
   const options = [
     { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
     { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
+    { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
   ];
 
   const handleClickOption = (option: string, index: number) => {
@@ -116,6 +130,7 @@ const DirectorCabinet = () => {
               {state.openAdmins && <OrderItems ordersItems={adminOrders} />}
               {state.openUsers && <UsersStatus />}
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
+              {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
             </Grid>
           </Grid>
         </CardContent>
