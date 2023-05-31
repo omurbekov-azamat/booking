@@ -261,16 +261,18 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           ) : (
             <Typography>{t('empty')}</Typography>
           )}
-          <Grid item container xs={12}>
-            <LoadingButton
-              loading={fetchNewPageLoading}
-              style={{ margin: 'auto' }}
-              variant="outlined"
-              onClick={() => addMore(page)}
-            >
-              {t('more')}
-            </LoadingButton>
-          </Grid>
+          {hotels.length && (
+            <Grid item container xs={12}>
+              <LoadingButton
+                loading={fetchNewPageLoading}
+                style={{ margin: 'auto' }}
+                variant="outlined"
+                onClick={() => addMore(page)}
+              >
+                {t('more')}
+              </LoadingButton>
+            </Grid>
+          )}
         </Grid>
       </Box>
     </Box>
