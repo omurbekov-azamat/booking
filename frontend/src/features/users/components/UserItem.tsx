@@ -32,9 +32,20 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
   };
 
   const handleYes = async () => {
-    await dispatch(changeRole(state));
-    await dispatch(getByRole(role));
-    await setOpen(false);
+    if (user?.role === 'admin') {
+      await dispatch(changeRole(state));
+      await dispatch(getByRole(role));
+      await setOpen(false);
+    } else {
+      await dispatch(
+        changeRole({
+          ...state,
+          role: role === 'admin' ? 'user' : role === 'user' ? 'admin' : 'admin',
+        }),
+      );
+      await dispatch(getByRole(role));
+      await setOpen(false);
+    }
   };
 
   return (
@@ -58,29 +69,38 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
         <Typography>Баланс: {prop.cashback}</Typography>
         <Typography>Верифицирован: {prop.isVerified ? 'Да' : 'Нет'}</Typography>
         <Typography textTransform="capitalize">Роль: {prop.role}</Typography>
-        {user?.role === 'admin' && (
+        {(user?.role === 'admin' || user?.role === 'director') && (
           <LoadingButton color="success" onClick={handleClick}>
             Изменить роль
           </LoadingButton>
         )}
       </AccordionDetails>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        {user?.role === 'admin' && (
-          <>
-            <DialogContent>
-              <Typography variant="body1">
-                {role === 'user' &&
-                  `Вы уверены, что хотите ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} дать возможность публиковать свой услуги?`}
-                {role === 'hotel' &&
-                  `Все его услуги удалятся и не будут доступны пользователям, Вы уверены, что хотите забрать у ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} возможность публиковать свой услуги?`}
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setOpen(false)}>отмена</Button>
-              <Button onClick={handleYes}>да</Button>
-            </DialogActions>
-          </>
-        )}
+        <>
+          <DialogContent>
+            <Typography variant="body1">
+              {user?.role === 'admin' ? (
+                <>
+                  {role === 'user' &&
+                    `Вы уверены, что хотите ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} дать возможность публиковать свои услуги?`}
+                  {role === 'hotel' &&
+                    `Все его услуги будут удалены и не будут доступны пользователям. Вы уверены, что хотите забрать у ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} возможность публиковать свои услуги?`}
+                </>
+              ) : (
+                <>
+                  {role === 'user' &&
+                    `Вы уверены, что хотите ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} сделать админом?`}
+                  {role === 'admin' &&
+                    `Вы уверены, что хотите забрать у ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} возможность быть админом?`}
+                </>
+              )}
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>отмена</Button>
+            <Button onClick={handleYes}>да</Button>
+          </DialogActions>
+        </>
       </Dialog>
     </Accordion>
   );
