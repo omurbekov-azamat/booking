@@ -23,12 +23,14 @@ import OrderItems from '../orders/components/OrderItems';
 import GroupIcon from '@mui/icons-material/Group';
 import { CabinetState } from '../../types';
 import UserItems from '../users/components/UserItems';
+import WcIcon from '@mui/icons-material/Wc';
 
 const initialState: CabinetState = {
   openAdmins: false,
   openUsers: false,
   openHotels: false,
   simpleUsers: false,
+  admins: false,
 };
 
 interface Props {
@@ -51,8 +53,10 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
       dispatch(getByRole('admin'));
     } else if (state.simpleUsers) {
       dispatch(getByRole('user'));
+    } else if (state.admins) {
+      dispatch(getByRole('admin'));
     }
-  }, [dispatch, state.openAdmins, state.simpleUsers]);
+  }, [dispatch, state.openAdmins, state.simpleUsers, state.admins]);
 
   const handleClickAdminName = (id: string) => {
     dispatch(getForAdminHisOrders(id));
@@ -62,6 +66,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
     { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
     { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
+    { option: 'admins', icon: <WcIcon />, text: 'Админы' },
   ];
 
   const handleClickOption = (option: string, index: number) => {
@@ -131,6 +136,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.openUsers && <UsersStatus />}
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
+              {state.admins && <UserItems prop={gotUsers} role="admin" />}
             </Grid>
           </Grid>
         </CardContent>
