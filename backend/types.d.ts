@@ -41,6 +41,10 @@ export interface IHotel {
     latitude: number;
     longitude: number;
   };
+  description: {
+    ru: string;
+    en: string;
+  };
   star: number;
   isPublished: boolean;
   image: string;
