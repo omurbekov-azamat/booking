@@ -125,6 +125,8 @@ export const createHotel = createAsyncThunk<
             formData.append(key, JSON.stringify(value));
           } else if (key === 'lowestPrice') {
             formData.append(key, JSON.stringify(value));
+          } else if (key === 'description') {
+            formData.append(key, JSON.stringify(value));
           } else {
             formData.append(key, value as string | Blob);
           }
