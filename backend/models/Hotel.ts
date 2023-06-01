@@ -88,6 +88,19 @@ const HotelSchema = new Schema<IHotel>({
     },
     required: true,
   },
+  description: {
+    type: {
+      ru: {
+        type: String,
+        required: true,
+      },
+      en: {
+        type: String,
+        required: true,
+      },
+    },
+    required: true,
+  },
   status: {
     type: String,
     required: true,
