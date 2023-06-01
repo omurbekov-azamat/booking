@@ -1,16 +1,18 @@
 import React from 'react';
 import { IApartment } from '../../../types';
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
-import { apiURL } from '../../../constants';
+import { apiURL, placeHolderImg } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { selectUser } from '../../users/usersSlice';
 import { fetchApartments, removeApartment } from '../apartmentThunks';
 import { selectLoadingRemoveApartment } from '../apartmentSlice';
 import { LoadingButton } from '@mui/lab';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface Props {
   apartment: IApartment;
@@ -40,11 +42,12 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
     <>
       <Card sx={{ maxWidth: '100%', height: '100%' }}>
         <CardActionArea onClick={() => navigate('/my-cabinet/apartments/' + apartment._id)}>
-          <CardMedia
-            component="img"
-            height="140"
-            image={cardImage}
+          <LazyLoadImage
             alt={i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
+            effect="blur"
+            height="140px"
+            src={cardImage}
+            placeholderSrc={placeHolderImg}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" align="center" color={'grey'}>

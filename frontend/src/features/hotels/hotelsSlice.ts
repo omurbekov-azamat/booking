@@ -41,6 +41,7 @@ interface HotelsState {
   fetchFavoriteHotelsLoading: boolean;
   recommendedHotels: Hotel[];
   fetchRecommendedHotelsLoading: boolean;
+  showMoreBtn: boolean;
 }
 
 const initialState: HotelsState = {
@@ -67,6 +68,7 @@ const initialState: HotelsState = {
   fetchFavoriteHotelsLoading: false,
   recommendedHotels: [],
   fetchRecommendedHotelsLoading: false,
+  showMoreBtn: false,
 };
 
 export const hotelsSlice = createSlice({
@@ -151,6 +153,7 @@ export const hotelsSlice = createSlice({
     });
     builder.addCase(fetchNewPage.fulfilled, (state, action) => {
       state.fetchNewPageLoading = false;
+      state.showMoreBtn = action.payload.length !== 0;
       if (action.payload.length) {
         state.hotels = state.hotels.concat(action.payload);
         state.page++;
@@ -176,6 +179,7 @@ export const hotelsSlice = createSlice({
     });
     builder.addCase(fetchSearchedHotels.fulfilled, (state, action) => {
       state.fetchSearchedHotelsLoading = false;
+      state.showMoreBtn = !!action.payload.length;
       state.hotels = action.payload;
       state.error = false;
     });
@@ -255,3 +259,4 @@ export const selectFetchRecommendedHotelsLoading = (state: RootState) => state.h
 export const selectHotelsSuccess = (state: RootState) => state.hotels.hotelsSuccess;
 export const selectUnpublishedHotels = (state: RootState) => state.hotels.unpublished;
 export const selectUnpublishedLoading = (state: RootState) => state.hotels.fetchUnpublishedLoading;
+export const selectShowMoreBtn = (state: RootState) => state.hotels.showMoreBtn;
