@@ -52,7 +52,8 @@ const Apartment = () => {
                 <Typography variant="h4" component="p">
                   {apartment?.hotelId.name}
                 </Typography>
-                <Typography variant="h5" component="p">
+                <Typography component="p" textTransform="capitalize">
+                  {t('roomType')}:{' '}
                   {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
                 </Typography>
                 <Typography gutterBottom component="p">
