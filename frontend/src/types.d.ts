@@ -6,7 +6,10 @@ export interface HotelData {
     latitude: number;
     longitude: number;
   };
-  description?: string;
+  description: {
+    ru: string;
+    en: string;
+  };
   founding: number;
   lowestPrice: LowestPriceType;
   parking: boolean;
