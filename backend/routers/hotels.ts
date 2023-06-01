@@ -17,6 +17,7 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
       name: req.body.name,
       address: req.body.address,
       location: req.body.location ? JSON.parse(req.body.location) : null,
+      description: JSON.parse(req.body.description),
       star: parseFloat(req.body.star),
       image: req.file && req.file.filename,
       nonSmokingRooms: req.body.nonSmokingRooms,
