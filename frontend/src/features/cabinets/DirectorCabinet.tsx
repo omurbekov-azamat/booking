@@ -24,6 +24,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import { CabinetState } from '../../types';
 import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 
 const initialState: CabinetState = {
   openAdmins: false,
@@ -31,6 +32,7 @@ const initialState: CabinetState = {
   openHotels: false,
   simpleUsers: false,
   admins: false,
+  serviceProviders: false,
 };
 
 interface Props {
@@ -67,6 +69,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
     { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
     { option: 'admins', icon: <WcIcon />, text: 'Админы' },
+    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: 'Поставщики услуг' },
   ];
 
   const handleClickOption = (option: string, index: number) => {
