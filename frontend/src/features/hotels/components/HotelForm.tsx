@@ -58,17 +58,84 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'som' || name === 'dollar') {
-      setState((prev) => ({
-        ...prev,
-        lowestPrice: {
-          ...prev.lowestPrice,
-          [name]: parseFloat(value),
-        },
-      }));
-    } else {
-      setState((prev) => ({ ...prev, [name]: value }));
+
+    switch (name) {
+      case 'som':
+      case 'dollar':
+        setState((prev) => ({
+          ...prev,
+          lowestPrice: {
+            ...prev.lowestPrice,
+            [name]: parseFloat(value),
+          },
+        }));
+        break;
+      case 'ru':
+      case 'en':
+        setState((prev) => ({
+          ...prev,
+          description: {
+            ...prev.description,
+            [name]: value,
+          },
+        }));
+        break;
+      default:
+        setState((prev) => ({ ...prev, [name]: value }));
     }
+
+    // switch (name) {
+    //   case 'som':
+    //     setState((prev) => ({
+    //       ...prev,
+    //       lowestPrice: {
+    //         ...prev.lowestPrice,
+    //         [name]: parseFloat(value),
+    //       },
+    //     }));
+    //     break;
+    //   case 'dollar':
+    //     setState((prev) => ({
+    //       ...prev,
+    //       lowestPrice: {
+    //         ...prev.lowestPrice,
+    //         [name]: parseFloat(value),
+    //       },
+    //     }));
+    //     break;
+    //   case 'ru':
+    //     setState((prev) => ({
+    //       ...prev,
+    //       description: {
+    //         ...prev.description,
+    //         [name]: value,
+    //       },
+    //     }));
+    //     break;
+    //   case 'en':
+    //     setState((prev) => ({
+    //       ...prev,
+    //       description: {
+    //         ...prev.description,
+    //         [name]: value,
+    //       },
+    //     }));
+    //     break;
+    //   default:
+    //     setState((prev) => ({ ...prev, [name]: value }));
+    // }
+
+    // if (name === 'som' || name === 'dollar') {
+    //   setState((prev) => ({
+    //     ...prev,
+    //     lowestPrice: {
+    //       ...prev.lowestPrice,
+    //       [name]: parseFloat(value),
+    //     },
+    //   }));
+    // } else {
+    //   setState((prev) => ({ ...prev, [name]: value }));
+    // }
   };
 
   const resizeFile = (file: File) =>
