@@ -15,6 +15,7 @@ import ApartmentsTable from '../../apartments/components/ApartmentsTable';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
+import { selectCurrency } from '../../currency/currencySlice';
 
 interface Props {
   hotel: Hotel;
@@ -22,10 +23,11 @@ interface Props {
 
 const HotelFull: React.FC<Props> = ({ hotel }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useParams() as { id: string };
   const user = useAppSelector(selectUser);
   const cardImage = apiURL + '/' + hotel.image;
+  const currency = useAppSelector(selectCurrency);
 
   return (
     <>
@@ -51,6 +53,16 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
 
               <Typography variant="h6" component="p" textAlign={'center'}>
                 {hotel.address}
+              </Typography>
+
+              <Typography component="p">
+                {t('price') +
+                  ': ' +
+                  (currency === 'kgs' ? hotel?.lowestPrice.som + ' KGS' : hotel?.lowestPrice.dollar + ' USD')}
+              </Typography>
+
+              <Typography component="p">
+                {i18n.language === 'ru' ? hotel?.description.ru : hotel?.description.en}
               </Typography>
 
               {/*<Typography variant="body2" color="text.secondary" fontSize={24}>*/}
