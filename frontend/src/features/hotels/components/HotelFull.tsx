@@ -31,34 +31,52 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
     <>
       <Card>
         <CardContent>
-          <Typography variant="h4" component="p" textAlign={'center'}>
-            {hotel.name}
-          </Typography>
-          <Box textAlign={'center'}>
-            <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
-          </Box>
-          <Typography variant="h6" component="p" textAlign={'center'}>
-            {hotel.address}
-          </Typography>
-          <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
-          {/*<Typography variant="body2" color="text.secondary" fontSize={24}>*/}
-          {/*  {hotel.description}*/}
-          {/*</Typography>*/}
-          <Typography sx={{ my: 2 }} component="p">
-            {t('extraServices')}
-          </Typography>
-          <Grid container rowSpacing={1}>
-            <Grid item xs={12} md={6} xl={3}>
-              <Parking parking={hotel.parking} />
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6} xl={6} order={{ xs: 2, md: 1 }}>
+              <Typography variant="h4" component="p" textAlign={'center'}>
+                {hotel.name}
+              </Typography>
+              <Box textAlign={'center'}>
+                <Rating name="read-only" value={hotel.star} precision={0.5} readOnly />
+              </Box>
+              <Typography variant="h6" component="p" textAlign={'center'}>
+                {hotel.type}
+              </Typography>
+              <Typography variant="h6" component="p" textAlign={'center'}>
+                {hotel.founding}
+              </Typography>
+              <Typography variant="h6" component="p" textAlign={'center'}>
+                {hotel.city}
+              </Typography>
+
+              <Typography variant="h6" component="p" textAlign={'center'}>
+                {hotel.address}
+              </Typography>
+
+              {/*<Typography variant="body2" color="text.secondary" fontSize={24}>*/}
+              {/*  {hotel.description}*/}
+              {/*</Typography>*/}
+              <Typography sx={{ my: 2 }} component="p">
+                {t('extraServices')}
+              </Typography>
+              <Grid container rowSpacing={1}>
+                <Grid item xs={12} md={6} xl={3}>
+                  <Parking parking={hotel.parking} />
+                </Grid>
+                <Grid item xs={12} md={6} xl={3}>
+                  <PetFriendly petFriendly={hotel.petFriendly} />
+                </Grid>
+                <Grid item xs={12} md={6} xl={3}>
+                  <Pool pool={hotel.swimmingPool} />
+                </Grid>
+                <Grid item xs={12} md={6} xl={3}>
+                  <Smoking noSmoking={hotel.nonSmokingRooms} />
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <PetFriendly petFriendly={hotel.petFriendly} />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <Pool pool={hotel.swimmingPool} />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <Smoking noSmoking={hotel.nonSmokingRooms} />
+
+            <Grid item xs={12} md={6} xl={6} order={{ xs: 1, md: 2 }}>
+              <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
             </Grid>
           </Grid>
         </CardContent>
