@@ -142,7 +142,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
               {state.admins && <UserItems prop={gotUsers} role="admin" />}
-              {state.serviceProviders && <UserItems prop={gotUsers} role="providers" />}
+              {state.serviceProviders && <UserItems prop={gotUsers} role="hotel" />}
             </Grid>
           </Grid>
         </CardContent>

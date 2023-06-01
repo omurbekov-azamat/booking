@@ -37,14 +37,20 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
       await dispatch(getByRole(role));
       await setOpen(false);
     } else {
-      await dispatch(
-        changeRole({
-          ...state,
-          role: role === 'admin' ? 'user' : role === 'user' ? 'admin' : 'admin',
-        }),
-      );
-      await dispatch(getByRole(role));
-      await setOpen(false);
+      if (role === 'admin' || role === 'user') {
+        await dispatch(
+          changeRole({
+            ...state,
+            role: role === 'admin' ? 'user' : role === 'user' ? 'admin' : 'admin',
+          }),
+        );
+        await dispatch(getByRole(role));
+        await setOpen(false);
+      } else {
+        await dispatch(changeRole(state));
+        await dispatch(getByRole(role));
+        await setOpen(false);
+      }
     }
   };
 
@@ -92,6 +98,8 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
                     `Вы уверены, что хотите ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} сделать админом?`}
                   {role === 'admin' &&
                     `Вы уверены, что хотите забрать у ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} возможность быть админом?`}
+                  {role === 'hotel' &&
+                    `Все его услуги будут удалены и не будут доступны пользователям. Вы уверены, что хотите забрать у ${prop.firstName.toUpperCase()} ${prop.lastName.toUpperCase()} возможность публиковать свои услуги?`}
                 </>
               )}
             </Typography>
