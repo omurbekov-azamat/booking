@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Box, CardMedia, Grid, styled } from '@mui/material';
-import { apiURL, arrowStyleGallery } from '../../../constants';
+import { Box, Grid, styled } from '@mui/material';
+import { apiURL, arrowStyleGallery, placeHolderImg } from '../../../constants';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { IApartment } from '../../../types';
 import { useTranslation } from 'react-i18next';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const MyGalleryContainer = styled('div')({
   width: '700px',
@@ -67,16 +69,17 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
   return (
     <Box sx={{ background: 'rgba(0, 0, 0, 0.1)', p: 1 }}>
       <Box sx={{ maxWidth: 'auto', height: 'auto', alignItem: 'center', pb: 1 }}>
-        <CardMedia
-          component="img"
-          image={apiURL + '/' + selectedImage.img}
-          height="450"
-          sx={{
+        <LazyLoadImage
+          alt={i18n.language === 'en' ? selectedImage.title.en : selectedImage.title.ru}
+          effect="blur"
+          height="450px"
+          style={{
             width: '100%',
             objectFit: 'cover',
             maxHeight: '100%',
           }}
-          alt={i18n.language === 'en' ? selectedImage.title.en : selectedImage.title.ru}
+          src={apiURL + '/' + selectedImage.img}
+          placeholderSrc={placeHolderImg}
         />
       </Box>
       <MyGalleryContainer sx={{ width: 'auto' }}>
@@ -99,16 +102,17 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
         >
           {data.map((item) => (
             <Grid item key={item} xs>
-              <CardMedia
-                component="img"
-                height="140"
-                image={apiURL + '/' + item}
+              <LazyLoadImage
                 alt={i18n.language === 'en' ? apartmentData.roomTypeId.name.en : apartmentData.roomTypeId.name.ru}
-                sx={{
+                effect="blur"
+                height="140px"
+                style={{
                   width: '100%',
                   objectFit: 'cover',
                   maxHeight: '100%',
                 }}
+                src={apiURL + '/' + item}
+                placeholderSrc={placeHolderImg}
                 onClick={() => handleImageClick(item, apartmentData.roomTypeId.name)}
               />
             </Grid>
