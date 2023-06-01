@@ -14,7 +14,7 @@ const MainPage = () => {
       <SwipePropertyTypeCards />
       <SwipeCityCards />
       <RecommendedHotels />
-      <Typography variant="h2" textAlign="center" mt={3} style={HeaderStyles}>
+      <Typography variant="h5" textAlign="center" mt={3} style={HeaderStyles}>
         {t('specialOffersForYou')}
       </Typography>
       <BlockAdditionalServices />
