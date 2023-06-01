@@ -32,6 +32,10 @@ const EditHotel = () => {
         som: currentHotel.lowestPrice.som,
         dollar: currentHotel.lowestPrice.dollar,
       },
+      description: {
+        ru: currentHotel.description.ru,
+        en: currentHotel.description.ru,
+      },
     };
   }
 

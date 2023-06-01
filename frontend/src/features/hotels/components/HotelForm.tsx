@@ -46,6 +46,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           som: 0,
           dollar: 0,
         },
+        description: {
+          ru: '',
+          en: '',
+        },
       };
 
   const [state, setState] = useState<HotelMutation>(initialState);
@@ -125,6 +129,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           lowestPrice: {
             som: 0,
             dollar: 0,
+          },
+          description: {
+            ru: '',
+            en: '',
           },
         });
       }
