@@ -185,6 +185,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         founding: req.body.founding,
         type: req.body.type,
         lowestPrice: JSON.parse(req.body.lowestPrice),
+        description: JSON.parse(req.body.description),
       },
     });
 
