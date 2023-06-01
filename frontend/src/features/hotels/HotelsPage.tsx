@@ -17,6 +17,7 @@ import {
   selectHotels,
   selectLoadingFetchNewPage,
   selectPageOfHotels,
+  selectShowMoreBtn,
 } from './hotelsSlice';
 import { LoadingButton } from '@mui/lab';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -35,6 +36,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   const page = useAppSelector(selectPageOfHotels);
   const fetchSearchHotelsLoading = useAppSelector(selectFetchSearchedHotelsLoading);
   const fetchNewPageLoading = useAppSelector(selectLoadingFetchNewPage);
+  const showMoreBtn = useAppSelector(selectShowMoreBtn);
 
   const catchParams = useParams() as { city: string; propertyType: string };
   const hotels = useAppSelector(selectHotels);
@@ -261,7 +263,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           ) : (
             <Typography>{t('empty')}</Typography>
           )}
-          {hotels.length && (
+          {showMoreBtn && (
             <Grid item container xs={12}>
               <LoadingButton
                 loading={fetchNewPageLoading}
