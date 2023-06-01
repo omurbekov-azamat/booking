@@ -41,9 +41,9 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
             {hotel.address}
           </Typography>
           <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
-          <Typography variant="body2" color="text.secondary" fontSize={24}>
-            {hotel.description}
-          </Typography>
+          {/*<Typography variant="body2" color="text.secondary" fontSize={24}>*/}
+          {/*  {hotel.description}*/}
+          {/*</Typography>*/}
           <Typography sx={{ my: 2 }} component="p">
             {t('extraServices')}
           </Typography>

@@ -313,6 +313,38 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           </Grid>
 
           <Grid item xs>
+            <TextField
+              multiline
+              rows={3}
+              label={'Описание (300 символов)'}
+              name="ru"
+              autoComplete="current-name"
+              value={state.description.ru}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('ru'))}
+              helperText={getFieldError('ru')}
+              inputProps={{ maxLength: 300 }}
+              required
+            />
+          </Grid>
+
+          <Grid item xs>
+            <TextField
+              multiline
+              rows={3}
+              label={'Description (300 symbols)'}
+              name="en"
+              autoComplete="current-name"
+              value={state.description.en}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('en'))}
+              helperText={getFieldError('en')}
+              inputProps={{ maxLength: 300 }}
+              required
+            />
+          </Grid>
+
+          <Grid item xs>
             <ListFacilities onChange={handleChangeCheckBox} width={400} />
           </Grid>
           <Grid item xs>
