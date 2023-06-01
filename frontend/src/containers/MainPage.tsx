@@ -1,7 +1,7 @@
 import React from 'react';
 import RecommendedHotels from '../features/hotels/components/RecommendedHotels';
 import BlockAdditionalServices from '../components/UI/BlockAdditionalServices/BlockAdditionalServices';
-import { Typography } from '@mui/material';
+import { Typography, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import SwipeCityCards from '../components/UI/BlocksOnMainPage/SwipeCityCards';
 import SwipePropertyTypeCards from '../components/UI/BlocksOnMainPage/SwipePropertyTypeCards';
@@ -17,7 +17,9 @@ const MainPage = () => {
       <Typography variant="h5" textAlign="center" mt={3} style={HeaderStyles}>
         {t('specialOffersForYou')}
       </Typography>
-      <BlockAdditionalServices />
+      <Container maxWidth="lg">
+        <BlockAdditionalServices />
+      </Container>
     </>
   );
 };
