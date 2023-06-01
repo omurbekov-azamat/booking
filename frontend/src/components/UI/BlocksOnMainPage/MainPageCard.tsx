@@ -1,9 +1,11 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, Grid, Typography, Box } from '@mui/material';
 import { BlockOnMainPage } from '../../../types';
 import { useNavigate } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { placeHolderImg } from '../../../constants';
 
 interface Props {
   item: BlockOnMainPage;
@@ -35,7 +37,14 @@ const MainPageCard: React.FC<Props> = ({ item, city, type }) => {
       >
         <Card style={{ maxWidth: '350px', maxHeight: 'auto' }}>
           <CardActionArea>
-            <CardMedia component="img" width="100%" height="200px" image={item.link} alt={item.link} />
+            <LazyLoadImage
+              alt={item.link}
+              width="100%"
+              height="200px"
+              effect="blur"
+              src={item.link}
+              placeholderSrc={placeHolderImg}
+            />
             <Typography
               variant="h5"
               component="div"

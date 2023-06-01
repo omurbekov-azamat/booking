@@ -141,11 +141,11 @@ usersRouter.patch('/role/:id', auth, permit('director', 'admin'), async (req, re
 
         res.send({ message: 'Role changed, and all hotels and apartments deleted' });
       } else {
-        await User.updateOne({_id: req.params.id}, { $set: {role: req.body.role}});
-        res.send({message: 'Role changed'});
+        await User.updateOne({ _id: req.params.id }, { $set: { role: req.body.role } });
+        res.send({ message: 'Role changed' });
       }
     } else {
-      res.send(400).send({message: 'User is not found'});
+      res.send(400).send({ message: 'User is not found' });
     }
   } catch (e) {
     return next(e);
