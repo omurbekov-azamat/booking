@@ -51,7 +51,7 @@ const BlockAdditionalServices = () => {
             actionIcon={
               <IconButton sx={{ color: 'rgba(255, 255, 255, 0.54)' }} aria-label={`info about ${item.title}`}>
                 <a href={item.link} target="_blank" rel="noreferrer" style={{ color: 'white', textDecoration: 'none' }}>
-                  {t('readMore')}
+                  ...
                 </a>
               </IconButton>
             }
