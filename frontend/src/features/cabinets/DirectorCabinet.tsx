@@ -27,11 +27,11 @@ import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 
 const initialState: CabinetState = {
-  openAdmins: false,
   openUsers: false,
   openHotels: false,
   simpleUsers: false,
   admins: false,
+  reportAdmins: false,
   serviceProviders: false,
 };
 
@@ -51,7 +51,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const [state, setState] = React.useState<CabinetState>(exist);
 
   useEffect(() => {
-    if (state.openAdmins) {
+    if (state.reportAdmins) {
       dispatch(getByRole('admin'));
     } else if (state.simpleUsers) {
       dispatch(getByRole('user'));
@@ -60,7 +60,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
     } else if (state.serviceProviders) {
       dispatch(getByRole('hotel'));
     }
-  }, [dispatch, state.openAdmins, state.simpleUsers, state.admins, state.serviceProviders]);
+  }, [dispatch, state.reportAdmins, state.simpleUsers, state.admins, state.serviceProviders]);
 
   const handleClickAdminName = (id: string) => {
     dispatch(getForAdminHisOrders(id));
@@ -114,15 +114,15 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 <ListItemButton
                   key={options.length}
                   selected={selectedIndex === options.length}
-                  onClick={() => handleClickOption('openAdmins', options.length)}
+                  onClick={() => handleClickOption('reportAdmins', options.length)}
                 >
                   <ListItemIcon>
                     <PeopleAltIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Admins" />
-                  {state.openAdmins ? <ExpandLess /> : <ExpandMore />}
+                  <ListItemText primary="Отчет админов" />
+                  {state.reportAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={state.openAdmins} timeout="auto" unmountOnExit>
+                <Collapse in={state.reportAdmins} timeout="auto" unmountOnExit>
                   {usersByRole.map((user) => (
                     <List key={user._id} component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(user._id)}>
@@ -137,12 +137,12 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
               </List>
             </Grid>
             <Grid item xs>
-              {state.openAdmins && <OrderItems ordersItems={adminOrders} />}
               {state.openUsers && <UsersStatus />}
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
               {state.admins && <UserItems prop={gotUsers} role="admin" />}
               {state.serviceProviders && <UserItems prop={gotUsers} role="hotel" />}
+              {state.reportAdmins && <OrderItems ordersItems={adminOrders} />}
             </Grid>
           </Grid>
         </CardContent>
