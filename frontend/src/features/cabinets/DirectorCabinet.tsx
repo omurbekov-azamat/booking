@@ -57,8 +57,10 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
       dispatch(getByRole('user'));
     } else if (state.admins) {
       dispatch(getByRole('admin'));
+    } else if (state.serviceProviders) {
+      dispatch(getByRole('hotel'));
     }
-  }, [dispatch, state.openAdmins, state.simpleUsers, state.admins]);
+  }, [dispatch, state.openAdmins, state.simpleUsers, state.admins, state.serviceProviders]);
 
   const handleClickAdminName = (id: string) => {
     dispatch(getForAdminHisOrders(id));
@@ -140,6 +142,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
               {state.admins && <UserItems prop={gotUsers} role="admin" />}
+              {state.serviceProviders && <UserItems prop={gotUsers} role="providers" />}
             </Grid>
           </Grid>
         </CardContent>
