@@ -323,7 +323,7 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('ru'))}
               helperText={getFieldError('ru')}
-              inputProps={{ maxLength: 300 }}
+              inputProps={{ minLength: 300, maxLength: 300 }}
               required
             />
           </Grid>
@@ -339,7 +339,7 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('en'))}
               helperText={getFieldError('en')}
-              inputProps={{ maxLength: 300 }}
+              inputProps={{ minLength: 300, maxLength: 300 }}
               required
             />
           </Grid>

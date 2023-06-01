@@ -93,10 +93,14 @@ const HotelSchema = new Schema<IHotel>({
       ru: {
         type: String,
         required: true,
+        minlength: 150,
+        maxlength: 300,
       },
       en: {
         type: String,
         required: true,
+        minlength: 150,
+        maxlength: 300,
       },
     },
     required: true,

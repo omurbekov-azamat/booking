@@ -34,7 +34,7 @@ const EditHotel = () => {
       },
       description: {
         ru: currentHotel.description.ru,
-        en: currentHotel.description.ru,
+        en: currentHotel.description.en,
       },
     };
   }
