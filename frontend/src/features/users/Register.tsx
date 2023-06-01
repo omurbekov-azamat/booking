@@ -8,9 +8,8 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import type { RegisterMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
-import PhoneInput from 'react-phone-number-input';
-import { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { MuiTelInput } from 'mui-tel-input';
 
 const Register = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +49,7 @@ const Register = () => {
     try {
       return error?.errors[fieldName].message;
     } catch {
-      return undefined;
+      return '';
     }
   };
 
@@ -89,51 +88,44 @@ const Register = () => {
               <TextField
                 label={t('password')}
                 name="password"
-                type="password"
                 autoComplete="new-password"
                 value={state.password}
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('password'))}
                 helperText={getFieldError('password')}
-                required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 label={t('firstName')}
                 name="firstName"
-                type="firstName"
                 autoComplete="new-firstName"
                 value={state.firstName}
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('firstName'))}
                 helperText={getFieldError('firstName')}
-                required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 label={t('lastName')}
                 name="lastName"
-                type="lastName"
                 autoComplete="new-lastName"
                 value={state.lastName}
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('lastName'))}
                 helperText={getFieldError('lastName')}
-                required
               />
             </Grid>
             <Grid item xs={12}>
-              <label> {t('phoneNumber')}</label>
-              <PhoneInput
+              <MuiTelInput
+                label={t('phoneNumber')}
                 onChange={phoneChangeHandler}
                 defaultCountry={'KG'}
-                international
-                countryCallingCodeEditable={false}
                 name="phoneNumber"
+                error={Boolean(getFieldError('phoneNumber'))}
+                helperText={getFieldError('phoneNumber')}
                 value={state.phoneNumber}
-                error={state.phoneNumber && (isValidPhoneNumber(state.phoneNumber) ? undefined : t('phoneError'))}
               />
             </Grid>
           </Grid>
