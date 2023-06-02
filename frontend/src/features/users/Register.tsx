@@ -8,7 +8,6 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import type { RegisterMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
-import 'react-phone-number-input/style.css';
 import { MuiTelInput } from 'mui-tel-input';
 
 const Register = () => {

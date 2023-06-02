@@ -53,7 +53,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
             <Typography gutterBottom variant="h5" align="center" color={'grey'}>
               {apartment.hotelId.name}
             </Typography>
-            <Typography gutterBottom variant="h5" align="center">
+            <Typography gutterBottom variant="h5" align="center" textTransform="capitalize">
               {i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
             </Typography>
             <Typography color={'grey'}>

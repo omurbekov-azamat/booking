@@ -247,7 +247,7 @@ const ApartmentForm: React.FC<Props> = ({ isEdit }) => {
                 >
                   {roomType.map((option) => {
                     return (
-                      <MenuItem key={option._id} value={option._id}>
+                      <MenuItem key={option._id} value={option._id} sx={{ textTransform: 'capitalize' }}>
                         {i18n.language === 'en' ? option.name.en : option.name.ru}
                       </MenuItem>
                     );
