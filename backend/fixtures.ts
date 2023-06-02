@@ -173,6 +173,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
     },
     {
@@ -195,6 +199,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
     },
@@ -219,6 +227,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
     },
     {
@@ -242,6 +254,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
     },
     {
@@ -264,6 +280,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
       type: 'pension',
@@ -289,6 +309,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
       type: 'guestHouse',
     },
@@ -313,6 +337,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
@@ -335,6 +363,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
@@ -359,6 +391,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
@@ -381,6 +417,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
@@ -405,6 +445,10 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
@@ -427,6 +471,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
@@ -451,6 +499,10 @@ const run = async () => {
         som: 1000,
         dollar: 12,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
@@ -473,6 +525,10 @@ const run = async () => {
       lowestPrice: {
         som: 1000,
         dollar: 12,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
@@ -497,6 +553,10 @@ const run = async () => {
         som: 1100,
         dollar: 13,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
@@ -519,6 +579,10 @@ const run = async () => {
       lowestPrice: {
         som: 1200,
         dollar: 14,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
     },
@@ -543,6 +607,10 @@ const run = async () => {
         som: 1400,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
     },
     {
@@ -565,6 +633,10 @@ const run = async () => {
       lowestPrice: {
         som: 1700,
         dollar: 16,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'standard',
     },

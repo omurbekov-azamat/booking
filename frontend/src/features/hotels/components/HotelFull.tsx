@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Box, Button, Grid, Rating } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { apiURL } from '../../../constants';
-import type { Hotel } from '../../../types';
+import type { Hotel, Comment } from '../../../types';
 import Parking from '../../../components/Icons/HotelIcons/Parking';
 import PetFriendly from '../../../components/Icons/HotelIcons/PetFriendly';
 import Pool from '../../../components/Icons/HotelIcons/Pool';
@@ -19,9 +19,10 @@ import { selectCurrency } from '../../currency/currencySlice';
 
 interface Props {
   hotel: Hotel;
+  comments: Comment[];
 }
 
-const HotelFull: React.FC<Props> = ({ hotel }) => {
+const HotelFull: React.FC<Props> = ({ hotel, comments }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { id } = useParams() as { id: string };
@@ -61,10 +62,6 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
                   (currency === 'kgs' ? hotel?.lowestPrice.som + ' KGS' : hotel?.lowestPrice.dollar + ' USD')}
               </Typography>
 
-              <Typography component="p">
-                {i18n.language === 'ru' ? hotel?.description.ru : hotel?.description.en}
-              </Typography>
-
               {/*<Typography variant="body2" color="text.secondary" fontSize={24}>*/}
               {/*  {hotel.description}*/}
               {/*</Typography>*/}
@@ -91,6 +88,10 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
               <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
             </Grid>
           </Grid>
+
+          <Typography component="p">
+            {i18n.language === 'ru' ? hotel?.description.ru : hotel?.description.en}
+          </Typography>
         </CardContent>
       </Card>
       {(user?.role === 'admin' || user?._id === hotel.userId) && (
