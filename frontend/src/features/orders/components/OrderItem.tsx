@@ -96,7 +96,9 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
               {t('city')}: {prop.apartmentId.hotelId.city}
             </Typography>
             <Typography textTransform="capitalize">
-              {t('address')}: {prop.apartmentId.hotelId.address.adrEn}
+              {i18n.language === 'ru'
+                ? t('address') + ': ' + prop.apartmentId.hotelId.address.adrRu
+                : prop.apartmentId.hotelId.address.adrEn}
             </Typography>
             <Typography textTransform="capitalize">
               {t('hotelName')}: {prop.apartmentId.hotelId.name}

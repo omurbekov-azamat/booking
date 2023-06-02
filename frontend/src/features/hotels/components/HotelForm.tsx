@@ -291,14 +291,14 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
             <TextField
               multiline
               rows={3}
-              label={'Описание (300 символов)'}
+              label={'Описание (мин 150 символов)'}
               name="ru"
               autoComplete="current-name"
               value={state.description.ru}
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('ru'))}
               helperText={getFieldError('ru')}
-              inputProps={{ minLength: 300, maxLength: 300 }}
+              inputProps={{ minLength: 150, maxLength: 300 }}
               required
             />
           </Grid>
@@ -307,14 +307,14 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
             <TextField
               multiline
               rows={3}
-              label={'Description (300 symbols)'}
+              label={'Description (min 150 symbols)'}
               name="en"
               autoComplete="current-name"
               value={state.description.en}
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('en'))}
               helperText={getFieldError('en')}
-              inputProps={{ minLength: 300, maxLength: 300 }}
+              inputProps={{ minLength: 150, maxLength: 300 }}
               required
             />
           </Grid>

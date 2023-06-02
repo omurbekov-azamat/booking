@@ -15,7 +15,7 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
     const hotel = new Hotel({
       userId: user._id,
       name: req.body.name,
-      address: req.body.address,
+      address: JSON.parse(req.body.address),
       location: req.body.location ? JSON.parse(req.body.location) : null,
       description: JSON.parse(req.body.description),
       star: parseFloat(req.body.star),
