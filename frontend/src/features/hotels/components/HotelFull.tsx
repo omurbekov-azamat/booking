@@ -17,13 +17,14 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
 import PlaceIcon from '@mui/icons-material/Place';
+import CommentMessage from '../../comments/components/CommentMessage';
 
 interface Props {
   hotel: Hotel;
   comments: Comment[];
 }
 
-const HotelFull: React.FC<Props> = ({ hotel }) => {
+const HotelFull: React.FC<Props> = ({ hotel, comments }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { id } = useParams() as { id: string };
@@ -130,24 +131,21 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
                 {hotel.address}
               </Typography>
               <Divider sx={{ my: 2 }} />
-              <Grid container justifyContent="space-between">
+              <Grid container justifyContent="space-between" alignItems={'center'}>
                 <Grid item>
-                  <Typography variant="h6" component="p" textAlign={'center'}>
+                  <Typography component="p" textAlign={'center'}>
                     {type}
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography component="p">
-                    {t('price') +
-                      ': ' +
-                      (currency === 'kgs' ? hotel?.lowestPrice.som + ' KGS' : hotel?.lowestPrice.dollar + ' USD')}
+                    {t('lowestPrice') + ': '}
+                    <strong>
+                      {currency === 'kgs' ? hotel?.lowestPrice.som + ' KGS' : hotel?.lowestPrice.dollar + ' USD'}
+                    </strong>
                   </Typography>
                 </Grid>
               </Grid>
-
-              {/*<Typography variant="body2" color="text.secondary" fontSize={24}>*/}
-              {/*  {hotel.description}*/}
-              {/*</Typography>*/}
               <Typography sx={{ my: 2 }} component="p">
                 {t('extraServices')}
               </Typography>
@@ -166,13 +164,11 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
                 </Grid>
               </Grid>
             </Grid>
-
             <Grid item xs={12} md={6} xl={6} order={{ xs: 1, md: 2 }}>
               <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
             </Grid>
           </Grid>
-
-          <Typography component="p" sx={{ mt: 2 }}>
+          <Typography component="p" sx={{ mt: 4, color: '#4d4949' }}>
             {i18n.language === 'ru' ? hotel?.description.ru : hotel?.description.en}
           </Typography>
         </CardContent>
@@ -188,6 +184,10 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
         </Button>
       )}
       <ApartmentsTable hotel={hotel} />
+
+      {comments.map((comment) => {
+        return <CommentMessage comment={comment} key={comment._id} />;
+      })}
     </>
   );
 };
