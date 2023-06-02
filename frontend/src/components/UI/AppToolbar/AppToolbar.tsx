@@ -37,7 +37,9 @@ const AppToolbar = () => {
               <Grid item xs={12} sm={12} md={4} lg={6} xl={6}>
                 <Grid container alignItems="center">
                   <Typography variant="h6" component="div" fontWeight="bold" mr={3}>
-                    <Link to="/">Booking</Link>
+                    <Link to="/" style={{ margin: 'auto' }}>
+                      <img style={{ maxWidth: '150px' }} src="/logo.png" alt="logo" />
+                    </Link>
                   </Typography>
                   <Box mr={1}>
                     <SearchField />
