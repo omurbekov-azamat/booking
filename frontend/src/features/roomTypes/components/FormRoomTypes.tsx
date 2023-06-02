@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { createNewRoomType } from '../roomTypesThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectErrorCreateRoomType, selectLoadingCreateRoomType } from '../roomTypesSlice';
-import { Box, Grid, TextField, Typography } from '@mui/material';
+import { Box, Card, Container, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { RoomTypesMutation } from '../../../types';
+import { someStyle } from '../../../constants';
 
 const FormRoomTypes = () => {
   const dispatch = useAppDispatch();
@@ -48,44 +49,46 @@ const FormRoomTypes = () => {
   };
 
   return (
-    <Box component="form" onSubmit={submitFormHandler}>
-      <Grid container spacing={5} flexDirection="column" textAlign="center">
-        <Grid item>
-          <Typography variant="h5" textTransform="uppercase">
-            {t('createRoomType')}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <TextField
-            label={'Тип номера'}
-            name="ru"
-            value={state.ru}
-            onChange={inputChangeHandler}
-            sx={{ width: '300px' }}
-            error={Boolean(getFieldError('ru'))}
-            helperText={getFieldError('ru')}
-            required
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            label={'Room type'}
-            name="en"
-            value={state.en}
-            onChange={inputChangeHandler}
-            sx={{ width: '300px' }}
-            error={Boolean(getFieldError('en'))}
-            helperText={getFieldError('en')}
-            required
-          />
-        </Grid>
-        <Grid item>
-          <LoadingButton loading={loadingCreateRoomType} type="submit" variant="contained">
-            {t('create')}
-          </LoadingButton>
-        </Grid>
-      </Grid>
-    </Box>
+    <Container component="main" maxWidth="sm">
+      <Box component="form" onSubmit={submitFormHandler}>
+        <Card sx={{ p: 2, boxShadow: someStyle.boxShadow }}>
+          <Grid container spacing={5} direction="column" textAlign="center">
+            <Grid item xs={12}>
+              <Typography variant="h6" textTransform="uppercase">
+                {t('createRoomType')}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TextField
+                label={'Тип номера на русском'}
+                name="ru"
+                value={state.ru}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('ru'))}
+                helperText={getFieldError('ru')}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                label={'Тип номера на английском'}
+                name="en"
+                value={state.en}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('en'))}
+                helperText={getFieldError('en')}
+                required
+              />
+            </Grid>
+            <Grid item>
+              <LoadingButton loading={loadingCreateRoomType} type="submit" variant="contained">
+                {t('create')}
+              </LoadingButton>
+            </Grid>
+          </Grid>
+        </Card>
+      </Box>
+    </Container>
   );
 };
 
