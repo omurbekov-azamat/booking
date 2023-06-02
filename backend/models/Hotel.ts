@@ -18,7 +18,16 @@ const HotelSchema = new Schema<IHotel>({
     required: true,
   },
   address: {
-    type: String,
+    type: {
+      adrRu: {
+        type: String,
+        required: true,
+      },
+      adrEn: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
   },
   location: {

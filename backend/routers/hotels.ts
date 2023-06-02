@@ -175,7 +175,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
       $set: {
         name: req.body.name,
         city: req.body.city,
-        address: req.body.address,
+        address: JSON.parse(req.body.address),
         star: parseInt(req.body.star),
         image: req.file && req.file.filename,
         parking: req.body.parking,

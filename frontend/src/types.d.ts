@@ -1,6 +1,9 @@
 export interface HotelData {
   name: string;
-  address: string;
+  address: {
+    adrRu: string;
+    adrEn: string;
+  };
   city: string;
   location?: {
     latitude: number;

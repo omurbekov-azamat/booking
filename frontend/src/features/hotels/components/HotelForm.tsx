@@ -33,7 +33,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     : {
         name: '',
         city: '',
-        address: '',
+        address: {
+          adrRu: '',
+          adrEn: '',
+        },
         star: '',
         image: null,
         parking: false,
@@ -80,62 +83,19 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           },
         }));
         break;
+      case 'adrRu':
+      case 'adrEn':
+        setState((prev) => ({
+          ...prev,
+          address: {
+            ...prev.address,
+            [name]: value,
+          },
+        }));
+        break;
       default:
         setState((prev) => ({ ...prev, [name]: value }));
     }
-
-    // switch (name) {
-    //   case 'som':
-    //     setState((prev) => ({
-    //       ...prev,
-    //       lowestPrice: {
-    //         ...prev.lowestPrice,
-    //         [name]: parseFloat(value),
-    //       },
-    //     }));
-    //     break;
-    //   case 'dollar':
-    //     setState((prev) => ({
-    //       ...prev,
-    //       lowestPrice: {
-    //         ...prev.lowestPrice,
-    //         [name]: parseFloat(value),
-    //       },
-    //     }));
-    //     break;
-    //   case 'ru':
-    //     setState((prev) => ({
-    //       ...prev,
-    //       description: {
-    //         ...prev.description,
-    //         [name]: value,
-    //       },
-    //     }));
-    //     break;
-    //   case 'en':
-    //     setState((prev) => ({
-    //       ...prev,
-    //       description: {
-    //         ...prev.description,
-    //         [name]: value,
-    //       },
-    //     }));
-    //     break;
-    //   default:
-    //     setState((prev) => ({ ...prev, [name]: value }));
-    // }
-
-    // if (name === 'som' || name === 'dollar') {
-    //   setState((prev) => ({
-    //     ...prev,
-    //     lowestPrice: {
-    //       ...prev.lowestPrice,
-    //       [name]: parseFloat(value),
-    //     },
-    //   }));
-    // } else {
-    //   setState((prev) => ({ ...prev, [name]: value }));
-    // }
   };
 
   const resizeFile = (file: File) =>
@@ -184,7 +144,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
         await setState({
           name: '',
           city: '',
-          address: '',
+          address: {
+            adrRu: '',
+            adrEn: '',
+          },
           type: '',
           star: '',
           image: null,
@@ -239,13 +202,25 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           </Grid>
           <Grid item xs>
             <TextField
-              label={t('address')}
-              name="address"
+              label={'Адрес'}
+              name="adrRu"
               autoComplete="current-address"
-              value={state.address}
+              value={state.address.adrRu}
               onChange={inputChangeHandler}
-              error={Boolean(getFieldError('address'))}
-              helperText={getFieldError('address')}
+              error={Boolean(getFieldError('adrRu'))}
+              helperText={getFieldError('adrRu')}
+              required
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              label={'Address'}
+              name="adrEn"
+              autoComplete="current-address"
+              value={state.address.adrEn}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('adrEn'))}
+              helperText={getFieldError('adrEn')}
               required
             />
           </Grid>

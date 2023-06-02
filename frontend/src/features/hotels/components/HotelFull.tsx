@@ -127,9 +127,9 @@ const HotelFull: React.FC<Props> = ({ hotel, comments }) => {
                 <PlaceIcon />
                 {city}
               </Typography>
-              <Typography component="p" textAlign={'center'}>
-                {hotel.address}
-              </Typography>
+              {/*<Typography component="p" textAlign={'center'}>*/}
+              {/*  {hotel.address}*/}
+              {/*</Typography>*/}
               <Divider sx={{ my: 2 }} />
               <Grid container justifyContent="space-between" alignItems={'center'}>
                 <Grid item>
