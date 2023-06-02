@@ -30,7 +30,7 @@ const Footer = () => {
                 </Typography>
               </Grid>
               <Grid container item xs={12} md={3}>
-                <Link href="http://www.eventm.kg/" style={{ margin: 'auto' }}>
+                <Link href="http://www.eventm.kg/" style={{ margin: 'auto' }} target="_blank" rel="noopener noreferrer">
                   <img style={{ maxWidth: '250px' }} src="/logo.png" alt="logo" />
                 </Link>
               </Grid>
@@ -39,7 +39,13 @@ const Footer = () => {
                   <EmailIcon /> conference@eventm.kg
                 </Typography>
                 <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
-                  <Link href="https://www.instagram.com/eventm_agency" color="#FFF" underline="none">
+                  <Link
+                    href="https://www.instagram.com/eventm_agency"
+                    color="#FFF"
+                    underline="none"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <InstagramIcon /> Eventm_agency
                   </Link>
                 </Typography>
