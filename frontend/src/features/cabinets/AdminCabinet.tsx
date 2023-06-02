@@ -11,7 +11,7 @@ import {
   selectUnpublishedHotels,
   selectUnpublishedLoading,
 } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton, Typography } from '@mui/material';
+import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import WorkIcon from '@mui/icons-material/Work';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -39,7 +39,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import { getByRole } from '../users/usersThunks';
 import UserItems from '../users/components/UserItems';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
-import { someStyle } from '../../constants';
+import RoomTypeItems from '../roomTypes/components/RoomTypeItems';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -62,7 +62,7 @@ interface Props {
 
 const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const dispatch = useAppDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const user = useAppSelector(selectUser);
   const hotelsState = useAppSelector(selectHotels);
   const orders = useAppSelector(selectAdminMyOrders);
@@ -173,22 +173,7 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.createRoomType && <FormRoomTypes />}
               {state.deleteHotel && <HotelsStatus DeleteAction={true} StatusAction={false} />}
               {loadingFetchAllRoomTypes && <Spinner />}
-              {state.roomTypes &&
-                roomTypes.map((item) => (
-                  <Card
-                    key={item._id}
-                    sx={{
-                      mb: 2,
-                      p: 2,
-                      maxWidth: '500px',
-                      boxShadow: someStyle.boxShadow,
-                    }}
-                  >
-                    <Typography key={item._id} textTransform="capitalize">
-                      {i18n.language === 'en' ? item.name.en : item.name.ru}
-                    </Typography>
-                  </Card>
-                ))}
+              {state.roomTypes && <RoomTypeItems items={roomTypes} />}
               {state.users && <UserItems prop={gotUsers} role="user" />}
               {state.serviceProviders && <UserItems prop={gotUsers} role="hotel" />}
             </Grid>
