@@ -15,41 +15,71 @@ const Footer = () => {
       <AppBar position="static" sx={FooterStyle}>
         <Toolbar sx={{ paddingY: '10px' }}>
           <Container maxWidth="xl">
-            <Grid container justifyContent="space-between" alignItems="center">
+            <Grid container justifyContent="space-between" alignItems="center" spacing={0.5}>
               <Grid container item direction="column" xs={12} md={3}>
-                <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
-                  +996 558 389288 <WhatsAppIcon />
+                <Typography
+                  variant="body1"
+                  component="div"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                >
+                  +996 558 389288 <WhatsAppIcon style={{ marginLeft: '4px' }} />
                 </Typography>
-                <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
+                <Typography
+                  variant="body1"
+                  component="div"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                >
                   +996 556 829978
-                  <CallIcon />
+                  <CallIcon style={{ marginLeft: '4px' }} />
                 </Typography>
-                <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
+                <Typography
+                  variant="body1"
+                  component="div"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                >
                   +996 505 000024
-                  <CallIcon />
+                  <CallIcon style={{ marginLeft: '4px' }} />
                 </Typography>
               </Grid>
               <Grid container item xs={12} md={3}>
-                <Link href="http://www.eventm.kg/" style={{ margin: 'auto' }} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="http://www.eventm.kg/"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img style={{ maxWidth: '250px' }} src="/logo.png" alt="logo" />
                 </Link>
               </Grid>
               <Grid container item direction="column" xs={12} md={5}>
-                <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
-                  <EmailIcon /> conference@eventm.kg
+                <Typography
+                  variant="body1"
+                  component="div"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                >
+                  <EmailIcon style={{ marginRight: '4px' }} /> conference@eventm.kg
                 </Typography>
-                <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
+                <Typography
+                  variant="body1"
+                  component="div"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                >
                   <Link
                     href="https://www.instagram.com/eventm_agency"
                     color="#FFF"
                     underline="none"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <InstagramIcon /> Eventm_agency
+                    <InstagramIcon style={{ marginRight: '4px' }} /> Eventm_agency
                   </Link>
                 </Typography>
-                <Typography variant="body1" component="div" style={{ margin: 'auto' }}>
+                <Typography
+                  variant="body1"
+                  component="div"
+                  style={{ margin: 'auto', display: 'flex', alignItems: 'center' }}
+                >
                   {t('footerAddress')}
                 </Typography>
               </Grid>
