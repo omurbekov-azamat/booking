@@ -6,6 +6,7 @@ import { Box, Card, Container, Grid, TextField, Typography } from '@mui/material
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { RoomTypesMutation } from '../../../types';
+import { someStyle } from '../../../constants';
 
 const FormRoomTypes = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ const FormRoomTypes = () => {
   return (
     <Container component="main" maxWidth="sm">
       <Box component="form" onSubmit={submitFormHandler}>
-        <Card sx={{ p: 2 }}>
+        <Card sx={{ p: 2, boxShadow: someStyle.boxShadow }}>
           <Grid container spacing={5} direction="column" textAlign="center">
             <Grid item xs={12}>
               <Typography variant="h6" textTransform="uppercase">
