@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import { Box, CardMedia, Checkbox, Grid, Link, Rating, Stack, Typography } from '@mui/material';
+import { Box, Checkbox, Grid, Link, Rating, Stack, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,8 @@ import { selectUser } from '../../users/usersSlice';
 import { LoadingButton } from '@mui/lab';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { selectLoadingRemoveHotel, selectLoadingTogglePublished } from '../hotelsSlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface Props {
   hotel: Hotel;
@@ -139,7 +141,15 @@ const HotelCardLarge: React.FC<Props> = ({
       <Box sx={{ border: 2, borderRadius: 5, borderColor: 'rgba(3, 201, 136, 0.7)', p: 1, overflow: 'hidden' }}>
         <Grid container gap={2}>
           <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
-            <CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />
+            <LazyLoadImage
+              alt={hotel.name}
+              width="100%"
+              height="auto"
+              effect="blur"
+              src={cardImage}
+              placeholderSrc="https://unsplash.it/200/100?image=44"
+            ></LazyLoadImage>
+            {/*<CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />*/}
           </Grid>
 
           <Grid item flex={1} onClick={() => onClickCard(hotel._id)}>

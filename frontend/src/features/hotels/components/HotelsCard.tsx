@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import { apiURL } from '../../../constants';
+import { apiURL, placeHolderImg } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { selectLoadingRemoveHotel, selectLoadingTogglePublished } from '../hotelsSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -7,13 +7,15 @@ import { useTranslation } from 'react-i18next';
 import { getFavoriteHotels } from '../hotelsThunks';
 import { changeFavorites, reAuthorization } from '../../users/usersThunks';
 import { selectUser } from '../../users/usersSlice';
-import { Box, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from '@mui/material';
+import { Box, Card, CardActionArea, CardContent, Rating, Stack, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Hotel } from '../../../types';
 import { LoadingButton } from '@mui/lab';
 import { selectCurrency } from '../../currency/currencySlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface Props {
   hotel: Hotel;
@@ -63,7 +65,15 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
         )
       )}
       <CardActionArea onClick={() => onClickCard(hotel._id)}>
-        <CardMedia component="img" height="140" image={cardImage} alt={hotel.name} />
+        <LazyLoadImage
+          alt={hotel.name}
+          width="100%"
+          height="140px"
+          effect="blur"
+          style={{ objectFit: 'cover' }}
+          src={cardImage}
+          placeholderSrc={placeHolderImg}
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" align="center">
             {hotel.name}

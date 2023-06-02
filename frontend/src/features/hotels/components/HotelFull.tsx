@@ -1,11 +1,10 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box, Button, Divider, Grid, Rating } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { apiURL } from '../../../constants';
+import { apiURL, placeHolderImg } from '../../../constants';
 import type { Hotel, Comment } from '../../../types';
 import Parking from '../../../components/Icons/HotelIcons/Parking';
 import PetFriendly from '../../../components/Icons/HotelIcons/PetFriendly';
@@ -18,6 +17,8 @@ import { selectUser } from '../../users/usersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
 import PlaceIcon from '@mui/icons-material/Place';
 import CommentMessage from '../../comments/components/CommentMessage';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface Props {
   hotel: Hotel;
@@ -165,7 +166,14 @@ const HotelFull: React.FC<Props> = ({ hotel, comments }) => {
               </Grid>
             </Grid>
             <Grid item xs={12} md={6} xl={6} order={{ xs: 1, md: 2 }}>
-              <CardMedia component="img" height="auto" width="100" image={cardImage} title={hotel.name} />
+              <LazyLoadImage
+                alt={hotel.name}
+                width="100%"
+                height="auto"
+                effect="blur"
+                src={cardImage}
+                placeholderSrc={placeHolderImg}
+              />
             </Grid>
           </Grid>
           <Typography component="p" sx={{ mt: 4, color: '#4d4949' }}>
