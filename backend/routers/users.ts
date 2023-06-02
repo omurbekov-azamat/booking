@@ -324,7 +324,7 @@ usersRouter.get('/verify/:token', auth, async (req, res) => {
   });
 });
 
-usersRouter.patch('/password', auth, permit('user'), async (req, res, next) => {
+usersRouter.patch('/password', auth, async (req, res, next) => {
   try {
     const { newPassword } = req.body;
     const user = (req as RequestWithUser).user;
