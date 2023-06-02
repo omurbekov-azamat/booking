@@ -24,6 +24,11 @@ export const arrowStyleGallery = {
   zIndex: 1,
 };
 
+export const someStyle = {
+  boxShadow:
+    '0px 2px 1px -1px rgba(3, 201, 136, 0.7), 0px 1px 1px 0px rgba(3, 201, 136, 0.7), 0px 1px 3px 0px rgba(3, 201, 136, 0.7)',
+};
+
 export const cities = [
   'bishkek',
   'issykKul',

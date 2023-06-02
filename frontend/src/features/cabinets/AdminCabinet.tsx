@@ -39,6 +39,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import { getByRole } from '../users/usersThunks';
 import UserItems from '../users/components/UserItems';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import { someStyle } from '../../constants';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -174,9 +175,19 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {loadingFetchAllRoomTypes && <Spinner />}
               {state.roomTypes &&
                 roomTypes.map((item) => (
-                  <Typography key={item._id} textTransform="capitalize">
-                    {i18n.language === 'en' ? item.name.en : item.name.ru}
-                  </Typography>
+                  <Card
+                    key={item._id}
+                    sx={{
+                      mb: 2,
+                      p: 2,
+                      maxWidth: '500px',
+                      boxShadow: someStyle.boxShadow,
+                    }}
+                  >
+                    <Typography key={item._id} textTransform="capitalize">
+                      {i18n.language === 'en' ? item.name.en : item.name.ru}
+                    </Typography>
+                  </Card>
                 ))}
               {state.users && <UserItems prop={gotUsers} role="user" />}
               {state.serviceProviders && <UserItems prop={gotUsers} role="hotel" />}
