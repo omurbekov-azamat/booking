@@ -155,7 +155,10 @@ const run = async () => {
     {
       userId: hotel._id,
       name: 'Golden Dragon',
-      address: 'Elebaev Street 60, 720005 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -172,13 +175,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
     },
     {
       userId: hotel._id,
       name: 'De`Mar Hotel',
-      address: 'Sverdlovsky Lane 3, Bldg.1, 720000 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -195,13 +205,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
     },
     {
       userId: hotel._id,
       name: 'Sara Boutique Hotel',
-      address: '51 Kuliev Street, 720010 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -218,13 +235,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
     },
     {
       userId: hotel._id,
       name: 'Discovery Hotel',
-      address: 'Оренбургский переулок , 31 , 720000 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -241,13 +265,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
     },
     {
       userId: hotel._id,
       name: 'Salut Hotel',
-      address: 'ul. Gogol 1, 720021 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -264,6 +295,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
       type: 'pension',
@@ -271,7 +306,10 @@ const run = async () => {
     {
       userId: hotel._id,
       name: 'Aurum hotel',
-      address: 'ул. Абая 40 1 этаж, 720001 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -288,6 +326,10 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'business',
       type: 'guestHouse',
@@ -295,7 +337,10 @@ const run = async () => {
     {
       userId: hotel._id,
       name: 'Asia Hotel',
-      address: 'Gorkogo Street 156, 720021 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -312,13 +357,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Navat Hotel',
-      address: '190 Yusup Abdrahmanov Street, 720040 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -335,13 +387,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Madison Ave Hotel Bishkek',
-      address: '210 Kiev Street, 720001 Бишкек, Киргизия – Великолепное расположение',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -358,13 +417,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Silk Road Lodge',
-      address: 'Abdymomunova 229, Bishkek, 720033, Kyrgyz Republic, 720033 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -381,13 +447,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Veve Hotel Bishkek',
-      address: '210 Kiev Street, 720001 Бишкек, Киргизия – Великолепное расположение',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -404,13 +477,20 @@ const run = async () => {
       lowestPrice: {
         som: 5000,
         dollar: 15,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Palace Resident Bishkek',
-      address: 'Yunusaliev Avenue Юнусалиева 102/4 Джантошева, 720005 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 300,
         longitude: 800,
@@ -428,12 +508,19 @@ const run = async () => {
         som: 5000,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Central Park Resident',
-      address: ' Chokmorov Street 105 , 720040 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 200,
         longitude: 500,
@@ -451,12 +538,19 @@ const run = async () => {
         som: 1000,
         dollar: 12,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Plaza Hotel Bishkek',
-      address: 'Улица Тоголок Молдо 52, 720044 Бишкек, Кыргызстан',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 100,
         longitude: 100,
@@ -474,12 +568,19 @@ const run = async () => {
         som: 1000,
         dollar: 12,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Hyatt Regency',
-      address: 'Abdrahmanov Street 191, 720011 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 50,
         longitude: 50,
@@ -497,12 +598,19 @@ const run = async () => {
         som: 1100,
         dollar: 13,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'premium',
     },
     {
       userId: hotel._id,
       name: 'Hotel Lulu',
-      address: 'Baytik Baatyr str, 70 , 720005 Бишкек, Киргизия',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 150,
         longitude: 150,
@@ -520,12 +628,19 @@ const run = async () => {
         som: 1200,
         dollar: 14,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
     },
     {
       userId: hotel._id,
       name: 'Dostuk',
-      address: 'Tynystanova 135',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 150,
         longitude: 150,
@@ -543,12 +658,19 @@ const run = async () => {
         som: 1400,
         dollar: 15,
       },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
+      },
       status: 'business',
     },
     {
       userId: hotel._id,
       name: 'Jannat Regency',
-      address: 'Tokombaeva, 21/2',
+      address: {
+        adrRu: 'улица Элебаева 60',
+        adrEn: 'Elebaev Street 60',
+      },
       location: {
         latitude: 150,
         longitude: 150,
@@ -565,6 +687,10 @@ const run = async () => {
       lowestPrice: {
         som: 1700,
         dollar: 16,
+      },
+      description: {
+        ru: 'Отель - идеальное место для вашего отдыха. У нас вы найдете комфортабельные номера, великолепный сервис. Насладитесь вкусным завтраком, отдохните у нашего бассейна и наслаждайтесь уютной атмосферой нашего ресторана. Наш дружелюбный персонал всегда готов сделать ваше пребывание незабываемым.',
+        en: 'The hotel is the perfect place for your holiday. Here you will find comfortable rooms, excellent service. Enjoy a delicious breakfast, relax by our pool and enjoy the cozy atmosphere of our restaurant. Our friendly staff is always ready to make your stay unforgettable.',
       },
       status: 'standard',
     },

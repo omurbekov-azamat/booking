@@ -50,10 +50,10 @@
   "adminCabinet": "Кабинет администратора",
   "directorCabinet": "Кабинет директора",
   "createRoom": "Добавить комнату",
-  "founding": "Основан",
+  "founding": "Основан в",
   "som": "Сом",
   "dollar": "Доллар",
-  "lowestPrice": "Минимальна цена",
+  "lowestPrice": "Мин. цена",
   "propertyRating": "Оценка объекта",
   "clearFilter": "Очистить фильтр",
   "myFavorites": "Избранные",
@@ -151,6 +151,5 @@
   "sure": "Вы верены?",
   "restorePassword": "Востановить пароль",
   "restorePasswordDesc": "Введите свой емейл. На ваш емайл адрес будет выслан новый пароль.",
-  "hotelWasDeleted": "Отель был удален",
-  "apartmentWasDeleted": "Апартамент был удален"
+  "hotelWasDeleted": "Отель был удален"
 }

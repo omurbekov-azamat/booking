@@ -33,7 +33,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     : {
         name: '',
         city: '',
-        address: '',
+        address: {
+          adrRu: '',
+          adrEn: '',
+        },
         star: '',
         image: null,
         parking: false,
@@ -46,6 +49,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           som: 0,
           dollar: 0,
         },
+        description: {
+          ru: '',
+          en: '',
+        },
       };
 
   const [state, setState] = useState<HotelMutation>(initialState);
@@ -54,16 +61,40 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'som' || name === 'dollar') {
-      setState((prev) => ({
-        ...prev,
-        lowestPrice: {
-          ...prev.lowestPrice,
-          [name]: parseFloat(value),
-        },
-      }));
-    } else {
-      setState((prev) => ({ ...prev, [name]: value }));
+
+    switch (name) {
+      case 'som':
+      case 'dollar':
+        setState((prev) => ({
+          ...prev,
+          lowestPrice: {
+            ...prev.lowestPrice,
+            [name]: parseFloat(value),
+          },
+        }));
+        break;
+      case 'ru':
+      case 'en':
+        setState((prev) => ({
+          ...prev,
+          description: {
+            ...prev.description,
+            [name]: value,
+          },
+        }));
+        break;
+      case 'adrRu':
+      case 'adrEn':
+        setState((prev) => ({
+          ...prev,
+          address: {
+            ...prev.address,
+            [name]: value,
+          },
+        }));
+        break;
+      default:
+        setState((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -113,7 +144,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
         await setState({
           name: '',
           city: '',
-          address: '',
+          address: {
+            adrRu: '',
+            adrEn: '',
+          },
           type: '',
           star: '',
           image: null,
@@ -125,6 +159,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           lowestPrice: {
             som: 0,
             dollar: 0,
+          },
+          description: {
+            ru: '',
+            en: '',
           },
         });
       }
@@ -164,13 +202,25 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
           </Grid>
           <Grid item xs>
             <TextField
-              label={t('address')}
-              name="address"
+              label={'Адрес'}
+              name="adrRu"
               autoComplete="current-address"
-              value={state.address}
+              value={state.address.adrRu}
               onChange={inputChangeHandler}
-              error={Boolean(getFieldError('address'))}
-              helperText={getFieldError('address')}
+              error={Boolean(getFieldError('adrRu'))}
+              helperText={getFieldError('adrRu')}
+              required
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              label={'Address'}
+              name="adrEn"
+              autoComplete="current-address"
+              value={state.address.adrEn}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('adrEn'))}
+              helperText={getFieldError('adrEn')}
               required
             />
           </Grid>
@@ -235,6 +285,38 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
                 />
               </Grid>
             </Grid>
+          </Grid>
+
+          <Grid item xs>
+            <TextField
+              multiline
+              rows={3}
+              label={'Описание (мин 150 символов)'}
+              name="ru"
+              autoComplete="current-name"
+              value={state.description.ru}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('ru'))}
+              helperText={getFieldError('ru')}
+              inputProps={{ minLength: 150, maxLength: 300 }}
+              required
+            />
+          </Grid>
+
+          <Grid item xs>
+            <TextField
+              multiline
+              rows={3}
+              label={'Description (min 150 symbols)'}
+              name="en"
+              autoComplete="current-name"
+              value={state.description.en}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('en'))}
+              helperText={getFieldError('en')}
+              inputProps={{ minLength: 150, maxLength: 300 }}
+              required
+            />
           </Grid>
 
           <Grid item xs>

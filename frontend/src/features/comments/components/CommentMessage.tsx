@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
 
 interface Props {
   comment: Comment;
-  onDeleteBtnClick: MouseEventHandler;
-  onEditBtnClick: MouseEventHandler;
+  onDeleteBtnClick?: MouseEventHandler;
+  onEditBtnClick?: MouseEventHandler;
 }
 
 const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnClick }) => {
@@ -28,8 +28,19 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
   );
 
   return (
-    <Grid container flexDirection={'column'} border={1} my={2} p={2}>
-      <Grid item>{comment.author.firstName + ' ' + comment.author.lastName + ':'} </Grid>
+    <Grid
+      container
+      flexDirection={'column'}
+      sx={{
+        border: 1,
+        my: 2,
+        p: 2,
+        boxShadow: 1,
+        borderRadius: 2,
+        borderColor: 'lightgray',
+      }}
+    >
+      <Grid item> {comment.author.firstName + ' ' + comment.author.lastName + ':'} </Grid>
       <Grid item>
         <Typography variant={'h6'} component={'p'}>
           {comment.text}

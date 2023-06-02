@@ -15,8 +15,9 @@ hotelsRouter.post('/', auth, permit('admin', 'hotel'), imagesUpload.single('imag
     const hotel = new Hotel({
       userId: user._id,
       name: req.body.name,
-      address: req.body.address,
+      address: JSON.parse(req.body.address),
       location: req.body.location ? JSON.parse(req.body.location) : null,
+      description: JSON.parse(req.body.description),
       star: parseFloat(req.body.star),
       image: req.file && req.file.filename,
       nonSmokingRooms: req.body.nonSmokingRooms,
@@ -174,7 +175,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
       $set: {
         name: req.body.name,
         city: req.body.city,
-        address: req.body.address,
+        address: JSON.parse(req.body.address),
         star: parseInt(req.body.star),
         image: req.file && req.file.filename,
         parking: req.body.parking,
@@ -184,6 +185,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         founding: req.body.founding,
         type: req.body.type,
         lowestPrice: JSON.parse(req.body.lowestPrice),
+        description: JSON.parse(req.body.description),
       },
     });
 

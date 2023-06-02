@@ -18,7 +18,16 @@ const HotelSchema = new Schema<IHotel>({
     required: true,
   },
   address: {
-    type: String,
+    type: {
+      adrRu: {
+        type: String,
+        required: true,
+      },
+      adrEn: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
   },
   location: {
@@ -84,6 +93,23 @@ const HotelSchema = new Schema<IHotel>({
           validator: (value: number) => value > 0,
           message: 'The lowest price in dollar must be a positive number!',
         },
+      },
+    },
+    required: true,
+  },
+  description: {
+    type: {
+      ru: {
+        type: String,
+        required: true,
+        minlength: 150,
+        maxlength: 300,
+      },
+      en: {
+        type: String,
+        required: true,
+        minlength: 150,
+        maxlength: 300,
       },
     },
     required: true,

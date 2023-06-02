@@ -36,10 +36,17 @@ export interface HotelFact {
 export interface IHotel {
   userId: ObjectId;
   name: string;
-  address: string;
+  address: {
+    adrRu: string;
+    adrEn: string;
+  };
   location: {
     latitude: number;
     longitude: number;
+  };
+  description: {
+    ru: string;
+    en: string;
   };
   star: number;
   isPublished: boolean;

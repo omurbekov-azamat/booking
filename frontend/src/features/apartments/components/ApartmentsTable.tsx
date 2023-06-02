@@ -44,7 +44,7 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
   return (
     <TableContainer component={Paper} sx={{ mt: 5 }}>
       <Table aria-label="simple table">
-        <TableHead sx={{ background: 'lightgreen' }}>
+        <TableHead sx={{ background: 'lightgrey' }}>
           <TableRow>
             <TableCell
               sx={{
