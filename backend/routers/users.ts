@@ -236,7 +236,7 @@ usersRouter.post('/google', async (req, res, next) => {
     const email = payload['email'];
     const id = payload['sub'];
     const firstName = payload['given_name'];
-    const lastName = payload['family_name'];
+    const lastName = payload['family_name'] ? payload['family_name'] : ' ';
     const phoneNumber = req.body.credential.phone;
     if (!email) {
       return res.status(400).send({ error: 'Not enough user data to continue' });
