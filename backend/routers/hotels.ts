@@ -311,4 +311,30 @@ hotelsRouter.get('/random/recommended', async (req, res, next) => {
   }
 });
 
+hotelsRouter.delete('/:id/image', auth, permit('admin', 'hotel'), async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const hotel = await Hotel.findById(req.params.id);
+
+    if (!hotel) {
+      return res.status(404).send({ message: 'Not found hotel!' });
+    }
+
+    if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
+      hotel.image = null;
+      await hotel.save();
+      return res.send({
+        message: {
+          en: 'Image deleted successfully',
+          ru: 'картинка успешно удалена',
+        },
+      });
+    } else {
+      return res.status(403).send({ message: 'You do not have permission!' });
+    }
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export default hotelsRouter;

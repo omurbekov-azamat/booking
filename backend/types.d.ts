@@ -50,7 +50,7 @@ export interface IHotel {
   };
   star: number;
   isPublished: boolean;
-  image: string;
+  image: string | null;
   nonSmokingRooms: boolean;
   parking: boolean;
   swimmingPool: boolean;
