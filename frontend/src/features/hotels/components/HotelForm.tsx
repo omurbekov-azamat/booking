@@ -6,7 +6,7 @@ import FileInput from '../../../components/UI/FileInput/FileInput';
 import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
-import { createHotel, editHotel } from '../hotelsThunks';
+import { createHotel, editHotel, fetchOneHotel, removeHotelImage } from '../hotelsThunks';
 import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
@@ -183,6 +183,11 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     setState({ ...state, image: null });
   };
 
+  const deleteOldImage = async (id: string) => {
+    await dispatch(removeHotelImage(id));
+    await dispatch(fetchOneHotel(id));
+  };
+
   return (
     <>
       <Container component="main" maxWidth="sm">
@@ -346,7 +351,7 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
                       <img src={apiURL + '/' + editedHotel.image} style={{ width: '100px' }} alt={editHotel.name} />
                     </Grid>
                     <Grid item ml={3}>
-                      <IconButton>
+                      <IconButton onClick={() => deleteOldImage(hotelId!)}>
                         <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
                       </IconButton>
                     </Grid>
