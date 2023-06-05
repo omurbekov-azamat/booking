@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { selectCreateHotelError, selectLoadingCreateHotel } from '../hotelsSlice';
-import { Alert, Box, Card, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Box, Card, Container, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import FileInput from '../../../components/UI/FileInput/FileInput';
 import SelectCities from '../../../components/UI/SelecetCities/SelectCities';
@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 import SelectType from '../../../components/UI/SelectType/SelectType';
+import { apiURL, someStyle } from '../../../constants';
 import Resizer from 'react-image-file-resizer';
-import { someStyle } from '../../../constants';
+import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 
 interface Props {
   editedHotel?: HotelMutation;
@@ -26,8 +27,6 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
   const loading = useAppSelector(selectLoadingCreateHotel);
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  console.log(editedHotel);
 
   const initialState = editedHotel
     ? {
@@ -59,7 +58,6 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
       };
 
   const [state, setState] = useState<HotelMutation>(initialState);
-
   const [imageRequired, setImageRequired] = useState(false);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,6 +177,10 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
     } catch {
       return undefined;
     }
+  };
+
+  const deleteImage = () => {
+    setState({ ...state, image: null });
   };
 
   return (
@@ -307,7 +309,6 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
                   required
                 />
               </Grid>
-
               <Grid item xs={12} md={6}>
                 <TextField
                   multiline
@@ -323,7 +324,6 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
                   required
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <ListFacilities onChange={handleChangeCheckBox} width={245} />
               </Grid>
@@ -338,6 +338,34 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
               </Grid>
               <Grid item xs={12}>
                 {imageRequired && <Alert severity="error">Image is required</Alert>}
+              </Grid>
+              <Grid item xs={12}>
+                {editedHotel?.image && isEdit && (
+                  <Grid container marginLeft={3} alignItems="center">
+                    <Grid item>
+                      <img src={apiURL + '/' + editedHotel.image} style={{ width: '100px' }} alt={editHotel.name} />
+                    </Grid>
+                    <Grid item ml={3}>
+                      <IconButton>
+                        <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                {state.image && state.image instanceof File && (
+                  <Grid container marginLeft={3} alignItems="center">
+                    <Grid item>
+                      <img src={URL.createObjectURL(state.image)} style={{ width: '100px' }} alt={editHotel.name} />
+                    </Grid>
+                    <Grid item ml={3}>
+                      <IconButton onClick={deleteImage}>
+                        <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
