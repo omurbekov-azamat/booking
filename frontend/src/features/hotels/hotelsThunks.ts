@@ -222,3 +222,11 @@ export const getRecommendedHotels = createAsyncThunk<Hotel[]>('hotels/getRecomme
     throw new Error();
   }
 });
+
+export const removeHotelImage = createAsyncThunk<void, string>('hotels/removeImage', async (id) => {
+  try {
+    await axiosApi.delete(`/hotels/${id}/image`);
+  } catch {
+    throw new Error();
+  }
+});
