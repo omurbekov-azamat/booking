@@ -152,5 +152,6 @@
   "restorePasswordDesc": "Enter your email address. A new password will be sent to your email address.",
   "hotelWasDeleted": "Hotel was deleted",
   "apartmentWasDeleted": "Apartment was deleted",
-  "payableAmount": "Payable amount"
+  "payableAmount": "Payable amount",
+  "amountOfDays": "Amount of days"
 }
