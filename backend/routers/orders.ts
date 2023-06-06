@@ -69,11 +69,23 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
             },
           });
 
+          const emailContent = `В каком отеле бронь: ${hotelName}
+Тип рума: ${roomTypeName}
+Дата прибытия: ${order.dateArrival}
+Дата ухода: ${order.dateDeparture}
+Данные пользователя:
+Имя: ${user.firstName + ' ' + user.lastName}
+Почта: ${user.email}
+елефон: ${user.phoneNumber}
+Комментарий: ${order.comment}
+Дополнительные услуги: ${additionalServices.join(', ')}
+Дата и время создания брони: ${orderDate}`;
+
           const mailOptions = {
             from: config.mail,
             to: adminUser.email,
             subject: 'New order',
-            text: '123',
+            text: emailContent,
           };
 
           transporter.sendMail(mailOptions);
