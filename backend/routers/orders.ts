@@ -76,7 +76,7 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
 Данные пользователя:
 Имя: ${user.firstName + ' ' + user.lastName}
 Почта: ${user.email}
-елефон: ${user.phoneNumber}
+Телефон: ${user.phoneNumber}
 Комментарий: ${order.comment}
 Дополнительные услуги: ${additionalServices.join(', ')}
 Дата и время создания брони: ${orderDate}`;
