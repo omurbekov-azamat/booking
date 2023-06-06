@@ -12,6 +12,7 @@ import Accordion from '@mui/material/Accordion';
 import { LoadingButton } from '@mui/lab';
 import dayjs from 'dayjs';
 import { Order } from '../../../types';
+import { selectCurrency } from '../../currency/currencySlice';
 
 interface Props {
   prop: Order;
@@ -22,6 +23,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const user = useAppSelector(selectUser);
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
   const { t, i18n } = useTranslation();
+  const currency = useAppSelector(selectCurrency);
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
   const handleClickOnCheckout = async (id: string) => {
@@ -118,6 +120,9 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
 
         <Typography>
           {t('commentary')}: {prop.comment}
+        </Typography>
+        <Typography>
+          Total: {currency === 'kgs' ? prop.totalPrice.kgs + ' KGS' : prop.totalPrice.usd + ' USD'}
         </Typography>
         <Typography sx={{ background }}>
           {t('status')}: {prop.status}
