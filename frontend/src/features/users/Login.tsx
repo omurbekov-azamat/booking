@@ -92,7 +92,7 @@ const Login = () => {
             <Grid item xs={12}>
               {error && error.error === 'Email incorrect' && (
                 <Alert severity="error" sx={{ mt: 1, width: '100%' }}>
-                  {error.error}
+                  {t('emailIncorrect')}
                 </Alert>
               )}
             </Grid>
@@ -110,7 +110,7 @@ const Login = () => {
             <Grid item xs={12}>
               {error && error.error === 'Password incorrect' && (
                 <Alert severity="error" sx={{ mt: 1, width: '100%' }}>
-                  {error.error}
+                  {t('PasswordIncorrect')}
                 </Alert>
               )}
             </Grid>
