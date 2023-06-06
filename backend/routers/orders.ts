@@ -43,6 +43,20 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
         minute: '2-digit',
       });
 
+      const additionalServices: string[] = [];
+      if (order.personalTranslator) {
+        additionalServices.push('Персональный переводчик');
+      }
+      if (order.meetingAirport) {
+        additionalServices.push('Встреча в аэропорту');
+      }
+      if (order.tourManagement) {
+        additionalServices.push('Организация тура');
+      }
+      if (order.eventManagement) {
+        additionalServices.push('Организация мероприятия');
+      }
+
       if (admin) {
         admin.forEach((adminUser) => {
           const transporter = nodemailer.createTransport({
