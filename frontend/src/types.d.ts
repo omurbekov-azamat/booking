@@ -199,6 +199,11 @@ export interface Order extends OrderData {
   status: 'open' | 'in progress' | 'closed';
   userId: User;
   _id: string;
+  amountOfDays: number;
+  totalPrice: {
+    kgs: number;
+    usd: number;
+  };
 }
 
 export interface Comment {
