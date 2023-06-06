@@ -16,6 +16,11 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
   const user = (req as RequestWithUser).user;
   try {
     if (user.isVerified) {
+      const apartment = await Apartment.findById(req.body.apartmentId);
+
+      if (!apartment) return;
+      const price = apartment.price;
+
       const order = new Order({
         userId: user._id,
         apartmentId: req.body.apartmentId,
@@ -27,14 +32,19 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
         meetingAirport: req.body.meetingAirport,
         tourManagement: req.body.tourManagement,
         eventManagement: req.body.eventManagement,
+        amountOfDays: req.body.amountOfDays,
+        totalPrice: {
+          usd: price.usd * req.body.amountOfDays,
+          kgs: price.kgs * req.body.amountOfDays,
+        },
       });
 
       const admin = await User.find({ role: 'admin' });
-      const apartment = await Apartment.findById<IApartmentMutation>(order.apartmentId)
+      const apartmentUser = await Apartment.findById<IApartmentMutation>(order.apartmentId)
         .populate('hotelId')
         .populate('roomTypeId');
-      const hotelName = apartment?.hotelId.name;
-      const roomTypeName = apartment?.roomTypeId.name.ru;
+      const hotelName = apartmentUser?.hotelId.name;
+      const roomTypeName = apartmentUser?.roomTypeId.name.ru;
       const orderDate = new Date(order.createdAt).toLocaleString('ru-RU', {
         day: '2-digit',
         month: '2-digit',

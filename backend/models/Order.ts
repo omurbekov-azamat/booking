@@ -63,6 +63,31 @@ const OrderSchema = new Schema<IOrder>({
   meetingAirport: Boolean,
   tourManagement: Boolean,
   eventManagement: Boolean,
+  amountOfDays: {
+    type: Number,
+    required: true,
+  },
+  totalPrice: {
+    type: {
+      usd: {
+        type: Number,
+        required: true,
+        validate: {
+          validator: (value: number) => value > 0,
+          message: 'The price in kgs must be a positive number!',
+        },
+      },
+      kgs: {
+        type: Number,
+        required: true,
+        validate: {
+          validator: (value: number) => value > 0,
+          message: 'The  price in usd must be a positive number!',
+        },
+      },
+    },
+    required: true,
+  },
 });
 
 const Order = mongoose.model<IOrder>('Order', OrderSchema);
