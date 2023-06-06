@@ -252,6 +252,7 @@ usersRouter.post('/google', async (req, res, next) => {
         password: crypto.randomUUID(),
         phoneNumber: phoneNumber,
         googleId: id,
+        isVerified: true,
       });
     }
     user.generateToken();
