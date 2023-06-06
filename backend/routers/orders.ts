@@ -30,6 +30,18 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
       });
 
       const admin = await User.find({ role: 'admin' });
+      const apartment = await Apartment.findById<IApartmentMutation>(order.apartmentId)
+        .populate('hotelId')
+        .populate('roomTypeId');
+      const hotelName = apartment?.hotelId.name;
+      const roomTypeName = apartment?.roomTypeId.name.ru;
+      const orderDate = new Date(order.createdAt).toLocaleString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
 
       if (admin) {
         admin.forEach((adminUser) => {
