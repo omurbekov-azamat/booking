@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Box, Button, Divider, Grid, Rating } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { apiURL, placeHolderImg } from '../../../constants';
-import type { Hotel, Comment } from '../../../types';
+import type { Hotel } from '../../../types';
 import Parking from '../../../components/Icons/HotelIcons/Parking';
 import PetFriendly from '../../../components/Icons/HotelIcons/PetFriendly';
 import Pool from '../../../components/Icons/HotelIcons/Pool';
@@ -16,16 +16,15 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
 import PlaceIcon from '@mui/icons-material/Place';
-import CommentMessage from '../../comments/components/CommentMessage';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import Comments from '../../comments/Comments';
 
 interface Props {
   hotel: Hotel;
-  comments: Comment[];
 }
 
-const HotelFull: React.FC<Props> = ({ hotel, comments }) => {
+const HotelFull: React.FC<Props> = ({ hotel }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { id } = useParams() as { id: string };
@@ -192,10 +191,7 @@ const HotelFull: React.FC<Props> = ({ hotel, comments }) => {
         </Button>
       )}
       <ApartmentsTable hotel={hotel} />
-
-      {comments.map((comment) => {
-        return <CommentMessage comment={comment} key={comment._id} />;
-      })}
+      <Comments />
     </>
   );
 };
