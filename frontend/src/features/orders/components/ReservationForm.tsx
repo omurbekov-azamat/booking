@@ -81,10 +81,12 @@ const ReservationForm = () => {
     e.preventDefault();
     if (reservation.dateArrival && reservation.dateDeparture) {
       setRequired(false);
+      const timeDiff = reservation.dateDeparture.getTime() - reservation.dateArrival.getTime();
       const reservationData: OrderSend = {
         ...reservation,
         dateArrival: reservation.dateArrival.toDateString(),
         dateDeparture: reservation.dateDeparture.toDateString(),
+        amountOfDays: Math.ceil(timeDiff / (1000 * 60 * 60 * 24)),
       };
       await dispatch(sendOrder(reservationData));
       await navigate('/my-cabinet');

@@ -187,6 +187,7 @@ export interface OrderSend extends OrderData {
   apartmentId: string;
   dateArrival: string;
   dateDeparture: string;
+  amountOfDays: number;
 }
 
 export interface Order extends OrderData {
