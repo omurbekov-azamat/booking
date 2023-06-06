@@ -101,6 +101,10 @@ export interface IOrder {
   meetingAirport: boolean;
   tourManagement: boolean;
   eventManagement: boolean;
+  totalPrice: {
+    usd: number;
+    kgs: number;
+  }
 }
 
 export interface IComment {
