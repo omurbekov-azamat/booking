@@ -53,17 +53,19 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
 
   return (
     <Card sx={{ maxWidth: '100%', height: '100%' }}>
-      {user && user.role === 'user' && favorite ? (
-        <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
-          <FavoriteIcon color="error" />
-        </Box>
-      ) : (
-        user?.role === 'user' && (
+      {user &&
+        user.isVerified &&
+        (user.role === 'user' && favorite ? (
           <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
-            <FavoriteBorderIcon />
+            <FavoriteIcon color="error" />
           </Box>
-        )
-      )}
+        ) : (
+          user.role === 'user' && (
+            <Box onClick={() => onClickFavorite(hotel._id)} textAlign="right">
+              <FavoriteBorderIcon />
+            </Box>
+          )
+        ))}
       <CardActionArea onClick={() => onClickCard(hotel._id)}>
         <LazyLoadImage
           alt={hotel.name}

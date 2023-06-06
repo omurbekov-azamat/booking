@@ -149,7 +149,6 @@ const HotelCardLarge: React.FC<Props> = ({
               src={cardImage}
               placeholderSrc="https://unsplash.it/200/100?image=44"
             ></LazyLoadImage>
-            {/*<CardMedia component="img" width="100%" height="auto" image={cardImage} alt={hotel.name} />*/}
           </Grid>
 
           <Grid item flex={1} onClick={() => onClickCard(hotel._id)}>
@@ -201,7 +200,7 @@ const HotelCardLarge: React.FC<Props> = ({
                   {t('comments') + ': ' + commentAmount}
                 </Link>
               </Grid>
-              {user && user.role === 'user' && (
+              {user && user.role === 'user' && user.isVerified && (
                 <Grid item>
                   <Checkbox
                     onClick={() => onClickFavorite(hotel._id)}
