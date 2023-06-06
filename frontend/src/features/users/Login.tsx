@@ -87,13 +87,15 @@ const Login = () => {
             }}
           />
         </Box>
-        {error && (
-          <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
-            {error.error}
-          </Alert>
-        )}
         <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              {error && error.error === 'Email incorrect' && (
+                <Alert severity="error" sx={{ mt: 1, width: '100%' }}>
+                  {error.error}
+                </Alert>
+              )}
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 label={t('email')}
