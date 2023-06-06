@@ -121,6 +121,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
         <Typography>
           {t('commentary')}: {prop.comment}
         </Typography>
+        <Typography>количество дней {prop.amountOfDays}</Typography>
         <Typography>
           {t('payableAmount')}: {currency === 'kgs' ? prop.totalPrice.kgs + ' KGS' : prop.totalPrice.usd + ' USD'}
         </Typography>
