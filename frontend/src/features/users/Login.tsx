@@ -105,6 +105,7 @@ const Login = () => {
                 value={state.email}
                 onChange={inputChangeHandler}
                 fullWidth
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -123,6 +124,7 @@ const Login = () => {
                 value={state.password}
                 onChange={inputChangeHandler}
                 fullWidth
+                required
               />
             </Grid>
             <Grid item xs={12}>
