@@ -36,8 +36,8 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
     } else {
       res.status(401).send({
         message: {
-          en: 'for order you must verify your account',
-          ru: 'для создания заказа вы должны подтвердить свой аккаунт',
+          en: 'For order, you must verify your account',
+          ru: 'Для создания заказа вы должны подтвердить свой аккаунт',
         },
       });
     }

@@ -109,3 +109,8 @@ export interface IComment {
   text: string;
   createdAt: Date;
 }
+
+export interface IApartmentMutation extends IApartment {
+  hotelId: IHotel;
+  roomTypeId: IRoomType;
+}
