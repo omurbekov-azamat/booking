@@ -108,6 +108,13 @@ const Login = () => {
               />
             </Grid>
             <Grid item xs={12}>
+              {error && error.error === 'Password incorrect' && (
+                <Alert severity="error" sx={{ mt: 1, width: '100%' }}>
+                  {error.error}
+                </Alert>
+              )}
+            </Grid>
+            <Grid item xs={12}>
               <TextField
                 label={t('password')}
                 name="password"
