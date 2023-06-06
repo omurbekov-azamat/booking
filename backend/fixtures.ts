@@ -1959,7 +1959,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
     {
       userId: user._id,
@@ -1977,7 +1977,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
     {
       userId: user._id,
@@ -1995,7 +1995,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
     {
       userId: user._id,
@@ -2011,7 +2011,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
     {
       userId: user2._id,
@@ -2027,7 +2027,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
     {
       userId: user2._id,
@@ -2043,7 +2043,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
     {
       userId: user2._id,
@@ -2059,7 +2059,7 @@ const run = async () => {
       totalPrice: {
         usd: 10,
         kgs: 200,
-      }
+      },
     },
   );
 
