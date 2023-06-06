@@ -3,9 +3,12 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
-import { IApartment } from '../types';
+import { IApartment, IApartmentMutation } from '../types';
 import Hotel from '../models/Hotel';
 import Apartment from '../models/Apartment';
+import User from '../models/User';
+import nodemailer from 'nodemailer';
+import config from '../config';
 
 const ordersRouter = express.Router();
 
@@ -25,6 +28,31 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
         tourManagement: req.body.tourManagement,
         eventManagement: req.body.eventManagement,
       });
+
+      const admin = await User.find({ role: 'admin' });
+
+      if (admin) {
+        admin.forEach((adminUser) => {
+          const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+              user: config.mail,
+              pass: 'qlfhiaqbgitxqlaw',
+            },
+          });
+
+          const mailOptions = {
+            from: config.mail,
+            to: adminUser.email,
+            subject: 'New order',
+            text: '123',
+          };
+
+          transporter.sendMail(mailOptions);
+        });
+      }
 
       await order.save();
       return res.send({
