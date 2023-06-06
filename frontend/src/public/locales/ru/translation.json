@@ -151,6 +151,8 @@
   "sure": "Вы верены?",
   "restorePassword": "Востановить пароль",
   "restorePasswordDesc": "Введите свой емейл. На ваш емайл адрес будет выслан новый пароль.",
+  "payableAmount": "Сумма к оплате",
+  "amountOfDays": "Количество дней",
   "hotelWasDeleted": "Отель был удален",
   "emailIncorrect": "Электронная почта неверна",
   "PasswordIncorrect": "Неверный пароль"

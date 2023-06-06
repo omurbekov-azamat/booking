@@ -187,6 +187,7 @@ export interface OrderSend extends OrderData {
   apartmentId: string;
   dateArrival: string;
   dateDeparture: string;
+  amountOfDays: number;
 }
 
 export interface Order extends OrderData {
@@ -198,6 +199,11 @@ export interface Order extends OrderData {
   status: 'open' | 'in progress' | 'closed';
   userId: User;
   _id: string;
+  amountOfDays: number;
+  totalPrice: {
+    kgs: number;
+    usd: number;
+  };
 }
 
 export interface Comment {

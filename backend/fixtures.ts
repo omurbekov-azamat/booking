@@ -1955,6 +1955,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 1,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
     {
       userId: user._id,
@@ -1968,6 +1973,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 1,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
     {
       userId: user._id,
@@ -1981,6 +1991,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 2,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
     {
       userId: user._id,
@@ -1992,6 +2007,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 1,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
     {
       userId: user2._id,
@@ -2003,6 +2023,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 1,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
     {
       userId: user2._id,
@@ -2014,6 +2039,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 1,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
     {
       userId: user2._id,
@@ -2025,6 +2055,11 @@ const run = async () => {
       meetingAirport: false,
       tourManagement: true,
       eventManagement: true,
+      amountOfDays: 3,
+      totalPrice: {
+        usd: 10,
+        kgs: 200,
+      }
     },
   );
 

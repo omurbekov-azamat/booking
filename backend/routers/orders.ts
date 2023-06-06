@@ -3,9 +3,9 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
-import { IApartment } from '../types';
 import Hotel from '../models/Hotel';
 import Apartment from '../models/Apartment';
+import { IApartment } from '../types';
 
 const ordersRouter = express.Router();
 
@@ -13,6 +13,11 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
   const user = (req as RequestWithUser).user;
   try {
     if (user.isVerified) {
+      const apartment = await Apartment.findById(req.body.apartmentId);
+
+      if (!apartment) return;
+      const price = apartment.price;
+
       const order = new Order({
         userId: user._id,
         apartmentId: req.body.apartmentId,
@@ -24,6 +29,11 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
         meetingAirport: req.body.meetingAirport,
         tourManagement: req.body.tourManagement,
         eventManagement: req.body.eventManagement,
+        amountOfDays: req.body.amountOfDays,
+        totalPrice: {
+          usd: price.usd * req.body.amountOfDays,
+          kgs: price.kgs * req.body.amountOfDays,
+        },
       });
 
       await order.save();
