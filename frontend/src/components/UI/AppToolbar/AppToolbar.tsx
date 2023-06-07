@@ -38,7 +38,7 @@ const AppToolbar = () => {
                 <Grid container alignItems="center">
                   <Typography variant="h6" component="div" fontWeight="bold" mr={3}>
                     <Link to="/" style={{ margin: 'auto' }}>
-                      <img style={{ maxWidth: '150px' }} src="/logo.png" alt="logo" />
+                      <img style={{ maxWidth: '150px' }} src="/bookHotel.png" alt="logo" />
                     </Link>
                   </Typography>
                   <Box mr={1}>

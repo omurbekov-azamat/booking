@@ -105,7 +105,7 @@ export interface IOrder {
   totalPrice: {
     usd: number;
     kgs: number;
-  }
+  };
 }
 
 export interface IComment {
