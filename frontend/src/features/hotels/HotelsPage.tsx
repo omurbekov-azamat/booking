@@ -11,7 +11,7 @@ import { Checkbox, FormControlLabel, FormGroup, Grid, MenuItem, TextField } from
 import { cities } from '../../constants';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchMatches, fetchNewPage, fetchSearchedHotels } from './hotelsThunks';
+import { fetchNewPage, fetchSearchedHotels } from './hotelsThunks';
 import {
   selectFetchSearchedHotelsLoading,
   selectHotels,
