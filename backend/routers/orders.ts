@@ -3,9 +3,12 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
+import { IApartment, IApartmentMutation } from '../types';
 import Hotel from '../models/Hotel';
 import Apartment from '../models/Apartment';
-import { IApartment } from '../types';
+import User from '../models/User';
+import nodemailer from 'nodemailer';
+import config from '../config';
 
 const ordersRouter = express.Router();
 
@@ -36,6 +39,69 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
         },
       });
 
+      const admin = await User.find({ role: 'admin' });
+      const apartmentUser = await Apartment.findById<IApartmentMutation>(order.apartmentId)
+        .populate('hotelId')
+        .populate('roomTypeId');
+      const hotelName = apartmentUser?.hotelId.name;
+      const roomTypeName = apartmentUser?.roomTypeId.name.ru;
+      const orderDate = new Date(order.createdAt).toLocaleString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+
+      const additionalServices: string[] = [];
+      if (order.personalTranslator) {
+        additionalServices.push('Персональный переводчик');
+      }
+      if (order.meetingAirport) {
+        additionalServices.push('Встреча в аэропорту');
+      }
+      if (order.tourManagement) {
+        additionalServices.push('Организация тура');
+      }
+      if (order.eventManagement) {
+        additionalServices.push('Организация мероприятия');
+      }
+
+      if (admin) {
+        admin.forEach((adminUser) => {
+          const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+              user: config.mail,
+              pass: 'qlfhiaqbgitxqlaw',
+            },
+          });
+
+          const emailContent = `В каком отеле бронь: ${hotelName}
+Тип рума: ${roomTypeName}
+Дата прибытия: ${order.dateArrival}
+Дата ухода: ${order.dateDeparture}
+Данные пользователя:
+Имя: ${user.firstName + ' ' + user.lastName}
+Почта: ${user.email}
+Телефон: ${user.phoneNumber}
+Комментарий: ${order.comment}
+Дополнительные услуги: ${additionalServices.join(', ')}
+Дата и время создания брони: ${orderDate}`;
+
+          const mailOptions = {
+            from: config.mail,
+            to: adminUser.email,
+            subject: 'New order',
+            text: emailContent,
+          };
+
+          transporter.sendMail(mailOptions);
+        });
+      }
+
       await order.save();
       return res.send({
         message: {
@@ -46,8 +112,8 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
     } else {
       res.status(401).send({
         message: {
-          en: 'for order you must verify your account',
-          ru: 'для создания заказа вы должны подтвердить свой аккаунт',
+          en: 'For order, you must verify your account',
+          ru: 'Для создания заказа вы должны подтвердить свой аккаунт',
         },
       });
     }
