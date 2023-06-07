@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Autocomplete, Grid, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectLoadingMatch, selectSearchHotels } from '../../hotelsSlice';
@@ -16,6 +16,15 @@ const SearchField = () => {
   const autocomplete: HotelWithLabel[] = [];
   const navigate = useNavigate();
   const loadingSearchMatch = useAppSelector(selectLoadingMatch);
+  const timerId = useRef<NodeJS.Timeout | null>(null);
+  const startDelayedSearch = (match: string) => {
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+    }
+    timerId.current = setTimeout(() => {
+      dispatch(fetchMatches(match));
+    }, 500);
+  };
   searchResult.map((el) => autocomplete.push({ ...el, label: el.name }));
   const [match, setMatch] = useState('');
 
@@ -23,6 +32,7 @@ const SearchField = () => {
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMatch(event.target.value);
+    startDelayedSearch(event.target.value);
   };
 
   const onAutocompleteChange = (event: React.ChangeEvent<unknown>, value: HotelWithLabel | null) => {
@@ -38,10 +48,6 @@ const SearchField = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(fetchMatches(match));
-  }, [dispatch, match]);
-
   return (
     <Grid container>
       <Grid item>
@@ -52,7 +58,9 @@ const SearchField = () => {
           onChange={onAutocompleteChange}
           value={selectedHotel}
           sx={{ width: 200 }}
-          renderInput={(params) => <TextField {...params} onChange={inputChangeHandler} label={t('search')} />}
+          renderInput={(params) => (
+            <TextField {...params} value={match} onChange={inputChangeHandler} label={t('search')} />
+          )}
         />
       </Grid>
       <Grid xs={1} item container alignItems="center">
