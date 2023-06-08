@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -118,9 +118,19 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
     setState((prev) => ({ ...prev, star: checked ? parseFloat(name) : null }));
   };
 
+  const timerId = useRef<NodeJS.Timeout | null>(null);
+  const startDelayedSearch = (state: SearchData) => {
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+    }
+    timerId.current = setTimeout(() => {
+      dispatch(fetchSearchedHotels(state));
+    }, 500);
+  };
+
   useEffect(() => {
-    dispatch(fetchSearchedHotels(state));
-  }, [dispatch, state]);
+    startDelayedSearch(state);
+  }, [state]);
 
   useEffect(() => {
     if (catchParams.propertyType !== 'false') {
