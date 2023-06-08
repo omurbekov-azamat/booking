@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Box, Container, Grid, Link, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Container, Divider, Grid, Link, Toolbar, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import CallIcon from '@mui/icons-material/Call';
@@ -82,6 +82,37 @@ const Footer = () => {
                 >
                   {t('footerAddress')}
                 </Typography>
+              </Grid>
+            </Grid>
+            <Divider sx={{ my: 1 }} />
+            <Grid container justifyContent="space-around">
+              <Grid item>
+                <Link
+                  href={'/privacy-policy'}
+                  sx={{
+                    textDecoration: 'none',
+                    color: 'white',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                >
+                  Политика конфиденциальности
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link
+                  href={'/contract-offer'}
+                  sx={{
+                    textDecoration: 'none',
+                    color: 'white',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                >
+                  Договор оферты
+                </Link>
               </Grid>
             </Grid>
           </Container>

@@ -26,6 +26,8 @@ import EditHotel from './features/hotels/components/EditHotel';
 import VerifyProtectedRoute from './components/UI/ProtectedRoute/VerifyProtectedRoute';
 import VerifyPage from './components/UI/VerifyPage/VerifyPage';
 import ConfirmPage from './components/UI/VerifyPage/ConfirmPage';
+import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
+import ContractOffer from './components/UI/Footer/ContractOffer';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -132,6 +134,8 @@ function App() {
         <Route path="/hotels/:id/:roomId" element={<Apartment />} />
         <Route path="/my-cabinet/apartments/:id" element={<Apartment />} />
         <Route path="/hotels/:id/createApartment" element={<ApartmentForm />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/contract-offer" element={<ContractOffer />} />
         <Route
           path="/my-cabinet/edit-apartment/:id"
           element={
