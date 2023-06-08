@@ -128,7 +128,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           {t('payableAmount')}: {currency === 'kgs' ? prop.totalPrice.kgs + ' KGS' : prop.totalPrice.usd + ' USD'}
         </Typography>
         {(prop.eventManagement || prop.tourManagement || prop.personalTranslator || prop.meetingAirport) && (
-          <Typography color="red">За дополнительные услуги взимается отдельная плата</Typography>
+          <Typography color="red">{t('additionalServicesAreCharged')}</Typography>
         )}
         <Typography sx={{ background }}>
           {t('status')}: {prop.status}
