@@ -84,10 +84,37 @@ const Footer = () => {
                 </Typography>
               </Grid>
             </Grid>
-            <Divider sx={{ my: 2 }} />
-            <Box>
-              <Link href={'/privacy-policy'}>Политика конфиденциальности</Link>
-            </Box>
+            <Divider sx={{ my: 1 }} />
+            <Grid container justifyContent="space-around">
+              <Grid item>
+                <Link
+                  href={'/privacy-policy'}
+                  sx={{
+                    textDecoration: 'none',
+                    color: 'white',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                >
+                  Политика конфиденциальности
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link
+                  href={'/contract-offer'}
+                  sx={{
+                    textDecoration: 'none',
+                    color: 'white',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                >
+                  Договор оферты
+                </Link>
+              </Grid>
+            </Grid>
           </Container>
         </Toolbar>
       </AppBar>
