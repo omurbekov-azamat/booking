@@ -155,5 +155,6 @@
   "amountOfDays": "Количество дней",
   "hotelWasDeleted": "Отель был удален",
   "emailIncorrect": "Электронная почта неверна",
-  "PasswordIncorrect": "Неверный пароль"
+  "PasswordIncorrect": "Неверный пароль",
+  "additionalServicesAreCharged": "За дополнительные услуги взимается отдельная плата"
 }

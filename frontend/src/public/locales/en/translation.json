@@ -155,5 +155,6 @@
   "PasswordIncorrect": "Password incorrect",
   "apartmentWasDeleted": "Apartment was deleted",
   "payableAmount": "Payable amount",
-  "amountOfDays": "Amount of days"
+  "amountOfDays": "Amount of days",
+  "additionalServicesAreCharged": "Additional services are charged separately"
 }
