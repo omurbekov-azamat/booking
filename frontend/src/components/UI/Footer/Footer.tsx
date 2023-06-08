@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Box, Container, Grid, Link, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Container, Divider, Grid, Link, Toolbar, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import CallIcon from '@mui/icons-material/Call';
@@ -84,6 +84,10 @@ const Footer = () => {
                 </Typography>
               </Grid>
             </Grid>
+            <Divider sx={{ my: 2 }} />
+            <Box>
+              <Link href={'/privacy-policy'}>Политика конфиденциальности</Link>
+            </Box>
           </Container>
         </Toolbar>
       </AppBar>
