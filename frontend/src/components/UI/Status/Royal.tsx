@@ -9,7 +9,7 @@ const RoyalStyles = {
   backgroundSize: '70%',
   backgroundPosition: 'center',
   display: 'inline-block',
-  fontSize: '40px',
+  fontSize: '20px',
   color: '#FFFF00',
   border: '2px solid black',
   borderRadius: '10px',

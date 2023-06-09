@@ -15,16 +15,22 @@ const MyInformation = () => {
     <Paper elevation={4} sx={{ minHeight: '300px' }}>
       {user && (
         <>
-          <Grid container justifyContent="center">
-            <Typography variant="h3">
-              {user.firstName} {user.lastName}
-            </Typography>
-            {user.status === 'royal' && <Royal />}
-            {user.status === 'vip' && <Vip />}
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item>
+              <Typography variant="h5">
+                {user.firstName} {user.lastName}
+              </Typography>
+            </Grid>
+            <Grid item>
+              {user.status === 'royal' && <Royal />}
+              {user.status === 'vip' && <Vip />}
+            </Grid>
           </Grid>
-          <Typography textAlign="right" variant="subtitle1" sx={{ marginX: '20px', fontWeight: 'bold' }}>
-            Cash Back : {user.cashback}
-          </Typography>
+          {user && user.role === 'user' && (
+            <Typography textAlign="right" variant="subtitle1" sx={{ marginX: '20px', fontWeight: 'bold' }}>
+              Cash Back : {user.cashback}
+            </Typography>
+          )}
           <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
             {t('phoneNumber')} : {user.phoneNumber}
           </Typography>
