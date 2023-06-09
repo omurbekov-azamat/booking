@@ -9,6 +9,7 @@ import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../../app/hooks';
 import { changePass, logout } from '../../users/usersThunks';
+import { enqueueSnackbar } from 'notistack';
 
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
@@ -34,7 +35,11 @@ const ChangePassword = () => {
   };
 
   const handleConfirmOpen = () => {
-    setConfirmOpen(true);
+    if (password.password1 === password.password2) {
+      setConfirmOpen(true);
+    } else {
+      enqueueSnackbar('Пароли не совпадают');
+    }
   };
 
   const handleConfirmClose = () => {
@@ -42,7 +47,7 @@ const ChangePassword = () => {
   };
 
   const handleSubscribe = async () => {
-    await dispatch(changePass(password));
+    await dispatch(changePass(password.password1));
     await dispatch(logout());
     await handleClose();
     await handleConfirmClose();
@@ -59,29 +64,35 @@ const ChangePassword = () => {
           <TextField
             autoFocus
             margin="dense"
-            id="password"
+            id="password1"
             label={t('password')}
             type="password"
+            name="password1"
             fullWidth
             variant="standard"
-            value={password}
+            value={password.password1}
             onChange={handlePasswordChange}
           />
           <TextField
             autoFocus
             margin="dense"
             id="password2"
+            name="password2"
             label={t('password')}
             type="password"
             fullWidth
             variant="standard"
-            value={password}
+            value={password.password2}
             onChange={handlePasswordChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('cancel')}</Button>
-          <Button disabled={password.length < 3} onClick={handleConfirmOpen} color="error">
+          <Button
+            disabled={password.password1.length < 3 && password.password2.length < 3}
+            onClick={handleConfirmOpen}
+            color="error"
+          >
             {t('changePassword')}
           </Button>
         </DialogActions>
