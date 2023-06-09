@@ -38,7 +38,7 @@ const ChangePassword = () => {
     if (password.password1 === password.password2) {
       setConfirmOpen(true);
     } else {
-      enqueueSnackbar('Пароли не совпадают');
+      enqueueSnackbar('Пароли не совпадают', { variant: 'error' });
     }
   };
 
@@ -65,7 +65,7 @@ const ChangePassword = () => {
             autoFocus
             margin="dense"
             id="password1"
-            label={t('password')}
+            label={t('newPassword')}
             type="password"
             name="password1"
             fullWidth
@@ -74,11 +74,10 @@ const ChangePassword = () => {
             onChange={handlePasswordChange}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="password2"
             name="password2"
-            label={t('password')}
+            label={t('secondPassword')}
             type="password"
             fullWidth
             variant="standard"
@@ -89,7 +88,7 @@ const ChangePassword = () => {
         <DialogActions>
           <Button onClick={handleClose}>{t('cancel')}</Button>
           <Button
-            disabled={password.password1.length < 3 && password.password2.length < 3}
+            disabled={password.password1.length < 3 || password.password2.length < 3}
             onClick={handleConfirmOpen}
             color="error"
           >
