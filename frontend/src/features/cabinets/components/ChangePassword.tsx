@@ -63,6 +63,17 @@ const ChangePassword = () => {
             value={password}
             onChange={handlePasswordChange}
           />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="password2"
+            label={t('password')}
+            type="password"
+            fullWidth
+            variant="standard"
+            value={password}
+            onChange={handlePasswordChange}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('cancel')}</Button>
