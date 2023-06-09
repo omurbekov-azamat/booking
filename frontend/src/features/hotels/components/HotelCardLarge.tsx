@@ -1,9 +1,9 @@
 import React, { MouseEventHandler } from 'react';
-import { Box, Checkbox, Grid, Link, Rating, Stack, Typography } from '@mui/material';
+import { Box, Checkbox, Grid, Rating, Stack, Typography } from '@mui/material';
 import { Hotel } from '../../../types';
 import { apiURL } from '../../../constants';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
@@ -21,19 +21,12 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface Props {
   hotel: Hotel;
-  commentAmount?: number;
   onDeleteBtnClick?: MouseEventHandler;
   onPublishBtnClick?: MouseEventHandler;
   isNeedButtons?: true;
 }
 
-const HotelCardLarge: React.FC<Props> = ({
-  hotel,
-  commentAmount,
-  onDeleteBtnClick,
-  onPublishBtnClick,
-  isNeedButtons,
-}) => {
+const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClick, isNeedButtons }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -138,7 +131,15 @@ const HotelCardLarge: React.FC<Props> = ({
 
   return (
     <>
-      <Box sx={{ border: 2, borderRadius: 5, borderColor: 'rgba(3, 201, 136, 0.7)', p: 1, overflow: 'hidden' }}>
+      <Box
+        sx={{
+          border: 2,
+          borderRadius: 5,
+          borderColor: 'rgba(3, 201, 136, 0.7)',
+          p: 1,
+          overflow: 'hidden',
+        }}
+      >
         <Grid container gap={2}>
           <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
             <LazyLoadImage
@@ -151,7 +152,7 @@ const HotelCardLarge: React.FC<Props> = ({
             ></LazyLoadImage>
           </Grid>
 
-          <Grid item flex={1} onClick={() => onClickCard(hotel._id)}>
+          <Grid item flex={1} onClick={() => onClickCard(hotel._id)} sx={{ cursor: 'pointer' }}>
             <Grid container flexDirection="row" justifyContent="space-between">
               <Grid container gap={1} alignItems="center">
                 <Grid item>
@@ -189,16 +190,6 @@ const HotelCardLarge: React.FC<Props> = ({
               </Grid>
               <Grid item>
                 <Typography sx={{ fontSize: 16 }}>{status}</Typography>
-              </Grid>
-              <Grid item>
-                <Link
-                  style={{ textDecoration: 'none', color: '#6b6b6b' }}
-                  component={RouterLink}
-                  to={'/hotel/' + hotel._id + '/comments'}
-                  variant="body2"
-                >
-                  {t('comments') + ': ' + commentAmount}
-                </Link>
               </Grid>
               {user && user.role === 'user' && user.isVerified && (
                 <Grid item>
