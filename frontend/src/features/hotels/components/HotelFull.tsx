@@ -194,7 +194,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
       )}
       <ApartmentsTable hotel={hotel} />
       <Typography variant="h6" sx={{ my: 2, fontWeight: 'bolder', color: 'grey' }}>
-        {'Comments: ' + comments.length}
+        {t('comments') + ': ' + comments.length}
       </Typography>
       <Comments />
     </>
