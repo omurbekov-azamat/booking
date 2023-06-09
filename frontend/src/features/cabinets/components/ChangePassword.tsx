@@ -12,7 +12,10 @@ import { changePass, logout } from '../../users/usersThunks';
 
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState({
+    password1: '',
+    password2: '',
+  });
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
