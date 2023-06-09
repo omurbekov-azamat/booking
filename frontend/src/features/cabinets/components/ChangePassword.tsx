@@ -29,7 +29,8 @@ const ChangePassword = () => {
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    const { name, value } = e.target;
+    setPassword((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleConfirmOpen = () => {
