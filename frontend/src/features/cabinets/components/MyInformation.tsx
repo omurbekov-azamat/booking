@@ -7,6 +7,9 @@ import Vip from '../../../components/UI/Status/vip';
 import { useTranslation } from 'react-i18next';
 import ChangePassword from './ChangePassword';
 import HelpIcon from '@mui/icons-material/Help';
+import Popper from '@mui/material/Popper';
+import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
+import Fade from '@mui/material/Fade';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
@@ -30,11 +33,27 @@ const MyInformation = () => {
           {user && user.role === 'user' && (
             <Grid container alignItems="center">
               <Typography textAlign="right" variant="subtitle1" sx={{ marginLeft: '20px', fontWeight: 'bold' }}>
-                Cash Back : {user.cashback}
+                Cash Back : {user.cashback} coins
               </Typography>
-              <Button>
-                <HelpIcon />
-              </Button>
+              <PopupState variant="popper" popupId="demo-popup-popper">
+                {(popupState) => (
+                  <div>
+                    <Button {...bindToggle(popupState)}>
+                      <HelpIcon />
+                    </Button>
+                    <Popper {...bindPopper(popupState)} transition>
+                      {({ TransitionProps }) => (
+                        <Fade {...TransitionProps} timeout={350}>
+                          <Paper>
+                            <Typography sx={{ p: 1 }}>1 coin = 1KGS</Typography>
+                            <Typography sx={{ p: 1 }}>90 coins = 1USD</Typography>
+                          </Paper>
+                        </Fade>
+                      )}
+                    </Popper>
+                  </div>
+                )}
+              </PopupState>
             </Grid>
           )}
           <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
