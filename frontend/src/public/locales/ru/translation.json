@@ -156,5 +156,8 @@
   "hotelWasDeleted": "Отель был удален",
   "emailIncorrect": "Электронная почта неверна",
   "PasswordIncorrect": "Неверный пароль",
-  "additionalServicesAreCharged": "За дополнительные услуги взимается отдельная плата"
+  "additionalServicesAreCharged": "За дополнительные услуги взимается отдельная плата",
+  "secondPassword": "Повторите пароль",
+  "newPassword": "Новый пароль",
+  "passwordError": "Пароли не совпадают"
 }
