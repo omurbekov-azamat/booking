@@ -1,11 +1,12 @@
 import React from 'react';
-import { Grid, Paper, Typography } from '@mui/material';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import Royal from '../../../components/UI/Status/Royal';
 import Vip from '../../../components/UI/Status/vip';
 import { useTranslation } from 'react-i18next';
 import ChangePassword from './ChangePassword';
+import HelpIcon from '@mui/icons-material/Help';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
@@ -27,9 +28,14 @@ const MyInformation = () => {
             </Grid>
           </Grid>
           {user && user.role === 'user' && (
-            <Typography textAlign="right" variant="subtitle1" sx={{ marginX: '20px', fontWeight: 'bold' }}>
-              Cash Back : {user.cashback}
-            </Typography>
+            <Grid container alignItems="center">
+              <Typography textAlign="right" variant="subtitle1" sx={{ marginLeft: '20px', fontWeight: 'bold' }}>
+                Cash Back : {user.cashback}
+              </Typography>
+              <Button>
+                <HelpIcon />
+              </Button>
+            </Grid>
           )}
           <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
             {t('phoneNumber')} : {user.phoneNumber}
