@@ -158,5 +158,6 @@
   "amountOfDays": "Amount of days",
   "additionalServicesAreCharged": "Additional services are charged separately",
   "secondPassword": "Confirm your password",
-  "newPassword": "New password"
+  "newPassword": "New password",
+  "passwordError": "Password mismatch"
 }

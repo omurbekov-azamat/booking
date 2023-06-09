@@ -158,5 +158,6 @@
   "PasswordIncorrect": "Неверный пароль",
   "additionalServicesAreCharged": "За дополнительные услуги взимается отдельная плата",
   "secondPassword": "Повторите пароль",
-  "newPassword": "Новый пароль"
+  "newPassword": "Новый пароль",
+  "passwordError": "Пароли не совпадают"
 }
