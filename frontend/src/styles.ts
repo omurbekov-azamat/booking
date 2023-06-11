@@ -13,6 +13,7 @@ export const ToolBarStyles = {
 
 export const FooterStyle = {
   background: '#03C988',
+  marginBottom: -4,
 };
 
 export const HeaderStyles = {
