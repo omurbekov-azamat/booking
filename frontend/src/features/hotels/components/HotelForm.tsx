@@ -374,7 +374,14 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                <LoadingButton type="submit" color="success" variant="contained" loading={loading}>
+                <LoadingButton
+                  type="submit"
+                  color="success"
+                  size="small"
+                  variant="contained"
+                  loading={loading}
+                  sx={{ background: '#0E8388' }}
+                >
                   {isEdit ? t('edit') : t('create')}
                 </LoadingButton>
               </Grid>
