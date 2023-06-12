@@ -25,6 +25,7 @@ import { CabinetState } from '../../types';
 import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import MyInformation from './components/MyInformation';
 
 const initialState: CabinetState = {
   openUsers: false,
@@ -137,6 +138,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
               </List>
             </Grid>
             <Grid item xs>
+              {state.myInfo && <MyInformation />}
               {state.openUsers && <UsersStatus />}
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
