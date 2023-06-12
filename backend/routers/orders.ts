@@ -3,7 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
-import { IApartment, IApartmentMutation, IOrder } from '../types';
+import { IApartmentMutation, IOrder } from '../types';
 import Hotel from '../models/Hotel';
 import Apartment from '../models/Apartment';
 import User from '../models/User';
@@ -259,7 +259,7 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
           { _id: orderOwner._id },
           {
             $set: {
-              cashback: orderOwner.cashback + order.totalPrice.kgs / 100 * 5,
+              cashback: orderOwner.cashback + (order.totalPrice.kgs / 100) * 5,
             },
           },
           { new: true },
@@ -270,7 +270,7 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
           { _id: orderOwner._id },
           {
             $set: {
-              cashback: orderOwner.cashback + order.totalPrice.kgs / 100 * 7,
+              cashback: orderOwner.cashback + (order.totalPrice.kgs / 100) * 7,
             },
           },
         );

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Grid, Paper, Typography } from '@mui/material';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import Royal from '../../../components/UI/Status/Royal';
 import Vip from '../../../components/UI/Status/vip';
@@ -10,10 +10,16 @@ import HelpIcon from '@mui/icons-material/Help';
 import Popper from '@mui/material/Popper';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import Fade from '@mui/material/Fade';
+import { reAuthorization } from '../../users/usersThunks';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(reAuthorization());
+  }, [dispatch]);
 
   return (
     <Paper elevation={4} sx={{ minHeight: '300px' }}>
