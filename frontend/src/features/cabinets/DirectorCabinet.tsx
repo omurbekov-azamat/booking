@@ -25,8 +25,10 @@ import { CabinetState } from '../../types';
 import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import MyInformation from './components/MyInformation';
 
 const initialState: CabinetState = {
+  myInfo: true,
   openUsers: false,
   openHotels: false,
   simpleUsers: false,
@@ -67,6 +69,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   };
 
   const options = [
+    { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
     { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
     { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
     { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
@@ -137,6 +140,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
               </List>
             </Grid>
             <Grid item xs>
+              {state.myInfo && <MyInformation />}
               {state.openUsers && <UsersStatus />}
               {state.openHotels && <HotelsStatus StatusAction={true} DeleteAction={false} />}
               {state.simpleUsers && <UserItems prop={gotUsers} role="user" />}
