@@ -3,7 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import permit from '../middleware/permit';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Order from '../models/Order';
-import { IApartment, IApartmentMutation } from '../types';
+import { IApartmentMutation, IOrder } from '../types';
 import Hotel from '../models/Hotel';
 import Apartment from '../models/Apartment';
 import User from '../models/User';
@@ -233,7 +233,7 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
     const updatedFields = { ...req.body };
     updatedFields.adminId = user._id;
 
-    const order: HydratedDocument<IApartment> | null = await Order.findOneAndUpdate(
+    const order: HydratedDocument<IOrder> | null = await Order.findOneAndUpdate(
       { _id: req.params.id },
       { $set: updatedFields },
       { new: true },
@@ -241,6 +241,40 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
 
     if (!order) {
       return res.status(404).send({ message: { en: 'cant find order', ru: 'заказ не найден' } });
+    }
+
+    if (req.body.status === 'closed') {
+      console.log('closed');
+      const orderOwner = await User.findById(order.userId);
+      if (!orderOwner) {
+        return res.status(403).send({
+          message: {
+            en: 'Cant find order owner',
+            ru: 'Владельца заказа нет в системе',
+          },
+        });
+      }
+      if (orderOwner.status === 'vip') {
+        await User.findOneAndUpdate(
+          { _id: orderOwner._id },
+          {
+            $set: {
+              cashback: orderOwner.cashback + (order.totalPrice.kgs / 100) * 5,
+            },
+          },
+          { new: true },
+        );
+      }
+      if (orderOwner.status === 'royal') {
+        await User.findOneAndUpdate(
+          { _id: orderOwner._id },
+          {
+            $set: {
+              cashback: orderOwner.cashback + (order.totalPrice.kgs / 100) * 7,
+            },
+          },
+        );
+      }
     }
 
     return res.send({
