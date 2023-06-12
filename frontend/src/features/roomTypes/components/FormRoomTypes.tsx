@@ -5,8 +5,8 @@ import { selectErrorCreateRoomType, selectLoadingCreateRoomType } from '../roomT
 import { Box, Card, Container, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
+import { someStyle } from '../../../styles';
 import { RoomTypesMutation } from '../../../types';
-import { someStyle } from '../../../constants';
 
 const FormRoomTypes = () => {
   const dispatch = useAppDispatch();

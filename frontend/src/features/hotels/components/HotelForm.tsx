@@ -11,9 +11,10 @@ import { useNavigate } from 'react-router-dom';
 import { HotelMutation } from '../../../types';
 import ListFacilities from '../../../components/UI/ListFacilities/ListFacilities';
 import SelectType from '../../../components/UI/SelectType/SelectType';
-import { apiURL, someStyle } from '../../../constants';
+import { apiURL } from '../../../constants';
 import Resizer from 'react-image-file-resizer';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import { someStyle } from '../../../styles';
 
 interface Props {
   editedHotel?: HotelMutation;
@@ -351,7 +352,7 @@ const HotelForm: React.FC<Props> = ({ editedHotel, isEdit, hotelId }) => {
                       <img src={apiURL + '/' + editedHotel.image} style={{ width: '100px' }} alt={editHotel.name} />
                     </Grid>
                     <Grid item ml={3}>
-                      <IconButton onClick={() => deleteOldImage(hotelId!)}>
+                      <IconButton onClick={() => hotelId && deleteOldImage(hotelId)}>
                         <DeleteForeverSharpIcon sx={{ color: 'rgba(230,17,17,0.87)' }} />
                       </IconButton>
                     </Grid>

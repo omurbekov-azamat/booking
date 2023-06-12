@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Grid, styled } from '@mui/material';
-import { apiURL, arrowStyleGallery, placeHolderImg } from '../../../constants';
+import { apiURL, placeHolderImg } from '../../../constants';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { IApartment } from '../../../types';
 import { useTranslation } from 'react-i18next';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { arrowStyleGallery } from '../../../styles';
 
 const MyGalleryContainer = styled('div')({
   width: '700px',
