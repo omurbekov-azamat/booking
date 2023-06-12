@@ -181,6 +181,52 @@ ordersRouter.get('/', auth, async (req, res, next) => {
   }
 });
 
+ordersRouter.patch('/useBonus/:id', auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const bonusUse = parseInt(req.body.bonusUse);
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).send({ message: { en: 'cant find order', ru: 'заказ не найден' } });
+    }
+    if (bonusUse > user.cashback) {
+      return res.status(400).send({ message: { en: 'not enough bonuses', ru: 'не хватает бонусных баллов' } });
+    }
+    if (order.totalPrice.kgs <= bonusUse) {
+      return res.status(400).send({
+        message: {
+          en: 'cant use too much bonuses',
+          ru: 'используете слишком много бонусов',
+        },
+      });
+    }
+
+    await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          totalPrice: {
+            kgs: order.totalPrice.kgs - bonusUse,
+            usd: order.totalPrice.usd - bonusUse / 90,
+          },
+        },
+      },
+    );
+
+    await User.findOneAndUpdate({ _id: user._id }, { $set: { cashback: user.cashback - bonusUse } });
+
+    res.send({
+      message: {
+        en: 'Bonus successfully used',
+        ru: 'Бонус успешно использован',
+      },
+    });
+  } catch (e) {
+    return next(e);
+  }
+});
+
 ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
   const user = (req as RequestWithUser).user;
   try {
@@ -194,7 +240,7 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
     );
 
     if (!order) {
-      return res.status(404).send({ message: 'Cant find order' });
+      return res.status(404).send({ message: { en: 'cant find order', ru: 'заказ не найден' } });
     }
 
     return res.send({
