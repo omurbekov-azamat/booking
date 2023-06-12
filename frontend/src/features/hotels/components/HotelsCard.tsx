@@ -99,7 +99,8 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
             <LoadingButton
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               variant="contained"
-              size="medium"
+              size="small"
+              sx={{ background: '#05BFDB' }}
               onClick={() => navigate('/my-cabinet/edit-hotel/' + hotel._id)}
             >
               {t('edit')}
@@ -109,7 +110,10 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
             <LoadingButton
               disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
               loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
-              variant="outlined"
+              variant="contained"
+              color="error"
+              size="small"
+              sx={{ background: '#CD1818' }}
               startIcon={<DeleteIcon />}
               onClick={onDeleteBtnClick}
             >
@@ -120,9 +124,10 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
             <LoadingButton
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
-              variant="outlined"
-              color="error"
-              sx={{ fontSize: 11 }}
+              variant="contained"
+              size="small"
+              color="success"
+              sx={{ background: '#0E8388' }}
               onClick={onPublishBtnClick}
             >
               {t('publish')}

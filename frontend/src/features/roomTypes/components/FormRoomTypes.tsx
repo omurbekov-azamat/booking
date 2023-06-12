@@ -5,8 +5,8 @@ import { selectErrorCreateRoomType, selectLoadingCreateRoomType } from '../roomT
 import { Box, Card, Container, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
+import { someStyle } from '../../../styles';
 import { RoomTypesMutation } from '../../../types';
-import { someStyle } from '../../../constants';
 
 const FormRoomTypes = () => {
   const dispatch = useAppDispatch();
@@ -81,7 +81,14 @@ const FormRoomTypes = () => {
               />
             </Grid>
             <Grid item>
-              <LoadingButton loading={loadingCreateRoomType} type="submit" variant="contained">
+              <LoadingButton
+                sx={{ background: '#0E8388' }}
+                loading={loadingCreateRoomType}
+                type="submit"
+                color="success"
+                variant="contained"
+                size="small"
+              >
                 {t('create')}
               </LoadingButton>
             </Grid>

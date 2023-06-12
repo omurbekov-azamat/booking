@@ -58,7 +58,13 @@ const FormComments: React.FC<Props> = ({ hotelId }) => {
             helperText={getFieldError('text')}
           />
           <Box textAlign="center" mt={3}>
-            <LoadingButton loading={loadingCreateComment} variant="contained" type="submit">
+            <LoadingButton
+              loading={loadingCreateComment}
+              variant="contained"
+              type="submit"
+              color="success"
+              sx={{ background: '#03C988' }}
+            >
               {t('send')}
             </LoadingButton>
           </Box>

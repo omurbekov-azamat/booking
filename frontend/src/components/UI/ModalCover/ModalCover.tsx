@@ -3,7 +3,7 @@ import Modal from '@mui/material/Modal';
 import { useAppDispatch } from '../../../app/hooks';
 import { closeModalCover } from '../../../features/users/usersSlice';
 import { Box } from '@mui/material';
-import { styleModalCover } from '../../../constants';
+import { styleModalCover } from '../../../styles';
 
 interface Props extends React.PropsWithChildren {
   state: boolean;

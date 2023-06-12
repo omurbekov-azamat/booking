@@ -167,7 +167,7 @@ export const editHotel = createAsyncThunk<
       keys.forEach((key) => {
         const value = updatedData.hotel[key];
         if (value !== null) {
-          if (key === 'lowestPrice') {
+          if (key === 'lowestPrice' || key === 'address' || key === 'description') {
             formData.append(key, JSON.stringify(value));
           } else {
             formData.append(key, value as string | Blob);
@@ -176,7 +176,6 @@ export const editHotel = createAsyncThunk<
       });
 
       const response = await axiosApi.patch('/hotels/' + updatedData.id, formData);
-
       return response.data;
     }
   } catch (e) {
@@ -218,14 +217,6 @@ export const getRecommendedHotels = createAsyncThunk<Hotel[]>('hotels/getRecomme
   try {
     const responseRecommendedHotels = await axiosApi.get<Hotel[]>('/hotels/random/recommended');
     return responseRecommendedHotels.data;
-  } catch {
-    throw new Error();
-  }
-});
-
-export const removeHotelImage = createAsyncThunk<void, string>('hotels/removeImage', async (id) => {
-  try {
-    await axiosApi.delete(`/hotels/${id}/image`);
   } catch {
     throw new Error();
   }

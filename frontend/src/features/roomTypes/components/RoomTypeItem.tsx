@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, Typography } from '@mui/material';
-import { someStyle } from '../../../constants';
 import { IRoomType } from '../../../types';
+import { someStyle } from '../../../styles';
 
 export interface Props {
   item: IRoomType;

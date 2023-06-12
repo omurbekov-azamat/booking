@@ -143,7 +143,8 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             <LoadingButton
               variant="contained"
               loading={buttonLoading === prop._id}
-              color="success"
+              size="small"
+              sx={{ background: '#05BFDB' }}
               onClick={() => handleClickOnCheckout(prop._id)}
             >
               Оформить бронь
@@ -155,8 +156,10 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             <LoadingButton
               variant="contained"
               loading={buttonLoading === prop._id}
-              color="secondary"
+              color="success"
               onClick={() => handleClickOnClose(prop._id)}
+              size="small"
+              sx={{ background: '#0E8388' }}
             >
               закрыть
             </LoadingButton>

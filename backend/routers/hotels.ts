@@ -162,7 +162,7 @@ hotelsRouter.get('/:id', async (req, res) => {
   }
 });
 
-hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res) => {
+hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
     let findParams;
@@ -171,6 +171,7 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
     } else {
       findParams = { _id: req.params.id };
     }
+
     const hotel = await Hotel.updateOne(findParams, {
       $set: {
         name: req.body.name,
@@ -199,8 +200,11 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         },
       });
     }
-  } catch {
-    return res.sendStatus(500);
+  } catch (e){
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(e);
+    }
+    return next(e);
   }
 });
 

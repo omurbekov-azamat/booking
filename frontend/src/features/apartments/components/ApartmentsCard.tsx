@@ -67,7 +67,8 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
                 <Button
                   variant="contained"
-                  size="medium"
+                  size="small"
+                  sx={{ background: '#05BFDB' }}
                   onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}
                 >
                   {t('edit')}
@@ -77,7 +78,10 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
                 <LoadingButton
                   loading={loadingDeleteApartment === apartment._id}
-                  variant="outlined"
+                  variant="contained"
+                  size="small"
+                  color="error"
+                  sx={{ background: '#CD1818' }}
                   startIcon={<DeleteIcon />}
                   onClick={() => deleteApartment(apartment._id)}
                 >
