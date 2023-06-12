@@ -69,7 +69,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   };
 
   const options = [
-    { option: 'myInfo', icon: <PersonIcon />, text: t('моя информация') },
+    { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
     { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
     { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
     { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
