@@ -124,9 +124,10 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
             <LoadingButton
               disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
               loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
-              variant="outlined"
-              color="error"
-              sx={{ fontSize: 11 }}
+              variant="contained"
+              size="small"
+              color="success"
+              sx={{ background: '#0E8388' }}
               onClick={onPublishBtnClick}
             >
               {t('publish')}
