@@ -184,9 +184,10 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
       </Card>
       {(user?.role === 'admin' || user?._id === hotel.userId) && (
         <Button
-          variant={'outlined'}
-          color={'success'}
-          style={{ margin: '10px auto', display: 'block' }}
+          variant="contained"
+          color="success"
+          size="small"
+          style={{ margin: '10px auto', display: 'block', background: '#03C988' }}
           onClick={() => navigate('/hotels/' + id + '/createApartment')}
         >
           {t('createRoom')}

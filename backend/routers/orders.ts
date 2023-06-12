@@ -244,7 +244,6 @@ ordersRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
     }
 
     if (req.body.status === 'closed') {
-      console.log('closed');
       const orderOwner = await User.findById(order.userId);
       if (!orderOwner) {
         return res.status(403).send({

@@ -63,7 +63,7 @@ const FormComments: React.FC<Props> = ({ hotelId }) => {
               variant="contained"
               type="submit"
               color="success"
-              sx={{ background: '#0E8388' }}
+              sx={{ background: '#03C988' }}
             >
               {t('send')}
             </LoadingButton>
