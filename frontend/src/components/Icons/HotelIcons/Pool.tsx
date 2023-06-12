@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import PoolIcon from '@mui/icons-material/Pool';
-import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
 
 interface Props {
   pool: boolean;

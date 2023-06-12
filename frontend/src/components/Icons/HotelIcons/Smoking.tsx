@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
 import { useTranslation } from 'react-i18next';
-import PoolIcon from '@mui/icons-material/Pool';
 
 interface Props {
   noSmoking: boolean;

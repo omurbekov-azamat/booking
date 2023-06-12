@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
-import PoolIcon from '@mui/icons-material/Pool';
 
 interface Props {
   petFriendly: boolean;

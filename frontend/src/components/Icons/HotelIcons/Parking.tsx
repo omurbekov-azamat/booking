@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
-import PetsIcon from '@mui/icons-material/Pets';
 
 interface Props {
   parking: boolean;
