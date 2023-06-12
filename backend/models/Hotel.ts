@@ -45,6 +45,7 @@ const HotelSchema = new Schema<IHotel>({
     default: false,
   },
   image: {
+    required: true,
     type: String,
   },
   nonSmokingRooms: {
