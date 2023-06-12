@@ -81,7 +81,14 @@ const FormRoomTypes = () => {
               />
             </Grid>
             <Grid item>
-              <LoadingButton loading={loadingCreateRoomType} type="submit" variant="contained">
+              <LoadingButton
+                sx={{ background: '#0E8388' }}
+                loading={loadingCreateRoomType}
+                type="submit"
+                color="success"
+                variant="contained"
+                size="small"
+              >
                 {t('create')}
               </LoadingButton>
             </Grid>
