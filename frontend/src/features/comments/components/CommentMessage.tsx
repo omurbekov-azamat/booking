@@ -17,12 +17,18 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
   const { t } = useTranslation();
 
   const deleteBtn = (
-    <Button onClick={onDeleteBtnClick} variant={'outlined'} color={'error'}>
+    <Button onClick={onDeleteBtnClick} variant="contained" color="error" size="small" sx={{ background: '#CD1818' }}>
       {t('delete')}
     </Button>
   );
   const editBtn = (
-    <Button onClick={onEditBtnClick} variant={'outlined'} color={'info'} sx={{ my: 1 }}>
+    <Button
+      onClick={onEditBtnClick}
+      variant="contained"
+      size="small"
+      color={'info'}
+      sx={{ my: 1, background: '#05BFDB' }}
+    >
       {t('edit')}
     </Button>
   );
