@@ -28,6 +28,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import MyInformation from './components/MyInformation';
 
 const initialState: CabinetState = {
+  myInfo: true,
   openUsers: false,
   openHotels: false,
   simpleUsers: false,
@@ -68,6 +69,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   };
 
   const options = [
+    { option: 'myInfo', icon: <PersonIcon />, text: t('моя информация') },
     { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
     { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
     { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
