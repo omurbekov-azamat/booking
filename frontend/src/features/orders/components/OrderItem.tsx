@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
+import { changeStatusOrder, getForAdminHisOrders, getOrders, useBonusOnOrder } from '../ordersThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectOrderChangeStatusLoading } from '../ordersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
@@ -36,6 +36,12 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
 
+  const handleConfirm = async (id: string) => {
+    await dispatch(useBonusOnOrder({ id: id, bonusUse: parseInt(value) })).unwrap();
+    await setOpen(false);
+    await setValue('');
+  };
+
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
   const handleClickOnCheckout = async (id: string) => {
@@ -57,12 +63,6 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     setOpen(true);
-  };
-
-  const handleConfirm = async () => {
-    console.log(value);
-    setOpen(false);
-    setValue('');
   };
 
   return (
@@ -227,7 +227,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
-            <Button onClick={handleConfirm}>{t('continue')}</Button>
+            <Button onClick={() => handleConfirm(prop._id)}>{t('continue')}</Button>
           </DialogActions>
         </Dialog>
       </AccordionDetails>
