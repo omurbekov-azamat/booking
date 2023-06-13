@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
 import { selectOrderChangeStatusLoading } from '../ordersSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -11,8 +11,8 @@ import { Box, Grid, Typography } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import { LoadingButton } from '@mui/lab';
 import dayjs from 'dayjs';
-import { Order } from '../../../types';
 import { selectCurrency } from '../../currency/currencySlice';
+import { Order } from '../../../types';
 
 interface Props {
   prop: Order;
@@ -38,6 +38,17 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
     }
   };
 
+  const [value, setValue] = useState('');
+
+  const inputValueChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const submitFormHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(value);
+  };
+  console.log(user?.cashback);
   return (
     <Accordion sx={{ background }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
@@ -165,6 +176,32 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             </LoadingButton>
           </Box>
         )}
+        {user &&
+          user.role === 'user' &&
+          user.cashback > 0 &&
+          (prop.status === 'open' || prop.status === 'in progress') && (
+            <Box component="form" onSubmit={submitFormHandler}>
+              <Grid container alignItems="center" spacing={3}>
+                <Grid item>
+                  <Typography>Хотите воспользоваться бонусом?</Typography>
+                </Grid>
+                <Grid item>
+                  <input type="number" value={value} onChange={inputValueChangeHandler} min={1} max={user.cashback} />
+                </Grid>
+                <Grid item>
+                  <LoadingButton
+                    type="submit"
+                    size="small"
+                    color="success"
+                    variant="contained"
+                    sx={{ background: '#03C988' }}
+                  >
+                    Send
+                  </LoadingButton>
+                </Grid>
+              </Grid>
+            </Box>
+          )}
       </AccordionDetails>
     </Accordion>
   );

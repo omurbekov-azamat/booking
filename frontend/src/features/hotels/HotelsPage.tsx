@@ -78,7 +78,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
 
   const [checkPropertyType, setCheckPropertyType] = useState([
     { value: false, id: 'guestHouse', title: t('guestHouse') },
-    { value: false, id: 'Hostel', title: t('Hostel') },
+    { value: false, id: 'hostel', title: t('hostel') },
     { value: false, id: 'hotel', title: t('hotel') },
     { value: false, id: 'pension', title: t('pension') },
   ]);

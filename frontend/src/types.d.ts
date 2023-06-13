@@ -115,7 +115,7 @@ export interface User {
   role: string;
   phoneNumber: string;
   status?: string;
-  cashback?: string;
+  cashback: number;
   favorites: string[];
   isVerified: boolean;
 }
