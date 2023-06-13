@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
-import { selectOrderChangeStatusLoading } from '../ordersSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useTranslation } from 'react-i18next';
-import { selectUser } from '../../users/usersSlice';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Box, Grid, Typography } from '@mui/material';
-import Accordion from '@mui/material/Accordion';
-import { LoadingButton } from '@mui/lab';
-import dayjs from 'dayjs';
+import { selectOrderChangeStatusLoading } from '../ordersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { selectUser } from '../../users/usersSlice';
+import { useTranslation } from 'react-i18next';
+import { Accordion, AccordionSummary, AccordionDetails, Box, Grid, Typography } from '@mui/material';
+import dayjs from 'dayjs';
+import { LoadingButton } from '@mui/lab';
 import { Order } from '../../../types';
 
 interface Props {
@@ -83,22 +80,22 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           {t('dateDeparture')}: {prop.dateDeparture}
         </Typography>
         {prop.eventManagement && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="deepskyblue" fontWeight="bold">
             {t('meetingAirport')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.personalTranslator && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="blueviolet" fontWeight="bold">
             {t('personalTranslator')}: {prop.personalTranslator && <>&#9745;</>}
           </Typography>
         )}
         {prop.tourManagement && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="green" fontWeight="bold">
             {t('tourOrganization')}: {prop.tourManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.eventManagement && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="darkmagenta" fontWeight="bold">
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
@@ -189,13 +186,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
                   <input type="number" value={value} onChange={inputValueChangeHandler} min={1} max={user.cashback} />
                 </Grid>
                 <Grid item>
-                  <LoadingButton
-                    type="submit"
-                    size="small"
-                    color="success"
-                    variant="contained"
-                    sx={{ background: '#03C988' }}
-                  >
+                  <LoadingButton type="submit" size="small">
                     Send
                   </LoadingButton>
                 </Grid>
