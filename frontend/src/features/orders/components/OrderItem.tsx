@@ -45,7 +45,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
     e.preventDefault();
     console.log(value);
   };
-  console.log(user?.cashback);
+
   return (
     <Accordion sx={{ background }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
@@ -178,16 +178,16 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           user.cashback > 0 &&
           (prop.status === 'open' || prop.status === 'in progress') && (
             <Box component="form" onSubmit={submitFormHandler}>
-              <Grid container alignItems="center" spacing={3}>
+              <Grid container alignItems="center" spacing={1}>
                 <Grid item>
-                  <Typography>Хотите воспользоваться бонусом?</Typography>
+                  <Typography>{t('howManyBonuses')}</Typography>
                 </Grid>
                 <Grid item>
                   <input type="number" value={value} onChange={inputValueChangeHandler} min={1} max={user.cashback} />
                 </Grid>
                 <Grid item>
                   <LoadingButton type="submit" size="small">
-                    Send
+                    {t('send')}
                   </LoadingButton>
                 </Grid>
               </Grid>
