@@ -5,8 +5,8 @@ import {
   deleteOrder,
   getForAdminHisOrders,
   getOrders,
+  payBonusOnOrder,
   sendOrder,
-  useBonusOnOrder,
 } from './ordersThunks';
 import { RootState } from '../../app/store';
 
@@ -20,7 +20,7 @@ interface OrdersState {
   deleteOrderLoading: string | false;
   fetchOrdersForAdminLoading: boolean;
   adminMyOrders: Order[];
-  useBonusLoading: boolean;
+  useBonusLoading: string | false;
 }
 
 const initialState: OrdersState = {
@@ -99,14 +99,14 @@ export const ordersSlice = createSlice({
     builder.addCase(getForAdminHisOrders.rejected, (state) => {
       state.fetchOrdersForAdminLoading = false;
     });
-    builder.addCase(useBonusOnOrder.pending, (state) => {
-      state.useBonusLoading = true;
+    builder.addCase(payBonusOnOrder.pending, (state, { meta }) => {
+      state.useBonusLoading = meta.arg.id;
     });
-    builder.addCase(useBonusOnOrder.fulfilled, (state, { payload: data }) => {
+    builder.addCase(payBonusOnOrder.fulfilled, (state, { payload: data }) => {
       state.useBonusLoading = false;
       state.orderSuccess = data;
     });
-    builder.addCase(useBonusOnOrder.rejected, (state) => {
+    builder.addCase(payBonusOnOrder.rejected, (state) => {
       state.useBonusLoading = false;
     });
   },

@@ -71,11 +71,14 @@ interface UseBonusProps {
   bonusUse: number;
 }
 
-export const useBonusOnOrder = createAsyncThunk<GlobalSuccess, UseBonusProps>('orders/useBonus', async (data) => {
-  try {
-    const response = await axiosApi.patch(`/orders/useBonus/${data.id}`, { bonusUse: data.bonusUse });
-    return response.data;
-  } catch {
-    throw new Error();
-  }
-});
+export const payBonusOnOrder = createAsyncThunk<GlobalSuccess, UseBonusProps>(
+  'orders/useBonus',
+  async (data, { dispatch }) => {
+    try {
+      const response = await axiosApi.patch(`/orders/useBonus/${data.id}`, { bonusUse: data.bonusUse });
+      return response.data;
+    } finally {
+      dispatch(getOrders());
+    }
+  },
+);

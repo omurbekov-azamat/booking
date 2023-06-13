@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { changeStatusOrder, getForAdminHisOrders, getOrders, useBonusOnOrder } from '../ordersThunks';
+import { changeStatusOrder, getForAdminHisOrders, getOrders, payBonusOnOrder } from '../ordersThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectOrderChangeStatusLoading } from '../ordersSlice';
+import { selectOrderChangeStatusLoading, selectUseBonusLoading } from '../ordersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { selectUser } from '../../users/usersSlice';
@@ -32,14 +32,15 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const user = useAppSelector(selectUser);
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
   const currency = useAppSelector(selectCurrency);
+  const payBonusLoading = useAppSelector(selectUseBonusLoading);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
 
   const handleConfirm = async (id: string) => {
-    await dispatch(useBonusOnOrder({ id: id, bonusUse: parseInt(value) })).unwrap();
-    await setOpen(false);
+    await dispatch(payBonusOnOrder({ id: id, bonusUse: parseInt(value) })).unwrap();
     await setValue('');
+    await setOpen(false);
   };
 
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
@@ -227,7 +228,9 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
-            <Button onClick={() => handleConfirm(prop._id)}>{t('continue')}</Button>
+            <LoadingButton onClick={() => handleConfirm(prop._id)} loading={payBonusLoading === prop._id}>
+              {t('continue')}
+            </LoadingButton>
           </DialogActions>
         </Dialog>
       </AccordionDetails>
