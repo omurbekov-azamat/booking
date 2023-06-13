@@ -159,5 +159,8 @@
   "additionalServicesAreCharged": "За дополнительные услуги взимается отдельная плата",
   "secondPassword": "Повторите пароль",
   "newPassword": "Новый пароль",
-  "passwordError": "Пароли не совпадают"
+  "passwordError": "Пароли не совпадают",
+  "howManyBonuses": "Укажите, сколько бонусов вы хотите списать",
+  "youWantUseBonuses": "Вы уверены что хотите использовать",
+  "bonusesOn": "бонусов на"
 }

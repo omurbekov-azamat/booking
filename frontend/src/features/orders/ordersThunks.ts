@@ -65,3 +65,20 @@ export const deleteOrder = createAsyncThunk<GlobalSuccess, string>('orders/delet
     throw new Error();
   }
 });
+
+interface UseBonusProps {
+  id: string;
+  bonusUse: number;
+}
+
+export const payBonusOnOrder = createAsyncThunk<GlobalSuccess, UseBonusProps>(
+  'orders/useBonus',
+  async (data, { dispatch }) => {
+    try {
+      const response = await axiosApi.patch(`/orders/useBonus/${data.id}`, { bonusUse: data.bonusUse });
+      return response.data;
+    } finally {
+      dispatch(getOrders());
+    }
+  },
+);

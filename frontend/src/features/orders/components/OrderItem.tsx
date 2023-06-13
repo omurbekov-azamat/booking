@@ -1,18 +1,26 @@
-import React from 'react';
-import { changeStatusOrder, getForAdminHisOrders, getOrders } from '../ordersThunks';
-import { selectOrderChangeStatusLoading } from '../ordersSlice';
+import React, { useState } from 'react';
+import { changeStatusOrder, getForAdminHisOrders, getOrders, payBonusOnOrder } from '../ordersThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useTranslation } from 'react-i18next';
-import { selectUser } from '../../users/usersSlice';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Box, Grid, Typography } from '@mui/material';
-import Accordion from '@mui/material/Accordion';
-import { LoadingButton } from '@mui/lab';
-import dayjs from 'dayjs';
-import { Order } from '../../../types';
+import { selectOrderChangeStatusLoading, selectUseBonusLoading } from '../ordersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { selectUser } from '../../users/usersSlice';
+import { useTranslation } from 'react-i18next';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+  Grid,
+  Typography,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
+import dayjs from 'dayjs';
+import { LoadingButton } from '@mui/lab';
+import { Order } from '../../../types';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
 
 interface Props {
   prop: Order;
@@ -20,10 +28,21 @@ interface Props {
 
 const OrderItem: React.FC<Props> = ({ prop }) => {
   const dispatch = useAppDispatch();
+  const { t, i18n } = useTranslation();
   const user = useAppSelector(selectUser);
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
-  const { t, i18n } = useTranslation();
   const currency = useAppSelector(selectCurrency);
+  const payBonusLoading = useAppSelector(selectUseBonusLoading);
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
+
+  const handleConfirm = async (id: string) => {
+    await dispatch(payBonusOnOrder({ id: id, bonusUse: parseInt(value) })).unwrap();
+    await setValue('');
+    await setOpen(false);
+  };
+
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
   const handleClickOnCheckout = async (id: string) => {
@@ -36,6 +55,15 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
       await dispatch(changeStatusOrder({ id: id, status: 'closed' }));
       await dispatch(getForAdminHisOrders(user?._id));
     }
+  };
+
+  const inputValueChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const submitFormHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setOpen(true);
   };
 
   return (
@@ -72,22 +100,22 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           {t('dateDeparture')}: {prop.dateDeparture}
         </Typography>
         {prop.eventManagement && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="deepskyblue" fontWeight="bold">
             {t('meetingAirport')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.personalTranslator && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="blueviolet" fontWeight="bold">
             {t('personalTranslator')}: {prop.personalTranslator && <>&#9745;</>}
           </Typography>
         )}
         {prop.tourManagement && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="green" fontWeight="bold">
             {t('tourOrganization')}: {prop.tourManagement && <>&#9745;</>}
           </Typography>
         )}
         {prop.eventManagement && (
-          <Typography color="blue" fontWeight="bold">
+          <Typography color="darkmagenta" fontWeight="bold">
             {t('eventOrganization')}: {prop.eventManagement && <>&#9745;</>}
           </Typography>
         )}
@@ -165,6 +193,46 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             </LoadingButton>
           </Box>
         )}
+        {user &&
+          user.role === 'user' &&
+          user.cashback > 0 &&
+          (prop.status === 'open' || prop.status === 'in progress') && (
+            <Box component="form" onSubmit={submitFormHandler}>
+              <Grid container alignItems="center" spacing={1}>
+                <Grid item>
+                  <Typography>{t('howManyBonuses')}</Typography>
+                </Grid>
+                <Grid item>
+                  <input
+                    type="number"
+                    value={value}
+                    onChange={inputValueChangeHandler}
+                    min={1}
+                    max={user.cashback}
+                    required={true}
+                  />
+                </Grid>
+                <Grid item>
+                  <LoadingButton type="submit" size="small">
+                    {t('send')}
+                  </LoadingButton>
+                </Grid>
+              </Grid>
+            </Box>
+          )}
+        <Dialog open={open} onClose={() => setOpen(false)}>
+          <DialogContent>
+            <Typography variant="body1">{`${t('youWantUseBonuses')} ${value} ${t('bonusesOn')} №${prop._id} ${t(
+              'order',
+            ).toLowerCase()}?`}</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
+            <LoadingButton onClick={() => handleConfirm(prop._id)} loading={payBonusLoading === prop._id}>
+              {t('continue')}
+            </LoadingButton>
+          </DialogActions>
+        </Dialog>
       </AccordionDetails>
     </Accordion>
   );

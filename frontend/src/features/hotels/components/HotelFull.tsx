@@ -43,8 +43,8 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
     case 'pension':
       type = t('pension');
       break;
-    case 'Hostel':
-      type = t('Hostel');
+    case 'hostel':
+      type = t('hostel');
       break;
     case 'hotel':
       type = t('hotel');
