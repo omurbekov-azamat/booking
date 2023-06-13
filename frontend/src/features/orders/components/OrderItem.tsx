@@ -221,7 +221,9 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           )}
         <Dialog open={open} onClose={() => setOpen(false)}>
           <DialogContent>
-            <Typography variant="body1">{`Вы уверены что хотите использовать ${value} бонусов на №${prop._id} заказ?`}</Typography>
+            <Typography variant="body1">{`${t('youWantUseBonuses')} ${value} ${t('bonusesOn')} №${prop._id} ${t(
+              'order',
+            ).toLowerCase()}?`}</Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>

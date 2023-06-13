@@ -160,5 +160,7 @@
   "secondPassword": "Confirm your password",
   "newPassword": "New password",
   "passwordError": "Password mismatch",
-  "howManyBonuses": "Specify how many bonuses you want to write off"
+  "howManyBonuses": "Specify how many bonuses you want to write off",
+  "youWantUseBonuses": "Are you sure you want to use",
+  "bonusesOn": "bonuses on"
 }
