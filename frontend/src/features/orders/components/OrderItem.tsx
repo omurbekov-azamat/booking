@@ -6,10 +6,21 @@ import { selectCurrency } from '../../currency/currencySlice';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { selectUser } from '../../users/usersSlice';
 import { useTranslation } from 'react-i18next';
-import { Accordion, AccordionSummary, AccordionDetails, Box, Grid, Typography } from '@mui/material';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+  Grid,
+  Typography,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
 import dayjs from 'dayjs';
 import { LoadingButton } from '@mui/lab';
 import { Order } from '../../../types';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
 
 interface Props {
   prop: Order;
@@ -17,10 +28,14 @@ interface Props {
 
 const OrderItem: React.FC<Props> = ({ prop }) => {
   const dispatch = useAppDispatch();
+  const { t, i18n } = useTranslation();
   const user = useAppSelector(selectUser);
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
-  const { t, i18n } = useTranslation();
   const currency = useAppSelector(selectCurrency);
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
+
   const background = prop.status === 'open' ? '#FFEAE9' : prop.status === 'in progress' ? 'lightyellow' : '#CCFFCD';
 
   const handleClickOnCheckout = async (id: string) => {
@@ -35,15 +50,19 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
     }
   };
 
-  const [value, setValue] = useState('');
-
   const inputValueChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    setOpen(true);
+  };
+
+  const handleConfirm = async () => {
     console.log(value);
+    setOpen(false);
+    setValue('');
   };
 
   return (
@@ -183,7 +202,14 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
                   <Typography>{t('howManyBonuses')}</Typography>
                 </Grid>
                 <Grid item>
-                  <input type="number" value={value} onChange={inputValueChangeHandler} min={1} max={user.cashback} />
+                  <input
+                    type="number"
+                    value={value}
+                    onChange={inputValueChangeHandler}
+                    min={1}
+                    max={user.cashback}
+                    required={true}
+                  />
                 </Grid>
                 <Grid item>
                   <LoadingButton type="submit" size="small">
@@ -193,6 +219,15 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
               </Grid>
             </Box>
           )}
+        <Dialog open={open} onClose={() => setOpen(false)}>
+          <DialogContent>
+            <Typography variant="body1">{`Вы уверены что хотите использовать ${value} бонусов на №${prop._id} заказ?`}</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
+            <Button onClick={handleConfirm}>{t('continue')}</Button>
+          </DialogActions>
+        </Dialog>
       </AccordionDetails>
     </Accordion>
   );
