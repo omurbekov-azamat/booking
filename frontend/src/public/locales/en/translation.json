@@ -173,5 +173,6 @@
   "adminsReports": "Admins reports",
   "nameSearch": "Name search",
   "hotelsNotFound": "Hotels not found",
-  "typeRoomFormRu": "Room type in Russian"
+  "typeRoomFormRu": "Room type in Russian",
+  "typeRoomFormEng": "Room type in English"
 }
