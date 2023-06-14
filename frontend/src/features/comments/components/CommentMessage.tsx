@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import dayjs from 'dayjs';
-import { Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { Comment } from '../../../types';
 
 interface Props {
@@ -17,20 +17,25 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
   const { t } = useTranslation();
 
   const deleteBtn = (
-    <Button onClick={onDeleteBtnClick} variant="contained" color="error" size="small" sx={{ background: '#CD1818' }}>
-      {t('delete')}
-    </Button>
+    <Box textAlign="center">
+      <Button onClick={onDeleteBtnClick} variant="contained" color="error" size="small" sx={{ background: '#CD1818' }}>
+        {t('delete')}
+      </Button>
+    </Box>
   );
+
   const editBtn = (
-    <Button
-      onClick={onEditBtnClick}
-      variant="contained"
-      size="small"
-      color={'info'}
-      sx={{ my: 1, background: '#05BFDB' }}
-    >
-      {t('edit')}
-    </Button>
+    <Box textAlign="center">
+      <Button
+        onClick={onEditBtnClick}
+        variant="contained"
+        size="small"
+        color={'info'}
+        sx={{ my: 1, background: '#05BFDB' }}
+      >
+        {t('edit')}
+      </Button>
+    </Box>
   );
 
   return (
