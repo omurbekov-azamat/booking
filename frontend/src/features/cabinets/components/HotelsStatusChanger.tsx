@@ -52,19 +52,19 @@ const UsersStatusChanger: React.FC<Props> = ({ hotel, DeleteAction, StatusAction
   };
   return (
     <>
-      <Paper sx={{ marginTop: '5px', paddingY: '20px' }}>
-        <Grid container justifyContent="space-between">
-          <Typography display="inline-block" variant="body1">
+      <Paper sx={{ marginTop: '5px', p: 4, border: 1, boxShadow: 1, my: 2 }}>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Typography display="inline-block" variant="body1" sx={{ fontSize: 25, fontWeight: 'bolder', color: 'grey' }}>
             {hotel.name}
           </Typography>
           {StatusAction && (
             <FormControl>
-              <Select value={status} label="Статус" onChange={handleChange}>
+              <Select value={status} onChange={handleChange}>
                 <MenuItem value="standart">standart</MenuItem>
                 <MenuItem value="premium">premium</MenuItem>
                 <MenuItem value="business">business</MenuItem>
               </Select>
-              <Button onClick={onOkButton} variant="contained">
+              <Button onClick={onOkButton} variant="contained" sx={{ mt: 1 }}>
                 OK
               </Button>
             </FormControl>
