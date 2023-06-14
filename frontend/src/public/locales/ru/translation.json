@@ -168,5 +168,8 @@
   "hotelStatus": "Статус отелей",
   "removeHotel": "Удалить отель",
   "users": "Пользователи",
-  "serviceProviders": "Поставщики услуг"
+  "serviceProviders": "Поставщики услуг",
+  "usersStatus": "Статус пользователей",
+  "admins": "Админы",
+  "adminsReports": "Отчеты админов"
 }

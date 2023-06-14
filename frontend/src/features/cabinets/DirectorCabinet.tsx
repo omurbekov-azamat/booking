@@ -70,11 +70,11 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
 
   const options = [
     { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
-    { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
-    { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
-    { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
-    { option: 'admins', icon: <WcIcon />, text: 'Админы' },
-    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: 'Поставщики услуг' },
+    { option: 'openUsers', icon: <AssignmentIndIcon />, text: t('usersStatus') },
+    { option: 'openHotels', icon: <LocationCityIcon />, text: t('hotelStatus') },
+    { option: 'simpleUsers', icon: <GroupIcon />, text: t('users') },
+    { option: 'admins', icon: <WcIcon />, text: t('admins') },
+    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: t('serviceProviders') },
   ];
 
   const handleClickOption = (option: string, index: number) => {
@@ -122,7 +122,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   <ListItemIcon>
                     <PeopleAltIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Отчет админов" />
+                  <ListItemText primary={t('adminsReports')} />
                   {state.reportAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={state.reportAdmins} timeout="auto" unmountOnExit>

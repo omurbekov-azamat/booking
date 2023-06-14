@@ -164,8 +164,11 @@
   "youWantUseBonuses": "Are you sure you want to use",
   "bonusesOn": "bonuses on",
   "apartments": "Apartments",
-  "hotelStatus": "Hotel status",
+  "hotelStatus": "Hotels status",
   "removeHotel": "Remove hotel",
   "users": "Users",
-  "serviceProviders": "Service providers"
+  "serviceProviders": "Service providers",
+  "usersStatus": "Users status",
+  "admins": "Admins",
+  "adminsReports": "Admins reports"
 }
