@@ -9,9 +9,10 @@ import { CommentMutation } from '../../../types';
 
 interface Props {
   hotelId: string;
+  isEdit?: boolean;
 }
 
-const FormComments: React.FC<Props> = ({ hotelId }) => {
+const FormComments: React.FC<Props> = ({ hotelId, isEdit }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const ErrorCreateComment = useAppSelector(selectCreateCommentError);
