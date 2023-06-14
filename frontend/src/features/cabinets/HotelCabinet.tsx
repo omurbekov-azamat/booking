@@ -59,7 +59,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
     { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
-    { option: 'myApartments', icon: <BedroomParentIcon />, text: 'Апартаменты' },
+    { option: 'myApartments', icon: <BedroomParentIcon />, text: t('apartments') },
     { option: 'myOrders', icon: <WorkIcon />, text: t('myOrders') },
   ];
 
