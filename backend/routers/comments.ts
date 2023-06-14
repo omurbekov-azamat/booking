@@ -23,7 +23,7 @@ commentsRouter.get('/:id', auth, permit('user, admin, director'), async (req, re
     const id = req.params.id;
 
     if (user.role === 'user') {
-      const comments = await Comment.find({ _id: id, author: user._id }).populate('author');
+      const comments = await Comment.findOne({ _id: id, author: user._id }).populate('author');
       return res.send(comments);
     } else {
       const comments = await Comment.findById(id).populate('author');
