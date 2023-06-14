@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Props {
   name: string;
-  data: string | number;
+  data?: string | number;
 }
 
 const CurveText: React.FC<Props> = ({ name, data }) => {
