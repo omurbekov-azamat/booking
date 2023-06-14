@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { getCabinetHotels } from '../../hotels/hotelsThunks';
 import { selectCabinetHotels, selectCabinetLoading } from '../../hotels/hotelsSlice';
 import HotelsStatusChanger from './HotelsStatusChanger';
+import { useTranslation } from 'react-i18next';
 
 interface props {
   DeleteAction: boolean;
@@ -17,6 +18,7 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
   const dispatch = useAppDispatch();
   const hotels = useAppSelector(selectCabinetHotels);
   const hotelsLoading = useAppSelector(selectCabinetLoading);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (name.length > 1) {
@@ -35,7 +37,7 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Поиск по названию"
+          placeholder={t('nameSearch') as string}
           onChange={inputChangeNameHandler}
           value={name}
         />
