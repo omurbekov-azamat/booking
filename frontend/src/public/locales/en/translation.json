@@ -170,5 +170,7 @@
   "serviceProviders": "Service providers",
   "usersStatus": "Users status",
   "admins": "Admins",
-  "adminsReports": "Admins reports"
+  "adminsReports": "Admins reports",
+  "nameSearch": "Name search",
+  "hotelsNotFound": "Hotels not found"
 }

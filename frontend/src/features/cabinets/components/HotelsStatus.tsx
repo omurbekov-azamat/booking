@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import Paper from '@mui/material/Paper';
-import { CircularProgress, Divider, InputBase } from '@mui/material';
+import { CircularProgress, Divider, InputBase, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { getCabinetHotels } from '../../hotels/hotelsThunks';
 import { selectCabinetHotels, selectCabinetLoading } from '../../hotels/hotelsSlice';
 import HotelsStatusChanger from './HotelsStatusChanger';
+import { useTranslation } from 'react-i18next';
 
 interface props {
   DeleteAction: boolean;
@@ -17,6 +18,7 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
   const dispatch = useAppDispatch();
   const hotels = useAppSelector(selectCabinetHotels);
   const hotelsLoading = useAppSelector(selectCabinetLoading);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (name.length > 1) {
@@ -35,7 +37,7 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Поиск по названию"
+          placeholder={t('nameSearch') as string}
           onChange={inputChangeNameHandler}
           value={name}
         />
@@ -44,8 +46,8 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
       </Paper>
       {hotelsLoading ? (
         <CircularProgress />
-      ) : hotels.length < 1 ? (
-        'нету отелей'
+      ) : !hotels.length ? (
+        <Typography sx={{ my: 2, color: 'grey' }}>{t('hotelsNotFound')}</Typography>
       ) : (
         hotels.map((el) => (
           <HotelsStatusChanger

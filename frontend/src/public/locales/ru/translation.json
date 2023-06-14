@@ -171,5 +171,7 @@
   "serviceProviders": "Поставщики услуг",
   "usersStatus": "Статус пользователей",
   "admins": "Админы",
-  "adminsReports": "Отчеты админов"
+  "adminsReports": "Отчеты админов",
+  "nameSearch": "Поиск по названию",
+  "hotelsNotFound": "Отелей не найдено"
 }
