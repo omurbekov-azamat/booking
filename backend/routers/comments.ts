@@ -2,6 +2,7 @@ import express from 'express';
 import Comment from '../models/Comments';
 import auth, { RequestWithUser } from '../middleware/auth';
 import mongoose from 'mongoose';
+import permit from '../middleware/permit';
 
 const commentsRouter = express.Router();
 
@@ -11,6 +12,23 @@ commentsRouter.get('/', async (req, res, next) => {
 
     const comments = await Comment.find({ hotel: hotelId }).populate('author');
     return res.send(comments);
+  } catch (e) {
+    return next(e);
+  }
+});
+
+commentsRouter.get('/:id', auth, permit('user', 'admin', 'director'), async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const id = req.params.id;
+
+    if (user.role === 'user') {
+      const comments = await Comment.findOne({ _id: id, author: user._id }).populate('author');
+      return res.send(comments);
+    } else {
+      const comments = await Comment.findById(id).populate('author');
+      return res.send(comments);
+    }
   } catch (e) {
     return next(e);
   }
