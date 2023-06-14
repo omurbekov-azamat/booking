@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import Paper from '@mui/material/Paper';
-import { CircularProgress, Divider, InputBase } from '@mui/material';
+import { CircularProgress, Divider, InputBase, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { getCabinetHotels } from '../../hotels/hotelsThunks';
 import { selectCabinetHotels, selectCabinetLoading } from '../../hotels/hotelsSlice';
@@ -46,8 +46,8 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
       </Paper>
       {hotelsLoading ? (
         <CircularProgress />
-      ) : hotels.length < 1 ? (
-        'нету отелей'
+      ) : !hotels.length ? (
+        <Typography sx={{ my: 2, color: 'grey' }}>{t('hotelsNotFound')}</Typography>
       ) : (
         hotels.map((el) => (
           <HotelsStatusChanger
