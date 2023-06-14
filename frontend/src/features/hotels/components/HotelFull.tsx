@@ -19,7 +19,6 @@ import PlaceIcon from '@mui/icons-material/Place';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Comments from '../../comments/Comments';
-import { selectComments } from '../../comments/commentsSlice';
 
 interface Props {
   hotel: Hotel;
@@ -32,7 +31,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
   const user = useAppSelector(selectUser);
   const cardImage = apiURL + '/' + hotel.image;
   const currency = useAppSelector(selectCurrency);
-  const comments = useAppSelector(selectComments);
+
   let city;
   let type;
 
@@ -194,9 +193,6 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
         </Button>
       )}
       <ApartmentsTable hotel={hotel} />
-      <Typography variant="h6" sx={{ my: 2, fontWeight: 'bolder', color: 'grey' }}>
-        {t('comments') + ': ' + comments.length}
-      </Typography>
       <Comments />
     </>
   );

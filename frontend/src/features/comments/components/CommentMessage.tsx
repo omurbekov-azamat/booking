@@ -1,10 +1,10 @@
 import React, { MouseEventHandler } from 'react';
-import { Button, Grid, Typography } from '@mui/material';
-import { Comment } from '../../../types';
-import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
-import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import { Button, Grid, Typography } from '@mui/material';
+import { Comment } from '../../../types';
 
 interface Props {
   comment: Comment;
@@ -39,20 +39,25 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
       flexDirection={'column'}
       sx={{
         border: 1,
-        my: 2,
         p: 2,
+        mb: 3,
         boxShadow: 1,
         borderRadius: 2,
         borderColor: 'lightgray',
       }}
+      spacing={1}
     >
-      <Grid item> {comment.author.firstName + ' ' + comment.author.lastName + ':'} </Grid>
+      <Grid item>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>{comment.author.firstName + ' ' + comment.author.lastName + ':'}</Grid>
+          <Grid item>{dayjs(comment.createdAt).format('DD-MM-YYYY HH:mm')} </Grid>
+        </Grid>
+      </Grid>
       <Grid item>
         <Typography variant={'h6'} component={'p'}>
           {comment.text}
         </Typography>
       </Grid>
-      <Grid item>{dayjs(comment.createdAt).format('DD-MM-YYYY HH:mm')} </Grid>
       {user?._id === comment.author._id ? editBtn : null}
       {user?.role === 'admin' || user?.role === 'director' || user?._id === comment.author._id ? deleteBtn : null}
     </Grid>
