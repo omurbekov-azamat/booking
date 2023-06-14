@@ -5,14 +5,13 @@ import { reAuthorization } from '../../users/usersThunks';
 import Royal from '../../../components/UI/Status/Royal';
 import { selectUser } from '../../users/usersSlice';
 import Vip from '../../../components/UI/Status/vip';
-import { useTranslation } from 'react-i18next';
 import ChangePassword from './ChangePassword';
 import HelpIcon from '@mui/icons-material/Help';
 import { someStyle } from '../../../styles';
+import CurveText from '../../../components/UI/CurveText/CurveText';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const MyInformation = () => {
   }, [dispatch]);
 
   return (
-    <Paper elevation={4} sx={{ minHeight: '300px', boxShadow: someStyle.boxShadow }}>
+    <Paper elevation={4} sx={{ minHeight: '300px', boxShadow: someStyle.boxShadow, p: 2 }}>
       {user && (
         <>
           <Grid container justifyContent="center" alignItems="center">
@@ -36,15 +35,13 @@ const MyInformation = () => {
           </Grid>
           {user && user.role === 'user' && (
             <Grid container alignItems="center">
-              <Typography variant="subtitle1" sx={{ marginLeft: '20px', fontWeight: 'bold' }}>
-                Cash Back : {user.cashback} coins
-              </Typography>
+              <CurveText name="Cash back" data={`${user.cashback} coins`} />
               <Tooltip
                 title={
-                  <React.Fragment>
-                    <Typography sx={{ p: 1 }}>1 coin = 1KGS</Typography>
-                    <Typography sx={{ p: 1 }}>90 coins = 1USD</Typography>
-                  </React.Fragment>
+                  <>
+                    <CurveText name="1 coin" data="1KGS" />
+                    <CurveText name="90 coin" data="1USD" />
+                  </>
                 }
                 arrow
               >
@@ -52,13 +49,9 @@ const MyInformation = () => {
               </Tooltip>
             </Grid>
           )}
-          <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
-            {t('phoneNumber')} : {user.phoneNumber}
-          </Typography>
-          <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
-            {t('email')} : {user.email}
-          </Typography>
-          {<ChangePassword />}
+          <CurveText name="phoneNumber" data={user.phoneNumber} />
+          <CurveText name="email" data={user.email} />
+          <ChangePassword />
         </>
       )}
     </Paper>
