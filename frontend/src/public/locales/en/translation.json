@@ -162,5 +162,6 @@
   "passwordError": "Password mismatch",
   "howManyBonuses": "Specify how many bonuses you want to write off",
   "youWantUseBonuses": "Are you sure you want to use",
-  "bonusesOn": "bonuses on"
+  "bonusesOn": "bonuses on",
+  "apartments": "Apartments"
 }
