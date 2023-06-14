@@ -8,7 +8,7 @@ import { createComment, fetchComments } from '../commentsThunks';
 import { CommentMutation } from '../../../types';
 
 interface Props {
-  hotelId: string;
+  hotelId?: string;
   isEdit?: boolean;
 }
 
@@ -19,7 +19,7 @@ const FormComments: React.FC<Props> = ({ hotelId, isEdit }) => {
   const loadingCreateComment = useAppSelector(selectLoadingCreateComment);
 
   const [state, setState] = useState<CommentMutation>({
-    hotel: hotelId,
+    hotel: hotelId as string,
     text: '',
   });
 
@@ -31,7 +31,7 @@ const FormComments: React.FC<Props> = ({ hotelId, isEdit }) => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     await dispatch(createComment(state)).unwrap();
-    await dispatch(fetchComments(hotelId));
+    await dispatch(fetchComments(hotelId as string));
   };
 
   const getFieldError = (fieldName: string) => {

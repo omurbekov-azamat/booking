@@ -17,7 +17,7 @@ commentsRouter.get('/', async (req, res, next) => {
   }
 });
 
-commentsRouter.get('/:id', auth, permit('user, admin, director'), async (req, res, next) => {
+commentsRouter.get('/:id', auth, permit('user', 'admin', 'director'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
     const id = req.params.id;

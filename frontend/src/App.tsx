@@ -28,6 +28,7 @@ import VerifyPage from './components/UI/VerifyPage/VerifyPage';
 import ConfirmPage from './components/UI/VerifyPage/ConfirmPage';
 import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
 import ContractOffer from './components/UI/Footer/ContractOffer';
+import EditComments from './features/comments/components/EditComments';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -175,6 +176,16 @@ function App() {
             <VerifyProtectedRoute isVerify={user && user.isVerified}>
               <Cabinet />
             </VerifyProtectedRoute>
+          }
+        />
+        <Route
+          path="/comments/:id/edit-comment"
+          element={
+            <ProtectedRoute
+              isAllowed={user && (user.role === 'admin' || user.role === 'director' || user.role === 'user')}
+            >
+              <EditComments />
+            </ProtectedRoute>
           }
         />
         <Route
