@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
-import { Button, Grid, Paper, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectUser } from '../../users/usersSlice';
+import { Grid, Paper, Tooltip, Typography } from '@mui/material';
+import { reAuthorization } from '../../users/usersThunks';
 import Royal from '../../../components/UI/Status/Royal';
+import { selectUser } from '../../users/usersSlice';
 import Vip from '../../../components/UI/Status/vip';
 import { useTranslation } from 'react-i18next';
 import ChangePassword from './ChangePassword';
 import HelpIcon from '@mui/icons-material/Help';
-import Popper from '@mui/material/Popper';
-import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
-import Fade from '@mui/material/Fade';
-import { reAuthorization } from '../../users/usersThunks';
+import { someStyle } from '../../../styles';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
@@ -22,7 +20,7 @@ const MyInformation = () => {
   }, [dispatch]);
 
   return (
-    <Paper elevation={4} sx={{ minHeight: '300px' }}>
+    <Paper elevation={4} sx={{ minHeight: '300px', boxShadow: someStyle.boxShadow }}>
       {user && (
         <>
           <Grid container justifyContent="center" alignItems="center">
@@ -38,28 +36,20 @@ const MyInformation = () => {
           </Grid>
           {user && user.role === 'user' && (
             <Grid container alignItems="center">
-              <Typography textAlign="right" variant="subtitle1" sx={{ marginLeft: '20px', fontWeight: 'bold' }}>
+              <Typography variant="subtitle1" sx={{ marginLeft: '20px', fontWeight: 'bold' }}>
                 Cash Back : {user.cashback} coins
               </Typography>
-              <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (
-                  <div>
-                    <Button {...bindToggle(popupState)}>
-                      <HelpIcon />
-                    </Button>
-                    <Popper {...bindPopper(popupState)} transition>
-                      {({ TransitionProps }) => (
-                        <Fade {...TransitionProps} timeout={350}>
-                          <Paper>
-                            <Typography sx={{ p: 1 }}>1 coin = 1KGS</Typography>
-                            <Typography sx={{ p: 1 }}>90 coins = 1USD</Typography>
-                          </Paper>
-                        </Fade>
-                      )}
-                    </Popper>
-                  </div>
-                )}
-              </PopupState>
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    <Typography sx={{ p: 1 }}>1 coin = 1KGS</Typography>
+                    <Typography sx={{ p: 1 }}>90 coins = 1USD</Typography>
+                  </React.Fragment>
+                }
+                arrow
+              >
+                <HelpIcon color="primary" />
+              </Tooltip>
             </Grid>
           )}
           <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
