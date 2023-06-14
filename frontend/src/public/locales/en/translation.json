@@ -43,8 +43,8 @@
   "delete": "Delete",
   "edit": "Edit",
   "publish": "publish",
-  "unPublish": "Un publish",
-  "UnPublished": "Un published",
+  "unPublish": "Unpublish",
+  "UnPublished": "Unpublished",
   "myOrders": "My orders",
   "myHotels": "My hotels",
   "adminCabinet": "Admin cabinet",
@@ -163,5 +163,9 @@
   "howManyBonuses": "Specify how many bonuses you want to write off",
   "youWantUseBonuses": "Are you sure you want to use",
   "bonusesOn": "bonuses on",
-  "apartments": "Apartments"
+  "apartments": "Apartments",
+  "hotelStatus": "Hotel status",
+  "removeHotel": "Remove hotel",
+  "users": "Users",
+  "serviceProviders": "Service providers"
 }

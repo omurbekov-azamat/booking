@@ -118,18 +118,18 @@ const AdminCabinet: React.FC<Props> = ({ exist = initialState }) => {
   };
 
   const options = [
-    { option: 'myInfo', icon: <PersonIcon />, text: t('моя информация') },
-    { option: 'myOrders', icon: <WorkIcon />, text: t('мои заказы') },
-    { option: 'unacceptedOrders', icon: <WorkspacesIcon />, text: 'не принятые заказы' },
-    { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('мои отели') },
-    { option: 'createHotel', icon: <AddCircleIcon />, text: t('создать отель') },
-    { option: 'hotelStatus', icon: <LocationCityIcon />, text: 'Статус отелей' },
-    { option: 'createRoomType', icon: <LivingIcon />, text: 'Создать тип комнаты' },
-    { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: 'Типы комнат' },
-    { option: 'unPublished', icon: <UnpublishedIcon />, text: 'не опубликованные' },
-    { option: 'deleteHotel', icon: <DeleteIcon />, text: 'удалить Отель' },
-    { option: 'users', icon: <GroupIcon />, text: 'Пользователи' },
-    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: 'Поставщики услуг' },
+    { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
+    { option: 'myOrders', icon: <WorkIcon />, text: t('myOrders') },
+    { option: 'unacceptedOrders', icon: <WorkspacesIcon />, text: t('unacceptedOrders') },
+    { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
+    { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
+    { option: 'hotelStatus', icon: <LocationCityIcon />, text: t('hotelStatus') },
+    { option: 'createRoomType', icon: <LivingIcon />, text: t('createRoomType') },
+    { option: 'roomTypes', icon: <RoomPreferencesIcon />, text: t('roomType') },
+    { option: 'unPublished', icon: <UnpublishedIcon />, text: t('UnPublished') },
+    { option: 'deleteHotel', icon: <DeleteIcon />, text: t('removeHotel') },
+    { option: 'users', icon: <GroupIcon />, text: t('users') },
+    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: t('serviceProviders') },
   ];
 
   return (
