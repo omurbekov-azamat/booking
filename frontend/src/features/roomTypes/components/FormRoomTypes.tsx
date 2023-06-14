@@ -60,7 +60,7 @@ const FormRoomTypes = () => {
             </Grid>
             <Grid item xs={12} md={3}>
               <TextField
-                label={'Тип номера на русском'}
+                label={t('typeRoomFormRu')}
                 name="ru"
                 value={state.ru}
                 onChange={inputChangeHandler}
