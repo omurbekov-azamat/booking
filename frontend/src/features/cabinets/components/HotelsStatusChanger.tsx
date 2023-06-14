@@ -60,7 +60,7 @@ const UsersStatusChanger: React.FC<Props> = ({ hotel, DeleteAction, StatusAction
           {StatusAction && (
             <FormControl>
               <Select value={status} onChange={handleChange}>
-                <MenuItem value="standart">standart</MenuItem>
+                <MenuItem value="standart">standard</MenuItem>
                 <MenuItem value="premium">premium</MenuItem>
                 <MenuItem value="business">business</MenuItem>
               </Select>
