@@ -44,7 +44,7 @@
   "edit": "Изменить",
   "publish": "Опубликовать",
   "unPublish": "Не публиковать",
-  "UnPublished": "Не Опубликовано",
+  "UnPublished": "Неопубликовано",
   "myOrders": "Мои заказы",
   "myHotels": "Мои отели",
   "adminCabinet": "Кабинет администратора",
@@ -162,5 +162,14 @@
   "passwordError": "Пароли не совпадают",
   "howManyBonuses": "Укажите, сколько бонусов вы хотите списать",
   "youWantUseBonuses": "Вы уверены что хотите использовать",
-  "bonusesOn": "бонусов на"
+  "bonusesOn": "бонусов на",
+  "apartments": "Aпартаменты",
+  "unacceptedOrders": "Непринятые заказы",
+  "hotelStatus": "Статус отелей",
+  "removeHotel": "Удалить отель",
+  "users": "Пользователи",
+  "serviceProviders": "Поставщики услуг",
+  "usersStatus": "Статус пользователей",
+  "admins": "Админы",
+  "adminsReports": "Отчеты админов"
 }

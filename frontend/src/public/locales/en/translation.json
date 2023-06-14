@@ -43,8 +43,8 @@
   "delete": "Delete",
   "edit": "Edit",
   "publish": "publish",
-  "unPublish": "Un publish",
-  "UnPublished": "Un published",
+  "unPublish": "Unpublish",
+  "UnPublished": "Unpublished",
   "myOrders": "My orders",
   "myHotels": "My hotels",
   "adminCabinet": "Admin cabinet",
@@ -162,5 +162,13 @@
   "passwordError": "Password mismatch",
   "howManyBonuses": "Specify how many bonuses you want to write off",
   "youWantUseBonuses": "Are you sure you want to use",
-  "bonusesOn": "bonuses on"
+  "bonusesOn": "bonuses on",
+  "apartments": "Apartments",
+  "hotelStatus": "Hotels status",
+  "removeHotel": "Remove hotel",
+  "users": "Users",
+  "serviceProviders": "Service providers",
+  "usersStatus": "Users status",
+  "admins": "Admins",
+  "adminsReports": "Admins reports"
 }
