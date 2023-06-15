@@ -174,5 +174,7 @@
   "nameSearch": "Name search",
   "hotelsNotFound": "Hotels not found",
   "typeRoomFormRu": "Room type in Russian",
-  "typeRoomFormEng": "Room type in English"
+  "typeRoomFormEng": "Room type in English",
+  "searchBySurname": "Search by surname",
+  "searchByEmail": "Search by emeil"
 }

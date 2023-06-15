@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { getUsers } from '../../users/usersThunks';
 import { selectUsers, selectUsersLoading } from '../../users/usersSlice';
 import UsersStatusChanger from './UsersStatusChanger';
+import { useTranslation } from 'react-i18next';
 
 const UsersStatus = () => {
   const [lastName, setLastName] = useState('');
@@ -13,6 +14,7 @@ const UsersStatus = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector(selectUsers);
   const userLoading = useAppSelector(selectUsersLoading);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (lastName.length > 1) {
@@ -42,7 +44,7 @@ const UsersStatus = () => {
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Поиск по фамилии"
+          placeholder={t('searchBySurname') as string}
           onChange={inputChangeNameHandler}
           value={lastName}
         />
@@ -52,7 +54,7 @@ const UsersStatus = () => {
       <Paper component="form" sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, marginY: '15px' }}>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Поиск по почте"
+          placeholder={t('searchByEmail') as string}
           onChange={inputChangeMailHandler}
           value={email}
         />
@@ -61,7 +63,7 @@ const UsersStatus = () => {
       </Paper>
       {userLoading ? (
         <CircularProgress />
-      ) : users.length < 1 ? (
+      ) : !users.length ? (
         'нету пользователей'
       ) : (
         users.map((el) => <UsersStatusChanger user={el} key={el._id} />)
