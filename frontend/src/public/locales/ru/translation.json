@@ -177,5 +177,6 @@
   "typeRoomFormRu": "Тип номера на русском",
   "typeRoomFormEng": "Тип номера на английском",
   "searchBySurname": "Поиск по фамилии",
-  "searchByEmail": "Поиск по емейлу"
+  "searchByEmail": "Поиск по емейлу",
+  "usersNotFound": "Пользователи не найдены"
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import Paper from '@mui/material/Paper';
-import { CircularProgress, Divider, InputBase } from '@mui/material';
+import { CircularProgress, Divider, InputBase, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { getUsers } from '../../users/usersThunks';
 import { selectUsers, selectUsersLoading } from '../../users/usersSlice';
@@ -64,7 +64,7 @@ const UsersStatus = () => {
       {userLoading ? (
         <CircularProgress />
       ) : !users.length ? (
-        'нету пользователей'
+        <Typography sx={{ my: 2, color: 'grey' }}>{t('usersNotFound')}</Typography>
       ) : (
         users.map((el) => <UsersStatusChanger user={el} key={el._id} />)
       )}
