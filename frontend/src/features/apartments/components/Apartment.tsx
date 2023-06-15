@@ -45,12 +45,9 @@ const Apartment = () => {
       {loadingFetchOneApartment && <Spinner />}
       <Grid container alignItems="start">
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Grid container gap={2} flexDirection="column">
-            <Typography variant="h4" component="p">
-              {apartment?.hotelId.name}
-            </Typography>
-            <Typography component="p" textTransform="capitalize">
-              {t('roomType')}: {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
+          <Grid container gap={1} flexDirection="column">
+            <Typography variant="h5" textTransform="capitalize" fontWeight="bold">
+              {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
             </Typography>
             <Typography gutterBottom component="p">
               {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
