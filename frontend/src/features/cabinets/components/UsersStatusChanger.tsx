@@ -21,24 +21,31 @@ const UsersStatusChanger: React.FC<Props> = ({ user }) => {
     }
   };
   return (
-    <Paper sx={{ marginTop: '5px', paddingY: '20px' }}>
-      <Grid container justifyContent="space-between">
-        <Typography display="inline-block" variant="body1">
-          {user.firstName} {user.lastName}
-        </Typography>
-        <Typography display="inline-block" variant="body1">
-          Почта : {user.email}
-        </Typography>
-        <FormControl fullWidth>
-          <Select value={status} label="Статус" onChange={handleChange}>
-            <MenuItem value="standart">standart</MenuItem>
-            <MenuItem value="royal">royal</MenuItem>
-            <MenuItem value="vip">vip</MenuItem>
-          </Select>
-          <Button onClick={onOkButton} variant="contained">
-            OK
-          </Button>
-        </FormControl>
+    <Paper sx={{ my: 1, paddingY: '20px', border: 1, boxShadow: 1, p: 2 }}>
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Grid item>
+          <Typography display="inline-block" variant="body1">
+            {user.firstName} {user.lastName}
+          </Typography>
+        </Grid>
+
+        <Grid item>
+          <Typography display="inline-block" variant="body1">
+            Почта : {user.email}
+          </Typography>
+        </Grid>
+        <Grid item minWidth="150px">
+          <FormControl fullWidth>
+            <Select value={status} onChange={handleChange}>
+              <MenuItem value="standard">standart</MenuItem>
+              <MenuItem value="royal">royal</MenuItem>
+              <MenuItem value="vip">vip</MenuItem>
+            </Select>
+            <Button onClick={onOkButton} variant="contained" sx={{ mt: 1 }}>
+              OK
+            </Button>
+          </FormControl>
+        </Grid>
       </Grid>
     </Paper>
   );
