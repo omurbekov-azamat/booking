@@ -68,7 +68,7 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
   };
 
   return (
-    <Box sx={{ background: 'rgba(0, 0, 0, 0.1)', p: 1 }}>
+    <>
       <Box sx={{ maxWidth: 'auto', height: 'auto', alignItem: 'center', pb: 1 }}>
         <LazyLoadImage
           alt={i18n.language === 'en' ? selectedImage.title.en : selectedImage.title.ru}
@@ -120,7 +120,7 @@ const ApartmentsGallery: React.FC<Props> = ({ apartmentData }) => {
           ))}
         </Grid>
       </MyGalleryContainer>
-    </Box>
+    </>
   );
 };
 
