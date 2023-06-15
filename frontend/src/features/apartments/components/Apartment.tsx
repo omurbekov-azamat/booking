@@ -18,6 +18,7 @@ import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import WifiIcon from '@mui/icons-material/Wifi';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import CurveIcon from '../../../components/UI/CurveIcon/CurveIcon';
+import TabUnselectedIcon from '@mui/icons-material/TabUnselected';
 
 const Apartment = () => {
   const dispatch = useAppDispatch();
@@ -43,12 +44,25 @@ const Apartment = () => {
   return (
     <>
       {loadingFetchOneApartment && <Spinner />}
-      <Grid container alignItems="start">
+      <Grid container>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Grid container gap={1} flexDirection="column">
+          <Grid container gap={3} flexDirection="column">
             <Typography variant="h5" textTransform="capitalize" fontWeight="bold">
               {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
             </Typography>
+            <Grid item>
+              <Grid container direction="row" spacing={1} maxWidth={500}>
+                {apartment?.AC && <CurveIcon icon={<AcUnitIcon />} text="AC" />}
+                {apartment?.balcony && <CurveIcon icon={<BalconyIcon />} text="balcony" />}
+                {apartment?.bath && <CurveIcon icon={<BathtubIcon />} text="bath" />}
+                {apartment?.petFriendly && <CurveIcon icon={<PetsIcon />} text="petFriendly" />}
+                {apartment?.food && <CurveIcon icon={<RestaurantIcon />} text="food" />}
+                {apartment?.tv && <CurveIcon icon={<TvIcon />} text="tv" />}
+                {apartment?.towel && <CurveIcon icon={<DryCleaningIcon />} text="towel" />}
+                {apartment?.wifi && <CurveIcon icon={<WifiIcon />} text="wiFi" />}
+                {apartment?.place && <CurveIcon icon={<TabUnselectedIcon />} text={`${apartment.place} M2`} />}
+              </Grid>
+            </Grid>
             <Typography gutterBottom component="p">
               {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
             </Typography>
@@ -58,16 +72,6 @@ const Apartment = () => {
             <Typography gutterBottom component="p">
               {i18n.language === 'en' ? apartment?.description.en : apartment?.description.ru}
             </Typography>
-          </Grid>
-          <Grid item>
-            {apartment?.AC && <CurveIcon icon={<AcUnitIcon />} text="AC" />}
-            {apartment?.balcony && <CurveIcon icon={<BalconyIcon />} text="balcony" />}
-            {apartment?.bath && <CurveIcon icon={<BathtubIcon />} text="bath" />}
-            {apartment?.petFriendly && <CurveIcon icon={<PetsIcon />} text="petFriendly" />}
-            {apartment?.food && <CurveIcon icon={<RestaurantIcon />} text="food" />}
-            {apartment?.tv && <CurveIcon icon={<TvIcon />} text="tv" />}
-            {apartment?.towel && <CurveIcon icon={<DryCleaningIcon />} text="towel" />}
-            {apartment?.wifi && <CurveIcon icon={<WifiIcon />} text="wiFi" />}
           </Grid>
           <Box textAlign="right">
             <Button
