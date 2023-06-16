@@ -1,5 +1,5 @@
 export const apiURL = 'http://localhost:8000';
-export const GOOGLE_CLIENT_ID = '349332092478-a9b2nse4rg5rt9s4buau9m23tinr36lm.apps.googleusercontent.com';
+export const GOOGLE_CLIENT_ID = '786348353209-73ljmk11q4jr3om43lm8qa80891616iu.apps.googleusercontent.com';
 
 export const placeHolderImg = 'https://unsplash.it/200/100?image=44';
 
