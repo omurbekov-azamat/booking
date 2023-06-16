@@ -11,6 +11,7 @@ const config = {
   db: 'mongodb://localhost/booking',
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   },
   mail: 'esdpjs17@gmail.com',
   site: 'http://localhost:3000',
