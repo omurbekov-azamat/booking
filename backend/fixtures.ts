@@ -1446,20 +1446,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1481,20 +1482,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1516,20 +1518,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -1551,20 +1554,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1586,20 +1590,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1621,20 +1626,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -1656,20 +1662,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1691,20 +1698,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1726,20 +1734,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -1761,20 +1770,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1796,20 +1806,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1831,20 +1842,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -1866,20 +1878,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1901,20 +1914,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -1936,20 +1950,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -1971,20 +1986,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2006,20 +2022,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2041,20 +2058,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -2076,20 +2094,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2111,20 +2130,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2146,20 +2166,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -2181,20 +2202,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2216,20 +2238,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2251,20 +2274,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -2286,20 +2310,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2321,20 +2346,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2356,20 +2382,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -2391,20 +2418,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2426,20 +2454,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2461,20 +2490,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -2496,20 +2526,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2531,20 +2562,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2566,20 +2598,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 1',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: false,
@@ -2601,20 +2634,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 2',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
@@ -2636,20 +2670,21 @@ const run = async () => {
       images: ['fixtures/plaza11.jpg', 'fixtures/plaza12.jpg'],
       description: {
         ru: 'Классные апартаменты 3',
-        en: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
-            '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
-            '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
-            '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
-            '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
-            '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
-            '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
-            '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
-            '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
-            '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
-            '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
-            '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
-            '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
-            '        reiciendis rerum saepe sapiente tempora, voluptatum.',
+        en:
+          '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci amet aspernatur eaque eos est eum\n' +
+          '        nesciunt optio qui repellendus temporibus, tenetur. Adipisci aliquam assumenda atque, delectus deleniti deserunt\n' +
+          '        doloremque dolores est et eum eveniet fugiat impedit in magni maiores maxime minima nihil odit officia pariatur\n' +
+          '        placeat quisquam sed sit ullam unde vel, veritatis voluptatum? Aliquam asperiores facere, ipsa ipsam iusto\n' +
+          '        officiis quasi repellat? Architecto eveniet, id itaque maxime perferendis porro quisquam sed sequi similique\n' +
+          '        suscipit. Atque autem ipsam minus quam quia rerum voluptatibus! Alias consequatur consequuntur distinctio\n' +
+          '        eveniet fuga magnam sapiente veritatis voluptas. Eaque id itaque, molestias odit porro quasi unde. Alias aliquam\n' +
+          '        animi architecto aspernatur aut beatae blanditiis corporis, culpa dolor dolore dolorem eligendi eos est et\n' +
+          '        exercitationem expedita inventore ipsum libero magnam nam neque nesciunt nobis nostrum numquam obcaecati officia\n' +
+          '        optio praesentium, quasi qui quod reprehenderit sequi similique sit ut vel veniam vero. Ad aspernatur\n' +
+          '        consectetur corporis debitis delectus dicta dolore doloremque eius eveniet ex expedita facilis fuga fugit harum,\n' +
+          '        in incidunt ipsa ipsum labore laudantium minus mollitia nemo nihil non quibusdam ratione recusandae repellat\n' +
+          '        saepe soluta sunt tempora unde veniam voluptatem voluptates. Ab omnis, quia! Aperiam cupiditate delectus et non\n' +
+          '        reiciendis rerum saepe sapiente tempora, voluptatum.',
       },
       AC: true,
       balcony: true,
