@@ -1,5 +1,5 @@
 export const apiURL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-export const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
+export const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID ? process.env.REACT_APP_GOOGLE_CLIENT_ID : '';
 
 export const placeHolderImg = 'https://unsplash.it/200/100?image=44';
 
