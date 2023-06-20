@@ -14,6 +14,7 @@ const VerifyPage = () => {
   const { t } = useTranslation();
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(true);
@@ -21,6 +22,11 @@ const VerifyPage = () => {
     await dispatch(sendMail());
     setActive(true);
   };
+
+  const goBack = () => {
+    navigate(-2);
+  };
+
   return (
     <Container>
       {user && !user.isVerified ? (
@@ -46,7 +52,7 @@ const VerifyPage = () => {
               color="success"
               size="small"
               style={{ margin: '10px auto', display: 'block', background: '#03C988', marginTop: '10px' }}
-              onClick={() => navigate('/')}
+              onClick={goBack}
             >
               Back
             </Button>
