@@ -41,7 +41,15 @@ const VerifyPage = () => {
                 {t('sendSuccess')}
               </Alert>
             </Collapse>
-            <Button onClick={() => navigate('/')}>Back</Button>
+            <Button
+              variant="contained"
+              color="success"
+              size="small"
+              style={{ margin: '10px auto', display: 'block', background: '#03C988', marginTop: '10px' }}
+              onClick={() => navigate('/')}
+            >
+              Back
+            </Button>
           </ModalCover>
         </>
       ) : (
