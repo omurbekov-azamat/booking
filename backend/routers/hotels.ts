@@ -286,7 +286,7 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
       if (user && user.role === 'admin') {
         const result = await Hotel.deleteOne({ _id: req.params.id });
         if (result.deletedCount) {
-          await fs.unlink(hotel.image as string);
+          await fs.unlink(('public/' + hotel.image) as string);
           await Apartment.deleteMany({ hotelId: req.params.id });
           return res.send({
             message: {
@@ -302,7 +302,7 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
       if (user && user.role === 'hotel') {
         const result = await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
         if (result.deletedCount) {
-          await fs.unlink(hotel.image as string);
+          await fs.unlink(('public/' + hotel.image) as string);
           await Apartment.deleteMany({ hotelId: req.params.id });
           return res.send({
             message: {
