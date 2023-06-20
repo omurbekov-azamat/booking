@@ -10,6 +10,7 @@ import { LoadingButton } from '@mui/lab';
 import { changeRole, getByRole } from '../usersThunks';
 import Button from '@mui/material/Button';
 import { User } from '../../../types';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   prop: User;
@@ -19,6 +20,7 @@ interface Props {
 const UserItem: React.FC<Props> = ({ prop, role }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const { t } = useTranslation();
 
   const [state] = useState({
     id: prop._id,
@@ -67,8 +69,14 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails sx={{ background: 'WhiteSmoke' }}>
-        <Typography textTransform="capitalize">Имя: {prop.firstName}</Typography>
-        <Typography textTransform="capitalize">Фамилия: {prop.lastName}</Typography>
+        <Typography textTransform="capitalize">
+          {t('name') + ': '}
+          {prop.firstName}
+        </Typography>
+        <Typography textTransform="capitalize">
+          {' '}
+          {t('lastName') + ': '} {prop.lastName}
+        </Typography>
         <Typography>Почта: {prop.email}</Typography>
         <Typography>Номер телефона: {prop.phoneNumber}</Typography>
         <Typography>Статус: {prop.status}</Typography>
