@@ -8,12 +8,14 @@ import roomTypesRouter from './routers/roomTypes';
 import apartmentsRouter from './routers/apartments';
 import ordersRouter from './routers/orders';
 import commentsRouter from './routers/comments';
+import path from 'path';
 
 const app = express();
 const port = 8000;
 
 app.use(cors());
-app.use(express.static('public'));
+const staticFilesPath = path.join(__dirname, 'public');
+app.use(express.static(staticFilesPath));
 app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/hotels', hotelsRouter);

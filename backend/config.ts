@@ -1,7 +1,9 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env';
+
+dotenv.config({ path: envFile });
 
 const rootPath = __dirname;
 
@@ -10,11 +12,11 @@ const config = {
   publicPath: path.join(rootPath, 'public'),
   db: 'mongodb://localhost/booking',
   google: {
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    clientId: process.env.GOOGLE_CLIENT_ID ? process.env.GOOGLE_CLIENT_ID : '',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET ? process.env.GOOGLE_CLIENT_SECRET : '',
   },
   mail: 'esdpjs17@gmail.com',
-  site: 'http://localhost:3000',
+  site: process.env.WEBSITE_ADDRESS ? process.env.WEBSITE_ADDRESS : 'http://localhost:3000',
 };
 
 export default config;
