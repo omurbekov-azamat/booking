@@ -182,5 +182,7 @@
   "balance": "Balance",
   "role": "Role",
   "verified": "Verified",
-  "changeRole": "Change role"
+  "changeRole": "Change role",
+  "warningHotelRemove": "Deleting a hotel will delete all apartments belonging to this hotel.",
+  "warning": "Warning!"
 }
