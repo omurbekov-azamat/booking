@@ -54,7 +54,7 @@ const VerifyPage = () => {
               style={{ margin: '10px auto', display: 'block', background: '#03C988', marginTop: '10px' }}
               onClick={goBack}
             >
-              Back
+              {t('back')}
             </Button>
           </ModalCover>
         </>

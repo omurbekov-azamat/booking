@@ -182,5 +182,6 @@
   "balance": "Balance",
   "role": "Role",
   "verified": "Verified",
-  "changeRole": "Change role"
+  "changeRole": "Change role",
+  "back": "Back"
 }
