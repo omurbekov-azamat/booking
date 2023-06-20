@@ -287,7 +287,15 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
         const result = await Hotel.deleteOne({ _id: req.params.id });
         if (result.deletedCount) {
           await fs.unlink(('public/' + hotel.image) as string);
-          await Apartment.deleteMany({ hotelId: req.params.id });
+          const apartments = await Apartment.find({ hotelId: req.params.id });
+          for (const apartment of apartments) {
+            if (apartment.images) {
+              for (const image of apartment.images) {
+                await fs.unlink('public/' + image);
+              }
+            }
+            await Apartment.deleteOne({ _id: apartment._id });
+          }
           return res.send({
             message: {
               en: hotel.name + ' deleted successfully',
@@ -303,7 +311,15 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
         const result = await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
         if (result.deletedCount) {
           await fs.unlink(('public/' + hotel.image) as string);
-          await Apartment.deleteMany({ hotelId: req.params.id });
+          const apartments = await Apartment.find({ hotelId: req.params.id });
+          for (const apartment of apartments) {
+            if (apartment.images) {
+              for (const image of apartment.images) {
+                await fs.unlink('public/' + image);
+              }
+            }
+            await Apartment.deleteOne({ _id: apartment._id });
+          }
           return res.send({
             message: {
               en: hotel.name + ' deleted successfully',
