@@ -5,6 +5,8 @@ import auth, { RequestWithUser } from '../middleware/auth';
 import Hotel from '../models/Hotel';
 import { imagesUpload } from '../multer';
 import { HotelFact } from '../types';
+import Apartment from '../models/Apartment';
+import { promises as fs } from 'fs';
 
 const hotelsRouter = express.Router();
 
@@ -279,24 +281,54 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
   try {
     const user = (req as RequestWithUser).user;
     const hotel = await Hotel.findById(req.params.id);
+
     if (hotel) {
       if (user && user.role === 'admin') {
-        await Hotel.deleteOne({ _id: req.params.id });
-        return res.send({
-          message: {
-            en: hotel.name + ' deleted successfully',
-            ru: hotel.name + ' успешно удалён',
-          },
-        });
+        const result = await Hotel.deleteOne({ _id: req.params.id });
+        if (result.deletedCount) {
+          await fs.unlink(('public/' + hotel.image) as string);
+          const apartments = await Apartment.find({ hotelId: req.params.id });
+          for (const apartment of apartments) {
+            if (apartment.images) {
+              for (const image of apartment.images) {
+                await fs.unlink('public/' + image);
+              }
+            }
+            await Apartment.deleteOne({ _id: apartment._id });
+          }
+          return res.send({
+            message: {
+              en: hotel.name + ' deleted successfully',
+              ru: hotel.name + ' успешно удалён',
+            },
+          });
+        } else {
+          return res.status(403).send({ message: 'Forbidden' });
+        }
       }
+
       if (user && user.role === 'hotel') {
-        await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
-        return res.send({
-          message: {
-            en: hotel.name + ' deleted successfully',
-            ru: hotel.name + ' успешно удалён',
-          },
-        });
+        const result = await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
+        if (result.deletedCount) {
+          await fs.unlink(('public/' + hotel.image) as string);
+          const apartments = await Apartment.find({ hotelId: req.params.id });
+          for (const apartment of apartments) {
+            if (apartment.images) {
+              for (const image of apartment.images) {
+                await fs.unlink('public/' + image);
+              }
+            }
+            await Apartment.deleteOne({ _id: apartment._id });
+          }
+          return res.send({
+            message: {
+              en: hotel.name + ' deleted successfully',
+              ru: hotel.name + ' успешно удалён',
+            },
+          });
+        } else {
+          return res.status(403).send({ message: 'Forbidden' });
+        }
       }
     } else {
       res.status(404).send({ message: 'Cant find hotel' });

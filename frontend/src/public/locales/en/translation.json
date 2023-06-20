@@ -146,9 +146,9 @@
   "sendSuccess": "Mail successfully sent. Check Inbox and spam",
   "navigateText": "You will automatically follow to your cabinet after 5sec. . .  or you can follow by click :",
   "navigateButton": "follow",
-  "changePassword" : "Change password",
-  "sure" : "Are you sure?",
-  "restorePassword" : "Restore Password",
+  "changePassword": "Change password",
+  "sure": "Are you sure?",
+  "restorePassword": "Restore Password",
   "restorePasswordDesc": "Enter your email address. A new password will be sent to your email address.",
   "hotelWasDeleted": "Hotel was deleted",
   "emailIncorrect": "Email incorrect",
@@ -177,5 +177,12 @@
   "typeRoomFormEng": "Room type in English",
   "searchBySurname": "Search by surname",
   "searchByEmail": "Search by emeil",
-  "usersNotFound": "Users not found"
+  "usersNotFound": "Users not found",
+  "name": "Name",
+  "balance": "Balance",
+  "role": "Role",
+  "verified": "Verified",
+  "changeRole": "Change role",
+  "warningHotelRemove": "Deleting a hotel will delete all apartments belonging to this hotel.",
+  "warning": "Warning!"
 }
