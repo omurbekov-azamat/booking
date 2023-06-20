@@ -178,5 +178,10 @@
   "typeRoomFormEng": "Тип номера на английском",
   "searchBySurname": "Поиск по фамилии",
   "searchByEmail": "Поиск по емейлу",
-  "usersNotFound": "Пользователи не найдены"
+  "usersNotFound": "Пользователи не найдены",
+  "name": "Имя",
+  "balance": "Баланс",
+  "role": "Роль",
+  "verified": "Верифицирован",
+  "changeRole": "Изменить роль"
 }
