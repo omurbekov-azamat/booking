@@ -183,6 +183,7 @@
   "role": "Role",
   "verified": "Verified",
   "changeRole": "Change role",
+  "back": "Back",
   "warningHotelRemove": "Deleting a hotel will delete all apartments belonging to this hotel.",
   "warning": "Warning!"
 }
