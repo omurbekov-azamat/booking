@@ -93,14 +93,17 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
           {t('balance') + ': '}
           {prop.cashback}
         </Typography>
-        <Typography>Верифицирован: {prop.isVerified ? 'Да' : 'Нет'}</Typography>
+        <Typography>
+          {' '}
+          {t('verified') + ': '} {prop.isVerified ? '+' : '-'}
+        </Typography>
         <Typography textTransform="capitalize">
           {' '}
           {t('role') + ': '} {prop.role}
         </Typography>
         {(user?.role === 'admin' || user?.role === 'director') && (
           <LoadingButton color="success" onClick={handleClick}>
-            Изменить роль
+            {t('changeRole')}
           </LoadingButton>
         )}
       </AccordionDetails>

@@ -180,5 +180,7 @@
   "usersNotFound": "Users not found",
   "name": "Name",
   "balance": "Balance",
-  "role": "Role"
+  "role": "Role",
+  "verified": "Verified",
+  "changeRole": "Change role"
 }
