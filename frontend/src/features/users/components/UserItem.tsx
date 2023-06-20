@@ -77,12 +77,27 @@ const UserItem: React.FC<Props> = ({ prop, role }) => {
           {' '}
           {t('lastName') + ': '} {prop.lastName}
         </Typography>
-        <Typography>Почта: {prop.email}</Typography>
-        <Typography>Номер телефона: {prop.phoneNumber}</Typography>
-        <Typography>Статус: {prop.status}</Typography>
-        <Typography>Баланс: {prop.cashback}</Typography>
+        <Typography>
+          {' '}
+          {t('email') + ': '} {prop.email}
+        </Typography>
+        <Typography>
+          {' '}
+          {t('phoneNumber') + ': '} {prop.phoneNumber}
+        </Typography>
+        <Typography>
+          {' '}
+          {t('status') + ': '} {prop.status}
+        </Typography>
+        <Typography>
+          {t('balance') + ': '}
+          {prop.cashback}
+        </Typography>
         <Typography>Верифицирован: {prop.isVerified ? 'Да' : 'Нет'}</Typography>
-        <Typography textTransform="capitalize">Роль: {prop.role}</Typography>
+        <Typography textTransform="capitalize">
+          {' '}
+          {t('role') + ': '} {prop.role}
+        </Typography>
         {(user?.role === 'admin' || user?.role === 'director') && (
           <LoadingButton color="success" onClick={handleClick}>
             Изменить роль

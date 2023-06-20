@@ -178,5 +178,7 @@
   "searchBySurname": "Search by surname",
   "searchByEmail": "Search by emeil",
   "usersNotFound": "Users not found",
-  "name": "Name"
+  "name": "Name",
+  "balance": "Balance",
+  "role": "Role"
 }

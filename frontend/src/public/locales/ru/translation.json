@@ -179,5 +179,7 @@
   "searchBySurname": "Поиск по фамилии",
   "searchByEmail": "Поиск по емейлу",
   "usersNotFound": "Пользователи не найдены",
-  "name": "Имя"
+  "name": "Имя",
+  "balance": "Баланс",
+  "role": "Роль"
 }
