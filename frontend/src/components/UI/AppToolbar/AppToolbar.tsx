@@ -32,8 +32,14 @@ const AppToolbar = () => {
       <AppBar position="sticky" sx={ToolBarStyles}>
         <Toolbar>
           <Container maxWidth="xl">
-            <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
-              <Grid item xs={12} sm={12} md={4} lg={6} xl={6}>
+            <Grid
+              container
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={2}
+              sx={{ '@media (max-width: 550px)': { justifyContent: 'center' } }}
+            >
+              <Grid item>
                 <Grid container alignItems="center">
                   <Typography variant="h6" component="div" fontWeight="bold" mr={3}>
                     <Link to="/" style={{ margin: 'auto' }}>
@@ -42,23 +48,41 @@ const AppToolbar = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={12} md={2} lg={3} xl={3}>
-                <Grid container>
-                  <CurrencySwitcher />
-                  <Grid item>
-                    <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('ru')}>
-                      <img src={RUIcon} alt="ru language" style={{ width: '100%', height: 'auto' }} />
-                    </IconButton>
-                    <IconButton style={{ width: 35, height: 35, padding: 0 }} onClick={() => changeLanguage('en')}>
-                      <img src={USAIcon} alt="eng language" style={{ width: '100%', height: 'auto' }} />
-                    </IconButton>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={12} sm={12} md={6} lg={3} xl={3}>
+              <Grid item>
                 <Grid container>
                   <Grid item ml="auto">
                     {user ? <UserMenu user={user} /> : <AnonymousMenu />}
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <Grid
+                    container
+                    flexDirection={'row-reverse'}
+                    sx={{ '@media (max-width: 550px)': { justifyContent: 'center' } }}
+                  >
+                    <Grid item>
+                      <CurrencySwitcher />
+                    </Grid>
+                    <Grid item>
+                      <Grid container>
+                        <Grid item>
+                          <IconButton
+                            style={{ width: 35, height: 35, padding: 0 }}
+                            onClick={() => changeLanguage('ru')}
+                          >
+                            <img src={RUIcon} alt="ru language" style={{ width: '100%', height: 'auto' }} />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            style={{ width: 35, height: 35, padding: 0 }}
+                            onClick={() => changeLanguage('en')}
+                          >
+                            <img src={USAIcon} alt="eng language" style={{ width: '100%', height: 'auto' }} />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
