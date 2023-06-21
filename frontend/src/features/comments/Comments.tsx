@@ -47,7 +47,7 @@ const Comments = () => {
               />
             );
           })}
-          {user && <FormComments hotelId={id} />}
+          {user?.isVerified && <FormComments hotelId={id} />}
         </CardContent>
       </Card>
     </>
