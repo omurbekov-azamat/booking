@@ -24,6 +24,7 @@ import OrderItems from '../orders/components/OrderItems';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ApartmentsCard from '../apartments/components/ApartmentsCard';
 import MyHotels from './components/MyHotels';
+import {someStyle} from "../../styles";
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -85,8 +86,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
