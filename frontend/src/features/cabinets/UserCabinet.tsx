@@ -17,6 +17,7 @@ import MyInformation from './components/MyInformation';
 import { getOrders } from '../orders/ordersThunks';
 import { selectOrders } from '../orders/ordersSlice';
 import { CabinetState } from '../../types';
+import { someStyle } from '../../styles';
 
 const initialState: CabinetState = {
   orders: false,
@@ -68,8 +69,7 @@ const UserCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
