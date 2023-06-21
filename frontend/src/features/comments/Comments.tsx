@@ -9,6 +9,7 @@ import FormComments from './components/FormComments';
 import { Card, CardContent } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
+import { selectUser } from '../users/usersSlice';
 
 const Comments = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ const Comments = () => {
   const { id } = useParams() as { id: string };
   const comments = useAppSelector(selectComments);
   const loadingFetchAllComments = useAppSelector(selectLoadingFetchAllComments);
+  const user = useAppSelector(selectUser);
 
   const deleteComment = async (commentId: string, hotelId: string) => {
     await dispatch(removeComment(commentId));
@@ -45,7 +47,7 @@ const Comments = () => {
               />
             );
           })}
-          <FormComments hotelId={id} />
+          {user && <FormComments hotelId={id} />}
         </CardContent>
       </Card>
     </>

@@ -193,7 +193,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
         </Button>
       )}
       <ApartmentsTable hotel={hotel} />
-      {user && <Comments />}
+      <Comments />
     </>
   );
 };
