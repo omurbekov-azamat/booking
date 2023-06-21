@@ -26,6 +26,7 @@ import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import MyInformation from './components/MyInformation';
+import {someStyle} from "../../styles";
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -98,8 +99,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
