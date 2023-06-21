@@ -121,16 +121,22 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   selected={selectedIndex === options.length}
                   onClick={() => handleClickOption('reportAdmins', options.length)}
                 >
-                  <ListItemIcon>
+                  <ListItemIcon style={state.reportAdmins ? { color: '#03C988' } : {}}>
                     <PeopleAltIcon />
                   </ListItemIcon>
-                  <ListItemText primary={t('adminsReports')} />
+                  <ListItemText style={state.reportAdmins ? { color: '#03C988' } : {}} primary={t('adminsReports')} />
                   {state.reportAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={state.reportAdmins} timeout="auto" unmountOnExit>
                   {usersByRole.map((user) => (
                     <List key={user._id} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(user._id)}>
+                      <ListItemButton
+                        sx={{
+                          pl: 4,
+                          backgroundColor: selectedIndex === options.length ? '#03C988' : 'transparent',
+                        }}
+                        onClick={() => handleClickAdminName(user._id)}
+                      >
                         <ListItemIcon>
                           <PersonIcon />
                         </ListItemIcon>
