@@ -26,7 +26,7 @@ import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import MyInformation from './components/MyInformation';
-import {someStyle} from "../../styles";
+import { someStyle } from '../../styles';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -110,8 +110,10 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     selected={selectedIndex === index}
                     onClick={() => handleClickOption(option.option, index)}
                   >
-                    <ListItemIcon>{option.icon}</ListItemIcon>
-                    <ListItemText primary={option.text} />
+                    <ListItemIcon style={selectedIndex === index ? { color: '#03C988' } : {}}>
+                      {option.icon}
+                    </ListItemIcon>
+                    <ListItemText style={selectedIndex === index ? { color: '#03C988' } : {}} primary={option.text} />
                   </ListItemButton>
                 ))}
                 <ListItemButton
