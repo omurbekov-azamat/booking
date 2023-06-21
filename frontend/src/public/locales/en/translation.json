@@ -1,8 +1,8 @@
 {
   "profile": "Profile",
   "logout": "Logout",
-  "signIn": "Enter",
-  "signUp": "Register",
+  "signIn": "Sing in",
+  "signUp": "Sing up",
   "hello": "hello",
   "password": "Password",
   "email": "Email",
