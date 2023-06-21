@@ -22,7 +22,7 @@ const SwipePropertyTypeCards = () => {
         },
         {
           name: t('pension'),
-          link: 'https://fergana.media/siteapi/media/images/362ecc92-a124-43a9-8e45-429f2f87611d.jpeg',
+          link: 'https://www.spot.uz/media/img/2019/06/GT7HFh15618111689229_l.jpg',
           lang: 'pension',
         },
         {
