@@ -50,14 +50,24 @@ const SearchField = () => {
 
   return (
     <Grid container>
-      <Grid item>
+      <Grid item flexGrow={1}>
         <Autocomplete
           disablePortal
           options={autocomplete}
           isOptionEqualToValue={(option, value) => option._id === value._id}
           onChange={onAutocompleteChange}
           value={selectedHotel}
-          sx={{ width: 200 }}
+          sx={{
+            width: '100%',
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'darkgrey',
+              borderWidth: '2px',
+            },
+            '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'darkgrey',
+              borderWidth: '2px',
+            },
+          }}
           renderInput={(params) => (
             <TextField {...params} value={match} onChange={inputChangeHandler} label={t('search')} />
           )}
@@ -65,7 +75,7 @@ const SearchField = () => {
       </Grid>
       <Grid xs={1} item container alignItems="center">
         <LoadingButton loading={loadingSearchMatch} type="button" onClick={onSubmit}>
-          <SearchIcon />
+          <SearchIcon color={'action'} />
         </LoadingButton>
       </Grid>
     </Grid>
