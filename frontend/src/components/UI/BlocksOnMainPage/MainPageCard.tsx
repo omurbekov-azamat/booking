@@ -34,7 +34,6 @@ const MainPageCard: React.FC<Props> = ({ item, city, type }) => {
       >
         <Card
           style={{
-            maxWidth: '300px',
             minHeight: '200px',
             backgroundImage: `url(${item.link})`,
             backgroundSize: 'cover',
