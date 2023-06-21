@@ -27,12 +27,9 @@ const AnonymousMenu = () => {
             <Button
               component={NavLink}
               to="/register"
-              variant="contained"
+              variant="outlined"
               startIcon={<AccountCircle />}
-              color="primary"
-              sx={{
-                backgroundColor: theme.palette.primary.main,
-              }}
+              color="secondary"
             >
               <Typography mt={0.5} fontWeight="bold">
                 {t('signUp')}
@@ -40,16 +37,7 @@ const AnonymousMenu = () => {
             </Button>
           </Grid>
           <Grid item>
-            <Button
-              component={NavLink}
-              to="/login"
-              variant="contained"
-              startIcon={<LockOutlined />}
-              color="secondary"
-              sx={{
-                backgroundColor: theme.palette.secondary.main,
-              }}
-            >
+            <Button component={NavLink} to="/login" variant="outlined" startIcon={<LockOutlined />} color="secondary">
               <Typography mt={0.5} fontWeight="bold">
                 {t('signIn')}
               </Typography>
