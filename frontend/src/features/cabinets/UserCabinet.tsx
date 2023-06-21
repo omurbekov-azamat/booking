@@ -76,9 +76,9 @@ const UserCabinet: React.FC<Props> = ({ exist = initialState }) => {
               >
                 <ListItemButton onClick={handleClickMyInfo}>
                   <ListItemIcon>
-                    <HomeIcon />
+                    <HomeIcon style={state.myInfo ? { color: 'green' } : {}} />
                   </ListItemIcon>
-                  <ListItemText primary={t('myInfo')} />
+                  <ListItemText style={state.myInfo ? { color: 'green' } : {}} primary={t('myInfo')} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClickOrders}>
                   <ListItemIcon>
