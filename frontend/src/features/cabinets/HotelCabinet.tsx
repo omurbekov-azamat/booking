@@ -165,10 +165,10 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 <DialogContent>{t('warningApartmentRemove')}</DialogContent>
                 <DialogActions>
                   <Button onClick={handleCancel} color="primary">
-                    Cancel
+                    {t('cancel')}
                   </Button>
                   <Button onClick={() => handleConfirm(apartmentId)} color="primary">
-                    Confirm
+                    {t('confirm')}
                   </Button>
                 </DialogActions>
               </Dialog>

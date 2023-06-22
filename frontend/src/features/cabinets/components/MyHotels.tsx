@@ -59,10 +59,10 @@ const MyHotels: React.FC<Props> = ({ hotels }) => {
               <DialogContent>{t('warningHotelRemove')}</DialogContent>
               <DialogActions>
                 <Button onClick={handleCancel} color="primary">
-                  Cancel
+                  {t('cancel')}
                 </Button>
                 <Button onClick={() => handleConfirm(hotelId)} color="primary">
-                  Confirm
+                  {t('confirm')}
                 </Button>
               </DialogActions>
             </Dialog>
