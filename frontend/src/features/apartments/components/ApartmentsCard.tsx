@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../app/hooks';
 import { selectCurrency } from '../../currency/currencySlice';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../users/usersSlice';
-import { fetchApartments, removeApartment } from '../apartmentThunks';
 import { selectLoadingRemoveApartment } from '../apartmentSlice';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Box, Button, Card, CardActionArea, CardContent, Stack, Typography } from '@mui/material';
@@ -17,26 +16,17 @@ import type { IApartment } from '../../../types';
 interface Props {
   apartment: IApartment;
   isNeedButtons?: true;
+  onDeleteBtnClick: MouseEventHandler;
 }
 
-const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
+const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons, onDeleteBtnClick }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const currency = useAppSelector(selectCurrency);
   const user = useAppSelector(selectUser);
   const loadingDeleteApartment = useAppSelector(selectLoadingRemoveApartment);
-  const location = useLocation();
 
   const cardImage = apiURL + '/' + apartment.images[0];
-
-  const deleteApartment = async (id: string) => {
-    await dispatch(removeApartment(id));
-
-    if (location.pathname === '/my-cabinet') {
-      await dispatch(fetchApartments({ userId: user?._id }));
-    }
-  };
 
   return (
     <>
@@ -84,7 +74,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
                   color="error"
                   sx={{ background: '#CD1818' }}
                   startIcon={<DeleteIcon />}
-                  onClick={() => deleteApartment(apartment._id)}
+                  onClick={onDeleteBtnClick}
                 >
                   {t('delete')}
                 </LoadingButton>
