@@ -185,5 +185,7 @@
   "changeRole": "Change role",
   "back": "Back",
   "warningHotelRemove": "Deleting a hotel will delete all apartments belonging to this hotel.",
-  "warning": "Warning!"
+  "warning": "Warning!",
+  "warningApartmentRemove": "Are you sure you want to delete the apartment?",
+  "confirm": "Confirm"
 }
