@@ -17,6 +17,7 @@ import MyInformation from './components/MyInformation';
 import { getOrders } from '../orders/ordersThunks';
 import { selectOrders } from '../orders/ordersSlice';
 import { CabinetState } from '../../types';
+import { someStyle } from '../../styles';
 
 const initialState: CabinetState = {
   orders: false,
@@ -68,29 +69,28 @@ const UserCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
                 <ListItemButton onClick={handleClickMyInfo}>
                   <ListItemIcon>
-                    <HomeIcon />
+                    <HomeIcon style={state.myInfo ? { color: '#03C988' } : {}} />
                   </ListItemIcon>
-                  <ListItemText primary={t('myInfo')} />
+                  <ListItemText style={state.myInfo ? { color: '#03C988' } : {}} primary={t('myInfo')} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClickOrders}>
                   <ListItemIcon>
-                    <MapsHomeWorkIcon />
+                    <MapsHomeWorkIcon style={state.orders ? { color: '#03C988' } : {}} />
                   </ListItemIcon>
-                  <ListItemText primary={t('myOrders')} />
+                  <ListItemText style={state.orders ? { color: '#03C988' } : {}} primary={t('myOrders')} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClickFavorites}>
                   <ListItemIcon>
-                    <FavoriteIcon />
+                    <FavoriteIcon style={state.favorites ? { color: '#03C988' } : {}} />
                   </ListItemIcon>
-                  <ListItemText primary={t('myFavorites')} />
+                  <ListItemText style={state.favorites ? { color: '#03C988' } : {}} primary={t('myFavorites')} />
                 </ListItemButton>
               </List>
             </Grid>
