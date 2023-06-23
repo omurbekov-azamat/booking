@@ -153,7 +153,7 @@
   "restorePasswordDesc": "Введите свой емейл. На ваш емайл адрес будет выслан новый пароль.",
   "payableAmount": "Сумма к оплате",
   "amountOfDays": "Количество дней",
-  "hotelWasDeleted": "Отель был удален",
+  "hotelNotFound": "Отель не найден",
   "emailIncorrect": "Электронная почта неверна",
   "PasswordIncorrect": "Неверный пароль",
   "additionalServicesAreCharged": "За дополнительные услуги взимается отдельная плата",
@@ -189,5 +189,6 @@
   "warning": "Внимание!",
   "warningApartmentRemove": "Вы уверенны что хотите удалить этот номер?",
   "confirm": "Подтвердить",
-  "hotelStatusInfo": "Введите название отеля и поменяйте статус"
+  "hotelStatusInfo": "Введите название отеля и поменяйте статус",
+  "apartmentNotFound": "Апартамент не найден"
 }
