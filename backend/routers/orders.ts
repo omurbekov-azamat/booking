@@ -75,7 +75,7 @@ ordersRouter.post('/', auth, permit('admin', 'user', 'director'), async (req, re
             secure: false,
             auth: {
               user: config.mail,
-              pass: 'qlfhiaqbgitxqlaw',
+              pass: 'vodjjdkhhdgcvenq',
             },
           });
 
