@@ -188,5 +188,6 @@
   "warning": "Warning!",
   "warningApartmentRemove": "Are you sure you want to delete the apartment?",
   "confirm": "Confirm",
-  "hotelStatusInfo": "Enter the name of the hotel and change the status"
+  "hotelStatusInfo": "Enter the name of the hotel and change the status",
+  "deleteHotelInfo": "Enter the name of the hotel and delete"
 }
