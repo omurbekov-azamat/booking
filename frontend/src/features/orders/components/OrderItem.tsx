@@ -120,7 +120,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           </Typography>
         )}
 
-        {prop.apartmentId.hotelId ? (
+        {prop.apartmentId && prop.apartmentId.hotelId ? (
           <>
             <Typography textTransform="capitalize">
               {t('city')}: {prop.apartmentId.hotelId.city}
