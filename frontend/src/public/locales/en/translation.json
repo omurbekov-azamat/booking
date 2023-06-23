@@ -150,10 +150,10 @@
   "sure": "Are you sure?",
   "restorePassword": "Restore Password",
   "restorePasswordDesc": "Enter your email address. A new password will be sent to your email address.",
-  "hotelWasDeleted": "Hotel was deleted",
+  "hotelNotFound": "Hotel not found",
   "emailIncorrect": "Email incorrect",
   "PasswordIncorrect": "Password incorrect",
-  "apartmentWasDeleted": "Apartment was deleted",
+  "apartmentNotFound": "Apartment not found",
   "payableAmount": "Payable amount",
   "amountOfDays": "Amount of days",
   "additionalServicesAreCharged": "Additional services are charged separately",
@@ -187,5 +187,7 @@
   "warningHotelRemove": "Deleting a hotel will delete all apartments belonging to this hotel.",
   "warning": "Warning!",
   "warningApartmentRemove": "Are you sure you want to delete the apartment?",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "hotelStatusInfo": "Enter the name of the hotel and change the status",
+  "deleteHotelInfo": "Enter the name of the hotel and delete"
 }
