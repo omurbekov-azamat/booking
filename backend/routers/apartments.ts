@@ -182,10 +182,11 @@ apartmentsRouter.delete('/:id/images/:index', auth, permit('admin', 'hotel'), as
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       const index = parseInt(req.params.index);
-
       if (apartment.images && index >= 0 && index < apartment.images.length) {
+        const deletingImage = apartment.images[index];
         apartment.images.splice(index, 1);
         await apartment.save();
+        await fs.unlink('public/' + deletingImage);
         res.send({
           message: {
             en: 'Image deleted successfully',
