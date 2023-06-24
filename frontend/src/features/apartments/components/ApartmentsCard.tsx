@@ -13,6 +13,8 @@ import { LoadingButton } from '@mui/lab';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import DeleteIcon from '@mui/icons-material/Delete';
 import type { IApartment } from '../../../types';
+import Tooltip from '@mui/material/Tooltip';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
   apartment: IApartment;
@@ -66,13 +68,8 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons }) => {
           <Stack direction="row" spacing={2} justifyContent="space-around" m={1} height="100%">
             {isNeedButtons &&
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{ background: '#05BFDB' }}
-                  onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}
-                >
-                  {t('edit')}
+                <Button size="small" onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}>
+                  <EditIcon sx={{ color: '#05BFDB' }} />
                 </Button>
               )}
             {isNeedButtons &&
