@@ -66,13 +66,15 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons, onDeleteBtn
               )}
             {isNeedButtons &&
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-                <LoadingButton
-                  loading={loadingDeleteApartment === apartment._id}
-                  size="small"
-                  onClick={onDeleteBtnClick}
-                >
-                  <DeleteIcon sx={{ color: '#CD1818' }} />
-                </LoadingButton>
+                <Tooltip title={t('delete')} placement="top">
+                  <LoadingButton
+                    loading={loadingDeleteApartment === apartment._id}
+                    size="small"
+                    onClick={onDeleteBtnClick}
+                  >
+                    <DeleteIcon sx={{ color: '#CD1818' }} />
+                  </LoadingButton>
+                </Tooltip>
               )}
           </Stack>
         </Box>
