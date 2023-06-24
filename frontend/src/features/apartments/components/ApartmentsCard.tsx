@@ -58,9 +58,11 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons, onDeleteBtn
           <Stack direction="row" spacing={2} justifyContent="space-around" m={1} height="100%">
             {isNeedButtons &&
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-                <Button size="small" onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}>
-                  <EditIcon sx={{ color: '#05BFDB' }} />
-                </Button>
+                <Tooltip title={t('edit')} placement="top">
+                  <Button size="small" onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}>
+                    <EditIcon sx={{ color: '#05BFDB' }} />
+                  </Button>
+                </Tooltip>
               )}
             {isNeedButtons &&
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
