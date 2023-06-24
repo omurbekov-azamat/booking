@@ -26,6 +26,7 @@ import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import MyInformation from './components/MyInformation';
+import { someStyle } from '../../styles';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -98,8 +99,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
@@ -110,8 +110,10 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     selected={selectedIndex === index}
                     onClick={() => handleClickOption(option.option, index)}
                   >
-                    <ListItemIcon>{option.icon}</ListItemIcon>
-                    <ListItemText primary={option.text} />
+                    <ListItemIcon style={selectedIndex === index ? { color: '#03C988' } : {}}>
+                      {option.icon}
+                    </ListItemIcon>
+                    <ListItemText style={selectedIndex === index ? { color: '#03C988' } : {}} primary={option.text} />
                   </ListItemButton>
                 ))}
                 <ListItemButton
@@ -119,16 +121,22 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   selected={selectedIndex === options.length}
                   onClick={() => handleClickOption('reportAdmins', options.length)}
                 >
-                  <ListItemIcon>
+                  <ListItemIcon style={state.reportAdmins ? { color: '#03C988' } : {}}>
                     <PeopleAltIcon />
                   </ListItemIcon>
-                  <ListItemText primary={t('adminsReports')} />
+                  <ListItemText style={state.reportAdmins ? { color: '#03C988' } : {}} primary={t('adminsReports')} />
                   {state.reportAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={state.reportAdmins} timeout="auto" unmountOnExit>
                   {usersByRole.map((user) => (
                     <List key={user._id} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(user._id)}>
+                      <ListItemButton
+                        sx={{
+                          pl: 4,
+                          backgroundColor: selectedIndex === options.length ? '#03C988' : 'transparent',
+                        }}
+                        onClick={() => handleClickAdminName(user._id)}
+                      >
                         <ListItemIcon>
                           <PersonIcon />
                         </ListItemIcon>

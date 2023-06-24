@@ -15,7 +15,7 @@ const config = {
     clientId: process.env.GOOGLE_CLIENT_ID ? process.env.GOOGLE_CLIENT_ID : '',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET ? process.env.GOOGLE_CLIENT_SECRET : '',
   },
-  mail: 'esdpjs17@gmail.com',
+  mail: 'hotelsbookingkg@gmail.com',
   site: process.env.WEBSITE_ADDRESS ? process.env.WEBSITE_ADDRESS : 'http://localhost:3000',
 };
 

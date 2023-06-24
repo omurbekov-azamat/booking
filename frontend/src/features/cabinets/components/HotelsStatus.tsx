@@ -31,6 +31,16 @@ const HotelsStatus: React.FC<props> = ({ DeleteAction, StatusAction }) => {
   };
   return (
     <div>
+      {StatusAction ? (
+        <Typography variant={'h6'} fontWeight={'bolder'}>
+          {t('hotelStatusInfo')}
+        </Typography>
+      ) : (
+        <Typography variant={'h6'} fontWeight={'bolder'}>
+          {t('deleteHotelInfo')}
+        </Typography>
+      )}
+
       <Paper
         component="form"
         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, marginTop: '15px' }}
