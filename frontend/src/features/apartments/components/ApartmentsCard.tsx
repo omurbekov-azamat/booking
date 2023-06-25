@@ -12,6 +12,8 @@ import { LoadingButton } from '@mui/lab';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import DeleteIcon from '@mui/icons-material/Delete';
 import type { IApartment } from '../../../types';
+import Tooltip from '@mui/material/Tooltip';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
   apartment: IApartment;
@@ -56,28 +58,23 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons, onDeleteBtn
           <Stack direction="row" spacing={2} justifyContent="space-around" m={1} height="100%">
             {isNeedButtons &&
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{ background: '#05BFDB' }}
-                  onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}
-                >
-                  {t('edit')}
-                </Button>
+                <Tooltip title={t('edit')} placement="top">
+                  <Button size="small" onClick={() => navigate('/my-cabinet/edit-apartment/' + apartment._id)}>
+                    <EditIcon sx={{ color: '#05BFDB' }} />
+                  </Button>
+                </Tooltip>
               )}
             {isNeedButtons &&
               (user?.role === 'admin' || user?.role === 'director' || user?._id === apartment.hotelId.userId) && (
-                <LoadingButton
-                  loading={loadingDeleteApartment === apartment._id}
-                  variant="contained"
-                  size="small"
-                  color="error"
-                  sx={{ background: '#CD1818' }}
-                  startIcon={<DeleteIcon />}
-                  onClick={onDeleteBtnClick}
-                >
-                  {t('delete')}
-                </LoadingButton>
+                <Tooltip title={t('delete')} placement="top">
+                  <LoadingButton
+                    loading={loadingDeleteApartment === apartment._id}
+                    size="small"
+                    onClick={onDeleteBtnClick}
+                  >
+                    <DeleteIcon sx={{ color: '#CD1818' }} />
+                  </LoadingButton>
+                </Tooltip>
               )}
           </Stack>
         </Box>
