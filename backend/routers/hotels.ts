@@ -160,6 +160,12 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
       findParams = { _id: req.params.id };
     }
 
+    const currentHotel = await Hotel.findOne(findParams);
+
+    if (currentHotel && currentHotel.image && req.file) {
+      await fs.unlink('public/' + currentHotel.image);
+    }
+
     const hotel = await Hotel.updateOne(findParams, {
       $set: {
         name: req.body.name,
