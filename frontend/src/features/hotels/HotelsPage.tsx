@@ -216,7 +216,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   );
 
   const addMore = (pageNum: number) => {
-    dispatch(fetchNewPage(pageNum));
+    dispatch(fetchNewPage({ page: pageNum, data: state }));
   };
 
   const container = window !== undefined ? () => window().document.body : undefined;
