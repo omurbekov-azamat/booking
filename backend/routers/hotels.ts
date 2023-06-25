@@ -80,13 +80,12 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelsRes = await Hotel.find({ name: { $regex: new RegExp(match, 'i') } }).limit(10);
       return res.send(hotelsRes);
     }
+    const findParams: HotelFact = {};
     if (req.query) {
       if (queryOwner) {
         const hotelsRes = await Hotel.find({ userId: queryOwner });
         return res.send(hotelsRes);
       }
-
-      const findParams: HotelFact = {};
 
       if (type) {
         findParams.type = type;
@@ -109,44 +108,31 @@ hotelsRouter.get('/', async (req, res) => {
       if (star !== 'null') {
         findParams.star = star;
       }
-
-      const hotelResponse = await Hotel.find(findParams);
-      return res.send(hotelResponse);
     }
 
-    const pageNumber: number = parseInt(queryPage) || 1;
+    const pageNumber: number = queryPage ? parseInt(queryPage) : 1;
 
     const hotelsRes = await Hotel.aggregate([
       {
         $facet: {
-          premiumHotels: [{ $match: { status: 'premium', isPublished: true } }, { $limit: 18 }],
-          businessHotels: [{ $match: { status: 'business', isPublished: true } }, { $limit: 18 }],
-          standardHotels: [{ $match: { status: 'standard', isPublished: true } }, { $limit: 18 }],
+          premiumHotels: [{ $match: { ...findParams, status: 'premium', isPublished: true } }],
+          businessHotels: [{ $match: { ...findParams, status: 'business', isPublished: true } }],
+          standardHotels: [{ $match: { ...findParams, status: 'standard', isPublished: true } }],
           totalCount: [{ $group: { _id: null, count: { $sum: 1 } } }],
         },
       },
       {
         $project: {
           hotels: {
-            $concatArrays: [
-              '$premiumHotels',
-              { $slice: ['$businessHotels', 0, { $subtract: [18, { $size: '$premiumHotels' }] }] },
-              {
-                $slice: [
-                  '$standardHotels',
-                  0,
-                  { $subtract: [18, { $size: { $concatArrays: ['$premiumHotels', '$businessHotels'] } }] },
-                ],
-              },
-            ],
+            $concatArrays: ['$premiumHotels', '$businessHotels', '$standardHotels'],
           },
           totalCount: { $arrayElemAt: ['$totalCount.count', 0] },
         },
       },
       { $unwind: '$hotels' },
       { $replaceRoot: { newRoot: '$hotels' } },
-      { $skip: (pageNumber - 1) * 18 },
-      { $limit: 18 },
+      { $skip: (pageNumber - 1) * 12 },
+      { $limit: 12 },
     ]);
 
     return res.send(hotelsRes);
