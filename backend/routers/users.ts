@@ -224,7 +224,7 @@ usersRouter.delete('/sessions', async (req, res, next) => {
 usersRouter.post('/google', async (req, res, next) => {
   try {
     const ticket = await client.verifyIdToken({
-      idToken: req.body.credential.cred,
+      idToken: req.body.credential,
       audience: config.google.clientId,
     });
 
@@ -237,12 +237,12 @@ usersRouter.post('/google', async (req, res, next) => {
     const id = payload['sub'];
     const firstName = payload['given_name'];
     const lastName = payload['family_name'] ? payload['family_name'] : ' ';
-    const phoneNumber = req.body.credential.phone;
+    const phoneNumber = '000';
     if (!email) {
       return res.status(400).send({ error: 'Not enough user data to continue' });
     }
 
-    let user = await User.findOneAndUpdate({ googleId: id }, { phoneNumber: phoneNumber }, { new: true });
+    let user = await User.findOne({ googleId: id });
 
     if (!user) {
       user = new User({
