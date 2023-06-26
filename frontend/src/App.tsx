@@ -29,6 +29,7 @@ import ConfirmPage from './components/UI/VerifyPage/ConfirmPage';
 import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
 import ContractOffer from './components/UI/Footer/ContractOffer';
 import EditComments from './features/comments/components/EditComments';
+import GoogleProtectedRoute from './components/UI/ProtectedRoute/GoogleProtectedRoute';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -178,6 +179,16 @@ function App() {
             </VerifyProtectedRoute>
           }
         />
+
+        <Route
+          path="/my-cabinet"
+          element={
+            <GoogleProtectedRoute google={user && user.phoneNumber === '000' && true}>
+              <Cabinet />
+            </GoogleProtectedRoute>
+          }
+        />(
+
         <Route
           path="/comments/:id/edit-comment"
           element={
