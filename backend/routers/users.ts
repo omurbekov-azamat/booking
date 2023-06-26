@@ -269,18 +269,17 @@ usersRouter.post('/google', async (req, res, next) => {
   }
 });
 
-usersRouter.patch('/googlePhoneNumber', auth, permit('user'), async (req, res, next) => {
+usersRouter.patch('/googleNumber', auth, permit('user'), async (req, res, next) => {
   try {
-    const phoneData = req.body.phone;
+    const phoneData = req.body;
     const google = await User.findOneAndUpdate({ _id: phoneData.id }, { phoneNumber: phoneData.phoneNumber });
-
     if (!google) {
-      res.status(404).send({ message: 'Cant find hotel' });
+      res.status(404).send({ message: 'Cant find user' });
     } else {
       res.send({
         message: {
-          en: 'Hotel updated successfully',
-          ru: 'Отель успешно изменен',
+          en: 'Phone number added successfully.',
+          ru: 'Номер телефона успешно добавлен.',
         },
       });
     }

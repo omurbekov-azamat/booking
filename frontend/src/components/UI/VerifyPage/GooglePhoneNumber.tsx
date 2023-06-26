@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
 import ModalCover from '../ModalCover/ModalCover';
-import { Alert, Box, Button, Card, Container, Typography } from '@mui/material';
-import Collapse from '@mui/material/Collapse';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { Box, Button, Card, Container, Typography } from '@mui/material';
 import NoFoundPage from '../NoFoundPage/NoFoundPage';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../../features/users/usersSlice';
 import { useNavigate } from 'react-router-dom';
-import { sendMail } from '../../../features/users/usersThunks';
+import { googlePhoneNumber } from '../../../features/users/usersThunks';
 import ReactPhoneInput from 'react-phone-input-2';
 
 const GooglePhoneNumber = () => {
   const { t } = useTranslation();
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
-  const [active, setActive] = useState(false);
   const [open] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState('');
-
-  const onButtonClick = async () => {
-    await dispatch(sendMail());
-    setActive(true);
-  };
 
   const goBack = () => {
     navigate(-2);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (user) {
+      await dispatch(googlePhoneNumber({ number: phoneNumber, id: user?._id }));
+      await navigate('/my-cabinet');
+    }
   };
 
   return (
@@ -60,15 +55,6 @@ const GooglePhoneNumber = () => {
                   {t('submit')}
                 </Button>
               </form>
-              <Collapse in={active}>
-                <Alert
-                  iconMapping={{
-                    success: <CheckCircleOutlineIcon fontSize="inherit" />,
-                  }}
-                >
-                  {t('googlePhoneSuccess')}
-                </Alert>
-              </Collapse>
             </Card>
 
             <Button

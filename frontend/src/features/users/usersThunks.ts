@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   GlobalError,
   GlobalSuccess,
-  HotelMutation,
   LoginMutation,
   RegisterMutation,
   RegisterResponse,
@@ -146,6 +145,7 @@ export const googlePhoneNumber = createAsyncThunk<
     const user = getState().users.user;
 
     if (user) {
+      console.log(phone);
       const response = await axiosApi.patch('/users/googleNumber', phone);
       return response.data;
     }
