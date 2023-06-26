@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { changeStatusOrder, getForAdminHisOrders, getOrders, payBonusOnOrder } from '../ordersThunks';
+import { changeStatusOrder, deleteOrder, getForAdminHisOrders, getOrders, payBonusOnOrder } from '../ordersThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectOrderChangeStatusLoading, selectUseBonusLoading } from '../ordersSlice';
+import { selectOrderChangeStatusLoading, selectOrderDeleteLoading, selectUseBonusLoading } from '../ordersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { selectUser } from '../../users/usersSlice';
@@ -18,9 +18,9 @@ import {
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { LoadingButton } from '@mui/lab';
-import { Order } from '../../../types';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
+import { Order, User } from '../../../types';
 
 interface Props {
   prop: Order;
@@ -33,8 +33,10 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
   const currency = useAppSelector(selectCurrency);
   const payBonusLoading = useAppSelector(selectUseBonusLoading);
+  const deleteOrderLoading = useAppSelector(selectOrderDeleteLoading);
 
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [value, setValue] = useState('');
 
   const handleConfirm = async (id: string) => {
@@ -59,6 +61,13 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
 
   const inputValueChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
+  };
+
+  const handleDeleteOrder = async (id: string, admin: User | null) => {
+    if (admin) {
+      await dispatch(deleteOrder(id)).unwrap();
+      await dispatch(getForAdminHisOrders(admin._id));
+    }
   };
 
   const submitFormHandler = async (e: React.FormEvent) => {
@@ -193,6 +202,17 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             </LoadingButton>
           </Box>
         )}
+        {user && user.role === 'director' && (
+          <Button
+            onClick={() => setOpenDelete(true)}
+            size="small"
+            variant="contained"
+            color="error"
+            sx={{ background: '#CD1818' }}
+          >
+            {t('delete')}
+          </Button>
+        )}
         {user &&
           user.role === 'user' &&
           user.cashback > 0 &&
@@ -229,6 +249,20 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           <DialogActions>
             <Button onClick={() => setOpen(false)}>{t('cancel')}</Button>
             <LoadingButton onClick={() => handleConfirm(prop._id)} loading={payBonusLoading === prop._id}>
+              {t('continue')}
+            </LoadingButton>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={openDelete} onClose={() => setOpenDelete(false)}>
+          <DialogContent>
+            <Typography variant="body1">Вы уверены, что хотите удалить выбранный заказ ?</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenDelete(false)}>{t('cancel')}</Button>
+            <LoadingButton
+              onClick={() => handleDeleteOrder(prop._id, prop.adminId)}
+              loading={deleteOrderLoading === prop._id}
+            >
               {t('continue')}
             </LoadingButton>
           </DialogActions>

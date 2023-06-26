@@ -94,9 +94,6 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   return (
     <Box mt={3}>
       {loading && <Typography>loading...</Typography>}
-      <Typography variant="h5" fontWeight="bold" textAlign="center" mt={3}>
-        {t('directorCabinet')}
-      </Typography>
       {state.reportAdmins && (
         <Typography variant="h6" fontWeight="bolder" textAlign="center" sx={{ color: 'grey', textAlign: 'right' }}>
           {adminName}
