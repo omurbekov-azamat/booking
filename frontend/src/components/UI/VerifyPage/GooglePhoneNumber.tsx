@@ -24,7 +24,7 @@ const GooglePhoneNumber = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (user) {
-      await dispatch(googlePhoneNumber({ number: phoneNumber, id: user?._id }));
+      await dispatch(googlePhoneNumber(phoneNumber));
       await navigate('/my-cabinet');
     }
   };

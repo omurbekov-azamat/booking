@@ -271,22 +271,20 @@ usersRouter.post('/google', async (req, res, next) => {
 
 usersRouter.patch('/googleNumber', auth, permit('user'), async (req, res, next) => {
   try {
-    const phoneData = req.body;
-    const google = await User.findOneAndUpdate({ _id: phoneData.id }, { phoneNumber: phoneData.phoneNumber });
-    if (!google) {
-      res.status(404).send({ message: 'Cant find user' });
-    } else {
-      res.send({
+    const { newPhone } = req.body;
+    const user = (req as RequestWithUser).user;
+    user.phoneNumber = newPhone;
+    await user.save();
+    return res.send({
+      message: {
         message: {
           en: 'Phone number added successfully.',
           ru: 'Номер телефона успешно добавлен.',
         },
-      });
-    }
+      },
+      user,
+    });
   } catch (e) {
-    if (e instanceof mongoose.Error.ValidationError) {
-      return res.status(400).send(e);
-    }
     return next(e);
   }
 });

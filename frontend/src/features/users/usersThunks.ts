@@ -11,7 +11,6 @@ import {
 import { isAxiosError } from 'axios';
 import { unsetUser } from './usersSlice';
 import axiosApi from '../../axiosApi';
-import { RootState } from '../../app/store';
 
 export const register = createAsyncThunk<User, RegisterMutation, { rejectValue: ValidationError }>(
   'users/register',
@@ -132,30 +131,21 @@ export const googleLogin = createAsyncThunk<User, string, { rejectValue: GlobalE
 );
 
 interface googleUpdateNumber {
-  number: string;
-  id: string;
+  message: GlobalSuccess;
+  user: User;
 }
 
-export const googlePhoneNumber = createAsyncThunk<
-  GlobalSuccess,
-  googleUpdateNumber,
-  { state: RootState; rejectValue: ValidationError }
->('users/googlePhoneNumber', async (phone, { getState, rejectWithValue }) => {
-  try {
-    const user = getState().users.user;
-
-    if (user) {
-      console.log(phone);
-      const response = await axiosApi.patch('/users/googleNumber', phone);
+export const googlePhoneNumber = createAsyncThunk<googleUpdateNumber, string>(
+  'users/googlePhoneNumber',
+  async (phone) => {
+    try {
+      const response = await axiosApi.patch('/users/googleNumber', { newPhone: phone });
       return response.data;
+    } catch {
+      throw new Error();
     }
-  } catch (e) {
-    if (isAxiosError(e) && e.response && e.response.status === 400) {
-      return rejectWithValue(e.response.data as ValidationError);
-    }
-    throw e;
-  }
-});
+  },
+);
 
 export const sendMail = createAsyncThunk<GlobalSuccess>('users/getVerify', async () => {
   try {
