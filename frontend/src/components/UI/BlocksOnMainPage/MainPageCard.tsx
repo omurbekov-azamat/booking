@@ -26,7 +26,7 @@ const MainPageCard: React.FC<Props> = ({ item, city, type }) => {
         sx={{
           '&:hover': {
             '& div': {
-              background: 'rgba(184, 233, 134, 0.8)',
+              background: 'rgba(3,201,136, 0.85)',
             },
           },
         }}
