@@ -69,7 +69,7 @@ roomTypesRouter.delete('/:id', auth, permit('admin'), async (req, res, next) => 
       return res.send({
         message: {
           en: 'Room type deleted successfully',
-          ru: 'тип комнаты успешно удален',
+          ru: 'Тип комнаты успешно удален',
         },
       });
     }
