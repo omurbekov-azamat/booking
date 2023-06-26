@@ -34,6 +34,15 @@ roomTypesRouter.get('/', async (req, res, next) => {
   }
 });
 
+roomTypesRouter.get('/:id', auth, permit('admin'), async (req, res, next) => {
+  try {
+    const room = await RoomType.findById(req.params.id);
+    return res.send(room);
+  } catch (e) {
+    return next(e);
+  }
+});
+
 roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
   try {
     const room: HydratedDocument<IRoomType> | null = await RoomType.findById(req.params.id);
