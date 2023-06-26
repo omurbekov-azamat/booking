@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getByRole } from '../users/usersThunks';
 import { selectGetUsersByRoleLoading, selectUsersByRole, unsetCabinetUsers } from '../users/usersSlice';
@@ -21,7 +21,7 @@ import HotelsStatus from './components/HotelsStatus';
 import { unsetCabinetHotels } from '../hotels/hotelsSlice';
 import OrderItems from '../orders/components/OrderItems';
 import GroupIcon from '@mui/icons-material/Group';
-import { CabinetState } from '../../types';
+import { CabinetState, User } from '../../types';
 import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
@@ -52,6 +52,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
+  const [adminName, setAdminName] = useState('');
 
   useEffect(() => {
     if (state.reportAdmins) {
@@ -65,8 +66,9 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
     }
   }, [dispatch, state.reportAdmins, state.simpleUsers, state.admins, state.serviceProviders]);
 
-  const handleClickAdminName = (id: string) => {
-    dispatch(getForAdminHisOrders(id));
+  const handleClickAdminName = (user: User) => {
+    setAdminName(user.firstName + ' ' + user.lastName);
+    dispatch(getForAdminHisOrders(user._id));
   };
 
   const options = [
@@ -79,7 +81,11 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   ];
 
   const handleClickOption = (option: string, index: number) => {
-    setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
+    setState((prev) => ({
+      ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])),
+      [option]: !state[option],
+    }));
+    setAdminName('');
     setSelectedIndex(index);
     dispatch(unsetCabinetUsers());
     dispatch(unsetCabinetHotels());
@@ -91,6 +97,12 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
       <Typography variant="h5" fontWeight="bold" textAlign="center" mt={3}>
         {t('directorCabinet')}
       </Typography>
+      {state.reportAdmins && (
+        <Typography variant="h6" fontWeight="bolder" textAlign="center" sx={{ color: 'grey', textAlign: 'right' }}>
+          {adminName}
+        </Typography>
+      )}
+
       <Card sx={{ minHeight: '600px' }}>
         <CardContent>
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
@@ -133,9 +145,8 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                       <ListItemButton
                         sx={{
                           pl: 4,
-                          backgroundColor: selectedIndex === options.length ? '#03C988' : 'transparent',
                         }}
-                        onClick={() => handleClickAdminName(user._id)}
+                        onClick={() => handleClickAdminName(user)}
                       >
                         <ListItemIcon>
                           <PersonIcon />
