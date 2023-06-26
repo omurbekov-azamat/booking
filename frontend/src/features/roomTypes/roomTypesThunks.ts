@@ -42,3 +42,15 @@ export const deleteRoomType = createAsyncThunk<GlobalSuccess, string>(
     }
   },
 );
+
+export const fetchOneRoomType = createAsyncThunk<IRoomType, string>(
+  'roomTypes/fetchOneRoomType',
+  async (id: string) => {
+    try {
+      const response = await axiosApi.get<IRoomType>('/roomTypes/' + id);
+      return response.data;
+    } catch {
+      throw new Error();
+    }
+  },
+);

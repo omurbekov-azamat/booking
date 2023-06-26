@@ -1,4 +1,4 @@
-import { createNewRoomType, deleteRoomType, fetchRoomTypes } from './roomTypesThunks';
+import { createNewRoomType, deleteRoomType, fetchOneRoomType, fetchRoomTypes } from './roomTypesThunks';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { GlobalSuccess, IRoomType, ValidationError } from '../../types';
@@ -10,6 +10,8 @@ interface RoomTypesState {
   roomTypes: IRoomType[];
   deleteRoomTypeLoading: string | false;
   roomTypeSuccess: GlobalSuccess | null;
+  fetchOneRoomTypeLoading: boolean;
+  oneRoomType: IRoomType | null;
 }
 
 const initialState: RoomTypesState = {
@@ -19,6 +21,8 @@ const initialState: RoomTypesState = {
   roomTypes: [],
   deleteRoomTypeLoading: false,
   roomTypeSuccess: null,
+  fetchOneRoomTypeLoading: false,
+  oneRoomType: null,
 };
 
 export const roomTypesSlice = createSlice({
@@ -62,6 +66,16 @@ export const roomTypesSlice = createSlice({
     builder.addCase(deleteRoomType.rejected, (state) => {
       state.deleteRoomTypeLoading = false;
     });
+    builder.addCase(fetchOneRoomType.pending, (state) => {
+      state.fetchOneRoomTypeLoading = true;
+    });
+    builder.addCase(fetchOneRoomType.fulfilled, (state, { payload: room }) => {
+      state.fetchOneRoomTypeLoading = false;
+      state.oneRoomType = room;
+    });
+    builder.addCase(fetchOneRoomType.rejected, (state) => {
+      state.fetchOneRoomTypeLoading = false;
+    });
   },
 });
 
@@ -74,3 +88,5 @@ export const selectLoadingFetchAllRoomTypes = (state: RootState) => state.roomTy
 export const selectRoomTypes = (state: RootState) => state.roomTypes.roomTypes;
 export const selectDeleteRoomTypeLoading = (state: RootState) => state.roomTypes.deleteRoomTypeLoading;
 export const selectRoomTypeSuccess = (state: RootState) => state.roomTypes.roomTypeSuccess;
+export const selectFetchOneRoomTypeLoading = (state: RootState) => state.roomTypes.fetchOneRoomTypeLoading;
+export const selectOneRoomType = (state: RootState) => state.roomTypes.oneRoomType;
