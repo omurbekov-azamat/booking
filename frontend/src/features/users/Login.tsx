@@ -45,20 +45,22 @@ const Login = () => {
   };
 
   const googleLoginHandler = async (credentials: string) => {
-    await setPhoneNumber('');
-    await setIsDialogOpen(true);
-    await setCredentials(credentials);
+    // await setPhoneNumber('');
+    // await setIsDialogOpen(true);
+    // await setCredentials(credentials);
+    await dispatch(googleLogin(credentials)).unwrap();
+    await navigate('/');
   };
 
   const closeDialogHandler = () => {
     setIsDialogOpen(false);
   };
 
-  const submitDialogHandler = async (phone: string, cred: string) => {
-    await dispatch(googleLogin({ phone, cred })).unwrap();
-    setIsDialogOpen(false);
-    await navigate('/');
-  };
+  // const submitDialogHandler = async (phone: string, cred: string) => {
+  //   await dispatch(googleLogin({ phone, cred })).unwrap();
+  //   setIsDialogOpen(false);
+  //   await navigate('/');
+  // };
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -143,32 +145,32 @@ const Login = () => {
           </Grid>
         </Box>
 
-        <Dialog open={isDialogOpen} onClose={closeDialogHandler}>
-          <DialogTitle>{t('enterPhoneNumber')}</DialogTitle>
-          <DialogContent sx={{ p: 8 }}>
-            <ReactPhoneInput
-              inputProps={{
-                name: 'phoneNumber',
-                required: true,
-                autoFocus: true,
-              }}
-              country={'kg'}
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={closeDialogHandler}>{t('cancel')}</Button>
-            <Button
-              disabled={phoneNumber.length < 8}
-              onClick={() => submitDialogHandler(phoneNumber, credentials)}
-              color="primary"
-              variant="contained"
-            >
-              {t('submit')}
-            </Button>
-          </DialogActions>
-        </Dialog>
+        {/*<Dialog open={isDialogOpen} onClose={closeDialogHandler}>*/}
+        {/*  <DialogTitle>{t('enterPhoneNumber')}</DialogTitle>*/}
+        {/*  <DialogContent sx={{ p: 8 }}>*/}
+        {/*    <ReactPhoneInput*/}
+        {/*      inputProps={{*/}
+        {/*        name: 'phoneNumber',*/}
+        {/*        required: true,*/}
+        {/*        autoFocus: true,*/}
+        {/*      }}*/}
+        {/*      country={'kg'}*/}
+        {/*      value={phoneNumber}*/}
+        {/*      onChange={setPhoneNumber}*/}
+        {/*    />*/}
+        {/*  </DialogContent>*/}
+        {/*  <DialogActions>*/}
+        {/*    <Button onClick={closeDialogHandler}>{t('cancel')}</Button>*/}
+        {/*    <Button*/}
+        {/*      disabled={phoneNumber.length < 8}*/}
+        {/*      onClick={() => submitDialogHandler(phoneNumber, credentials)}*/}
+        {/*      color="primary"*/}
+        {/*      variant="contained"*/}
+        {/*    >*/}
+        {/*      {t('submit')}*/}
+        {/*    </Button>*/}
+        {/*  </DialogActions>*/}
+        {/*</Dialog>*/}
       </Box>
     </Container>
   );
