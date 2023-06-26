@@ -6,13 +6,13 @@ export const mainBlocksBorderStyles = {
 };
 
 export const ToolBarStyles = {
-  background: '#03C988',
+  background: 'radial-gradient(ellipse at bottom, #FFF 0%,#03C988 70% , #FFF 100%)',
   top: 0,
   py: 2,
 };
 
 export const FooterStyle = {
-  background: '#03C988',
+  background: 'radial-gradient(ellipse at top, #FFF 0%,#03C988 35% , #03C988 80%, #FFF 100%)',
   marginBottom: -4,
 };
 
