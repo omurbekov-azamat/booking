@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { changeStatusOrder, deleteOrder, getForAdminHisOrders, getOrders, payBonusOnOrder } from '../ordersThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectOrderChangeStatusLoading, selectUseBonusLoading } from '../ordersSlice';
+import { selectOrderChangeStatusLoading, selectOrderDeleteLoading, selectUseBonusLoading } from '../ordersSlice';
 import { selectCurrency } from '../../currency/currencySlice';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { selectUser } from '../../users/usersSlice';
@@ -33,6 +33,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const buttonLoading = useAppSelector(selectOrderChangeStatusLoading);
   const currency = useAppSelector(selectCurrency);
   const payBonusLoading = useAppSelector(selectUseBonusLoading);
+  const deleteOrderLoading = useAppSelector(selectOrderDeleteLoading);
 
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -258,7 +259,12 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenDelete(false)}>{t('cancel')}</Button>
-            <LoadingButton onClick={() => handleDeleteOrder(prop._id, prop.adminId)}>{t('continue')}</LoadingButton>
+            <LoadingButton
+              onClick={() => handleDeleteOrder(prop._id, prop.adminId)}
+              loading={deleteOrderLoading === prop._id}
+            >
+              {t('continue')}
+            </LoadingButton>
           </DialogActions>
         </Dialog>
       </AccordionDetails>
