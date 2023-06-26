@@ -38,6 +38,9 @@ const UsersStatus = () => {
   };
   return (
     <div>
+      <Typography variant={'h6'} fontWeight={'bolder'}>
+        {t('changeUserStatus')}
+      </Typography>
       <Paper
         component="form"
         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, marginTop: '15px' }}
