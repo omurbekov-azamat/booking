@@ -41,7 +41,7 @@ const GooglePhoneNumber = () => {
           <ModalCover state={open}>
             <Card sx={{ p: 2, mb: 2 }}>
               <Typography sx={{ display: 'inline-block', mb: 2 }} variant="body1" textAlign="center">
-                текст
+                {t('googlePhoneText')}
               </Typography>
               <form onSubmit={handleSubmit}>
                 <Box>
@@ -66,7 +66,7 @@ const GooglePhoneNumber = () => {
                     success: <CheckCircleOutlineIcon fontSize="inherit" />,
                   }}
                 >
-                  {t('sendSuccess')}
+                  {t('googlePhoneSuccess')}
                 </Alert>
               </Collapse>
             </Card>

@@ -190,5 +190,7 @@
   "confirm": "Confirm",
   "hotelStatusInfo": "Enter the name of the hotel and change the status",
   "deleteHotelInfo": "Enter the name of the hotel and delete",
-  "changeUserStatus": "Enter the user's name or email and change status"
+  "changeUserStatus": "Enter the user's name or email and change status",
+  "googlePhoneText": "To enter your personal account, you need to enter a phone number.",
+  "googlePhoneSuccess" : "Phone number added successfully."
 }
