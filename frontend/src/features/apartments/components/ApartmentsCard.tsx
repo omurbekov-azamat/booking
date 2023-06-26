@@ -11,9 +11,9 @@ import { apiURL, placeHolderImg } from '../../../constants';
 import { LoadingButton } from '@mui/lab';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import DeleteIcon from '@mui/icons-material/Delete';
-import type { IApartment } from '../../../types';
 import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
+import type { IApartment } from '../../../types';
 
 interface Props {
   apartment: IApartment;
@@ -35,7 +35,7 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons, onDeleteBtn
       <Card sx={{ maxWidth: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardActionArea onClick={() => navigate('/my-cabinet/apartments/' + apartment._id)}>
           <LazyLoadImage
-            alt={i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
+            alt={apartment.hotelId.name}
             effect="blur"
             width="100%"
             height="auto"
@@ -46,9 +46,11 @@ const ApartmentsCard: React.FC<Props> = ({ apartment, isNeedButtons, onDeleteBtn
             <Typography gutterBottom variant="h5" align="center" color={'grey'}>
               {apartment.hotelId.name}
             </Typography>
-            <Typography gutterBottom variant="h5" align="center" textTransform="capitalize">
-              {i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
-            </Typography>
+            {apartment.roomTypeId && (
+              <Typography gutterBottom variant="h5" align="center" textTransform="capitalize">
+                {i18n.language === 'en' ? apartment.roomTypeId.name.en : apartment.roomTypeId.name.ru}
+              </Typography>
+            )}
             <Typography sx={{ color: 'grey', textAlign: 'center' }}>
               {t('price') + ': ' + (currency === 'kgs' ? apartment?.price.kgs + ' KGS' : apartment?.price.usd + ' USD')}
             </Typography>

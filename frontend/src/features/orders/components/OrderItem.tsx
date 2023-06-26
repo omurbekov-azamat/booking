@@ -138,7 +138,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           <Typography color={'error'}>{t('hotelNotFound')}</Typography>
         )}
 
-        {prop.apartmentId ? (
+        {prop.apartmentId && prop.apartmentId.roomTypeId ? (
           <Typography textTransform="capitalize">
             {i18n.language === 'en' ? prop.apartmentId.roomTypeId.name.en : prop.apartmentId.roomTypeId.name.ru}
           </Typography>

@@ -64,8 +64,11 @@ const ApartmentsTable: React.FC<Props> = ({ hotel }) => {
             <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row" sx={{ textTransform: 'capitalize' }}>
                 <Link to={'/' + hotel.name + '/' + hotel._id + '/apartment/' + data._id}>
-                  {' '}
-                  {i18n.language === 'en' ? data.roomTypeId.name.en : data.roomTypeId.name.ru}
+                  {data.roomTypeId
+                    ? i18n.language === 'en'
+                      ? data.roomTypeId.name.en
+                      : data.roomTypeId.name.ru
+                    : 'Unknown'}
                 </Link>
                 {(user?.role === 'admin' || user?._id === hotel.userId) && (
                   <IconButton
