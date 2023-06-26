@@ -159,9 +159,15 @@ function App() {
         <Route
           path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
           element={
-            <VerifyProtectedRoute isVerify={user && user.isVerified}>
-              <ReservationForm />
-            </VerifyProtectedRoute>
+            user?.phoneNumber === '000' ? (
+              <GoogleProtectedRoute google={user && user.phoneNumber !== '000'}>
+                <Cabinet />
+              </GoogleProtectedRoute>
+            ) : (
+              <VerifyProtectedRoute isVerify={user && user.isVerified}>
+                <ReservationForm />
+              </VerifyProtectedRoute>
+            )
           }
         />
         <Route
