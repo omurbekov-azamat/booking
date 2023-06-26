@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import { LoadingButton } from '@mui/lab';
 import { someStyle } from '../../../styles';
 import { IRoomType } from '../../../types';
+import { useNavigate } from 'react-router-dom';
 
 export interface Props {
   item: IRoomType;
@@ -16,6 +17,7 @@ export interface Props {
 
 const RoomTypeItem: React.FC<Props> = ({ item }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const loading = useAppSelector(selectDeleteRoomTypeLoading);
   const { t, i18n } = useTranslation();
 
@@ -24,6 +26,10 @@ const RoomTypeItem: React.FC<Props> = ({ item }) => {
   const onHandleDeleteRoomType = async (id: string) => {
     await dispatch(deleteRoomType(id)).unwrap();
     await setOpen(false);
+  };
+
+  const onHandleEditRoomType = (id: string) => {
+    navigate(`/my-cabinet/edit-roomType/${id}`);
   };
 
   return (
@@ -40,7 +46,12 @@ const RoomTypeItem: React.FC<Props> = ({ item }) => {
         {i18n.language === 'en' ? item.name.en : item.name.ru}
       </Typography>
       <Box display="flex" gap={2}>
-        <Button sx={{ background: '#05BFDB' }} size="small" variant="contained">
+        <Button
+          sx={{ background: '#05BFDB' }}
+          size="small"
+          variant="contained"
+          onClick={() => onHandleEditRoomType(item._id)}
+        >
           {t('edit')}
         </Button>
         <Button

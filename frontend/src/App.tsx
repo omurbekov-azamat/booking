@@ -30,6 +30,7 @@ import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
 import ContractOffer from './components/UI/Footer/ContractOffer';
 import EditComments from './features/comments/components/EditComments';
 import { selectRoomTypeSuccess, setRoomTypeSuccessNull } from './features/roomTypes/roomTypesSlice';
+import FormRoomTypes from './features/roomTypes/components/FormRoomTypes';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -223,6 +224,14 @@ function App() {
           element={
             <ProtectedRoute isAllowed={user && Boolean(user)}>
               <ConfirmPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-cabinet/edit-roomType/:id"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <FormRoomTypes isEdit={true} />
             </ProtectedRoute>
           }
         />

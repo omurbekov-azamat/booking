@@ -8,7 +8,11 @@ import { LoadingButton } from '@mui/lab';
 import { someStyle } from '../../../styles';
 import { RoomTypesMutation } from '../../../types';
 
-const FormRoomTypes = () => {
+interface Props {
+  isEdit?: boolean;
+}
+
+const FormRoomTypes: React.FC<Props> = ({ isEdit }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const loadingCreateRoomType = useAppSelector(selectLoadingCreateRoomType);
@@ -55,7 +59,7 @@ const FormRoomTypes = () => {
           <Grid container spacing={5} direction="column" textAlign="center">
             <Grid item xs={12}>
               <Typography variant="h6" textTransform="uppercase">
-                {t('createRoomType')}
+                {isEdit ? 'Изменить тип комнаты' : t('createRoomType')}
               </Typography>
             </Grid>
             <Grid item xs={12} md={3}>
@@ -89,7 +93,7 @@ const FormRoomTypes = () => {
                 variant="contained"
                 size="small"
               >
-                {t('create')}
+                {isEdit ? 'Изменить' : t('create')}
               </LoadingButton>
             </Grid>
           </Grid>
