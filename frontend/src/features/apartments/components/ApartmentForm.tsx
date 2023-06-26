@@ -98,7 +98,7 @@ const ApartmentForm: React.FC<Props> = ({ isEdit }) => {
     if (isEdit && oneApartment) {
       setState((prevState) => ({
         ...prevState,
-        roomTypeId: oneApartment.roomTypeId._id,
+        roomTypeId: oneApartment.roomTypeId ? oneApartment.roomTypeId._id : '',
         hotelId: id,
         description: oneApartment.description,
         price: oneApartment.price,

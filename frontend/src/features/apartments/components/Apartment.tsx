@@ -47,9 +47,13 @@ const Apartment = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6} order={{ xs: 2, md: 1 }}>
           <Grid container gap={3} flexDirection="column">
-            <Typography variant="h5" textTransform="capitalize" fontWeight="bold">
-              {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
-            </Typography>
+            {apartment?.roomTypeId ? (
+              <Typography variant="h5" textTransform="capitalize" fontWeight="bold">
+                {i18n.language === 'en' ? apartment?.roomTypeId.name.en : apartment?.roomTypeId.name.ru}
+              </Typography>
+            ) : (
+              ''
+            )}
             <Grid container direction="row" spacing={1} maxWidth={500}>
               {apartment?.AC && <CurveIcon icon={<AcUnitIcon />} text="AC" />}
               {apartment?.balcony && <CurveIcon icon={<BalconyIcon />} text="balcony" />}
@@ -83,7 +87,7 @@ const Apartment = () => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6} alignSelf="center" order={{ xs: 1, md: 2 }}>
-          {apartment && <ApartmentsGallery apartmentData={apartment} />}
+          {apartment?.roomTypeId && <ApartmentsGallery apartmentData={apartment} />}
         </Grid>
       </Grid>
     </>

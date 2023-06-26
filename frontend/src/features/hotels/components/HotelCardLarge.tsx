@@ -131,7 +131,9 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
 
   return (
     <>
-      <Box
+      <Grid
+        alignItems="center"
+        container
         sx={{
           border: 2,
           borderRadius: 5,
@@ -140,19 +142,18 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
           overflow: 'hidden',
         }}
       >
-        <Grid container gap={2}>
-          <Grid item style={{ maxWidth: '200px', maxHeight: '200px' }}>
+        <Grid item container justifyContent="space-between" gap={1}>
+          <Grid xs={12} sm={3} item style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <LazyLoadImage
               alt={hotel.name}
               width="100%"
-              height="auto"
+              height="150px"
               effect="blur"
               src={cardImage}
               placeholderSrc="https://unsplash.it/200/100?image=44"
             ></LazyLoadImage>
           </Grid>
-
-          <Grid item flex={1} onClick={() => onClickCard(hotel._id)} sx={{ cursor: 'pointer' }}>
+          <Grid xs={12} sm={6} item flex={1} onClick={() => onClickCard(hotel._id)} sx={{ cursor: 'pointer' }}>
             <Grid container flexDirection="row" justifyContent="space-between">
               <Grid container gap={1} alignItems="center">
                 <Grid item>
@@ -183,7 +184,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid xs={12} sm={2} md={1} item>
             <Grid container flexDirection="column" alignItems="center">
               <Grid item style={{ width: 35, height: 35, padding: 0 }}>
                 <img src={statusIcon} alt={status} style={{ width: '100%', height: 'auto' }} />
@@ -204,44 +205,46 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
             </Grid>
           </Grid>
         </Grid>
-        <Box>
-          <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
-            {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
-              <LoadingButton
-                disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
-                variant="contained"
-                size="medium"
-                onClick={() => navigate('/my-cabinet/edit-hotel/' + hotel._id)}
-              >
-                {t('edit')}
-              </LoadingButton>
-            )}
-            {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
-              <LoadingButton
-                disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
-                loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
-                variant="outlined"
-                startIcon={<DeleteIcon />}
-                onClick={onDeleteBtnClick}
-              >
-                {t('delete')}
-              </LoadingButton>
-            )}
-            {isNeedButtons && (user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
-              <LoadingButton
-                disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
-                loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
-                variant="outlined"
-                color="error"
-                sx={{ fontSize: 11 }}
-                onClick={onPublishBtnClick}
-              >
-                {t('publish')}
-              </LoadingButton>
-            )}
-          </Stack>
-        </Box>
-      </Box>
+        {isNeedButtons && (user?.role === 'admin' || user?.role === 'director') && (
+          <Box>
+            <Stack direction="row" spacing={2} justifyContent="space-around" m={1}>
+              {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+                <LoadingButton
+                  disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+                  variant="contained"
+                  size="medium"
+                  onClick={() => navigate('/my-cabinet/edit-hotel/' + hotel._id)}
+                >
+                  {t('edit')}
+                </LoadingButton>
+              )}
+              {isNeedButtons && (user?.role === 'admin' || user?.role === 'director' || user?._id === hotel.userId) && (
+                <LoadingButton
+                  disabled={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
+                  loading={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+                  variant="outlined"
+                  startIcon={<DeleteIcon />}
+                  onClick={onDeleteBtnClick}
+                >
+                  {t('delete')}
+                </LoadingButton>
+              )}
+              {isNeedButtons && (user?.role === 'admin' || user?.role === 'director') && !hotel.isPublished && (
+                <LoadingButton
+                  disabled={loadingDeleteHotel ? loadingDeleteHotel === hotel._id : false}
+                  loading={loadingPublishHotel ? loadingPublishHotel === hotel._id : false}
+                  variant="outlined"
+                  color="error"
+                  sx={{ fontSize: 11 }}
+                  onClick={onPublishBtnClick}
+                >
+                  {t('publish')}
+                </LoadingButton>
+              )}
+            </Stack>
+          </Box>
+        )}
+      </Grid>
     </>
   );
 };

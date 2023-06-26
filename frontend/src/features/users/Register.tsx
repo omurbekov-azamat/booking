@@ -62,7 +62,7 @@ const Register = () => {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: '#03C988' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -128,7 +128,14 @@ const Register = () => {
               />
             </Grid>
           </Grid>
-          <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <LoadingButton
+            color="success"
+            type="submit"
+            loading={loading}
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, background: '#0E8388' }}
+          >
             {t('signUp')}
           </LoadingButton>
           <Grid container justifyContent="flex-end">
