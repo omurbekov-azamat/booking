@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { createNewRoomType, fetchOneRoomType } from '../roomTypesThunks';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createNewRoomType, editRoomType, fetchOneRoomType } from '../roomTypesThunks';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import {
+  selectEditRoomTypeLoading,
   selectErrorCreateRoomType,
   selectFetchOneRoomTypeLoading,
   selectLoadingCreateRoomType,
@@ -21,9 +22,11 @@ interface Props {
 
 const FormRoomTypes: React.FC<Props> = ({ isEdit }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams() as { id: string };
   const { t } = useTranslation();
   const loadingCreateRoomType = useAppSelector(selectLoadingCreateRoomType);
+  const loadingEditRoomType = useAppSelector(selectEditRoomTypeLoading);
   const errorCreateRoomType = useAppSelector(selectErrorCreateRoomType);
   const oneRoomType = useAppSelector(selectOneRoomType);
   const oneRoomTypeLoading = useAppSelector(selectFetchOneRoomTypeLoading);
@@ -41,7 +44,8 @@ const FormRoomTypes: React.FC<Props> = ({ isEdit }) => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit) {
-      console.log(state);
+      await dispatch(editRoomType({ roomType: state, id })).unwrap();
+      await navigate('/my-cabinet');
     } else {
       await dispatch(createNewRoomType(state)).unwrap();
       setState((prev) => {
@@ -111,7 +115,7 @@ const FormRoomTypes: React.FC<Props> = ({ isEdit }) => {
               <Grid item>
                 <LoadingButton
                   sx={{ background: '#0E8388' }}
-                  loading={loadingCreateRoomType}
+                  loading={loadingCreateRoomType || loadingEditRoomType}
                   type="submit"
                   color="success"
                   variant="contained"

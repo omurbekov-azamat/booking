@@ -51,13 +51,14 @@ roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
       return res.sendStatus(404);
     }
 
-    room.name = req.body.name;
+    room.name.en = req.body.en;
+    room.name.ru = req.body.ru;
 
     await room.save();
     return res.send({
       message: {
         en: 'Room type updated successfully',
-        ru: 'тип комнаты успешно обновлен',
+        ru: 'Тип комнаты успешно обновлен',
       },
     });
   } catch (e) {

@@ -1,4 +1,4 @@
-import { createNewRoomType, deleteRoomType, fetchOneRoomType, fetchRoomTypes } from './roomTypesThunks';
+import { createNewRoomType, deleteRoomType, editRoomType, fetchOneRoomType, fetchRoomTypes } from './roomTypesThunks';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { GlobalSuccess, IRoomType, ValidationError } from '../../types';
@@ -12,6 +12,7 @@ interface RoomTypesState {
   roomTypeSuccess: GlobalSuccess | null;
   fetchOneRoomTypeLoading: boolean;
   oneRoomType: IRoomType | null;
+  editRoomTypeLoading: boolean;
 }
 
 const initialState: RoomTypesState = {
@@ -23,6 +24,7 @@ const initialState: RoomTypesState = {
   roomTypeSuccess: null,
   fetchOneRoomTypeLoading: false,
   oneRoomType: null,
+  editRoomTypeLoading: false,
 };
 
 export const roomTypesSlice = createSlice({
@@ -76,6 +78,16 @@ export const roomTypesSlice = createSlice({
     builder.addCase(fetchOneRoomType.rejected, (state) => {
       state.fetchOneRoomTypeLoading = false;
     });
+    builder.addCase(editRoomType.pending, (state) => {
+      state.editRoomTypeLoading = true;
+    });
+    builder.addCase(editRoomType.fulfilled, (state, { payload: success }) => {
+      state.editRoomTypeLoading = false;
+      state.roomTypeSuccess = success;
+    });
+    builder.addCase(editRoomType.rejected, (state) => {
+      state.editRoomTypeLoading = false;
+    });
   },
 });
 
@@ -90,3 +102,4 @@ export const selectDeleteRoomTypeLoading = (state: RootState) => state.roomTypes
 export const selectRoomTypeSuccess = (state: RootState) => state.roomTypes.roomTypeSuccess;
 export const selectFetchOneRoomTypeLoading = (state: RootState) => state.roomTypes.fetchOneRoomTypeLoading;
 export const selectOneRoomType = (state: RootState) => state.roomTypes.oneRoomType;
+export const selectEditRoomTypeLoading = (state: RootState) => state.roomTypes.editRoomTypeLoading;
