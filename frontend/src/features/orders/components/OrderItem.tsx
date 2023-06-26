@@ -193,6 +193,11 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             </LoadingButton>
           </Box>
         )}
+        {user && user.role === 'director' && (
+          <LoadingButton size="small" variant="contained" color="error" sx={{ background: '#CD1818' }}>
+            {t('delete')}
+          </LoadingButton>
+        )}
         {user &&
           user.role === 'user' &&
           user.cashback > 0 &&
