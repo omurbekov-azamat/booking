@@ -245,3 +245,8 @@ export interface BlockOnMainPage {
   link: string;
   lang: string;
 }
+
+export interface UpdateRoomType {
+  id: string;
+  roomType: RoomTypesMutation;
+}

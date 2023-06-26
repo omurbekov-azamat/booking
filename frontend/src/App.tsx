@@ -29,6 +29,8 @@ import ConfirmPage from './components/UI/VerifyPage/ConfirmPage';
 import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
 import ContractOffer from './components/UI/Footer/ContractOffer';
 import EditComments from './features/comments/components/EditComments';
+import { selectRoomTypeSuccess, setRoomTypeSuccessNull } from './features/roomTypes/roomTypesSlice';
+import FormRoomTypes from './features/roomTypes/components/FormRoomTypes';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -37,6 +39,7 @@ function App() {
   const hotelsSuccess = useAppSelector(selectHotelsSuccess);
   const commentsSuccess = useAppSelector(selectCommentsSuccess);
   const apartmentsSuccess = useAppSelector(selectApartmentSuccess);
+  const roomTypeSuccess = useAppSelector(selectRoomTypeSuccess);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const { i18n } = useTranslation();
@@ -114,15 +117,35 @@ function App() {
       if (i18n.language === 'en') {
         enqueueSnackbar(orderSuccess.message.en, {
           variant: 'success',
+          preventDuplicate: true,
         });
       } else {
         enqueueSnackbar(orderSuccess.message.ru, {
           variant: 'success',
+          preventDuplicate: true,
         });
       }
       dispatch(setOrderSuccessNull());
     }
   }, [orderSuccess, i18n.language, dispatch, enqueueSnackbar]);
+
+  useEffect(() => {
+    if (roomTypeSuccess) {
+      if (i18n.language === 'en') {
+        enqueueSnackbar(roomTypeSuccess.message.en, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      } else {
+        enqueueSnackbar(roomTypeSuccess.message.ru, {
+          variant: 'success',
+          preventDuplicate: true,
+        });
+      }
+      dispatch(setRoomTypeSuccessNull());
+    }
+  }, [roomTypeSuccess, i18n.language, dispatch, enqueueSnackbar]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />}>
@@ -201,6 +224,14 @@ function App() {
           element={
             <ProtectedRoute isAllowed={user && Boolean(user)}>
               <ConfirmPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-cabinet/edit-roomType/:id"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <FormRoomTypes isEdit={true} />
             </ProtectedRoute>
           }
         />
