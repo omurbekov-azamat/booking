@@ -30,6 +30,7 @@ import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
 import ContractOffer from './components/UI/Footer/ContractOffer';
 import EditComments from './features/comments/components/EditComments';
 import GoogleProtectedRoute from './components/UI/ProtectedRoute/GoogleProtectedRoute';
+import GooglePhoneNumber from './components/UI/VerifyPage/GooglePhoneNumber';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -174,21 +175,25 @@ function App() {
         <Route
           path="/my-cabinet"
           element={
-            <VerifyProtectedRoute isVerify={user && user.isVerified}>
-              <Cabinet />
-            </VerifyProtectedRoute>
+            user?.phoneNumber === '000' ? (
+              <GoogleProtectedRoute google={user && user.phoneNumber !== '000'}>
+                <Cabinet />
+              </GoogleProtectedRoute>
+            ) : (
+              <VerifyProtectedRoute isVerify={user && user.isVerified}>
+                <Cabinet />
+              </VerifyProtectedRoute>
+            )
           }
         />
-
         <Route
-          path="/my-cabinet"
+          path="/google"
           element={
-            <GoogleProtectedRoute google={user && user.phoneNumber === '000' && true}>
-              <Cabinet />
-            </GoogleProtectedRoute>
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <GooglePhoneNumber />
+            </ProtectedRoute>
           }
-        />(
-
+        />
         <Route
           path="/comments/:id/edit-comment"
           element={
