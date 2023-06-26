@@ -51,7 +51,7 @@ const GooglePhoneNumber = () => {
                     onChange={setPhoneNumber}
                   />
                 </Box>
-                <Button variant="contained" type="submit" sx={{ mt: 3 }}>
+                <Button variant="contained" type="submit" sx={{ mt: 3 }} disabled={phoneNumber.length < 8}>
                   {t('submit')}
                 </Button>
               </form>
