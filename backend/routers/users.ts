@@ -269,6 +269,29 @@ usersRouter.post('/google', async (req, res, next) => {
   }
 });
 
+usersRouter.patch('/googlePhoneNumber', auth, permit('user'), async (req, res, next) => {
+  try {
+    const phoneData = req.body.phone;
+    const google = await User.findOneAndUpdate({ _id: phoneData.id }, { phoneNumber: phoneData.phoneNumber });
+
+    if (!google) {
+      res.status(404).send({ message: 'Cant find hotel' });
+    } else {
+      res.send({
+        message: {
+          en: 'Hotel updated successfully',
+          ru: 'Отель успешно изменен',
+        },
+      });
+    }
+  } catch (e) {
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(e);
+    }
+    return next(e);
+  }
+});
+
 usersRouter.post('/getVerify', auth, async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
