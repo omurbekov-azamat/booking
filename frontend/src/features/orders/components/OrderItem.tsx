@@ -35,6 +35,7 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
   const payBonusLoading = useAppSelector(selectUseBonusLoading);
 
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [value, setValue] = useState('');
 
   const handleConfirm = async (id: string) => {
@@ -194,9 +195,15 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
           </Box>
         )}
         {user && user.role === 'director' && (
-          <LoadingButton size="small" variant="contained" color="error" sx={{ background: '#CD1818' }}>
+          <Button
+            onClick={() => setOpenDelete(true)}
+            size="small"
+            variant="contained"
+            color="error"
+            sx={{ background: '#CD1818' }}
+          >
             {t('delete')}
-          </LoadingButton>
+          </Button>
         )}
         {user &&
           user.role === 'user' &&
@@ -236,6 +243,15 @@ const OrderItem: React.FC<Props> = ({ prop }) => {
             <LoadingButton onClick={() => handleConfirm(prop._id)} loading={payBonusLoading === prop._id}>
               {t('continue')}
             </LoadingButton>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={openDelete} onClose={() => setOpenDelete(false)}>
+          <DialogContent>
+            <Typography variant="body1">Вы уверены, что хотите удалить выбранный заказ ?</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenDelete(false)}>{t('cancel')}</Button>
+            <LoadingButton>{t('continue')}</LoadingButton>
           </DialogActions>
         </Dialog>
       </AccordionDetails>
