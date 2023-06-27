@@ -7,6 +7,7 @@ import { imagesUpload } from '../multer';
 import { HotelFact } from '../types';
 import Apartment from '../models/Apartment';
 import { promises as fs } from 'fs';
+import Comments from '../models/Comments';
 
 const hotelsRouter = express.Router();
 
@@ -288,6 +289,7 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
             }
             await Apartment.deleteOne({ _id: apartment._id });
           }
+          await Comments.deleteMany({ hotel: hotel._id });
           return res.send({
             message: {
               en: hotel.name + ' deleted successfully',
@@ -312,6 +314,7 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
             }
             await Apartment.deleteOne({ _id: apartment._id });
           }
+          await Comments.deleteMany({ hotel: hotel._id });
           return res.send({
             message: {
               en: hotel.name + ' deleted successfully',
