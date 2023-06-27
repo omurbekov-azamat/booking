@@ -285,9 +285,10 @@ const ApartmentForm: React.FC<Props> = ({ isEdit }) => {
 
               <Grid item xs mt={3}>
                 <TextField
-                  label={t('descriptionInRu')}
+                  label={'Описание (мин 150 символов)'}
                   type="text"
                   name="ru"
+                  inputProps={{ minLength: 150, maxLength: 300 }}
                   autoComplete="current-description"
                   value={state.description.ru}
                   onChange={inputChangeHandler}
@@ -299,7 +300,8 @@ const ApartmentForm: React.FC<Props> = ({ isEdit }) => {
 
               <Grid item xs mt={3}>
                 <TextField
-                  label={t('descriptionInEn')}
+                  label={'Description (min 150 symbols)'}
+                  inputProps={{ minLength: 150, maxLength: 300 }}
                   type="text"
                   name="en"
                   autoComplete="current-description"
