@@ -14,7 +14,7 @@ export const resources = {
 } as const;
 
 i18n.use(initReactI18next).init({
-  lng: 'en',
+  lng: 'ru',
   ns: ['RuTranslation', 'EnTranslation'],
   defaultNS,
   resources,
