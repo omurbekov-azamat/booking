@@ -5,6 +5,9 @@ import auth, { RequestWithUser } from '../middleware/auth';
 import Hotel from '../models/Hotel';
 import { imagesUpload } from '../multer';
 import { HotelFact } from '../types';
+import Apartment from '../models/Apartment';
+import { promises as fs } from 'fs';
+import Comments from '../models/Comments';
 
 const hotelsRouter = express.Router();
 
@@ -78,13 +81,12 @@ hotelsRouter.get('/', async (req, res) => {
       const hotelsRes = await Hotel.find({ name: { $regex: new RegExp(match, 'i') } }).limit(10);
       return res.send(hotelsRes);
     }
+    const findParams: HotelFact = {};
     if (req.query) {
       if (queryOwner) {
         const hotelsRes = await Hotel.find({ userId: queryOwner });
         return res.send(hotelsRes);
       }
-
-      const findParams: HotelFact = {};
 
       if (type) {
         findParams.type = type;
@@ -107,44 +109,31 @@ hotelsRouter.get('/', async (req, res) => {
       if (star !== 'null') {
         findParams.star = star;
       }
-
-      const hotelResponse = await Hotel.find(findParams);
-      return res.send(hotelResponse);
     }
 
-    const pageNumber: number = parseInt(queryPage) || 1;
+    const pageNumber: number = queryPage ? parseInt(queryPage) : 1;
 
     const hotelsRes = await Hotel.aggregate([
       {
         $facet: {
-          premiumHotels: [{ $match: { status: 'premium', isPublished: true } }, { $limit: 18 }],
-          businessHotels: [{ $match: { status: 'business', isPublished: true } }, { $limit: 18 }],
-          standardHotels: [{ $match: { status: 'standard', isPublished: true } }, { $limit: 18 }],
+          premiumHotels: [{ $match: { ...findParams, status: 'premium', isPublished: true } }],
+          businessHotels: [{ $match: { ...findParams, status: 'business', isPublished: true } }],
+          standardHotels: [{ $match: { ...findParams, status: 'standard', isPublished: true } }],
           totalCount: [{ $group: { _id: null, count: { $sum: 1 } } }],
         },
       },
       {
         $project: {
           hotels: {
-            $concatArrays: [
-              '$premiumHotels',
-              { $slice: ['$businessHotels', 0, { $subtract: [18, { $size: '$premiumHotels' }] }] },
-              {
-                $slice: [
-                  '$standardHotels',
-                  0,
-                  { $subtract: [18, { $size: { $concatArrays: ['$premiumHotels', '$businessHotels'] } }] },
-                ],
-              },
-            ],
+            $concatArrays: ['$premiumHotels', '$businessHotels', '$standardHotels'],
           },
           totalCount: { $arrayElemAt: ['$totalCount.count', 0] },
         },
       },
       { $unwind: '$hotels' },
       { $replaceRoot: { newRoot: '$hotels' } },
-      { $skip: (pageNumber - 1) * 18 },
-      { $limit: 18 },
+      { $skip: (pageNumber - 1) * 12 },
+      { $limit: 12 },
     ]);
 
     return res.send(hotelsRes);
@@ -162,7 +151,7 @@ hotelsRouter.get('/:id', async (req, res) => {
   }
 });
 
-hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res) => {
+hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('image'), async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
     let findParams;
@@ -171,6 +160,13 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
     } else {
       findParams = { _id: req.params.id };
     }
+
+    const currentHotel = await Hotel.findOne(findParams);
+
+    if (currentHotel && currentHotel.image && req.file) {
+      await fs.unlink('public/' + currentHotel.image);
+    }
+
     const hotel = await Hotel.updateOne(findParams, {
       $set: {
         name: req.body.name,
@@ -199,8 +195,11 @@ hotelsRouter.patch('/:id', auth, permit('admin', 'hotel'), imagesUpload.single('
         },
       });
     }
-  } catch {
-    return res.sendStatus(500);
+  } catch (e) {
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(e);
+    }
+    return next(e);
   }
 });
 
@@ -275,24 +274,56 @@ hotelsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res, nex
   try {
     const user = (req as RequestWithUser).user;
     const hotel = await Hotel.findById(req.params.id);
+
     if (hotel) {
       if (user && user.role === 'admin') {
-        await Hotel.deleteOne({ _id: req.params.id });
-        return res.send({
-          message: {
-            en: hotel.name + ' deleted successfully',
-            ru: hotel.name + ' успешно удалён',
-          },
-        });
+        const result = await Hotel.deleteOne({ _id: req.params.id });
+        if (result.deletedCount) {
+          await fs.unlink(('public/' + hotel.image) as string);
+          const apartments = await Apartment.find({ hotelId: req.params.id });
+          for (const apartment of apartments) {
+            if (apartment.images) {
+              for (const image of apartment.images) {
+                await fs.unlink('public/' + image);
+              }
+            }
+            await Apartment.deleteOne({ _id: apartment._id });
+          }
+          await Comments.deleteMany({ hotel: hotel._id });
+          return res.send({
+            message: {
+              en: hotel.name + ' deleted successfully',
+              ru: hotel.name + ' успешно удалён',
+            },
+          });
+        } else {
+          return res.status(403).send({ message: 'Forbidden' });
+        }
       }
+
       if (user && user.role === 'hotel') {
-        await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
-        return res.send({
-          message: {
-            en: hotel.name + ' deleted successfully',
-            ru: hotel.name + ' успешно удалён',
-          },
-        });
+        const result = await Hotel.deleteOne({ _id: req.params.id, userId: user._id });
+        if (result.deletedCount) {
+          await fs.unlink(('public/' + hotel.image) as string);
+          const apartments = await Apartment.find({ hotelId: req.params.id });
+          for (const apartment of apartments) {
+            if (apartment.images) {
+              for (const image of apartment.images) {
+                await fs.unlink('public/' + image);
+              }
+            }
+            await Apartment.deleteOne({ _id: apartment._id });
+          }
+          await Comments.deleteMany({ hotel: hotel._id });
+          return res.send({
+            message: {
+              en: hotel.name + ' deleted successfully',
+              ru: hotel.name + ' успешно удалён',
+            },
+          });
+        } else {
+          return res.status(403).send({ message: 'Forbidden' });
+        }
       }
     } else {
       res.status(404).send({ message: 'Cant find hotel' });

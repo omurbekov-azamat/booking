@@ -19,7 +19,6 @@ import PlaceIcon from '@mui/icons-material/Place';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Comments from '../../comments/Comments';
-import { selectComments } from '../../comments/commentsSlice';
 
 interface Props {
   hotel: Hotel;
@@ -32,7 +31,7 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
   const user = useAppSelector(selectUser);
   const cardImage = apiURL + '/' + hotel.image;
   const currency = useAppSelector(selectCurrency);
-  const comments = useAppSelector(selectComments);
+
   let city;
   let type;
 
@@ -43,8 +42,8 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
     case 'pension':
       type = t('pension');
       break;
-    case 'Hostel':
-      type = t('Hostel');
+    case 'hostel':
+      type = t('hostel');
       break;
     case 'hotel':
       type = t('hotel');
@@ -169,8 +168,9 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
             <Grid item xs={12} md={6} xl={6} order={{ xs: 1, md: 2 }}>
               <LazyLoadImage
                 alt={hotel.name}
-                width="100%"
-                height="auto"
+                style={{ maxWidth: '100%', maxHeight: '600px', borderRadius: '20px' }}
+                width={'100%'}
+                height={'600px'}
                 effect="blur"
                 src={cardImage}
                 placeholderSrc={placeHolderImg}
@@ -184,18 +184,16 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
       </Card>
       {(user?.role === 'admin' || user?._id === hotel.userId) && (
         <Button
-          variant={'outlined'}
-          color={'success'}
-          style={{ margin: '10px auto', display: 'block' }}
+          variant="contained"
+          color="success"
+          size="small"
+          style={{ margin: '10px auto', display: 'block', background: '#03C988' }}
           onClick={() => navigate('/hotels/' + id + '/createApartment')}
         >
           {t('createRoom')}
         </Button>
       )}
       <ApartmentsTable hotel={hotel} />
-      <Typography variant="h6" sx={{ my: 2, fontWeight: 'bolder', color: 'grey' }}>
-        {t('comments') + ': ' + comments.length}
-      </Typography>
       <Comments />
     </>
   );

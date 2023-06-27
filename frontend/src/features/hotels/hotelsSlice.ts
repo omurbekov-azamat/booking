@@ -52,7 +52,7 @@ const initialState: HotelsState = {
   fetchUnpublishedLoading: false,
   hotel: null,
   fetchNewPageLoading: false,
-  page: 1,
+  page: 2,
   search: [],
   loadingMatchHotel: false,
   loadingCreateHotel: false,
@@ -86,11 +86,13 @@ export const hotelsSlice = createSlice({
     builder.addCase(fetchHotels.pending, (state) => {
       state.hotels = [];
       state.fetchAllHotelsLoading = true;
+
       state.error = false;
     });
     builder.addCase(fetchHotels.fulfilled, (state, action) => {
       state.fetchAllHotelsLoading = false;
       state.hotels = action.payload;
+      state.page = 2;
       state.error = false;
     });
     builder.addCase(fetchHotels.rejected, (state) => {
@@ -180,6 +182,7 @@ export const hotelsSlice = createSlice({
     builder.addCase(fetchSearchedHotels.fulfilled, (state, action) => {
       state.fetchSearchedHotelsLoading = false;
       state.showMoreBtn = !!action.payload.length;
+      state.page = 2;
       state.hotels = action.payload;
       state.error = false;
     });

@@ -9,12 +9,6 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import type { LoginMutation } from '../../types';
 import { useTranslation } from 'react-i18next';
 import { GoogleLogin } from '@react-oauth/google';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import RestorePassword from './components/RestorePassword';
 
@@ -29,9 +23,6 @@ const Login = () => {
     email: '',
     password: '',
   });
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [credentials, setCredentials] = useState('');
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,20 +36,10 @@ const Login = () => {
   };
 
   const googleLoginHandler = async (credentials: string) => {
-    await setPhoneNumber('');
-    await setIsDialogOpen(true);
-    await setCredentials(credentials);
-  };
-
-  const closeDialogHandler = () => {
-    setIsDialogOpen(false);
-  };
-
-  const submitDialogHandler = async (phone: string, cred: string) => {
-    await dispatch(googleLogin({ phone, cred })).unwrap();
-    setIsDialogOpen(false);
+    await dispatch(googleLogin(credentials)).unwrap();
     await navigate('/');
   };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -69,7 +50,7 @@ const Login = () => {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: '#03C988' }}>
           <LockOpenIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -131,7 +112,14 @@ const Login = () => {
               <RestorePassword />
             </Grid>
           </Grid>
-          <LoadingButton type="submit" loading={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <LoadingButton
+            color="success"
+            type="submit"
+            loading={loading}
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, background: '#0E8388' }}
+          >
             {t('signIn')}
           </LoadingButton>
           <Grid container justifyContent="flex-end">
@@ -142,33 +130,6 @@ const Login = () => {
             </Grid>
           </Grid>
         </Box>
-
-        <Dialog open={isDialogOpen} onClose={closeDialogHandler}>
-          <DialogTitle>{t('enterPhoneNumber')}</DialogTitle>
-          <DialogContent sx={{ p: 8 }}>
-            <ReactPhoneInput
-              inputProps={{
-                name: 'phoneNumber',
-                required: true,
-                autoFocus: true,
-              }}
-              country={'kg'}
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={closeDialogHandler}>{t('cancel')}</Button>
-            <Button
-              disabled={phoneNumber.length < 8}
-              onClick={() => submitDialogHandler(phoneNumber, credentials)}
-              color="primary"
-              variant="contained"
-            >
-              {t('submit')}
-            </Button>
-          </DialogActions>
-        </Dialog>
       </Box>
     </Container>
   );

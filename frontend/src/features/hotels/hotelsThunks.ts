@@ -54,14 +54,34 @@ export const fetchSearchedHotels = createAsyncThunk<Hotel[], SearchData>('hotels
   }
 });
 
-export const fetchNewPage = createAsyncThunk<Hotel[], number>('hotels/nextPage', async (page) => {
-  try {
-    const response = await axiosApi.get<Hotel[]>('hotels?page=' + page);
-    return response.data;
-  } catch {
-    throw new Error();
-  }
-});
+export const fetchNewPage = createAsyncThunk<Hotel[], { data: SearchData; page: number }>(
+  'hotels/nextPage',
+  async ({ data, page }) => {
+    try {
+      const response = await axiosApi.get<Hotel[]>(
+        '/hotels?nonSmoking=' +
+          data.nonSmokingRooms +
+          '&swimmingPool=' +
+          data.swimmingPool +
+          '&city=' +
+          data.city +
+          '&parking=' +
+          data.parking +
+          '&star=' +
+          data.star +
+          '&petFriendly=' +
+          data.petFriendly +
+          '&type=' +
+          data.propertyType +
+          '&page=' +
+          page,
+      );
+      return response.data;
+    } catch {
+      throw new Error();
+    }
+  },
+);
 
 export const fetchMatches = createAsyncThunk<Hotel[], string>('hotels/matches', async (match) => {
   try {
@@ -167,7 +187,7 @@ export const editHotel = createAsyncThunk<
       keys.forEach((key) => {
         const value = updatedData.hotel[key];
         if (value !== null) {
-          if (key === 'lowestPrice') {
+          if (key === 'lowestPrice' || key === 'address' || key === 'description') {
             formData.append(key, JSON.stringify(value));
           } else {
             formData.append(key, value as string | Blob);
@@ -176,7 +196,6 @@ export const editHotel = createAsyncThunk<
       });
 
       const response = await axiosApi.patch('/hotels/' + updatedData.id, formData);
-
       return response.data;
     }
   } catch (e) {
@@ -218,14 +237,6 @@ export const getRecommendedHotels = createAsyncThunk<Hotel[]>('hotels/getRecomme
   try {
     const responseRecommendedHotels = await axiosApi.get<Hotel[]>('/hotels/random/recommended');
     return responseRecommendedHotels.data;
-  } catch {
-    throw new Error();
-  }
-});
-
-export const removeHotelImage = createAsyncThunk<void, string>('hotels/removeImage', async (id) => {
-  try {
-    await axiosApi.delete(`/hotels/${id}/image`);
   } catch {
     throw new Error();
   }

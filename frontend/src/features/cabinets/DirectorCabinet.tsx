@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getByRole } from '../users/usersThunks';
 import { selectGetUsersByRoleLoading, selectUsersByRole, unsetCabinetUsers } from '../users/usersSlice';
@@ -21,11 +21,12 @@ import HotelsStatus from './components/HotelsStatus';
 import { unsetCabinetHotels } from '../hotels/hotelsSlice';
 import OrderItems from '../orders/components/OrderItems';
 import GroupIcon from '@mui/icons-material/Group';
-import { CabinetState } from '../../types';
+import { CabinetState, User } from '../../types';
 import UserItems from '../users/components/UserItems';
 import WcIcon from '@mui/icons-material/Wc';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import MyInformation from './components/MyInformation';
+import { someStyle } from '../../styles';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -51,6 +52,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
+  const [adminName, setAdminName] = useState('');
 
   useEffect(() => {
     if (state.reportAdmins) {
@@ -64,21 +66,26 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
     }
   }, [dispatch, state.reportAdmins, state.simpleUsers, state.admins, state.serviceProviders]);
 
-  const handleClickAdminName = (id: string) => {
-    dispatch(getForAdminHisOrders(id));
+  const handleClickAdminName = (user: User) => {
+    setAdminName(user.firstName + ' ' + user.lastName);
+    dispatch(getForAdminHisOrders(user._id));
   };
 
   const options = [
     { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
-    { option: 'openUsers', icon: <AssignmentIndIcon />, text: 'Статус пользователей' },
-    { option: 'openHotels', icon: <LocationCityIcon />, text: 'Статус отелей' },
-    { option: 'simpleUsers', icon: <GroupIcon />, text: 'Пользователи' },
-    { option: 'admins', icon: <WcIcon />, text: 'Админы' },
-    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: 'Поставщики услуг' },
+    { option: 'openUsers', icon: <AssignmentIndIcon />, text: t('usersStatus') },
+    { option: 'openHotels', icon: <LocationCityIcon />, text: t('hotelStatus') },
+    { option: 'simpleUsers', icon: <GroupIcon />, text: t('users') },
+    { option: 'admins', icon: <WcIcon />, text: t('admins') },
+    { option: 'serviceProviders', icon: <ManageAccountsOutlinedIcon />, text: t('serviceProviders') },
   ];
 
   const handleClickOption = (option: string, index: number) => {
-    setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
+    setState((prev) => ({
+      ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])),
+      [option]: !state[option],
+    }));
+    setAdminName('');
     setSelectedIndex(index);
     dispatch(unsetCabinetUsers());
     dispatch(unsetCabinetHotels());
@@ -87,9 +94,12 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
   return (
     <Box mt={3}>
       {loading && <Typography>loading...</Typography>}
-      <Typography variant="h5" fontWeight="bold" textAlign="center" mt={3}>
-        {t('directorCabinet')}
-      </Typography>
+      {state.reportAdmins && (
+        <Typography variant="h6" fontWeight="bolder" textAlign="center" sx={{ color: 'grey', textAlign: 'right' }}>
+          {adminName}
+        </Typography>
+      )}
+
       <Card sx={{ minHeight: '600px' }}>
         <CardContent>
           <Grid container flexDirection="row" spacing={2} alignItems="self-start">
@@ -98,8 +108,7 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
@@ -110,8 +119,10 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     selected={selectedIndex === index}
                     onClick={() => handleClickOption(option.option, index)}
                   >
-                    <ListItemIcon>{option.icon}</ListItemIcon>
-                    <ListItemText primary={option.text} />
+                    <ListItemIcon style={selectedIndex === index ? { color: '#03C988' } : {}}>
+                      {option.icon}
+                    </ListItemIcon>
+                    <ListItemText style={selectedIndex === index ? { color: '#03C988' } : {}} primary={option.text} />
                   </ListItemButton>
                 ))}
                 <ListItemButton
@@ -119,16 +130,21 @@ const DirectorCabinet: React.FC<Props> = ({ exist = initialState }) => {
                   selected={selectedIndex === options.length}
                   onClick={() => handleClickOption('reportAdmins', options.length)}
                 >
-                  <ListItemIcon>
+                  <ListItemIcon style={state.reportAdmins ? { color: '#03C988' } : {}}>
                     <PeopleAltIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Отчет админов" />
+                  <ListItemText style={state.reportAdmins ? { color: '#03C988' } : {}} primary={t('adminsReports')} />
                   {state.reportAdmins ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={state.reportAdmins} timeout="auto" unmountOnExit>
                   {usersByRole.map((user) => (
                     <List key={user._id} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickAdminName(user._id)}>
+                      <ListItemButton
+                        sx={{
+                          pl: 4,
+                        }}
+                        onClick={() => handleClickAdminName(user)}
+                      >
                         <ListItemIcon>
                           <PersonIcon />
                         </ListItemIcon>

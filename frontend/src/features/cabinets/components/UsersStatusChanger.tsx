@@ -12,33 +12,52 @@ interface Props {
 const UsersStatusChanger: React.FC<Props> = ({ user }) => {
   const dispatch = useAppDispatch();
   const [status, setStatus] = useState(user.status);
+
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
   };
+
   const onOkButton = () => {
     if (status) {
       dispatch(changeStatus({ id: user._id, status: status }));
     }
   };
   return (
-    <Paper sx={{ marginTop: '5px', paddingY: '20px' }}>
-      <Grid container justifyContent="space-between">
-        <Typography display="inline-block" variant="body1">
-          {user.firstName} {user.lastName}
-        </Typography>
-        <Typography display="inline-block" variant="body1">
-          Почта : {user.email}
-        </Typography>
-        <FormControl fullWidth>
-          <Select value={status} label="Статус" onChange={handleChange}>
-            <MenuItem value="standart">standart</MenuItem>
-            <MenuItem value="royal">royal</MenuItem>
-            <MenuItem value="vip">vip</MenuItem>
-          </Select>
-          <Button onClick={onOkButton} variant="contained">
-            OK
-          </Button>
-        </FormControl>
+    <Paper sx={{ my: 1, border: 1, boxShadow: 1, p: 2 }}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{
+          flexDirection: { xs: 'column' },
+          '@media (min-width: 621px)': {
+            flexDirection: 'row',
+          },
+        }}
+        spacing={1}
+      >
+        <Grid item>
+          <Typography display="inline-block" variant="body1" sx={{ fontSize: 18, fontWeight: 'bolder', color: 'grey' }}>
+            {user.firstName} {user.lastName}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography display="inline-block" variant="body1" sx={{ fontSize: 18, fontWeight: 'bolder', color: 'grey' }}>
+            {user.email}
+          </Typography>
+        </Grid>
+        <Grid item minWidth="150px">
+          <FormControl fullWidth>
+            <Select value={status} onChange={handleChange}>
+              <MenuItem value="standard">standard</MenuItem>
+              <MenuItem value="royal">royal</MenuItem>
+              <MenuItem value="vip">vip</MenuItem>
+            </Select>
+            <Button onClick={onOkButton} variant="contained" sx={{ mt: 1 }}>
+              OK
+            </Button>
+          </FormControl>
+        </Grid>
       </Grid>
     </Paper>
   );

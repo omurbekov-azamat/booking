@@ -34,6 +34,15 @@ roomTypesRouter.get('/', async (req, res, next) => {
   }
 });
 
+roomTypesRouter.get('/:id', auth, permit('admin'), async (req, res, next) => {
+  try {
+    const room = await RoomType.findById(req.params.id);
+    return res.send(room);
+  } catch (e) {
+    return next(e);
+  }
+});
+
 roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
   try {
     const room: HydratedDocument<IRoomType> | null = await RoomType.findById(req.params.id);
@@ -42,13 +51,14 @@ roomTypesRouter.patch('/:id', auth, permit('admin'), async (req, res, next) => {
       return res.sendStatus(404);
     }
 
-    room.name = req.body.name;
+    room.name.en = req.body.en;
+    room.name.ru = req.body.ru;
 
     await room.save();
     return res.send({
       message: {
         en: 'Room type updated successfully',
-        ru: 'тип комнаты успешно обновлен',
+        ru: 'Тип комнаты успешно обновлен',
       },
     });
   } catch (e) {
@@ -69,7 +79,7 @@ roomTypesRouter.delete('/:id', auth, permit('admin'), async (req, res, next) => 
       return res.send({
         message: {
           en: 'Room type deleted successfully',
-          ru: 'тип комнаты успешно удален',
+          ru: 'Тип комнаты успешно удален',
         },
       });
     }

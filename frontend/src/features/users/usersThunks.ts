@@ -115,7 +115,7 @@ export const reAuthorization = createAsyncThunk<User>('users/reAuthorization', a
   }
 });
 
-export const googleLogin = createAsyncThunk<User, { phone: string; cred: string }, { rejectValue: GlobalError }>(
+export const googleLogin = createAsyncThunk<User, string, { rejectValue: GlobalError }>(
   'users/googleLogin',
   async (credential, { rejectWithValue }) => {
     try {
@@ -126,6 +126,23 @@ export const googleLogin = createAsyncThunk<User, { phone: string; cred: string 
         return rejectWithValue(e.response.data as GlobalError);
       }
       throw e;
+    }
+  },
+);
+
+interface googleUpdateNumber {
+  message: GlobalSuccess;
+  user: User;
+}
+
+export const googlePhoneNumber = createAsyncThunk<googleUpdateNumber, string>(
+  'users/googlePhoneNumber',
+  async (phone) => {
+    try {
+      const response = await axiosApi.patch('/users/googleNumber', { newPhone: phone });
+      return response.data;
+    } catch {
+      throw new Error();
     }
   },
 );

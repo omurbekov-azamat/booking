@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import type { Comment, GlobalSuccess, ValidationError } from '../../types';
-import { createComment, fetchComments, removeComment, updateComment } from './commentsThunks';
+import { createComment, fetchComments, fetchOneComment, removeComment, updateComment } from './commentsThunks';
 
 interface CommentsState {
   loadingFetchAllComments: boolean;
   comments: Comment[];
+  comment: Comment | null;
   loadingCreateComment: boolean;
+  loadingFetchOneComment: boolean;
   loadingRemoveComment: false | string;
   loadingUpdateComment: boolean;
   commentsSuccess: GlobalSuccess | null;
@@ -16,7 +18,9 @@ interface CommentsState {
 
 const initialState: CommentsState = {
   comments: [],
+  comment: null,
   loadingFetchAllComments: false,
+  loadingFetchOneComment: false,
   loadingCreateComment: false,
   loadingRemoveComment: false,
   loadingUpdateComment: false,
@@ -44,6 +48,19 @@ export const commentsSlice = createSlice({
       state.error = false;
     });
     builder.addCase(fetchComments.rejected, (state) => {
+      state.loadingFetchOneComment = false;
+      state.error = true;
+    });
+    builder.addCase(fetchOneComment.pending, (state) => {
+      state.loadingFetchOneComment = true;
+      state.error = false;
+    });
+    builder.addCase(fetchOneComment.fulfilled, (state, action) => {
+      state.loadingFetchOneComment = false;
+      state.comment = action.payload;
+      state.error = false;
+    });
+    builder.addCase(fetchOneComment.rejected, (state) => {
       state.loadingFetchAllComments = false;
       state.error = true;
     });
@@ -98,3 +115,5 @@ export const selectLoadingUpdateComment = (state: RootState) => state.comments.l
 export const selectLoadingRemoveComment = (state: RootState) => state.comments.loadingRemoveComment;
 export const selectCreateCommentError = (state: RootState) => state.comments.createCommentError;
 export const selectCommentsSuccess = (state: RootState) => state.comments.commentsSuccess;
+export const selectLoadingFetchOneComment = (state: RootState) => state.comments.loadingFetchOneComment;
+export const selectComment = (state: RootState) => state.comments.comment;

@@ -6,11 +6,13 @@ import { useTranslation } from 'react-i18next';
 import SwipeCityCards from '../components/UI/BlocksOnMainPage/SwipeCityCards';
 import SwipePropertyTypeCards from '../components/UI/BlocksOnMainPage/SwipePropertyTypeCards';
 import { HeaderStyles } from '../styles';
+import SearchField from '../features/hotels/components/SearchField/SearchField';
 
 const MainPage = () => {
   const { t } = useTranslation();
   return (
     <>
+      <SearchField />
       <SwipePropertyTypeCards />
       <SwipeCityCards />
       <RecommendedHotels />

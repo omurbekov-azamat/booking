@@ -1,10 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchHotels } from '../hotels/hotelsThunks';
 import { selectUser } from '../users/usersSlice';
 import { CabinetState, User } from '../../types';
 import { selectFetchAllHotelsLoading, selectHotels } from '../hotels/hotelsSlice';
-import { Box, Card, Grid, List, ListItemButton } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  List,
+  ListItemButton,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PersonIcon from '@mui/icons-material/Person';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
@@ -15,7 +26,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MyInformation from './components/MyInformation';
 import HotelForm from '../hotels/components/HotelForm';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
-import { fetchApartments } from '../apartments/apartmentThunks';
+import { fetchApartments, removeApartment } from '../apartments/apartmentThunks';
 import { selectApartments, selectLoadingFetchAllApartments } from '../apartments/apartmentSlice';
 import WorkIcon from '@mui/icons-material/Work';
 import { getOrders } from '../orders/ordersThunks';
@@ -24,6 +35,8 @@ import OrderItems from '../orders/components/OrderItems';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ApartmentsCard from '../apartments/components/ApartmentsCard';
 import MyHotels from './components/MyHotels';
+import { someStyle } from '../../styles';
+import { useLocation } from 'react-router-dom';
 
 const initialState: CabinetState = {
   myInfo: true,
@@ -46,20 +59,41 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
   const reservedRooms = useAppSelector(selectOrders);
   const fetchAllHotelsLoading = useAppSelector(selectFetchAllHotelsLoading);
   const loadingFetchAllApartments = useAppSelector(selectLoadingFetchAllApartments);
+  const location = useLocation();
 
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const [state, setState] = React.useState<CabinetState>(exist);
+  const [apartmentId, setApartmentId] = useState('');
+  const [open, setOpen] = useState(false);
 
   const clickOption = (option: string, index: number) => {
     setState((prev) => ({ ...Object.fromEntries(Object.keys(prev).map((key) => [key, false])), [option]: true }));
     setSelectedIndex(index);
   };
 
+  const handleClick = (id: string) => {
+    setApartmentId(id);
+    setOpen(true);
+  };
+
+  const handleConfirm = async (id: string) => {
+    await dispatch(removeApartment(id));
+
+    if (location.pathname === '/my-cabinet') {
+      await dispatch(fetchApartments({ userId: user?._id }));
+    }
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
   const options = [
     { option: 'myInfo', icon: <PersonIcon />, text: t('myInfo') },
     { option: 'myHotels', icon: <MapsHomeWorkIcon />, text: t('myHotels') },
     { option: 'createHotel', icon: <AddCircleIcon />, text: t('createHotel') },
-    { option: 'myApartments', icon: <BedroomParentIcon />, text: 'Апартаменты' },
+    { option: 'myApartments', icon: <BedroomParentIcon />, text: t('apartments') },
     { option: 'myOrders', icon: <WorkIcon />, text: t('myOrders') },
   ];
 
@@ -85,8 +119,7 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 sx={{
                   width: '100%',
                   maxWidth: 360,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #c5c5c5',
+                  boxShadow: someStyle.boxShadow,
                 }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
@@ -97,8 +130,10 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                     selected={selectedIndex === index}
                     onClick={() => clickOption(option.option, index)}
                   >
-                    <ListItemIcon>{option.icon}</ListItemIcon>
-                    <ListItemText primary={option.text} />
+                    <ListItemIcon style={selectedIndex === index ? { color: '#03C988' } : {}}>
+                      {option.icon}
+                    </ListItemIcon>
+                    <ListItemText style={selectedIndex === index ? { color: '#03C988' } : {}} primary={option.text} />
                   </ListItemButton>
                 ))}
               </List>
@@ -111,7 +146,12 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
                 <Grid container spacing={2}>
                   {apartments.map((apartment) => (
                     <Grid item xs={12} sm={12} md={6} lg={4} xl={4} key={apartment._id}>
-                      <ApartmentsCard key={apartment._id} apartment={apartment} isNeedButtons={true} />
+                      <ApartmentsCard
+                        key={apartment._id}
+                        apartment={apartment}
+                        isNeedButtons={true}
+                        onDeleteBtnClick={() => handleClick(apartment._id)}
+                      />
                     </Grid>
                   ))}
                 </Grid>
@@ -119,6 +159,19 @@ const HotelCabinet: React.FC<Props> = ({ exist = initialState }) => {
               {state.myOrders && <OrderItems ordersItems={reservedRooms} />}
               {fetchAllHotelsLoading && <Spinner />}
               {loadingFetchAllApartments && <Spinner />}
+
+              <Dialog open={open} onClose={handleCancel}>
+                <DialogTitle>{t('warning')}</DialogTitle>
+                <DialogContent>{t('warningApartmentRemove')}</DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCancel} color="primary">
+                    {t('cancel')}
+                  </Button>
+                  <Button onClick={() => handleConfirm(apartmentId)} color="primary">
+                    {t('confirm')}
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </Grid>
           </Grid>
         </CardContent>

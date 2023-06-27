@@ -78,7 +78,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
 
   const [checkPropertyType, setCheckPropertyType] = useState([
     { value: false, id: 'guestHouse', title: t('guestHouse') },
-    { value: false, id: 'Hostel', title: t('Hostel') },
+    { value: false, id: 'hostel', title: t('hostel') },
     { value: false, id: 'hotel', title: t('hotel') },
     { value: false, id: 'pension', title: t('pension') },
   ]);
@@ -154,7 +154,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
       <Typography p={2} variant="h5">
         {t('filterBy')}
       </Typography>
-      <Divider />
+      <Divider color={'#03C988'} />
       <Box p={2}>
         <TextField
           id="standard-select-currency-native"
@@ -183,7 +183,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
               />
             ))}
           </FormGroup>
-          <Divider />
+          <Divider color={'#03C988'} />
         </Box>
         <Box textAlign="center" mt={2}>
           <Typography fontWeight="bold">{t('facilities')}</Typography>
@@ -196,7 +196,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
               />
             ))}
           </FormGroup>
-          <Divider />
+          <Divider color={'#03C988'} />
         </Box>
         <Box textAlign="center" mt={2}>
           <Typography fontWeight="bold">{t('propertyRating')}</Typography>
@@ -209,14 +209,14 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
               />
             ))}
           </FormGroup>
-          <Divider />
+          <Divider color={'#03C988'} />
         </Box>
       </Box>
     </>
   );
 
   const addMore = (pageNum: number) => {
-    dispatch(fetchNewPage(pageNum));
+    dispatch(fetchNewPage({ page: pageNum, data: state }));
   };
 
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -224,7 +224,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+      <Box component="nav" sx={{ width: { lg: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
         <Drawer
           container={container}
           variant="temporary"
@@ -234,7 +234,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', lg: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
@@ -243,8 +243,13 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, position: 'unset' },
+            display: { xs: 'none', lg: 'block' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              position: 'unset',
+              borderColor: '#03C988',
+            },
           }}
           open
         >
@@ -257,7 +262,7 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
           aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
+          sx={{ mr: 2, display: { lg: 'none' } }}
         >
           <MenuIcon />
         </IconButton>

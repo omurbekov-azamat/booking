@@ -1,10 +1,10 @@
 import React, { MouseEventHandler } from 'react';
-import { Button, Grid, Typography } from '@mui/material';
-import { Comment } from '../../../types';
-import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
-import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { Comment } from '../../../types';
 
 interface Props {
   comment: Comment;
@@ -17,14 +17,25 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
   const { t } = useTranslation();
 
   const deleteBtn = (
-    <Button onClick={onDeleteBtnClick} variant={'outlined'} color={'error'}>
-      {t('delete')}
-    </Button>
+    <Box textAlign="center">
+      <Button onClick={onDeleteBtnClick} variant="contained" color="error" size="small" sx={{ background: '#CD1818' }}>
+        {t('delete')}
+      </Button>
+    </Box>
   );
+
   const editBtn = (
-    <Button onClick={onEditBtnClick} variant={'outlined'} color={'info'} sx={{ my: 1 }}>
-      {t('edit')}
-    </Button>
+    <Box textAlign="center">
+      <Button
+        onClick={onEditBtnClick}
+        variant="contained"
+        size="small"
+        color={'info'}
+        sx={{ my: 1, background: '#05BFDB' }}
+      >
+        {t('edit')}
+      </Button>
+    </Box>
   );
 
   return (
@@ -33,20 +44,25 @@ const CommentMessage: React.FC<Props> = ({ comment, onDeleteBtnClick, onEditBtnC
       flexDirection={'column'}
       sx={{
         border: 1,
-        my: 2,
         p: 2,
+        mb: 3,
         boxShadow: 1,
         borderRadius: 2,
         borderColor: 'lightgray',
       }}
+      spacing={1}
     >
-      <Grid item> {comment.author.firstName + ' ' + comment.author.lastName + ':'} </Grid>
+      <Grid item>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>{comment.author.firstName + ' ' + comment.author.lastName + ':'}</Grid>
+          <Grid item>{dayjs(comment.createdAt).format('DD-MM-YYYY HH:mm')} </Grid>
+        </Grid>
+      </Grid>
       <Grid item>
         <Typography variant={'h6'} component={'p'}>
           {comment.text}
         </Typography>
       </Grid>
-      <Grid item>{dayjs(comment.createdAt).format('DD-MM-YYYY HH:mm')} </Grid>
       {user?._id === comment.author._id ? editBtn : null}
       {user?.role === 'admin' || user?.role === 'director' || user?._id === comment.author._id ? deleteBtn : null}
     </Grid>

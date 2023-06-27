@@ -2,8 +2,8 @@ import React from 'react';
 import vip from '../../../assets/images/vip.png';
 
 const vipStyle = {
-  width: '60px',
-  height: '60px',
+  width: '40px',
+  height: '40px',
   display: 'inline-block',
   backgroundImage: 'url(' + vip + ')',
   backgroundRepeat: 'no-repeat',

@@ -6,6 +6,7 @@ import Apartment from '../models/Apartment';
 import { imagesUpload } from '../multer';
 import { IApartment, IHotel } from '../types';
 import Hotel from '../models/Hotel';
+import { promises as fs } from 'fs';
 
 const apartmentsRouter = express.Router();
 
@@ -149,7 +150,12 @@ apartmentsRouter.delete('/:id', auth, permit('admin', 'hotel'), async (req, res,
     }
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
-      await Apartment.deleteOne({ _id: req.params.id });
+      if (apartment.images) {
+        for (const image of apartment.images) {
+          await fs.unlink('public/' + image);
+        }
+      }
+      await Apartment.deleteOne({ _id: apartment._id });
       res.send({ message: { en: 'Apartments updated successfully', ru: 'Апартаменты успешно изменены' } });
     } else {
       return res.status(403).send({ message: 'You do not have permission!' });
@@ -176,10 +182,11 @@ apartmentsRouter.delete('/:id/images/:index', auth, permit('admin', 'hotel'), as
 
     if (user.role === 'admin' || hotel.userId.toString() === user._id.toString()) {
       const index = parseInt(req.params.index);
-
       if (apartment.images && index >= 0 && index < apartment.images.length) {
+        const deletingImage = apartment.images[index];
         apartment.images.splice(index, 1);
         await apartment.save();
+        await fs.unlink('public/' + deletingImage);
         res.send({
           message: {
             en: 'Image deleted successfully',

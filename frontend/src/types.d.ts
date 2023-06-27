@@ -115,7 +115,7 @@ export interface User {
   role: string;
   phoneNumber: string;
   status?: string;
-  cashback?: string;
+  cashback: number;
   favorites: string[];
   isVerified: boolean;
 }
@@ -244,4 +244,9 @@ export interface BlockOnMainPage {
   name: string;
   link: string;
   lang: string;
+}
+
+export interface UpdateRoomType {
+  id: string;
+  roomType: RoomTypesMutation;
 }

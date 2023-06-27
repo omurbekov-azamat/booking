@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GlobalSuccess, Order, ValidationError } from '../../types';
-import { changeStatusOrder, deleteOrder, getForAdminHisOrders, getOrders, sendOrder } from './ordersThunks';
+import {
+  changeStatusOrder,
+  deleteOrder,
+  getForAdminHisOrders,
+  getOrders,
+  payBonusOnOrder,
+  sendOrder,
+} from './ordersThunks';
 import { RootState } from '../../app/store';
 
 interface OrdersState {
@@ -13,6 +20,7 @@ interface OrdersState {
   deleteOrderLoading: string | false;
   fetchOrdersForAdminLoading: boolean;
   adminMyOrders: Order[];
+  useBonusLoading: string | false;
 }
 
 const initialState: OrdersState = {
@@ -25,6 +33,7 @@ const initialState: OrdersState = {
   deleteOrderLoading: false,
   fetchOrdersForAdminLoading: false,
   adminMyOrders: [],
+  useBonusLoading: false,
 };
 
 export const ordersSlice = createSlice({
@@ -90,6 +99,16 @@ export const ordersSlice = createSlice({
     builder.addCase(getForAdminHisOrders.rejected, (state) => {
       state.fetchOrdersForAdminLoading = false;
     });
+    builder.addCase(payBonusOnOrder.pending, (state, { meta }) => {
+      state.useBonusLoading = meta.arg.id;
+    });
+    builder.addCase(payBonusOnOrder.fulfilled, (state, { payload: data }) => {
+      state.useBonusLoading = false;
+      state.orderSuccess = data;
+    });
+    builder.addCase(payBonusOnOrder.rejected, (state) => {
+      state.useBonusLoading = false;
+    });
   },
 });
 
@@ -105,3 +124,4 @@ export const selectOrderDeleteLoading = (state: RootState) => state.orders.delet
 export const selectFetchOrdersForAdminLoading = (state: RootState) => state.orders.fetchOrdersForAdminLoading;
 export const selectAdminMyOrders = (state: RootState) => state.orders.adminMyOrders;
 export const selectOrderSuccess = (state: RootState) => state.orders.orderSuccess;
+export const selectUseBonusLoading = (state: RootState) => state.orders.useBonusLoading;

@@ -1,68 +1,64 @@
-import React from 'react';
-import { Button, Grid, Paper, Typography } from '@mui/material';
-import { useAppSelector } from '../../../app/hooks';
-import { selectUser } from '../../users/usersSlice';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { Box, Paper, Typography } from '@mui/material';
+import { reAuthorization } from '../../users/usersThunks';
 import Royal from '../../../components/UI/Status/Royal';
+import { selectUser } from '../../users/usersSlice';
 import Vip from '../../../components/UI/Status/vip';
-import { useTranslation } from 'react-i18next';
 import ChangePassword from './ChangePassword';
-import HelpIcon from '@mui/icons-material/Help';
-import Popper from '@mui/material/Popper';
-import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
-import Fade from '@mui/material/Fade';
+import { someStyle } from '../../../styles';
+import CurveText from '../../../components/UI/CurveText/CurveText';
+import CurveGrid from '../../../components/UI/CurveGrid/CurveGrid';
 
 const MyInformation = () => {
   const user = useAppSelector(selectUser);
-  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(reAuthorization());
+  }, [dispatch]);
 
   return (
-    <Paper elevation={4} sx={{ minHeight: '300px' }}>
+    <Paper elevation={4} sx={{ minHeight: '300px', boxShadow: someStyle.boxShadow, p: 2 }}>
       {user && (
         <>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid item>
-              <Typography variant="h5">
-                {user.firstName} {user.lastName}
-              </Typography>
-            </Grid>
-            <Grid item>
-              {user.status === 'royal' && <Royal />}
-              {user.status === 'vip' && <Vip />}
-            </Grid>
-          </Grid>
-          {user && user.role === 'user' && (
-            <Grid container alignItems="center">
-              <Typography textAlign="right" variant="subtitle1" sx={{ marginLeft: '20px', fontWeight: 'bold' }}>
-                Cash Back : {user.cashback} coins
-              </Typography>
-              <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (
-                  <div>
-                    <Button {...bindToggle(popupState)}>
-                      <HelpIcon />
-                    </Button>
-                    <Popper {...bindPopper(popupState)} transition>
-                      {({ TransitionProps }) => (
-                        <Fade {...TransitionProps} timeout={350}>
-                          <Paper>
-                            <Typography sx={{ p: 1 }}>1 coin = 1KGS</Typography>
-                            <Typography sx={{ p: 1 }}>90 coins = 1USD</Typography>
-                          </Paper>
-                        </Fade>
-                      )}
-                    </Popper>
-                  </div>
-                )}
-              </PopupState>
-            </Grid>
+          <Box textAlign="center">
+            <Typography variant="h5">
+              {user.firstName} {user.lastName}
+            </Typography>
+          </Box>
+          {user && (user.role === 'user' || user.role === 'hotel') && (
+            <CurveGrid
+              color="blue"
+              spacing={1}
+              text={<CurveText name="status" />}
+              icon={
+                <>
+                  {user.status === 'royal' && <Royal />}
+                  {user.status === 'vip' && <Vip />}
+                </>
+              }
+              tooltipInformation={
+                <>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda distinctio dolorem ex</>
+              }
+            />
           )}
-          <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
-            {t('phoneNumber')} : {user.phoneNumber}
-          </Typography>
-          <Typography variant="subtitle1" sx={{ margin: '20px', fontWeight: 'bold' }}>
-            {t('email')} : {user.email}
-          </Typography>
-          {<ChangePassword />}
+          {user && user.role === 'user' && (
+            <CurveGrid
+              color="grey"
+              spacing={0}
+              text={<CurveText name="Cash back" data={`${user.cashback} coins`} />}
+              tooltipInformation={
+                <>
+                  <CurveText name="1 coin" data="1KGS" />
+                  <CurveText name="90 coin" data="1USD" />
+                </>
+              }
+            />
+          )}
+          <CurveText name="phoneNumber" data={user.phoneNumber} />
+          <CurveText name="email" data={user.email} />
+          <ChangePassword />
         </>
       )}
     </Paper>

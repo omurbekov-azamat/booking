@@ -16,6 +16,15 @@ export const fetchComments = createAsyncThunk<Comment[], string>(
   },
 );
 
+export const fetchOneComment = createAsyncThunk<Comment, string>('comments/fetchOne', async (id: string) => {
+  try {
+    const response = await axiosApi.get<Comment>('/comments/' + id);
+    return response.data;
+  } catch {
+    throw new Error();
+  }
+});
+
 export const createComment = createAsyncThunk<
   GlobalSuccess,
   CommentMutation,
