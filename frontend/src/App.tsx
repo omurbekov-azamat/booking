@@ -29,6 +29,8 @@ import ConfirmPage from './components/UI/VerifyPage/ConfirmPage';
 import PrivacyPolicy from './components/UI/Footer/PrivacyPolicy';
 import ContractOffer from './components/UI/Footer/ContractOffer';
 import EditComments from './features/comments/components/EditComments';
+import GoogleProtectedRoute from './components/UI/ProtectedRoute/GoogleProtectedRoute';
+import GooglePhoneNumber from './components/UI/VerifyPage/GooglePhoneNumber';
 import { selectRoomTypeSuccess, setRoomTypeSuccessNull } from './features/roomTypes/roomTypesSlice';
 import FormRoomTypes from './features/roomTypes/components/FormRoomTypes';
 
@@ -180,9 +182,15 @@ function App() {
         <Route
           path="/book-apartment/:hotelName/:hotelId/apartment/:apartmentId"
           element={
-            <VerifyProtectedRoute isVerify={user && user.isVerified}>
-              <ReservationForm />
-            </VerifyProtectedRoute>
+            user?.phoneNumber === '000' ? (
+              <GoogleProtectedRoute google={user && user.phoneNumber !== '000'}>
+                <Cabinet />
+              </GoogleProtectedRoute>
+            ) : (
+              <VerifyProtectedRoute isVerify={user && user.isVerified}>
+                <ReservationForm />
+              </VerifyProtectedRoute>
+            )
           }
         />
         <Route
@@ -196,9 +204,23 @@ function App() {
         <Route
           path="/my-cabinet"
           element={
-            <VerifyProtectedRoute isVerify={user && user.isVerified}>
-              <Cabinet />
-            </VerifyProtectedRoute>
+            user?.phoneNumber === '000' ? (
+              <GoogleProtectedRoute google={user && user.phoneNumber !== '000'}>
+                <Cabinet />
+              </GoogleProtectedRoute>
+            ) : (
+              <VerifyProtectedRoute isVerify={user && user.isVerified}>
+                <Cabinet />
+              </VerifyProtectedRoute>
+            )
+          }
+        />
+        <Route
+          path="/google"
+          element={
+            <ProtectedRoute isAllowed={user && Boolean(user)}>
+              <GooglePhoneNumber />
+            </ProtectedRoute>
           }
         />
         <Route

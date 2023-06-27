@@ -6,6 +6,7 @@ import {
   getByRole,
   getUsers,
   googleLogin,
+  googlePhoneNumber,
   login,
   logout,
   reAuthorization,
@@ -150,6 +151,10 @@ export const usersSlice = createSlice({
     });
     builder.addCase(changePass.fulfilled, (state, { payload: success }) => {
       state.Success = success;
+    });
+    builder.addCase(googlePhoneNumber.fulfilled, (state, { payload: user }) => {
+      state.user = user.user;
+      state.Success = user.message;
     });
   },
 });
