@@ -166,15 +166,21 @@ const HotelFull: React.FC<Props> = ({ hotel }) => {
               </Grid>
             </Grid>
             <Grid item xs={12} md={6} xl={6} order={{ xs: 1, md: 2 }}>
-              <LazyLoadImage
-                alt={hotel.name}
-                style={{ maxWidth: '100%', maxHeight: '600px', borderRadius: '20px' }}
-                width={'100%'}
-                height={'600px'}
-                effect="blur"
-                src={cardImage}
-                placeholderSrc={placeHolderImg}
-              />
+              <Box display="flex" justifyContent="center">
+                <LazyLoadImage
+                  alt={hotel.name}
+                  effect="blur"
+                  style={{
+                    minWidth: '300px',
+                    width: '100%',
+                    objectFit: 'cover',
+                    maxHeight: '100%',
+                    borderRadius: '20px',
+                  }}
+                  src={cardImage}
+                  placeholderSrc={placeHolderImg}
+                />
+              </Box>
             </Grid>
           </Grid>
           <Typography component="p" sx={{ mt: 4, color: '#4d4949' }}>

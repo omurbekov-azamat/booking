@@ -269,15 +269,13 @@ const HotelsPage: React.FC<Props> = ({ window }) => {
         {fetchSearchHotelsLoading && <Spinner />}
         {fetchNewPageLoading && <Spinner />}
         <Grid container spacing={2} alignItems="stretch" sx={{ marginTop: '10px' }}>
-          {hotels && hotels.length > 0 ? (
+          {hotels &&
+            hotels.length > 0 &&
             hotels.map((el) => (
               <Grid item xs={12} sm={12} md={12} lg={12} key={el._id} alignItems="stretch">
                 <HotelCardLarge hotel={el} />
               </Grid>
-            ))
-          ) : (
-            <Typography>{t('empty')}</Typography>
-          )}
+            ))}
           {showMoreBtn && (
             <Grid item container xs={12}>
               <LoadingButton

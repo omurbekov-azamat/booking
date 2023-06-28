@@ -70,7 +70,7 @@ const HotelsCard: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtnClic
         <LazyLoadImage
           alt={hotel.name}
           width="100%"
-          height="140px"
+          height="300px"
           effect="blur"
           style={{ objectFit: 'cover' }}
           src={cardImage}

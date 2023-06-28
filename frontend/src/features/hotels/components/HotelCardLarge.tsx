@@ -147,7 +147,7 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
             <LazyLoadImage
               alt={hotel.name}
               width="100%"
-              height="150px"
+              style={{ minHeight: '100%', minWidth: '120px', objectFit: 'cover', borderRadius: '10px' }}
               effect="blur"
               src={cardImage}
               placeholderSrc="https://unsplash.it/200/100?image=44"
@@ -161,10 +161,10 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
                     {hotel.name}
                   </Typography>
                 </Grid>
-                <Grid item>
-                  <Rating name="read-only" value={hotel.star} precision={0.5} readOnly size="small" />
-                </Grid>
               </Grid>
+            </Grid>
+            <Grid item>
+              <Rating name="read-only" value={hotel.star} precision={0.5} readOnly size="small" />
             </Grid>
             <Grid item>
               <Grid item>
