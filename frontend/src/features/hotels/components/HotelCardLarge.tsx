@@ -147,7 +147,13 @@ const HotelCardLarge: React.FC<Props> = ({ hotel, onDeleteBtnClick, onPublishBtn
             <LazyLoadImage
               alt={hotel.name}
               width="100%"
-              style={{ minHeight: '100%', minWidth: '120px', objectFit: 'cover', borderRadius: '10px' }}
+              style={{
+                minHeight: '100%',
+                minWidth: '120px',
+                objectFit: 'cover',
+                borderRadius: '10px',
+                maxHeight: '180px',
+              }}
               effect="blur"
               src={cardImage}
               placeholderSrc="https://unsplash.it/200/100?image=44"
